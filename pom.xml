@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.bedework</groupId>
+    <artifactId>bedework-parent</artifactId>
+    <version>4.0.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.bedework.deploy</groupId>
+  <artifactId>bw-calendar-deploy</artifactId>
+  <version>4.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Bedework: deploy calendar web components</name>
+  <description>Create ear and war files for bedework</description>
+  <url>https://github.com/Bedework/bw-calendar-deploy</url>
+
+  <modules>
+    <module>bw-calendar-notifyws</module>
+    <module>bw-calendar-pubcaldav</module>
+    <module>bw-calendar-publicws</module>
+    <module>bw-calendar-synchws</module>
+    <module>bw-calendar-ucaldav</module>
+    <module>bw-calendar-userws</module>
+    <module>bw-webclient-ucal</module>
+    <module>bw-webclient-submit</module>
+    <module>bw-webclient-feeder</module>
+    <module>bw-webclient-calauth</module>
+    <module>bw-webclient-caladmin</module>
+    <module>bw-webclient-cal</module>
+    <module>bw-calendar-all-ear</module>
+    <module>bw-calendar-ro-ear</module>
+  </modules>
+</project>
