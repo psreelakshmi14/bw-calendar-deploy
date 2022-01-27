@@ -10,7 +10,7 @@
     <version>4.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>bw-calendar-ro-ear</artifactId>
+  <artifactId>bw-calendar-ro</artifactId>
   <name>Bedework: deploy calendar ro ear</name>
   <packaging>ear</packaging>
 
@@ -119,7 +119,7 @@
             <artifactId>bw-util-maven-deploy</artifactId>
 
             <configuration>
-              <earName>bw-calro</earName>
+              <earName>bw-calendar-ro</earName>
               <baseDirPath>${org.bedework.feature-build.deployment.basedir}</baseDirPath>
               <propsPath>${org.bedework.feature-build.deployment.properties}</propsPath>
             </configuration>

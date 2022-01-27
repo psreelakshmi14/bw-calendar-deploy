@@ -29,7 +29,7 @@
     <module>bw-webclient-calauth</module>
     <module>bw-webclient-caladmin</module>
     <module>bw-webclient-cal</module>
-    <module>bw-calendar-all-ear</module>
-    <module>bw-calendar-ro-ear</module>
+    <module>bw-calendar-all</module>
+    <module>bw-calendar-ro</module>
   </modules>
 </project>
