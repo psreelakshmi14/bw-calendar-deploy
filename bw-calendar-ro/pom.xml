@@ -119,7 +119,7 @@
             <artifactId>bw-util-maven-deploy</artifactId>
 
             <configuration>
-              <earName>bw-calendar-ro</earName>
+              <earName>bw-calro</earName>
               <baseDirPath>${org.bedework.feature-build.deployment.basedir}</baseDirPath>
               <propsPath>${org.bedework.feature-build.deployment.properties}</propsPath>
             </configuration>

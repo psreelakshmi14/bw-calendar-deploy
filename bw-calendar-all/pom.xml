@@ -242,7 +242,7 @@
             <artifactId>bw-util-maven-deploy</artifactId>
 
             <configuration>
-              <earName>bw-calendar-all</earName>
+              <earName>bw-cal</earName>
               <baseDirPath>${org.bedework.feature-build.deployment.basedir}</baseDirPath>
               <propsPath>${org.bedework.feature-build.deployment.properties}</propsPath>
             </configuration>
