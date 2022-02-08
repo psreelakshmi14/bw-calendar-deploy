@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+  <head>
+    <title>Public Events Admin: Login</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript">
+      // places the cursor in the first available form element when the page is loaded
+      // (if a form exists on the page)
+      function focusFirstElement() {
+        if (window.document.forms[0]) {
+          window.document.forms[0].elements[0].focus();
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="login.css"/>
+  </head>
+
+  <body onload="focusFirstElement()">
+    <div id="logo">
+      <img src="/approots/bedework-common/images/bedeworkLogo.gif" alt="Bedework Logo"/>
+    </div>
+    <form method="post" action="j_security_check" id="loginBox">
+      <label for="username">Username:</label>
+      <input type="text" name="j_username" id="username" size="20"/><br/>
+      <label for="password">Password:</label>
+      <input type="password" name="j_password" id="password" size="20"/>
+      <input type="submit" name="j_security_check" value="login"/>
+    </form>
+  </body>
+</html>

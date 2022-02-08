@@ -9,6 +9,24 @@
 
   <artifactId>bw-calendar-pubcaldav</artifactId>
   <name>Bedework: build public caldav war</name>
-
   <packaging>war</packaging>
+
+  <properties>
+    <org.bedework.war.dependency>org.bedework.calendar.ro-war</org.bedework.war.dependency>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.bedework</groupId>
+        <artifactId>bw-util-maven-deploy</artifactId>
+
+        <configuration>
+          <warName>${project.artifactId}</warName>
+          <baseDirPath>${project.basedir}/../..</baseDirPath>
+          <propsPath>${org.bedework.deployment.properties}</propsPath>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

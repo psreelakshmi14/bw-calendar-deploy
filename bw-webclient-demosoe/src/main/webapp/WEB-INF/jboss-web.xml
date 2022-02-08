@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jboss-web>
+  <!-- Virtual host -->
+
+  <context-root>/demosoe</context-root>
+
+  <resource-ref>
+    <res-ref-name>jms/BedeworkConnectionFactory</res-ref-name>
+    <res-type>javax.jms.ConnectionFactory</res-type>
+    <jndi-name>java:/jms/BedeworkConnectionFactory</jndi-name>
+  </resource-ref>
+</jboss-web>

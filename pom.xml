@@ -26,10 +26,30 @@
     <module>bw-webclient-ucal</module>
     <module>bw-webclient-submit</module>
     <module>bw-webclient-feeder</module>
-    <module>bw-webclient-calauth</module>
-    <module>bw-webclient-caladmin</module>
     <module>bw-webclient-cal</module>
-    <module>bw-calendar-all</module>
-    <module>bw-calendar-ro</module>
+    <module>bw-webclient-caladmin</module>
+    <module>bw-webclient-calauth</module>
+    <module>bw-webclient-demosoe</module>
   </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+
+          <configuration>
+            <webResources>
+              <resource>
+                <directory>src/main/meta</directory>
+                <filtering>true</filtering>
+                <targetPath>WEB-INF</targetPath>
+              </resource>
+            </webResources>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

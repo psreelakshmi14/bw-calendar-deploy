@@ -9,6 +9,25 @@
 
   <artifactId>bw-calendar-synchws</artifactId>
   <name>Bedework: build synch web service</name>
-
+  <description>Nakes CalDAV available to the synch engine as a web service</description>
   <packaging>war</packaging>
+
+  <properties>
+    <org.bedework.war.dependency>org.bedework.calendar.rw-war</org.bedework.war.dependency>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.bedework</groupId>
+        <artifactId>bw-util-maven-deploy</artifactId>
+
+        <configuration>
+          <warName>${project.artifactId}</warName>
+          <baseDirPath>${project.basedir}/../..</baseDirPath>
+          <propsPath>${org.bedework.deployment.properties}</propsPath>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
