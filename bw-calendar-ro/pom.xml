@@ -44,6 +44,8 @@
         <artifactId>maven-ear-plugin</artifactId>
 
         <configuration>
+          <filtering>true</filtering>
+
           <modules>
             <webModule>
               <groupId>org.bedework.deploy</groupId>
