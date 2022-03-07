@@ -116,15 +116,6 @@
       <forward name="success" path="/docs/main.jsp"/>
     </action>
 
-    <action    path="/admin/showError"
-               type="org.bedework.webcommon.RenderAction"
-               name="calForm"
-               scope="session"
-               parameter="actionType=render;conversation=end"
-               validate="false">
-      <forward name="success" path="/docs/error.jsp"/>
-    </action>
-
     <action    path="/admin/showNoAccess"
                type="org.bedework.webcommon.RenderAction"
                name="calForm"
