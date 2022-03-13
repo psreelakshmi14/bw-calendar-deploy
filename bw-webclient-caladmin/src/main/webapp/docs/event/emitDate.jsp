@@ -1,76 +1,107 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
+<%@ taglib uri='bedework' prefix='bw' %>
       <%-- All date/time information below is in "local" time --%>
-      <allday><bean:write name="date" property="dateType"/></allday><%--
+      <bw:emitText name="date" property="dateType"
+                   tagName="allday" /><%--
         Value: true/false --%>
-      <floating><bean:write name="date" property="floating"/></floating>
-      <utc><bean:write name="date" property="utc"/></utc><%--
+      <bw:emitText name="date" property="floating"/>
+      <bw:emitText name="date" property="utc"/><%--
         Value: true or false --%>
-      <utcdate><bean:write name="date" property="utcDate"/></utcdate><%--
+      <bw:emitText name="date" property="utcDate"
+                   tagName="utcdate" /><%--
+        Value: yyyymmdd - date value --%>
+      <bw:emitText name="date" property="unformatted"/><%--
         Value: yyyymmdd - date value --%>
 
-      <bean:define id="fmtdate" name="date" property="formatted" />
+      <c:set var="fmtdate" value="${date.formatted}" />
 
-      <year><bean:write name="fmtdate" property="year"/></year><%--
+      <bw:emitText name="fmtdate" property="year"/><%--
         Value: yyyy - year value --%>
-      <fourdigityear><bean:write name="fmtdate" property="fourDigitYear"/></fourdigityear><%--
+      <bw:emitText name="fmtdate" property="fourDigitYear"
+                   tagName="fourdigityear"/><%--
         Value: yyyy - four digit year value.  --%>
-      <month><bean:write name="fmtdate" property="month"/></month><%--
+      <bw:emitText name="fmtdate" property="month"/><%--
         Value: m - single or two digit month value --%>
-      <twodigitmonth><bean:write name="fmtdate" property="twoDigitMonth"/></twodigitmonth><%--
+      <bw:emitText name="fmtdate" property="twoDigitMonth"
+                   tagName="twodigitmonth"/><%--
         Value: mm - two digit month value --%>
-      <monthname><bean:write name="fmtdate" property="monthName"/></monthname><%--
+      <bw:emitText name="fmtdate" property="monthName"
+                   tagName="monthname"/><%--
         Value (example): January - full month name --%>
-      <day><bean:write name="fmtdate" property="day"/></day><%--
+      <bw:emitText name="fmtdate" property="day"/><%--
         Value: d - single or two digit day value --%>
-      <dayname><bean:write name="fmtdate" property="dayName"/></dayname><%--
+      <bw:emitText name="fmtdate" property="dayName"
+                   tagName="dayname"/><%--
         Value (example): Monday - full day name --%>
-      <twodigitday><bean:write name="fmtdate" property="twoDigitDay"/></twodigitday><%--
+      <bw:emitText name="fmtdate" property="twoDigitDay"
+                   tagName="twodigitday"/><%--
         Value: dd - two digit day value --%>
-      <hour24><bean:write name="fmtdate" property="hour24"/></hour24><%--
+      <bw:emitText name="fmtdate" property="hour24"/><%--
         Value: h - single to two digit 24 hour value (0-23) --%>
-      <twodigithour24><bean:write name="fmtdate" property="twoDigitHour24"/></twodigithour24><%--
+      <bw:emitText name="fmtdate" property="twoDigitHour24"
+                   tagName="twodigithour24"/><%--
         Value: hh - two digit 24 hour value (00-23) --%>
-      <hour><bean:write name="fmtdate" property="hour"/></hour><%--
+      <bw:emitText name="fmtdate" property="hour"/><%--
         Value: h - single to two digit hour value (0-12) --%>
-      <twodigithour><bean:write name="fmtdate" property="twoDigitHour"/></twodigithour><%--
+      <bw:emitText name="fmtdate" property="twoDigitHour"
+                   tagName="twodigithour"/><%--
         Value: hh - two digit hour value (00-12) --%>
-      <minute><bean:write name="fmtdate" property="minute"/></minute><%--
+      <bw:emitText name="fmtdate" property="minute"/><%--
         Value: m - single to two digit minute value (0-59) --%>
-      <twodigitminute><bean:write name="fmtdate" property="twoDigitMinute"/></twodigitminute><%--
+      <bw:emitText name="fmtdate" property="twoDigitMinute"
+                   tagName="twodigitminute"/><%--
         Value: mm - two digit minute value (00-59) --%>
-      <ampm><bean:write name="fmtdate" property="amPm"/></ampm><%--
+      <bw:emitText name="fmtdate" property="amPm"
+                   tagName="ampm"/><%--
         Value: am,pm --%>
-      <longdate><bean:write name="fmtdate" property="longDateString"/></longdate><%--
+      <bw:emitText name="fmtdate" property="longDateString"
+                   tagName="longdate"/><%--
         Value (example): February 8, 2004 - long representation of the date --%>
-      <shortdate><bean:write name="fmtdate" property="dateString"/></shortdate><%--
+      <bw:emitText name="fmtdate" property="dateString"
+                   tagName="shortdate"/><%--
         Value (example): 2/8/04 - short representation of the date --%>
-      <time><bean:write name="fmtdate" property="timeString"/></time><%--
+      <bw:emitText name="fmtdate" property="timeString"
+                   tagName="time"/><%--
         Value (example): 10:15 PM - representation of the time --%>
       <timezone>
-        <id><bean:write name="date" property="tzid"/></id>
-        <islocal><bean:write name="date" property="tzIsLocal"/></islocal>
+        <bw:emitText name="date" property="tzid"
+                     tagName="id"/>
+        <bw:emitText name="date" property="tzIsLocal"
+                     tagName="islocal"/>
         <logic:equal name="date" property="tzIsLocal" value="false">
-          <bean:define id="tzdate" name="date" property="tzFormatted" />
+          <c:set var="tzdate" value="${date.tzFormatted}" />
 
-          <date><bean:write name="tzdate" property="date"/></date>
-          <year><bean:write name="tzdate" property="year"/></year>
-          <fourdigityear><bean:write name="tzdate" property="fourDigitYear"/></fourdigityear>
-          <month><bean:write name="tzdate" property="month"/></month>
-          <twodigitmonth><bean:write name="tzdate" property="twoDigitMonth"/></twodigitmonth>
-          <monthname><bean:write name="tzdate" property="monthName"/></monthname>
-          <day><bean:write name="tzdate" property="day"/></day>
-          <dayname><bean:write name="tzdate" property="dayName"/></dayname>
-          <twodigitday><bean:write name="tzdate" property="twoDigitDay"/></twodigitday>
-          <hour24><bean:write name="tzdate" property="hour24"/></hour24>
-          <twodigithour24><bean:write name="tzdate" property="twoDigitHour24"/></twodigithour24>
-          <hour><bean:write name="tzdate" property="hour"/></hour>
-          <twodigithour><bean:write name="tzdate" property="twoDigitHour"/></twodigithour>
-          <minute><bean:write name="tzdate" property="minute"/></minute>
-          <twodigitminute><bean:write name="tzdate" property="twoDigitMinute"/></twodigitminute>
-          <ampm><bean:write name="tzdate" property="amPm"/></ampm>
-          <longdate><bean:write name="tzdate" property="longDateString"/></longdate>
-          <shortdate><bean:write name="tzdate" property="dateString"/></shortdate>
-          <time><bean:write name="tzdate" property="timeString"/></time>
+          <bw:emitText name="tzdate" property="date"/>
+          <bw:emitText name="tzdate" property="year"/>
+          <bw:emitText name="tzdate" property="fourDigitYear"
+                       tagName="fourdigityear"/>
+          <bw:emitText name="tzdate" property="month"/>
+          <bw:emitText name="tzdate" property="twoDigitMonth"
+                       tagName="twodigitmonth"/>
+          <bw:emitText name="tzdate" property="monthName"
+                       tagName="monthname"/>
+          <bw:emitText name="tzdate" property="day"/>
+          <bw:emitText name="tzdate" property="dayName"
+                       tagName="dayname"/>
+          <bw:emitText name="tzdate" property="twoDigitDay"
+                       tagName="twodigitday"/>
+          <bw:emitText name="tzdate" property="hour24"/>
+          <bw:emitText name="tzdate" property="twoDigitHour24"
+                       tagName="twodigithour24"/>
+          <bw:emitText name="tzdate" property="hour"/>
+          <bw:emitText name="tzdate" property="twoDigitHour"
+                       tagName="twodigithour"/>
+          <bw:emitText name="tzdate" property="minute"/>
+          <bw:emitText name="tzdate" property="twoDigitMinute"
+                       tagName="twodigitminute"/>
+          <bw:emitText name="tzdate" property="amPm"
+                       tagName="ampm"/>
+          <bw:emitText name="tzdate" property="longDateString"
+                       tagName="longdate"/>
+          <bw:emitText name="tzdate" property="dateString"
+                       tagName="shortdate"/>
+          <bw:emitText name="tzdate" property="timeString"
+                       tagName="time"/>
         </logic:equal>
       </timezone>
 

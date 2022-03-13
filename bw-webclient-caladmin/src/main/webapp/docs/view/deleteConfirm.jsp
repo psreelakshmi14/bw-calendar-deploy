@@ -1,4 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -6,11 +7,11 @@
 <page>deleteViewConfirm</page>
 <tab>calsuite</tab>
 
-<bean:define name="calForm" property="view" id="curView"/>
+<c:set var="curView" value="${calForm.view}"/>
 <currentView>
-  <name><bean:write name="curView" property="name" /></name>
+  <bw:emitText name="curView" property="name" />
   <logic:iterate name="curView" property="collectionPaths" id="path">
-    <path><bean:write name="path"/></path>
+    <bw:emitText name="path"/>
   </logic:iterate>
 </currentView>
 

@@ -1,7 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -12,7 +12,8 @@
 
 <formElements>
   <genurl:form action="authuser/update" >
-    <userHref><bean:write name="calForm" property="editAuthUser.userHref" /></userHref>
+    <bw:emitText name="calForm" property="editAuthUser.userHref"
+                 tagName="userHref"/>
     <publicEvents><html:checkbox property="editAuthUserPublicEvents" /></publicEvents>
     <contentAdmin><html:checkbox property="editAuthUserContentAdmin" /></contentAdmin>
     <approver><html:checkbox property="editAuthUserApprover" /></approver>

@@ -1,7 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -10,16 +10,16 @@
 <page>contactReferenced</page>
 <tab>main</tab>
 
+<c:set var="contact" value="${calform.contact}"/>
 <contact>
-  <name>
-    <bean:write name="calForm" property="contact.cn.value" />
-  </name>
-  <phone><bean:write name="calForm" property="contact.phone" /></phone>
-  <logic:present name="calForm" property="contact.email">
-    <email><bean:write name="calForm" property="contact.email"/></email>
+  <bw:emitText name="contact" property="cn.value"
+               tagName="name"/>
+  <bw:emitText name="contact" property="phone" />
+  <logic:present name="contact" property="email">
+    <bw:emitText name="contact" property="email"/>
   </logic:present>
-  <logic:present name="calForm" property="contact.link">
-    <link><bean:write name="calForm" property="contact.link" /></link>
+  <logic:present name="contact" property="link">
+    <bw:emitText name="contact" property="link" />
   </logic:present>
 </contact>
 

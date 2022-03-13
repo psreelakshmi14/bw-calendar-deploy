@@ -1,7 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -10,7 +10,8 @@
 <page>modLocation</page>
 <tab>main</tab>
 
-<creating><bean:write name="calForm" property="addingLocation"/></creating>
+<bw:emitText name="calForm" property="addingLocation"
+             tagName="creating"/>
 
 <!-- Mod pages contain only formElements for now; we do this to
      take advantage of Struts' form processing features -->

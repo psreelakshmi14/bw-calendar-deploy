@@ -1,17 +1,19 @@
-<bean:define id="uid" name="contact" property="uid"/>
-<% rpitemp="/contact/fetchForUpdate.do?uid=" + uid; %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <contact>
   <name>
-    <genurl:link page="<%=rpitemp%>">
-      <bean:write name="contact" property="cn.value" />
-    </genurl:link>
+    <c:url value="/contact/fetchForUpdate.do" var="theUrl">
+      <c:param name="uid" value="${contact.uid}"/>
+    </c:url>
+    <a href='<c:out value="${theUrl}"/>'><c:out
+              value="${contact.cn.value}" /></a>
   </name>
-  <phone><bean:write name="contact" property="phone" /></phone>
-  <status><bean:write name="contact" property="status" /></status>
+  <bw:emitText name="contact" property="phone" />
+  <bw:emitText name="contact" property="status" />
   <logic:present name="contact" property="email">
-    <email><bean:write name="contact" property="email"/></email>
+    <bw:emitText name="contact" property="email"/>
   </logic:present>
   <logic:present name="contact" property="link">
-    <link><bean:write name="contact" property="link" /></link>
+    <bw:emitText name="contact" property="link" />
   </logic:present>
 </contact>

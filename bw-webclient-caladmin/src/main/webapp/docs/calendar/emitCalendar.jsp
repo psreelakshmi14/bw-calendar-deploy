@@ -1,7 +1,6 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <calendar>
   <bw:emitCollection name="calendar" indent="  " full="true" noTag="true" />
@@ -15,11 +14,11 @@
            and ignore the open or closed state of calendars  --%>
       <bw:getChildren id="children" name="calendar" form="calForm" />
       <logic:iterate name="children" id="cal">
-        <bean:define id="calendar" name="cal" toScope="session" />
+        <c:set var="calendar" value="${cal}" scope="session" />
           <%--
         <c:if test="${requestScope.stopDescent == 'true'}">
           < % - - an explicit request has been made to stop descending the full tree - - % >
-          <bean:define id="fullTree" toScope="request">false</bean:define>
+          <c:set var="fullTree" value="false" toScope="request"/>
         </c:if>
         --%>
         <c:if test="${!((requestScope.stopDescentAtAliases == 'true') and (internalAlias == 'true' or externalSub == 'true'))}">
@@ -33,7 +32,7 @@
       <logic:equal name="calendar" property="open" value="true">
         <bw:getChildren id="children" name="calendar" form="calForm" />
         <logic:iterate name="children" id="cal">
-          <bean:define id="calendar" name="cal" toScope="session" />
+          <c:set var="calendar" value="${cal}" scope="session" />
           <jsp:include page="/docs/calendar/emitCalendar.jsp" />
         </logic:iterate>
       </logic:equal>

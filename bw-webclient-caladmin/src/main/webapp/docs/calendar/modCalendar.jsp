@@ -1,5 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -7,7 +7,8 @@
 <page>modCalendar</page>
 <tab>system</tab>
 
-<creating><bean:write name="calForm" property="addingCalendar"/></creating>
+<bw:emitText name="calForm" property="addingCalendar"
+             tagName="creating"/>
 
 <%@include file="/docs/calendar/displayCalendarCommon.jsp"%>
 <%@include file="/docs/calendar/subscriptionStatus.jsp"%>

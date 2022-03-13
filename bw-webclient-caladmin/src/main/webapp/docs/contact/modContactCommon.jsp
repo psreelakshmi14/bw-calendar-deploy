@@ -1,7 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <name><html:text property="contactName.value" size="30"/></name>

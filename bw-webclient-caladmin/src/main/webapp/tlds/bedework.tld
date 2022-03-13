@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
-          "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
-
-<taglib>
-  <tlibversion>1.0</tlibversion>
-  <jspversion>1.1</jspversion>
-  <shortname>bedework</shortname>
-  <uri>http://bedework.org/downloads/bedeworktags.jar</uri>
-  <info>Bedework Tag library</info>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+  <display-name>Bedework Tag library</display-name>
+  <tlib-version>1.2</tlib-version>
+  <short-name>bedework</short-name>
+  <uri>https://bedework.org/jsp/jstl/bedework</uri>
 
   <tag>
+    <description>Set a PropertiesEntity value</description>
     <name>setProperty</name>
-    <tagclass>org.bedework.webcommon.taglib.SetPropertyTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Set a PropertiesEntity value</info>
+    <tag-class>org.bedework.webcommon.taglib.SetPropertyTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>pname</name>
@@ -48,10 +47,10 @@
   </tag>
 
   <tag>
+    <description>Get children of a calendar</description>
     <name>getChildren</name>
-    <tagclass>org.bedework.webcommon.taglib.GetChildrenTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Get children of a calendar</info>
+    <tag-class>org.bedework.webcommon.taglib.GetChildrenTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>form</name>
@@ -85,10 +84,10 @@
   </tag>
 
   <tag>
+    <description>Emit txt in a tag</description>
     <name>emitText</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitTextTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit txt in a tag</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitTextTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -128,10 +127,10 @@
   </tag>
 
   <tag>
+    <description>Emit bedework collections in a tag</description>
     <name>emitContainer</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitContainerTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit bedework collections in a tag</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitContainerTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -177,10 +176,10 @@
   </tag>
 
   <tag>
+    <description>Emit bedework collections in a tag</description>
     <name>emitCollection</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitCollectionTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit bedework collections in a tag</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitCollectionTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -226,10 +225,10 @@
   </tag>
 
   <tag>
+    <description>Emit recurrence or exception dates</description>
     <name>emitRexdates</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitRExDatesTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit recurrence or exception dates</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitRExDatesTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -275,10 +274,10 @@
   </tag>
 
   <tag>
+    <description>Emit xml version of current privs in a tag</description>
     <name>emitCurrentPrivs</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitCurrentPrivsTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit xml version of current privs in a tag</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitCurrentPrivsTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -306,10 +305,10 @@
   </tag>
 
   <tag>
+    <description>Emit xml version of acl in a tag</description>
     <name>emitAcl</name>
-    <tagclass>org.bedework.webcommon.taglib.EmitAclTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <info>Emit xml version of acl in a tag</info>
+    <tag-class>org.bedework.webcommon.taglib.EmitAclTag</tag-class>
+    <body-content>empty</body-content>
 
     <attribute>
       <name>name</name>
@@ -327,103 +326,6 @@
       <name>scope</name>
       <required>false</required>
       <rtexprvalue>false</rtexprvalue>
-    </attribute>
-  </tag>
-
-  <!-- portlet aware rewrite tag. Adds some extra attributes -->
-  <tag>
-    <name>rewrite</name>
-    <tagclass>org.bedework.webcommon.taglib.portlet.CalRewriteTag</tagclass>
-    <bodycontent>empty</bodycontent>
-    <attribute>
-    <name>actionURL</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>renderURL</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>resourceURL</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>action</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>module</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>anchor</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>forward</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>href</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>name</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>page</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>paramId</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>paramName</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>paramProperty</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>paramScope</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>property</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>scope</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>transaction</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    <name>useLocalEncoding</name>
-    <required>false</required>
-    <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
 </taglib>

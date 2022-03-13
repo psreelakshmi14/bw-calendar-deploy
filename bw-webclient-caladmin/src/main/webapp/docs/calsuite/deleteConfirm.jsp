@@ -1,5 +1,4 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -11,7 +10,7 @@
 <page>deleteCalSuiteConfirm</page>
 <tab>system</tab>
 
-<bean:define id="calSuite" name="calForm" property="calSuite" >
+<c:set var="calSuite" value="${calForm.calSuite}"/>
 <calSuite>
   <bw:emitText name="calSuite" property="name" />
   <bw:emitText name="calSuite" property="group.name" tagName"group" />

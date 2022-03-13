@@ -1,14 +1,17 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <resources>
   <logic:iterate name="calForm" property="calSuiteResources" id="resource">
     <resource>
-      <name><bean:write name="resource" property="name" /></name>
-      <content-type><bean:write name="resource" property="contentType" /></content-type>
-      <class><bean:write name="resource" property="rclass" /></class>
-      <type><bean:write name="resource" property="type" /></type>
-      <path><bean:write name="resource" property="path" /></path>
+      <bw:emitText name="resource" property="name" />
+      <bw:emitText name="resource" property="contentType"
+                   tagName="content-type"/>
+      <bw:emitText name="resource" property="rclass"
+                   tagName="class"/>
+      <bw:emitText name="resource" property="type" />
+      <bw:emitText name="resource" property="path" />
     </resource>
   </logic:iterate>
 </resources>

@@ -1,7 +1,6 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -10,11 +9,12 @@
 <page>modCategory</page>
 <tab>system</tab>
 
-<creating><bean:write name="calForm" property="addingCategory"/></creating>
+<bw:emitText name="calForm" property="addingCategory"
+             tagName="creating"/>
 
 <currentCategory>
   <logic:present name="calForm" property="category">
-    <bean:define id="category" name="calForm" property="category"/>
+    <c:set var="category" value="${calForm.category}"/>
     <%@include file="/docs/category/emitCategory.jsp"%>
   </logic:present>
 </currentCategory>

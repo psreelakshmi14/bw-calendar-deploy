@@ -1,7 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -12,7 +12,7 @@
 
 <currentCategory>
   <logic:present name="calForm" property="category">
-    <bean:define id="category" name="calForm" property="category"/>
+    <c:set var="category" value="${calForm.category}"/>
     <%@include file="/docs/category/emitCategory.jsp"%>
   </logic:present>
 </currentCategory>
@@ -22,19 +22,20 @@
     <logic:iterate id="propRef" name="calForm" property="propRefs" >
       <propRef>
         <logic:present name="propRef" property="collection">
-          <bw:emitText name="propRef" property="collection" tagName="isCollection" />
+          <bw:emitText name="propRef" property="collection"
+                       tagName="isCollection" />
         </logic:present>
         <logic:notPresent name="propRef" property="collection">
           <isCollection></isCollection>
         </logic:notPresent>
         <logic:present name="propRef" property="path">
-          <bw:emitText name="propRef" property="path" tagName="path" />
+          <bw:emitText name="propRef" property="path" />
         </logic:present>
         <logic:notPresent name="propRef" property="path">
           <path></path>
         </logic:notPresent>
         <logic:present name="propRef" property="uid">
-          <bw:emitText name="propRef" property="uid" tagName="uid" />
+          <bw:emitText name="propRef" property="uid" />
         </logic:present>
         <logic:notPresent name="propRef" property="uid">
           <uid></uid>

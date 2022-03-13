@@ -1,7 +1,8 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -11,16 +12,16 @@
 <tab>main</tab>
 
 <location>
-  <address>
-    <bean:write name="calForm" property="location.address.value" />
-  </address>
+  <bw:emitText name="calForm" property="location.address.value"
+               tagName="address"/>
   <subaddress>
     <logic:present name="calForm" property="location.subaddress">
-      <bean:write name="calForm" property="location.subaddress.value" />
+      <c:out value="${calForm.location.subaddress.value}" />
     </logic:present>
   </subaddress>
   <logic:present name="calForm" property="location.link">
-    <link><bean:write name="calForm" property="location.link" /></link>
+    <bw:emitText name="calForm" property="location.link"
+                 tagName="link"/>
   </logic:present>
 </location>
 

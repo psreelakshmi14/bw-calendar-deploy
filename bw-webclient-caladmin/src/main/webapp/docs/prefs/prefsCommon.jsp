@@ -1,28 +1,30 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
-<bean:define id="userPrefs" name="calForm" property="userPreferences"/>
+<c:set var="userPrefs" value="${calForm.userPreferences}"/>
 <prefs>
-  <user><bean:write name="userPrefs" property="ownerHref"/></user>
+  <bw:emitText name="userPrefs" property="ownerHref"
+               tagName="user"/>
   <!-- name of default view (collection of subscriptions) that will appear upon login -->
-  <preferredView><bean:write name="userPrefs" property="preferredView"/></preferredView>
+  <bw:emitText name="userPrefs" property="preferredView"/>
   <!-- default mode of view:
        daily - a list of events grouped by date showing entire view period
        list - a list of discrete events from now into the future
        grid - calendar grid - in week and month view periods
   -->
-  <defaultViewMode><bean:write name="userPrefs" property="defaultViewMode"/></defaultViewMode>
+  <bw:emitText name="userPrefs" property="defaultViewMode"/>
   <!-- default period that will appear upon login (day, week, month, year, today) -->
-  <preferredViewPeriod><bean:write name="userPrefs" property="preferredViewPeriod"/></preferredViewPeriod>
+  <bw:emitText name="userPrefs" property="preferredViewPeriod"/>
   <!-- whether user will use 12 (am/pm) or 24 hour mode when entering events -->
   <bw:emitText name="userPrefs" property="hour24"/>
   <bw:emitText name="userPrefs" property="noNotifications"/>
-  <skinName><bean:write name="userPrefs" property="skinName"/></skinName>
-  <skinStyle><bean:write name="userPrefs" property="skinStyle"/></skinStyle>
+  <bw:emitText name="userPrefs" property="skinName"/>
+  <bw:emitText name="userPrefs" property="skinStyle"/>
   <!-- pref end type = date or duration -->
   <bw:emitText name="userPrefs" property="preferredEndType"/>
-  <defaultImageDirectory><bean:write name="userPrefs" property="defaultImageDirectory"/></defaultImageDirectory>
-  <maxEntitySize><bean:write name="userPrefs" property="maxEntitySize"/></maxEntitySize>
+  <bw:emitText name="userPrefs" property="defaultImageDirectory"/>
+  <bw:emitText name="userPrefs" property="maxEntitySize"/>
 
   <bw:emitText name="userPrefs" property="pageSize"/>
   <bw:emitText name="userPrefs" property="adminResourcesDirectory"/>

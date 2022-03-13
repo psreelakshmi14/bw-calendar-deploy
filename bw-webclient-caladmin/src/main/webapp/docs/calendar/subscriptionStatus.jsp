@@ -1,20 +1,17 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <subscriptionStatus>
   <logic:present name="bw_subscription_status" scope="session">
-    <bean:define id="sstatus" name="bw_subscription_status"
-                 scope="session"
-                 toScope="request" />
+    <c:set var="sstatus" value="${bw_subscription_status}"
+           scope="request" />
     <bw:emitText name="sstatus" property="requestStatus" />
     <logic:present name="sstatus" property="subscriptionStatus" >
-      <bean:define id="ss" name="sstatus"
-                   property="subscriptionStatus"
-                   toScope="request" />
+      <c:set var="ss" value="${sstatus.subscriptionStatus}"
+             scope="request" />
       <bw:emitText name="ss" property="subscriptionId" />
       <bw:emitText name="ss" property="principalHref" />
       <bw:emitText name="ss" property="direction" />
@@ -24,25 +21,21 @@
       <bw:emitText name="ss" property="missingTarget" />
       <endA>
         <logic:present name="ss" property="endAConnector" >
-          <bean:define id="connector" name="ss"
-                       property="endAConnector"
-                       toScope="request" />
+          <c:set var="connector" value="${ss.endAConnector}"
+                 scope="request" />
           <bw:emitText name="connector" property="connectorId" />
-          <bean:define id="properties" name="connector"
-                       property="properties"
-                       toScope="request" />
+          <c:set var="properties" value="${connector.properties}"
+                 scope="request" />
           <%@ include file="/docs/synchProperties.jsp" %>
         </logic:present>
       </endA>
       <endB>
         <logic:present name="ss" property="endBConnector" >
-          <bean:define id="connector" name="ss"
-                       property="endBConnector"
-                       toScope="request" />
+          <c:set var="connector" value="${ss.endBConnector}"
+                 scope="request" />
           <bw:emitText name="connector" property="connectorId" />
-          <bean:define id="properties" name="connector"
-                       property="properties"
-                       toScope="request" />
+          <c:set var="properties" value="${connector.properties}"
+                 scope="request" />
           <%@ include file="/docs/synchProperties.jsp" %>
         </logic:present>
       </endB>

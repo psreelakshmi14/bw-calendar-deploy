@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
@@ -10,7 +10,7 @@
 <page>addLocationKey</page>
 <tab>main</tab>
 
-  <bean:define id="location" name="calForm" property="location" />
+  <c:set var="location" value="${calForm.location}" />
   <%@include file="/docs/location/emitLocation.jsp"%>
 
   <!-- Mod pages contain only formElements for now; we do this to

@@ -1,9 +1,8 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
-<bean:define id="eventFmt" name="eventFormatter"/>
-<bean:define id="eventInfo" name="eventFmt" property="eventInfo" toScope="request"  />
-<bean:define id="event" name="eventInfo" property="event" toScope="request"  />
+<c:set var="eventFmt" value="${eventFormatter}" />
+<c:set var="eventInfo" value="${eventFmt.eventInfo}" scope="request"  />
+<c:set var="event" value="${eventInfo.event}" scope="request"  />
 <%-- Output a single event. This page handles fields common to all views --%>
 <%@ include file="/docs/event/emitEventCommon.jsp" %>
 

@@ -1,7 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -10,8 +8,6 @@
 <page>contactList</page>
 <tab>main</tab>
 
-<% /* used by included file */
-   String rpitemp; %>
 <contacts>
   <logic:present name="bw_editable_contacts_list" scope="session">
     <logic:iterate id="contact" name="bw_editable_contacts_list"

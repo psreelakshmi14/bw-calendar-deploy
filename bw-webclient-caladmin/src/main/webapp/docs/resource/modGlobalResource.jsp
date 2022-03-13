@@ -1,4 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -6,15 +7,18 @@
 <page>modResource</page>
 <tab>system</tab>
 
-<creating><bean:write name="calForm" property="addingResource"/></creating>
+<bw:emitText name="calForm" property="addingResource"
+             tagName="creating"/>
 
-<bean:define name="calForm" property="calSuiteResource" id="curResource"/>
+<c:set var="curResource" value="${calForm.calSuiteResource}"/>
 <currentResource>
-  <name><bean:write name="curResource" property="name" /></name>
-  <content-type><bean:write name="curResource" property="contentType" /></content-type>
-  <class><bean:write name="curResource" property="rclass" /></class>
-  <type><bean:write name="curResource" property="type" /></type>
-  <path><bean:write name="curResource" property="path" /></path>
+  <bw:emitText name="curResource" property="name" />
+  <bw:emitText name="curResource" property="contentType"
+               tagName="content-type"/>
+  <bw:emitText name="curResource" property="rclass"
+               tagName="class"/>
+  <bw:emitText name="curResource" property="type" />
+  <bw:emitText name="curResource" property="path" />
 </currentResource>
 
 <%@include file="/docs/footer.jsp"%>

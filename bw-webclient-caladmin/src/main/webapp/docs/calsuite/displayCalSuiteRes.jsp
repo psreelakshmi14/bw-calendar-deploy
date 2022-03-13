@@ -1,7 +1,6 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -10,7 +9,7 @@
 <page>calSuiteRes</page>
 <tab>system</tab>
 
-<bean:define id="csres" name="calForm" property="calSuiteResource" />
+<c:set var="csres" value="${calForm.calSuiteResource}" />
 
   <calSuiteResource>
     <bw:emitText name="csres" property="name" />

@@ -1,5 +1,4 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -20,8 +19,8 @@
       */ %>
 
 <calendars>
-  <bean:define id="calendar" name="bw_collection_list" scope="session"
-             toScope="session" />
+  <c:set var="calendar" value="${bw_collection_list}"
+         scope="session" />
   <%@include file="/docs/calendar/emitCalendar.jsp"%>
 </calendars>
 

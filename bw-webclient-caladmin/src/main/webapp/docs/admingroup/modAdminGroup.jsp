@@ -1,7 +1,8 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -9,7 +10,8 @@
 
 <page>modAdminGroup</page>
 <tab>users</tab>
-<creating><bean:write name="calForm" property="addingAdmingroup"/></creating>
+<bw:emitText name="calForm" property="addingAdmingroup"
+             tagName="creating"/>
 
 <formElements>
   <genurl:form action="admingroup/update" >
@@ -18,7 +20,7 @@
         <html:text name="calForm" property="updAdminGroup.account" />
       </logic:equal>
       <logic:notEqual name="calForm" property="addingAdmingroup" value="true" >
-        <bean:write name="calForm" property="updAdminGroup.account" />
+        <c:out value="${calForm.updAdminGroup.account}" />
       </logic:notEqual>
     </name>
     <desc>

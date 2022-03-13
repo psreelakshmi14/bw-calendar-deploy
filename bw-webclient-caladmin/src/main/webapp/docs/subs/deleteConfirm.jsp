@@ -1,5 +1,6 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -7,23 +8,24 @@
 <page>deleteSubConfirm</page>
 <tab>calsuite</tab>
 
-<creating><bean:write name="calForm" property="addingCalendar"/></creating>
+<bw:emitText name="calForm" property="addingCalendar"
+             tagName="creating"/>
 
 <%@include file="/docs/calendar/displayCalendarCommon.jsp"%>
 
 <!-- subscriptions are a subset of calendars; there is no difference to the underlying code. -->
 <calendars>
-  <bean:define id="calendar" name="bw_user_collection_list" scope="session"
-             toScope="session" />
+  <c:set var="calendar" value="${bw_user_collection_list}"
+         scope="session" />
   <%@include file="/docs/calendar/emitCalendar.jsp"%>
 </calendars>
 
 <publicCalendars>
-  <bean:define id="calendar" name="bw_public_collection_list" scope="session"
-             toScope="session" />
+  <c:set var="calendar" value="${bw_public_collection_list}"
+         scope="session" />
 
   <%-- open up the calendars to descend down the tree --%>
-  <bean:define id="fullTree" toScope="request">true</bean:define>
+  <c:set var="fullTree" value="true" scope="request"/>
 
   <%@include file="/docs/calendar/emitCalendar.jsp"%>
 </publicCalendars>

@@ -1,7 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
 <bedework>
@@ -11,14 +11,15 @@
 <tab>users</tab>
 
 <adminGroup>
-  <name><bean:write name="calForm" property="updAdminGroup.account" /></name>
+  <bw:emitText name="calForm" property="updAdminGroup.account"
+               tagName="name"/>
   <members>
     <logic:present name="calForm" property="updAdminGroup.groupMembers" >
       <logic:iterate name="calForm" property="updAdminGroup.groupMembers"
                      id="member" >
         <member>
-          <account><bean:write name="member" property="account" /></account>
-          <kind><bean:write name="member" property="kind" /></kind>
+          <bw:emitText name="member" property="account" />
+          <bw:emitText name="member" property="kind" />
         </member>
       </logic:iterate>
     </logic:present>

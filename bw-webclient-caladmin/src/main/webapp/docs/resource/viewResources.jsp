@@ -1,4 +1,3 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>

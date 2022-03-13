@@ -1,16 +1,16 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
-<bean:define id="uid" name="location" property="uid"/>
-<% rpitemp="/location/fetchForUpdate.do?uid=" + uid; %>
 <location>
   <address>
-    <genurl:link page="<%=rpitemp%>">
-      <bean:write name="location" property="addressField" />
-    </genurl:link>
+    <c:url value="/location/fetchForUpdate.do" var="theUrl">
+      <c:param name="uid" value="${location.uid}"/>
+    </c:url>
+    <a href='<c:out value="${theUrl}"/>'><c:out
+        value="${location.addressField}" /></a>
   </address>
 
   <bw:emitText name="location" property="roomField" />
@@ -28,7 +28,7 @@
 
   <subaddress>
     <logic:present name="location" property="subaddress" >
-      <bean:write name="location" property="subaddress.value" />
+      <c:out value="${location.subaddress.value}" />
     </logic:present>
   </subaddress>
 

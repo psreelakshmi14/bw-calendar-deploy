@@ -1,5 +1,5 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -8,19 +8,22 @@
 <tab>users</tab>
 
 <groups>
-  <showMembers><bean:write name="calForm" property="showAgMembers"/></showMembers>
+  <bw:emitText name="calForm" property="showAgMembers"
+               tagName="showMembers"/>
   <logic:iterate id="adminGroup" name="bw_admin_groups" scope="session" >
     <group>
-      <name><bean:write name="adminGroup" property="account" /></name>
-      <desc><bean:write name="adminGroup" property="description" /></desc>
+      <bw:emitText name="adminGroup" property="account"
+                   tagName="name"/>
+      <bw:emitText name="adminGroup" property="description"
+                   tagName="desc"/>
       <members>
         <logic:equal name="calForm" property="showAgMembers" value="true">
           <logic:present name="adminGroup" property="groupMembers" >
             <logic:iterate name="adminGroup" property="groupMembers"
                            id="member" >
               <member>
-                <account><bean:write name="member" property="account" /></account>
-                <kind><bean:write name="member" property="kind" /></kind>
+                <bw:emitText name="member" property="account" />
+                <bw:emitText name="member" property="kind" />
               </member>
             </logic:iterate>
           </logic:present>
