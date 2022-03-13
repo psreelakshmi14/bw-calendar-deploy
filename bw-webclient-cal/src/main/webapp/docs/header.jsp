@@ -76,7 +76,7 @@ try {
       Value (example): January - full month name --%>
   </lastday>
   <bw:emitText name="ctView" property="prevDate"
-               tagName="previousdate"><%--
+               tagName="previousdate"/><%--
     Value: YYYYMMDD - The previous "firstdate" in the selected time period  --%>
   <bw:emitText name="ctView" property="nextDate"
                tagName="nextdate"/><%--
