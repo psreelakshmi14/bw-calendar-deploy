@@ -1,86 +1,97 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <%
 try {
 %>
   <%-- Generates standard calendar values for use in the client for forms, etc --%>
 
-  <bean:define id="calInfo" name="moduleState" property="calInfo" />
-  <bean:define id="forLabels" name="moduleState"
-               property="eventDates.forLabels" />
-
+  <c:set var="calInfo" value="${moduleState.calInfo}" />
+  <c:set var="forLabels" value="${moduleState.eventDates.forLabels}" />
 
 <daylabels>
     <logic:iterate id="dayLabel" name="calInfo" property="dayLabels">
-      <val><bean:write name="dayLabel"/></val>
+      <bw:emitText name="dayLabel" tagName="val"/>
     </logic:iterate>
   </daylabels>
   <dayvalues>
     <logic:iterate id="dayVal" name="calInfo" property="dayVals">
-      <val><bean:write name="dayVal"/></val>
+      <bw:emitText name="dayVal" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.day"/></start>
+    <bw:emitText name="moduleState" property="viewStartDate.day"
+                 tagName="start"/>
   </dayvalues>
   <daynames>
     <logic:iterate id="dayName" name="calInfo" property="dayNamesAdjusted">
-      <val><bean:write name="dayName"/></val>
+      <bw:emitText name="dayName" tagName="val"/>
     </logic:iterate>
   </daynames>
   <shortdaynames>
     <logic:iterate id="shortDayName" name="calInfo" property="shortDayNamesAdjusted">
-      <val><bean:write name="shortDayName"/></val>
+      <bw:emitText name="shortDayName" tagName="val"/>
     </logic:iterate>
   </shortdaynames>
   <recurdayvals>
     <logic:iterate id="recurDayName" name="calInfo" property="recurDayNamesAdjusted">
-      <val><bean:write name="recurDayName"/></val>
+      <bw:emitText name="recurDayName" tagName="val"/>
     </logic:iterate>
   </recurdayvals>
   <monthlabels>
     <logic:iterate id="monthLabel" name="calInfo" property="monthLabels">
-      <val><bean:write name="monthLabel"/></val>
+      <bw:emitText name="monthLabel" tagName="val"/>
     </logic:iterate>
   </monthlabels>
   <monthvalues>
     <logic:iterate id="monthVal" name="calInfo" property="monthVals">
-      <val><bean:write name="monthVal"/></val>
+      <bw:emitText name="monthVal" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.month"/></start>
+    <bw:emitText name="moduleState"
+                 property="viewStartDate.month"
+                 tagName="start"/>
   </monthvalues>
   <yearvalues>
     <logic:iterate id="yearVals" name="calForm" property="yearVals">
-      <val><bean:write name="yearVals"/></val>
+      <bw:emitText name="yearVals" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.year"/></start>
+    <bw:emitText name="moduleState"
+                 property="viewStartDate.year"
+                 tagName="start"/>
   </yearvalues>
   <hourlabels>
     <logic:iterate id="hourLabel" name="forLabels" property="hourLabels">
-      <val><bean:write name="hourLabel"/></val>
+      <bw:emitText name="hourLabel" tagName="val"/>
     </logic:iterate>
   </hourlabels>
   <hourvalues>
     <logic:iterate id="hourVal" name="forLabels" property="hourVals">
-      <val><bean:write name="hourVal"/></val>
+      <bw:emitText name="hourVal" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.hour"/></start>
+    <bw:emitText name="moduleState"
+                 property="viewStartDate.hour"
+                 tagName="start"/>
   </hourvalues>
   <minvalues>
     <logic:iterate id="minuteVals" name="forLabels" property="minuteLabels">
-      <val><bean:write name="minuteVals"/></val>
+      <bw:emitText name="minuteVals" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.minute"/></start>
+    <bw:emitText name="moduleState"
+                 property="viewStartDate.minute"
+                 tagName="start"/>
 <%--    <logic:iterate id="minuteVals" name="forLabels" property="minuteLabels">
  --%>
   </minvalues>
   <ampmvalues>
-    <logic:iterate id="ampmVals" name="forLabels" property="ampmLabels">
-      <val><bean:write name="ampmVals"/></val>
+    <logic:iterate id="ampmVals" name="forLabels"
+                   property="ampmLabels">
+      <bw:emitText name="ampmVals" tagName="val"/>
     </logic:iterate>
-    <start><bean:write name="moduleState" property="viewStartDate.ampm"/></start>
+    <bw:emitText name="moduleState"
+                 property="viewStartDate.ampm"
+                 tagName="start"/>
   </ampmvalues>
 <%
-} catch (Throwable t) {
+} catch (final Throwable t) {
   t.printStackTrace();
 }
 %>
