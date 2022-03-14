@@ -1,3 +1,5 @@
+<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 
 <category>
   <%-- unique id  --%>
@@ -15,10 +17,10 @@
   <logic:present name="category" property="name" >
       <bw:emitText name="category" property="name" />
   </logic:present>
-    <%-- description of the category  --%>
-    <logic:present name="category" property="descriptionVal" >
+  <%-- description of the category  --%>
+  <logic:present name="category" property="descriptionVal" >
       <bw:emitText name="category" property="descriptionVal" tagName="description" />
-    </logic:present>
+  </logic:present>
     <%-- status of the category  --%>
     <logic:present name="category" property="status" >
       <bw:emitText name="category" property="status" tagName="status" />
@@ -26,3 +28,4 @@
   <%-- creator of the category  --%>
   <bw:emitText name="category" property="creatorHref" tagName="creator" />
 </category>
+

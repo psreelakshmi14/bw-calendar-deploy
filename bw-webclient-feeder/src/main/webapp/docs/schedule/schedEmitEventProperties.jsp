@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -9,7 +9,7 @@
       <organizerSchedulingObject />
     </logic:equal>
     <logic:present  name="schedEvent" property="organizer">
-      <bean:define id="organizer" name="schedEvent" property="organizer"/>
+      <c:set var="organizer" value="${schedEvent.organizer}"/>
       <organizer>
         <bw:emitText name="organizer" property="cn"/><%--
           Value: string - cn of the organizer --%>
@@ -27,7 +27,7 @@
       <attendees>
         <logic:iterate id="attendee" name="schedEvent" property="attendees">
           <attendee>
-            <id><bean:write name="attendee" property="id"/></id><%--
+            <bw:emitText name="attendee" property="id" /><%--
                 Value: integer - attendee id --%>
             <bw:emitText name="attendee" property="cn"/><%--
               Value: string - cn of the attendee --%>
@@ -44,7 +44,7 @@
                 Value: string - language code --%>
             <bw:emitText name="attendee" property="sentBy"/><%--
               Value: string - usually mailto url --%>
-            <rsvp><bean:write name="attendee" property="rsvp"/></rsvp>
+            <bw:emitText name="attendee" property="rsvp" />
             <bw:emitText name="attendee" property="role"/>
             <bw:emitText name="attendee" property="partstat"/>
             <bw:emitText name="attendee" property="attendeeUri"/>

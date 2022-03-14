@@ -1,10 +1,7 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <%-- Load the header common to all pages --%>
 <bedework>
@@ -21,45 +18,50 @@
       4. other          - an arbitrary page (see showPage.jsp)
 --%>
 <page>eventscalendar</page>
-<bean:define id="dayViewName" name="calForm" property="viewTypeName[1]"/>
+<c:set var="dayViewName" value="${calForm.viewTypeName[1]}"/>
 
 <%-- The events listing in a calendar tree --%>
 <eventscalendar>
-  <%--
-  <bean:define id="timeInfo" name="calForm"
-               property="curTimeView.timePeriodInfo"/>
-               --%>
-  <bean:define id="curTimeView" name="moduleState" property="curTimeView"/>
-  <bean:define id="timeInfo" name="curTimeView" property="timePeriodInfo"/>
+  <c:set var="curTimeView" value="${moduleState.curTimeView}"/>
+  <c:set var="timeInfo" value="${curTimeView.timePeriodInfo}"/>
   <logic:iterate id="yearInfo" name="timeInfo" >
     <year>
-      <value><bean:write name="yearInfo" property="year"/></value>
+      <bw:emitText name="yearInfo" property="year"
+                   tagName="value"/>
       <logic:iterate id="monthInfo" name="yearInfo" property="entries" >
         <month>
-          <value><bean:write name="monthInfo" property="month"/></value>
-          <longname><bean:write name="monthInfo" property="monthName"/></longname>
-          <shortname><bean:write name="monthInfo" property="monthName"/></shortname>
+          <bw:emitText name="monthInfo" property="month"
+                       tagName="value"/>
+          <bw:emitText name="monthInfo" property="monthName"
+                       tagName="longname"/>
+          <bw:emitText name="monthInfo" property="monthName"
+                       tagName="shortname"/>
           <logic:iterate id="weekInfo" name="monthInfo" property="entries" >
             <week>
-              <value><bean:write name="weekInfo" property="weekOfYear"/></value>
+              <bw:emitText name="weekInfo" property="weekOfYear"
+                           tagName="value"/>
               <logic:iterate id="dayInfo" name="weekInfo" property="entries" >
                 <day>
-                  <filler><bean:write name="dayInfo" property="filler"/></filler>
+                  <bw:emitText name="dayInfo" property="filler"/>
                   <%/* Fillers currently have no information */%>
                   <logic:equal name="dayInfo" property="filler" value="false">
-                    <value><bean:write name="dayInfo" property="dayOfMonth"/></value>
-                    <name><bean:write name="dayInfo" property="dayName"/></name>
-                    <date><bean:write name="dayInfo" property="date"/></date>
-                    <longdate><bean:write name="dayInfo" property="dateLong"/></longdate>
-                    <shortdate><bean:write name="dayInfo" property="dateShort"/></shortdate>
+                    <bw:emitText name="dayInfo" property="dayOfMonth"
+                                 tagName="value"/>
+                    <bw:emitText name="dayInfo" property="dayName"
+                                 tagName="name"/>
+                    <bw:emitText name="dayInfo" property="date"/>
+                    <bw:emitText name="dayInfo" property="dateLong"
+                                 tagName="longdate"/>
+                    <bw:emitText name="dayInfo" property="dateShort"
+                                 tagName="shortdate"/>
                     <%-- Do not produce events if we are in the year view
                     <logic:equal name="calForm"
                                  property="curTimeView.showData" value="true">
                                  --%>
                     <logic:equal name="curTimeView" property="showData" value="true">
                       <logic:iterate id="eventFmt" name="dayInfo" property="events">
-                        <bean:define id="eventFormatter" name="eventFmt"
-                                     toScope="request" />
+                        <c:set var="eventFormatter" value="${eventFmt}"
+                               scope="request" />
                         <jsp:include page="/docs/event/emitEvent.jsp" />
                       </logic:iterate>
                     </logic:equal>

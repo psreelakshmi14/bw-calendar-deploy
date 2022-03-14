@@ -158,32 +158,13 @@
 
   <jsp-config>
     <!--  Reference a taglib in the jsp like this:
-      <%@ taglib uri="struts-bean" prefix="bean" %>
+      <%@ taglib uri="bedework" prefix="bw" %>
      -->
-
-    <taglib>
-      <taglib-uri>struts-bean</taglib-uri>
-      <taglib-location>/tlds/struts-bean.tld</taglib-location>
-    </taglib>
-    <taglib>
-      <taglib-uri>struts-html</taglib-uri>
-      <taglib-location>/tlds/struts-html.tld</taglib-location>
-    </taglib>
-
-    <taglib>
-      <taglib-uri>struts-genurl</taglib-uri>
-      <taglib-location>/tlds/struts-html.tld</taglib-location>
-    </taglib>
 
     <taglib>
       <taglib-uri>struts-logic</taglib-uri>
       <taglib-location>/tlds/struts-logic.tld</taglib-location>
     </taglib>
-    <!-- Doesn't exist
-    <taglib>
-      <taglib-uri>struts-template</taglib-uri>
-      <taglib-location>/tlds/struts-template.tld</taglib-location>
-    </taglib>-->
 
     <taglib>
       <taglib-uri>bedework</taglib-uri>

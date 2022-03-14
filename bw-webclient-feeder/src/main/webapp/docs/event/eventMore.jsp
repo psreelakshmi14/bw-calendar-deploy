@@ -1,10 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
-<%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -13,11 +8,9 @@ try {
 %>
   <page>event</page>
   <%-- Wrapper for a single event (emitEvent.jsp) --%>
-    <bean:define id="allView" value="true" toScope="request"/>
-    <bean:define id="eventFormatter"
-                 name="calForm"
-                 property="curEventFmt"
-                 toScope="request"/>
+  <c:set var="allView" value="true" scope="request"/>
+  <c:set var="eventFormatter" value="${calForm.curEventFmt}"
+         scope="request"/>
 
     <%@ include file="/docs/event/emitEvent.jsp" %>
 <%

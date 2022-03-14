@@ -1,12 +1,12 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%-- Output any event fields with forms specific to short format displays --%>
     <logic:present  name="event" property="location">
-      <bean:define id="location" name="event" property="location"/>
+      <c:set var="location" value="${event.location}"/>
       <location>
-        <uid><bean:write name="location" property="uid"/></uid><%--
+        <bw:emitText name="location" property="uid"/><%--
             Value: location uid --%>
         <bw:emitText name="location" property="addressField" tagName="address"/><%--
           Value: string - physical address of the location --%>
@@ -63,13 +63,13 @@
         Value: string - long description of the event.  Limited to 500 characters. --%>
     <bw:emitText name="event" property="cost" /><%--
         Value: string - cost information --%>
-    <sequence><bean:write name="event" property="sequence"/></sequence><%--
+    <bw:emitText name="event" property="sequence"/><%--
         RFC sequence number for the event --%>
 
     <logic:present name="event" property="contact">
-      <bean:define id="contact" name="event" property="contact"/>
+      <c:set var="contact" value="${event.contact}"/>
       <contact>
-        <id><bean:write name="contact" property="id"/></id><%--
+        <bw:emitText name="contact" property="id"/><%--
           Value: integer - contact id --%>
         <bw:emitText name="contact" property="cn.value" tagName="name"/><%--
           Value: string - contact's name --%>
