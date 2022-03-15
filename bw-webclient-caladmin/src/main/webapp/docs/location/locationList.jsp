@@ -1,6 +1,4 @@
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
