@@ -19,7 +19,8 @@
       <logic:present  name="rrc" property="byDay">
         <byday>
           <logic:iterate  id="posdays" name="rrc" property="byDay">
-            <pos val="${posdays.pos}">
+            <c:out value='<pos val="${posdays.pos}">'
+                   escapeXml="false"/>
             <logic:iterate  id="day" name="posdays" property="days">
               <bw:emitText name="day" />
             </logic:iterate>
