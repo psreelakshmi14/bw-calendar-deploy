@@ -3,7 +3,7 @@
 
 <calendars>
   <logic:present name="bw_public_collection_list" scope="session">
-    <c:set name="calendar" value="${bw_public_collection_list}"
+    <c:set var="calendar" value="${bw_public_collection_list}"
            scope="session" />
     <%@include file="/docs/calendar/emitCalendar.jsp"%>
   </logic:present>

@@ -18,7 +18,6 @@
       4. other          - an arbitrary page (see showPage.jsp)
 --%>
 <page>eventscalendar</page>
-<c:set var="dayViewName" value="${calForm.viewTypeName[1]}"/>
 
 <%-- The events listing in a calendar tree --%>
 <eventscalendar>
