@@ -1,9 +1,7 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -22,15 +20,17 @@ try {
   </logic:notPresent>
 
   <logic:present name="bw_search_result" scope="request">
-    <bean:define id="sres" name="bw_search_result" scope="request"/>
+    <c:set var="sres" value="${bw_search_result}"/>
     <bw:emitText name="sres" property="found" tagName="resultSize" />
     <logic:iterate id="sre" name="bw_search_list" scope="request">
       <searchResult>
         <bw:emitText name="sre" property="score" />
         <logic:equal name="sre" property="docType" value="event">
-          <bean:define id="eventFmt" name="sre" property="entity" toScope="request"  />
-          <bean:define id="eventInfo" name="eventFmt" property="eventInfo" toScope="request"  />
-          <bean:define id="event" name="eventFmt" property="event" toScope="request"  />
+          <c:set var="eventFmt" value="${sre.entity}" scope="request"  />
+          <c:set var="eventInfo" value="${eventFmt.eventInfo}"
+                 scope="request"  />
+          <c:set var="event" value="${eventFmt.event}"
+                 scope="request"  />
           <%@ include file="/docs/event/emitEventCommon.jsp" %>
         </logic:equal>
       </searchResult>

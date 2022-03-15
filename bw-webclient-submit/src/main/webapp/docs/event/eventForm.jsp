@@ -1,20 +1,20 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 
 <%
 try {
 %>
 
-<bean:define id="event" name="calForm" property="event"/>
+<c:set var="event" value="${calForm.event}"/>
 <formElements>
   <subscriptionId></subscriptionId>
-  <guid><bean:write name="event" property="uid"/></guid>
-  <recurrenceId><bean:write name="event" property="recurrenceId"/></recurrenceId>
+  <bw:emitText name="event" property="uid"
+               tagName=""guid"/">
+  <bw:emitText name="event" property="recurrenceId"/>
 
   <genurl:form action="event/editEvent">
     <bw:emitText name="event" property="scheduleMethod"
@@ -32,8 +32,10 @@ try {
     <storeUTC><html:checkbox property="eventStartDate.storeUTC"/></storeUTC>
     <floating><html:checkbox property="eventStartDate.floating"/></floating>
     <start>
-      <rfc3339DateTime><bean:write name="calForm" property="eventStartDate.rfc3339DateTime"/></rfc3339DateTime>
-      <temphour><bean:write name="calForm" property="eventStartDate.hour"/></temphour>
+      <bw:emitText name="calForm" property="eventStartDate.rfc3339DateTime"
+                   tagName="rfc3339DateTime"/>
+      <bw:emitText name="calForm" property="eventStartDate.hour"
+                   tagName="temphour"/>
       <month>
         <html:select property="eventStartDate.month">
           <html:options labelProperty="eventStartDate.monthLabels"
@@ -76,8 +78,10 @@ try {
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
-      <rfc3339DateTime><bean:write name="calForm" property="eventEndDate.rfc3339DateTime"/></rfc3339DateTime>
-      <type><bean:write name="calForm" property="eventEndType"/></type>
+      <bw:emitText name="calForm" property="eventEndDate.rfc3339DateTime"
+                   tagName="rfc3339DateTime"/>
+      <bw:emitText name="calForm" property="eventEndType"
+                   tagName="type"/>
       <dateTime>
         <month>
           <html:select property="eventEndDate.month">
@@ -128,13 +132,14 @@ try {
       </duration>
     </end>
     <desc><html:textarea property="description"></html:textarea></desc>
-    <descLength><bean:write name="calForm" property="authpars.maxPublicDescriptionLength" /></descLength>
-    <status><bean:write name="event" property="status"/></status>
-    <transparency><bean:write name="event" property="transparency"/></transparency>
+    <bw:emitText name="calForm" property="authpars.maxPublicDescriptionLength"
+                 tagName="descLength"/>
+    <bw:emitText name="event" property="status"/>
+    <bw:emitText name="event" property="transparency"/>
     <cost><html:text name="event" property="cost"/></cost>
     <link><html:text name="event" property="link"/></link>
-    <bean:define id="locations"
-                 name="bw_locations_list" scope="session" />
+    <c:set var="locations"
+           value="${bw_locations_list}" />
     <location>
       <locationmenu>
         <html:select property="locationUid">
@@ -148,8 +153,8 @@ try {
 
     <contact>
       <logic:present name="bw_preferred_contacts_list" scope="session">
-        <bean:define id="preferredContacts"
-                         name="bw_preferred_contacts_list" scope="session"/>
+        <c:set var="preferredContacts"
+               value="${bw_preferred_contacts_list}"/>
         <preferred>
           <html:select property="prefContactId">
             <html:optionsCollection name="preferredContacts"
@@ -159,8 +164,7 @@ try {
         </preferred>
       </logic:present>
       <all>
-        <bean:define id="contacts"
-                     name="bw_contacts_list" scope="session"/>
+        <c:set var="contacts" value="${bw_contacts_list}"/>
         <html:select property="allContactId">
           <html:optionsCollection name="contacts"
                                   label="cn.value"
@@ -194,7 +198,8 @@ try {
         <logic:present name="event" property="categories">
           <logic:iterate id="category" name="event" property="categories">
             <category>
-              <keyword><bean:write name="category" property="word.value"/></keyword>
+              <bw:emitText name="category" property="word.value"
+                           tagName="keyword"/>
             </category>
           </logic:iterate>
         </logic:present>
@@ -204,10 +209,9 @@ try {
     <!-- return the public tree's calendars.  Will use the aliases in the tree for
          our default topical areas -->
     <calendars>
-      <bean:define id="calendar" name="bw_user_collection_list" scope="session"
-                 toScope="session" />
-      <bean:define id="fullTree" toScope="request">true</bean:define>
-      <bean:define id="stopDescentAtAliases" toScope="request">false</bean:define>
+      <c:set var="calendar" value="${bw_user_collection_list}" scope="session"/>
+      <c:set var="fullTree" value="true" scope="request"/>
+      <c:set var="stopDescentAtAliases" value="false" scope="request"/>
       <%@include file="/docs/calendar/emitCalendar.jsp"%>
     </calendars>
 
@@ -223,24 +227,19 @@ try {
     <logic:present name="event" property="xproperties">
       <xproperties>
         <logic:iterate id="xprop" name="event" property="xproperties">
-          <bean:define id="xpropName" name="xprop" property="name"/>
-          <% String xpropStart = "<" + (String)xpropName + ">";
-             String xpropEnd = "</" + (String)xpropName + ">";%>
-          <%=xpropStart%>
+          <c:out value="<${xprop.name}>" escapeXml="false"/>
             <logic:present name="xprop" property="parameters">
               <parameters>
               <logic:iterate id="xpar" name="xprop" property="parameters">
-                <bean:define id="xparName" name="xpar" property="name"/>
-                <% String xparStart = "<" + (String)xparName + ">";
-                   String xparEnd = "</" + (String)xparName + ">";%>
-                <%=xparStart%><![CDATA[<bean:write name="xpar" property="value" />]]><%=xparEnd%>
+                  <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
               </logic:iterate>
               </parameters>
             </logic:present>
             <values>
-              <text><![CDATA[<bean:write name="xprop" property="value"/>]]></text>
+                <text><![CDATA[<c:out value="${xprop.value}"
+                                      escapeXml="false"/>]]></text>
             </values>
-          <%=xpropEnd%>
+          <c:out value="</${xprop.name}>" escapeXml="false"/>
         </logic:iterate>
       </xproperties>
     </logic:present>
@@ -250,7 +249,7 @@ try {
 
 <editableAccess>
   <logic:present name="calForm" property="curEventFmt">
-    <bean:define id="eventFormatter" name="calForm" property="curEventFmt"/>
+    <c:set var="eventFormatter" value=""${calForm.curEventFmt}"/>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
   </logic:present>
@@ -259,8 +258,8 @@ try {
 <timezones>
   <logic:iterate id="tz" name="calForm" property="timeZoneNames">
     <timezone>
-      <name><bean:write name="tz" property="name" filter="true"/></name>
-      <id><bean:write name="tz" property="id" filter="true"/></id>
+      <bw:emitText name="tz" property="name" filter="true"/>
+      <bw:emitText name="tz" property="id" filter="true"/>
     </timezone>
   </logic:iterate>
 </timezones>

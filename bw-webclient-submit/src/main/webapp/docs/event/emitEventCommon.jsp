@@ -1,28 +1,26 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <%-- Output a single event. This page handles fields common to all views --%>
   <event>
-    <entityType><bean:write name="event" property="entityType"/></entityType>
-    <scheduleMethod><bean:write name="event" property="scheduleMethod"/></scheduleMethod>
+    <bw:emitText name="event" property="entityType"/>
+    <bw:emitText name="event" property="scheduleMethod"/>
     <start><%-- start date and time --%>
-      <bean:define id="date" name="eventFmt"
-                   property="start"
-                   toScope="request" />
+      <c:set var="date" value="${eventFmt.start}"
+             scope="request" />
       <%@ include file="/docs/event/emitDate.jsp" %>
     </start>
     <end><%-- end date and time --%>
-      <bean:define id="date" name="eventFmt"
-                   property="end"
-                   toScope="request" />
+      <c:set var="date" value="${eventFmt.end}"
+             scope="request" />
       <%@ include file="/docs/event/emitDate.jsp" %>
     </end>
     <bw:emitText name="event" property="creatorHref" tagName="creator"/>
     <bw:emitText name="event" property="ownerHref" tagName="owner"/>
     <bw:emitText name="event" property="calSuite"/>
 
-    <id><bean:write name="event" property="id"/></id><%--
+    <bw:emitText name="event" property="id"/><%--
       Value: integer - event id --%>
     <bw:emitText name="event" property="uid" tagName="guid" />
     <bw:emitText name="event" property="encodedHref" />
@@ -31,17 +29,18 @@
       Value: string - short description, typically used for the event title  --%>
     <bw:emitText name="event" property="link"/><%--
       Value: URI - link associated with the event --%>
-    <public><bean:write name="event" property="publick"/></public>
-    <editable><bean:write name="eventInfo" property="editable"/></editable><%--
+    <bw:emitText name="event"
+                 property="publick" tagName="public"/>
+    <bw:emitText name="eventInfo" property="editable"/><%--
       Value: true,false - true if user can edit (and delete) event, false otherwise --%>
     <logic:present  name="event" property="target">
       <isAnnotation/>
     </logic:present>
-    <kind><bean:write name="eventInfo" property="kind"/></kind><%--
+    <bw:emitText name="eventInfo" property="kind"/><%--
       Value: 0 - actual event entry
              1 - 'added event' from a reference
              2 - from a subscription --%>
-    <recurring><bean:write name="event" property="recurring"/></recurring><%--
+    <bw:emitText name="event" property="recurring"/><%--
       Value: true,false - true if the event is recurring --%>
     <bw:emitContainer name="event" indent="    " tagName="calendar" />
     <bw:emitText name="event" property="status" /><%-- Status
