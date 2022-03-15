@@ -3,6 +3,7 @@
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
+<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>

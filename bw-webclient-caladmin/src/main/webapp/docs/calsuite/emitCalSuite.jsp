@@ -1,6 +1,4 @@
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <calSuite>
   <bw:emitText name="calSuite" property="name" />
