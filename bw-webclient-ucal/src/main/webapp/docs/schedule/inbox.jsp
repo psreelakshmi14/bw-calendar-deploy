@@ -1,10 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
-<%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -12,7 +7,7 @@
 <page>inbox</page>
 
 <%--  Display inbox --%>
-<bean:define id="boxInfo" name="calForm" property="inBoxInfo" />
+<c:set var="boxInfo" value="${calForm.inBoxInfo}" />
 <inbox>
   <%@include file="/docs/schedule/inoutbox.jsp"%>
 </inbox>

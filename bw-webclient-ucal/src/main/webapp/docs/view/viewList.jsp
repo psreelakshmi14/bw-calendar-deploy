@@ -1,10 +1,7 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -14,10 +11,10 @@
 <views>
   <logic:iterate name="calForm" property="views" id="view">
     <view>
-      <name><bean:write name="view" property="name" /></name>
+      <bw:emitText name="view" property="name" />
       <paths>
         <logic:iterate name="view" property="collectionPaths" id="path">
-          <path><bean:write name="path"/></path>
+          <bw:emitText name="path" />
         </logic:iterate>
       </paths>
     </view>

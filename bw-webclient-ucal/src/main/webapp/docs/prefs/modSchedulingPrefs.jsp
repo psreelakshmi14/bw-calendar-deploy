@@ -1,18 +1,16 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
 
 <page>modSchedulingPrefs</page>
-<bean:define id="userPrefs" name="calForm" property="userPreferences"/>
+<c:set var="userPrefs" value="${calForm.userPreferences}"/>
 <schPrefs>
-  <user><bean:write name="userPrefs" property="ownerHref"/></user>
+  <bw:emitText name="userPrefs" property="ownerHref"
+               tagName="user"/>
   <%--inbox>
     <bw:emitAcl name="inBoxInfo" property="currentAccess" />
   </inbox --%>

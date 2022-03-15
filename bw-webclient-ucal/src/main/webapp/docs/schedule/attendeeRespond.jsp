@@ -1,5 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
@@ -16,18 +16,18 @@ try {
 <page>attendeeRespond</page>
 
 <formElements>
-  <bean:define id="event" name="calForm" property="event"/>
+  <c:set var="event" value="${}calForm.event}"/>
 
   <bw:emitText name="event" property="scheduleState" />
   <bw:emitText name="event" property="scheduleMethod" />
 
   <subscriptionId></subscriptionId>
-  <guid><bean:write name="event" property="uid"/></guid>
-  <recurrenceId><bean:write name="event" property="recurrenceId"/></recurrenceId>
+  <bw:emitText name="event" property="uid" tagName="guid" />
+  <bw:emitText name="event" property="recurrenceId" />
 
   <guidcals>
   <logic:present  name="calForm" property="meetingCal">
-    <bean:define id="cal" name="calForm" property="meetingCal"/>
+    <c:set var="cal" value="${calForm.meetingCal}"/>
     <calendar>
       <bw:emitText name="cal" property="name"/>
       <bw:emitText name="cal" property="path"/>
@@ -99,7 +99,7 @@ try {
       </logic:notEqual>
     </start>
     <end>
-      <type><bean:write name="calForm" property="eventEndType"/></type>
+      <bw:emitText name="calForm" property="eventEndType" tagName="type"/>
       <dateTime>
         <month>
           <html:select property="eventEndDate.month">
@@ -149,11 +149,10 @@ try {
       </duration>
     </end>
     <desc><html:textarea name="event" property="description"></html:textarea></desc>
-    <status><bean:write name="event" property="status"/></status>
-    <transparency><bean:write name="event" property="transparency"/></transparency>
+    <bw:emitText name="event" property="status"/>
+    <bw:emitText name="event" property="transparency"/>
     <link><html:text name="event" property="link"/></link>
-    <bean:define id="locations"
-                 name="bw_locations_list" scope="session" />
+    <c:set var="locations" value="${bw_locations_list}" />
     <location>
       <locationmenu>
         <html:select property="locationUid">
@@ -166,7 +165,8 @@ try {
     </location>
   </genurl:form>
 </formElements>
-<bean:define id="eventFormatter" name="calForm" property="curEventFmt"/>
+<c:set var="eventFormatter" value="${calForm.curEventFmt}"
+       scope="request"/>
 <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
 

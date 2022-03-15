@@ -1,8 +1,7 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -10,13 +9,15 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modPrefs</page>
-<bean:define id="userPrefs" name="calForm" property="userPreferences"/>
+<c:set var="userPrefs" value="${calForm.userPreferences}"/>
 <prefs>
-  <user><bean:write name="userPrefs" property="ownerHref"/></user>
+  <bw:emitText name="userPrefs" property="ownerHref"
+               tagName="user"/>
   <bw:emitText name="userPrefs" property="email"/>
   <!-- default calendar into which events will be placed -->
   <defaultCalendar>
-    <path><bean:write name="userPrefs" property="defaultCalendarPath"/></path>
+    <bw:emitText name="userPrefs" property="defaultCalendarPath"
+                 tagName="path"/>
     <subName></subName>
   </defaultCalendar>
   <!-- name of default view (collection of subscriptions) that will appear upon login -->
@@ -53,8 +54,8 @@
  <form>
    <!-- user's writable calendars -->
    <calendars>
-     <bean:define id="addContentCalendarCollections"
-                  name="bw_addcontent_collection_list" scope="session" />
+     <c:set var="addContentCalendarCollections"
+            value="${bw_addcontent_collection_list}" />
      <html:select name="calForm" property="calendarId">
        <html:optionsCollection name="addContentCalendarCollections"
                                      label="path"

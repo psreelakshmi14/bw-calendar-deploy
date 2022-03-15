@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -19,8 +19,8 @@
       <logic:present  name="rrc" property="byDay">
         <byday>
           <logic:iterate  id="posdays" name="rrc" property="byDay">
-            <bean:define id="pos" name="posdays" property="pos" />
-            <pos val="<%=String.valueOf(pos)%>">
+            <c:out value='<pos val="${posdays.pos}">'
+                   escapeXml="false"/>
             <logic:iterate  id="day" name="posdays" property="days">
               <bw:emitText name="day" />
             </logic:iterate>

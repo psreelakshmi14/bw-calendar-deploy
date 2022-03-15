@@ -1,16 +1,14 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
 
 <page>modCalendar</page>
-<creating><bean:write name="calForm" property="addingCalendar"/></creating>
+<bw:emitText name="calForm" property="addingCalendar"
+             tagName="creating"/>
 
 <%@include file="/docs/calendar/displayCalendarCommon.jsp"%>
 <%@include file="/docs/calendar/subscriptionStatus.jsp"%>
@@ -18,8 +16,8 @@
 <%@include file="/docs/calendar/emitCalendars.jsp"%>
 
 <publicCalendars>
-  <bean:define id="calendar" name="bw_public_collection_list" scope="session"
-             toScope="session" />
+  <c:set var="calendar" value="${bw_public_collection_list}"
+         scope="session" />
   <%@include file="/docs/calendar/emitCalendar.jsp"%>
 </publicCalendars>
 

@@ -1,10 +1,7 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -16,9 +13,9 @@
   <page>managePolls</page>
 
   <vpoll>
-    <bw:emitText property="requestedUid" name="calForm" tagName="uid" />
-    <tab><logic:present name="bw_req_vpoll_tab" scope="session" ><bean:write name="bw_req_vpoll_tab" scope="session" /></logic:present></tab>
-    <defaultCalendarPath><logic:present name="bw_default_event_calendar" scope="session" ><bean:write name="bw_default_event_calendar" scope="session" /></logic:present></defaultCalendarPath>
+    <bw:emitText name="calForm" property="requestedUid" tagName="uid" />
+    <tab><logic:present name="bw_req_vpoll_tab" scope="session" ><c:out value="${bw_req_vpoll_tab}" /></logic:present></tab>
+    <defaultCalendarPath><logic:present name="bw_default_event_calendar" scope="session" ><c:out value="${bw_default_event_calendar}"/></logic:present></defaultCalendarPath>
   </vpoll>
 
 <%

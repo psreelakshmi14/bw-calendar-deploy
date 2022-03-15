@@ -1,15 +1,11 @@
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <synchInfo>
   <logic:present name="calForm" property="synchInfo">
-    <bean:define id="synchInfo" name="calForm"
-                 property="synchInfo"
-                 toScope="request" />
+    <c:set var="synchInfo" value="${calForm.synchInfo}"
+           scope="request" />
     <logic:iterate id="conn" name="synchInfo" property="conns">
       <conn>
         <bw:emitText name="conn" property="name" />

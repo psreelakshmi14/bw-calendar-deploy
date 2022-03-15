@@ -1,26 +1,24 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
 
 <page>modView</page>
-<creating><bean:write name="calForm" property="addingView"/></creating>
+<bw:emitText name="calForm" property="addingView"
+             tagName="creating"/>
 
 <views>
-  <bean:define name="calForm" property="view" id="view"/>
+  <c:set var="view" value="${calForm.view}"/>
   <view>
-    <name><bean:write name="view" property="name" /></name>
+    <bw:emitText name="view" property="name" />
     <collections>
       <logic:iterate name="view" property="collections" id="collection">
         <collection>
-          <name><bean:write name="collection" property="name" /></name>
-          <path><bean:write name="collection" property="path" /></path>
+          <bw:emitText name="collection" property="name" />
+          <bw:emitText name="collection" property="path" />
         </collection>
       </logic:iterate>
     </collections>

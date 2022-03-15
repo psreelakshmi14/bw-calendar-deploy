@@ -1,10 +1,7 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -14,8 +11,8 @@ try {
 %>
 
 <page>attendeesList</page>
-  <logic:present  name="calForm" property="attendees">
-    <attendees>
+<attendees>
+  <logic:present name="calForm" property="attendees">
     <logic:iterate id="att" name="calForm" property="attendees.attendees">
 	    <attendee>
 	      <bw:emitText name="att" property="attendeeUri"/>
@@ -24,12 +21,8 @@ try {
         <bw:emitText name="att" property="role"/>
 	    <attendee>
     </logic:iterate>
-    </attendees>
   </logic:present>
-  <logic:notPresent  name="calForm" property="attendees">
-    <attendees>
-    </attendees>
-  </logic:notPresent>
+</attendees>
 
 <%
 } catch (Throwable t) {

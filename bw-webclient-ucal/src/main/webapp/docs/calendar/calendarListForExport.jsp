@@ -1,5 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
@@ -16,8 +16,9 @@
 
 <calendars>
   <logic:present name="bw_public_collection_list" scope="session">
-    <bean:define id="calendar" name="bw_public_collection_list" scope="session"
-                 toScope="session" />
+    <c:set var="calendar"
+           value="${bw_public_collection_list}"
+           scope="session" />
     <%@include file="/docs/calendar/emitCalendar.jsp"%>
   </logic:present>
 </calendars>

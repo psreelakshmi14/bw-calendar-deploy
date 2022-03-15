@@ -1,21 +1,18 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
-<%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
 
 <page>modCategory</page>
 
-<creating><bean:write name="calForm" property="addingCategory"/></creating>
+<bw:emitText name="calForm" property="addingCategory"
+             tagName="creating"/>
 
 <currentCategory>
   <logic:present name="calForm" property="category">
-    <bean:define id="category" name="calForm" property="category"/>
+    <c:set var="category" value="${calForm.category}"/>
     <%@include file="/docs/category/emitCategory.jsp"%>
   </logic:present>
 </currentCategory>

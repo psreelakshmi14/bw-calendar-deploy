@@ -1404,7 +1404,7 @@
     </action>
 
     <action    path="/vpoll/managePolls"
-               type="org.bedework.client.web.rw.VpollAction"
+               type="org.bedework.client.web.rw.schedule.VpollAction"
                name="calForm"
                scope="session"
                parameter="actionType=render;conversation=end;refinterval=1500"

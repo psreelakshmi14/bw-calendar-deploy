@@ -1,5 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-bean' prefix='bean' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
@@ -54,7 +54,7 @@ try {
                       value="false" />
     </alarmTriggerSelectorDuration>
     <alarmduration>
-      <bean:define id="td" name="calForm" property="eventState.triggerDuration" />
+      <c:set var="td" value="${calForm.eventState.triggerDuration}" />
       <days><html:text size="5" maxlength="5" name="td" property="daysStr"/></days>
       <hours><html:text size="3" maxlength="3" name="td" property="hoursStr"/></hours>
       <minutes><html:text size="3" maxlength="3" name="td" property="minutesStr"/></minutes>
