@@ -102,6 +102,11 @@
       org.apache.struts.action.ActionServlet
     </servlet-class>
 
+    <init-param>
+      <param-name>errorForward</param-name>
+      <param-value>/main/showMain.rdo</param-value>
+    </init-param>
+
     <load-on-startup>1</load-on-startup>
   </servlet>
 
