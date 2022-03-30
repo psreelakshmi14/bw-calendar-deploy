@@ -13,6 +13,11 @@
     <param-value>EventsAuth</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>errorForward</param-name>
+    <param-value>/main/showMain.rdo</param-value>
+  </context-param>
+
   <!-- Do not alter or move  the following comment -->
   <!-- add context params here -->
 
@@ -102,11 +107,6 @@
     <servlet-class>
       org.apache.struts.action.ActionServlet
     </servlet-class>
-
-    <init-param>
-      <param-name>errorForward</param-name>
-      <param-value>/main/showMain.rdo</param-value>
-    </init-param>
 
     <load-on-startup>1</load-on-startup>
   </servlet>
