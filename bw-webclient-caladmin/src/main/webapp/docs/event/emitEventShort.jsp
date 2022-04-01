@@ -3,7 +3,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%-- Output any event fields with forms specific to short format displays --%>
-    <logic:present  name="event" property="location">
+    <c:if test="${not empty event.location}">
       <c:set var="location" value="${event.location}"/>
       <location>
         <bw:emitText name="location" property="id"/><%--
@@ -14,17 +14,17 @@
         <bw:emitText name="location" property="link"/><%--
                     Value: URI - link to a web address for the location --%>
       </location>
-    </logic:present>
-    <logic:notPresent  name="event" property="location">
+    </c:if>
+    <c:if test="${empty event.location}">
       <location>
         <address></address>
       </location>
-    </logic:notPresent>
+    </c:if>
     <categories>
-      <logic:present name="event" property="categories">
+      <c:if test="${not empty event.categories}">
         <logic:iterate id="category" name="event" property="categories">
           <%@include file="/docs/category/emitCategory.jsp"%>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </categories>
 

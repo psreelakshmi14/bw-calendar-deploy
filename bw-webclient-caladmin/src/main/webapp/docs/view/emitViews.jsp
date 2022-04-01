@@ -2,7 +2,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <views>
-  <logic:present name="bw_views_list" scope="session">
+  <c:if test="${not empty sessionScope.bw_views_list}">
     <logic:iterate id="view" name="bw_views_list"
                    scope="session">
       <view>
@@ -12,5 +12,5 @@
         </logic:iterate>
       </view>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </views>

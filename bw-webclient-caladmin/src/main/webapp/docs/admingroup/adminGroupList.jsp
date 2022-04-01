@@ -18,7 +18,7 @@
                    tagName="desc"/>
       <members>
         <logic:equal name="calForm" property="showAgMembers" value="true">
-          <logic:present name="adminGroup" property="groupMembers" >
+          <c:if test="${not empty adminGroup.groupMembers}" >
             <logic:iterate name="adminGroup" property="groupMembers"
                            id="member" >
               <member>
@@ -26,7 +26,7 @@
                 <bw:emitText name="member" property="kind" />
               </member>
             </logic:iterate>
-          </logic:present>
+          </c:if>
         </logic:equal>
       </members>
     </group>

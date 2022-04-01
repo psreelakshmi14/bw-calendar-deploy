@@ -11,7 +11,7 @@
   <bw:emitText name="calForm" property="adminGroupEventOwner"
                tagName="eventsOwner"/>
   <members>
-    <logic:present name="calForm" property="updAdminGroup.groupMembers" >
+    <c:if test="${not empty calForm.updAdminGroup.groupMembers}" >
       <logic:iterate name="calForm" property="updAdminGroup.groupMembers"
                      id="member" >
         <member>
@@ -19,6 +19,6 @@
           <bw:emitText name="member" property="kind" />
         </member>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </members>
 </group>

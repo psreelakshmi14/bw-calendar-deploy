@@ -25,9 +25,9 @@
   <bw:emitText name="location" property="status" />
 
   <subaddress>
-    <logic:present name="location" property="subaddress" >
+    <c:if test="${not empty location.subaddress}" >
       <c:out value="${location.subaddress.value}" />
-    </logic:present>
+    </c:if>
   </subaddress>
 
   <bw:emitText name="location" property="street" />
@@ -39,12 +39,12 @@
   <bw:emitText name="location" property="code" />
   <bw:emitText name="location" property="alternateAddress" />
   <keys>
-    <logic:present name="location" property="keys">
+    <c:if test="${not empty location.keys}">
       <logic:iterate id="keyFld" name="location" property="keys">
         <bw:emitText name="keyFld" property="keyName" />
         <bw:emitText name="keyFld" property="keyVal" />
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </keys>
 </location>
 

@@ -7,12 +7,12 @@
 <tab>main</tab>
 
 <contacts>
-  <logic:present name="bw_editable_contacts_list" scope="session">
+  <c:if test="${not empty sessionScope.bw_editable_contacts_list}">
     <logic:iterate id="contact" name="bw_editable_contacts_list"
                    scope="session">
       <%@include file="/docs/contact/emitContact.jsp"%>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </contacts>
 
 <%@include file="/docs/footer.jsp"%>

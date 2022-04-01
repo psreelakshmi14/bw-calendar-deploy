@@ -38,11 +38,11 @@
     </logic:iterate>
   </all>
   <current>
-    <logic:present name="calForm" property="calendar.categories">
+    <c:if test="${not empty calForm.calendar.categories}">
       <logic:iterate id="category" name="calForm" property="calendar.categories">
         <%@include file="/docs/category/emitCategory.jsp"%>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </current>
 </categories>
 

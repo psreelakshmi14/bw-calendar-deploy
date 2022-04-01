@@ -7,12 +7,12 @@
 <tab>main</tab>
 
 <locations>
-  <logic:present name="bw_editable_locations_list" scope="session">
+  <c:if test="${not empty sessionScope.bw_editable_locations_list}">
     <logic:iterate id="location" name="bw_editable_locations_list"
                    scope="session">
       <%@include file="/docs/location/emitLocation.jsp"%>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </locations>
 
 <%@include file="/docs/footer.jsp"%>

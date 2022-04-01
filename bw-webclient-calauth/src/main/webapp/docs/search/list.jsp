@@ -73,9 +73,12 @@ try {
                          tagName="public"/>
             <bw:emitText name="eventInfo" property="editable"/><%--
               Value: true,false - true if user can edit (and delete) event, false otherwise --%>
-            <logic:present  name="event" property="target">
-              <isAnnotation/>
-            </logic:present>
+              <%-- This test does not work - fails if target is not a property
+                   We never use the result anyway.
+              <c:if test="${not empty event.target}">
+                <isAnnotation/>
+              </c:if>
+              --%>
             <bw:emitText name="eventInfo" property="kind"/><%--
               Value: 0 - actual event entry
                      1 - 'added event' from a reference

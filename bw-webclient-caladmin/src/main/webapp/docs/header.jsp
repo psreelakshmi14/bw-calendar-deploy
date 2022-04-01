@@ -314,7 +314,7 @@ try {
 
   <bw:emitText name="calForm" property="calSuiteName" />
 
-  <logic:present name="calForm" property="currentCalSuite" >
+  <c:if test="${not empty calForm.currentCalSuite}" >
     <currentCalSuite>
       <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
       <bw:emitText name="calForm" property="currentCalSuite.group.account" tagName="group" />
@@ -322,14 +322,14 @@ try {
       <bw:emitText name="calForm" property="currentCalSuite.resourcesHome" tagName="resourcesHome" />
       <bw:emitCurrentPrivs name="calForm" property="currentCalSuite.currentAccess" tagName="currentAccess"/>
     </currentCalSuite>
-  </logic:present>
+  </c:if>
 
   <notifications>
-    <logic:present name="calForm" property="notificationInfo" >
+    <c:if test="${not empty calForm.notificationInfo}" >
         <c:set var="notificationInfo"
                value="${calForm.notificationInfo}" />
         <%@include file="/docs/notifications/notificationInfo.jsp"%>
-    </logic:present>
+    </c:if>
   </notifications>
 
   <userInfo>
@@ -360,12 +360,12 @@ try {
     <%-- user and group --%>
     <bw:emitText name="calForm" property="currentUser"/>
     <bw:emitText name="calForm" property="adminUserId" tagName="user"/>
-    <logic:present name="calForm" property="adminGroupName" >
+    <c:if test="${not empty calForm.adminGroupName}" >
       <bw:emitText name="calForm" property="adminGroupName" tagName="group"/>
       <bw:emitText name="calForm" property="oneGroup"/>
-    </logic:present>
+    </c:if>
     <groups>
-      <logic:present name="bw_user_admin_search_groups" scope="session" >
+      <c:if test="${not empty sessionScope.bw_user_admin_search_groups}" >
         <logic:iterate id="adminGroup" name="bw_user_admin_search_groups" scope="session" >
           <group>
             <bw:emitText name="adminGroup" property="account"
@@ -378,13 +378,13 @@ try {
                          tagName="desc"/>
           </group>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </groups>
   </userInfo>
 
   <%-- System parameters and directory info--%>
   <syspars>
-    <logic:present name="calForm" property="dirInfo" >
+    <c:if test="${not empty calForm.dirInfo}" >
       <c:set var="dir" value="${calForm.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
@@ -392,17 +392,17 @@ try {
       <bw:emitText name="dir" property="resourcePrincipalRoot" />
       <bw:emitText name="dir" property="hostPrincipalRoot" />
       <bw:emitText name="dir" property="venuePrincipalRoot" />
-    </logic:present>
+    </c:if>
   </syspars>
 
-  <logic:present name="calForm" property="imageUploadDirectory" >
+  <c:if test="${not empty calForm.imageUploadDirectory}" >
     <bw:emitText name="calForm" property="imageUploadDirectory" />
-  </logic:present>
+  </c:if>
 
-  <logic:present name="bw_feature_flags" scope="session" >
+  <c:if test="${not empty sessionScope.bw_feature_flags}" >
       <bw:emitText name="bw_feature_flags" scope="session"
                    tagName="featureFlags"/>
-  </logic:present>
+  </c:if>
 
   <logic:iterate id="appvar" name="calForm" property="appVars">
     <appvar><%--

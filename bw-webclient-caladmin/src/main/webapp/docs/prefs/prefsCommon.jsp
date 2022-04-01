@@ -45,12 +45,12 @@
     </logic:iterate>
   </all>
   <current>
-    <logic:present name="bw_default_categories_list" scope="session">
+    <c:if test="${not empty sessionScope.bw_default_categories_list}">
       <logic:iterate id="category" name="bw_default_categories_list"
                      scope="session">
         <%@include file="/docs/category/emitCategory.jsp"%>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </current>
 </categories>
 

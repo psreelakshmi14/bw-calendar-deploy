@@ -14,11 +14,11 @@
 <c:set var="curView" value="${calForm.view}"/>
 <currentView>
   <bw:emitText name="curView" property="name" />
-  <logic:present name="curView" property="collectionPaths">
+  <c:if test="${not empty curView.collectionPaths}">
     <logic:iterate name="curView" property="collectionPaths" id="path">
       <bw:emitText name="path"/>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </currentView>
 
 

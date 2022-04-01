@@ -8,10 +8,10 @@
 <tab>system</tab>
 
 <currentCategory>
-  <logic:present name="calForm" property="category">
+  <c:if test="${not empty calForm.category}">
     <c:set var="category" value="${calForm.category}"/>
     <%@include file="/docs/category/emitCategory.jsp"%>
-  </logic:present>
+  </c:if>
 </currentCategory>
 
 <%@include file="/docs/footer.jsp"%>

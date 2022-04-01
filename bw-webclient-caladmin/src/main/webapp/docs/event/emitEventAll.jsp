@@ -3,7 +3,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%-- Output any additional event fields for full format displays --%>
-    <logic:present  name="event" property="organizer">
+    <c:if test="${not empty event.organizer}">
       <c:set var="organizer" value="${event.organizer}"/>
       <organizer>
         <bw:emitText name="organizer" property="cn"/><%--
@@ -17,9 +17,9 @@
         <bw:emitText name="organizer" property="organizerUri"/><%--
           Value: string - u --%>
       </organizer>
-    </logic:present>
+    </c:if>
     <%--  hide attendees altogether in admin:
-    <logic:present name="event" property="attendees">
+    <c:if test="${not empty event.attendees}">
       <logic:iterate id="attendee" name="event" property="attendees">
         <attendee>
           <bw_emitText name="attendee" property="id"/>< %--
@@ -45,14 +45,14 @@
           <bw:emitText name="attendee" property="attendeeUri"/>
         </attendee>
       </logic:iterate>
-    </logic:present> --%>
-    <logic:present name="event" property="comments">
+    </c:if> --%>
+    <c:if test="${not empty event.comments}">
       <comments>
         <logic:iterate id="comment" name="event" property="comments">
             <bw:emitText name="comment"/>
         </logic:iterate>
       </comments>
-    </logic:present>
+    </c:if>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
 

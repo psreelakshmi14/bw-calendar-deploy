@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -15,14 +14,14 @@
   <bw:emitText name="calForm" property="location.address.value"
                tagName="address"/>
   <subaddress>
-    <logic:present name="calForm" property="location.subaddress">
+    <c:if test="${not empty calForm.location.subaddress}">
       <c:out value="${calForm.location.subaddress.value}" />
-    </logic:present>
+    </c:if>
   </subaddress>
-  <logic:present name="calForm" property="location.link">
+  <c:if test="${not empty calForm.location.link}">
     <bw:emitText name="calForm" property="location.link"
                  tagName="link"/>
-  </logic:present>
+  </c:if>
 </location>
 
 <formElements>

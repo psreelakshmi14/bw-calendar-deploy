@@ -34,9 +34,12 @@
                  property="publick" tagName="public"/>
     <bw:emitText name="eventInfo" property="editable"/><%--
       Value: true,false - true if user can edit (and delete) event, false otherwise --%>
-    <logic:present  name="event" property="target">
+    <%-- This test does not work - fails if target is not a property
+         We never use the result anyway.
+    <c:if test="${not empty event.target}">
       <isAnnotation/>
-    </logic:present>
+    </c:if>
+    --%>
     <bw:emitText name="eventInfo" property="kind"/><%--
       Value: 0 - actual event entry
              1 - 'added event' from a reference
@@ -47,20 +50,20 @@
     <bw:emitText name="event" property="status" /><%-- Status
           Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
-    <logic:notPresent name="detailView" scope="request"><%-- look for short form --%>
-      <logic:notPresent name="allView" scope="request">
+    <c:if test="${empty requestScope.detailView}"><%-- look for short form --%>
+      <c:if test="${empty requestScope.allView}">
         <jsp:include page="/docs/event/emitEventShort.jsp"/>
-      </logic:notPresent>
-    </logic:notPresent>
+      </c:if>
+    </c:if>
 
-    <logic:present name="detailView" scope="request">
+    <c:if test="${not empty requestScope.detailView}">
       <jsp:include page="/docs/event/emitEventDetail.jsp"/>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="allView" scope="request">
+    <c:if test="${not empty requestScope.allView}">
       <jsp:include page="/docs/event/emitEventDetail.jsp"/>
       <jsp:include page="/docs/event/emitEventAll.jsp"/>
-    </logic:present>
+    </c:if>
 
 
     <%-- ****************************************************************

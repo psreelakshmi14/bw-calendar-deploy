@@ -7,12 +7,12 @@
   <bw:emitText name="category" property="uid" />
   <bw:emitText name="category" property="href" />
   <%-- text value of the category --%>
-  <logic:present name="category" property="word" >
+  <c:if test="${not empty category.word}" >
     <bw:emitText name="category" property="word.value" tagName="value" />
-  </logic:present>
-  <logic:notPresent name="category" property="word" >
+  </c:if>
+  <c:if test="${empty category.word}" >
     <value></value>
-  </logic:notPresent>
+  </c:if>
     <bw:emitText name="category" property="colPath" />
     <bw:emitText name="category" property="name" />
   <%-- description of the category  --%>

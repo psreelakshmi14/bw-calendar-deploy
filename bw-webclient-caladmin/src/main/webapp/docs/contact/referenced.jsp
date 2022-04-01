@@ -13,39 +13,24 @@
   <bw:emitText name="contact" property="cn.value"
                tagName="name"/>
   <bw:emitText name="contact" property="phone" />
-  <logic:present name="contact" property="email">
+  <c:if test="${not empty contact.email}">
     <bw:emitText name="contact" property="email"/>
-  </logic:present>
-  <logic:present name="contact" property="link">
+  </c:if>
+  <c:if test="${not empty contact.link}">
     <bw:emitText name="contact" property="link" />
-  </logic:present>
+  </c:if>
 </contact>
 
 <propRefs>
-  <logic:present name="calForm" property="propRefs">
+  <c:if test="${not empty calForm.propRefs}">
     <logic:iterate id="propRef" name="calForm" property="propRefs" >
       <propRef>
-        <logic:present name="propRef" property="collection">
-          <bw:emitText name="propRef" property="collection" tagName="isCollection" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="collection">
-          <isCollection></isCollection>
-        </logic:notPresent>
-        <logic:present name="propRef" property="path">
-          <bw:emitText name="propRef" property="path" tagName="path" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="path">
-          <path></path>
-        </logic:notPresent>
-        <logic:present name="propRef" property="uid">
-          <bw:emitText name="propRef" property="uid" tagName="uid" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="uid">
-          <uid></uid>
-        </logic:notPresent>
+        <bw:emitText name="propRef" property="collection" tagName="isCollection" />
+        <bw:emitText name="propRef" property="path" tagName="path" />
+        <bw:emitText name="propRef" property="uid" tagName="uid" />
       </propRef>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </propRefs>
 
 <%@include file="/docs/footer.jsp"%>

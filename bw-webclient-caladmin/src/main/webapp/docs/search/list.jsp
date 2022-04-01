@@ -16,11 +16,11 @@ try {
 <searchResults>
   <bw:emitText name="moduleState" property="query"/>
   <bw:emitText name="moduleState" property="searchLimits"/>
-  <logic:notPresent name="bw_search_result" scope="request">
+  <c:if test="${empty requestScope.bw_search_result}">
     <resultSize>0</resultSize>
-  </logic:notPresent>
+  </c:if>
 
-  <logic:present name="bw_search_result" scope="request">
+  <c:if test="${not empty requestScope.bw_search_result}">
     <c:set var="sres" value="${bw_search_result}"/>
     <bw:emitText name="sres" property="found" tagName="resultSize" />
     <logic:iterate id="sre" name="bw_search_list" scope="request">
@@ -36,7 +36,7 @@ try {
         </logic:equal>
       </searchResult>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 
 </searchResults>
 

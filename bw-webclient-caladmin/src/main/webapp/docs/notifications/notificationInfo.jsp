@@ -9,27 +9,27 @@
       <bw:emitText name="notification" property="type" />
       <bw:emitText name="notification" property="xmlFragment"
                    tagName="message" filter="false" />
-      <logic:present name="notification" property="resourcesInfo" >
+      <c:if test="${not empty notification.resourcesInfo}" >
         <logic:iterate id="resourceInfo"
                        name="notification" property="resourcesInfo" >
           <resource>
             <bw:emitText name="resourceInfo" property="href" />
             <bw:emitText name="resourceInfo" property="created" />
             <bw:emitText name="resourceInfo" property="deleted" />
-            <logic:present name="resourceInfo" property="summary" >
+            <c:if test="${not empty resourceInfo.summary}" >
               <bw:emitText name="resourceInfo" property="summary" />
-            </logic:present>
-            <logic:present name="resourceInfo" property="formattedStart" >
+            </c:if>
+            <c:if test="${not empty resourceInfo.formattedStart}" >
               <c:set var="fdt" value="${resourceInfo.formattedStart.formatted}" />
               <bw:emitText name="fdt" property="dayName" />
               <bw:emitText name="resourceInfo" property="formattedStart.dateType"
                            tagName="allday" /><%--
         Value: true/false --%>
               <%-- Whatever else is needed --%>
-            </logic:present>
+            </c:if>
           </resource>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </notification>
   </logic:iterate>
 

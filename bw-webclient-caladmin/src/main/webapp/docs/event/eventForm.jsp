@@ -34,7 +34,7 @@
     <title><html:text property="summary" size="40" styleId="iTitle" styleClass="edit"/></title>
     <deleted><html:checkbox property="event.deleted" /></deleted>
     <calendar>
-      <logic:present name="calForm" property="preferredCalendars">
+      <c:if test="${not empty calForm.preferredCalendars}">
         <%-- all publishing calendars a user has previously used. --%>
         <preferred>
           <html:select property="prefCalendarId">
@@ -43,7 +43,7 @@
                                         value="path"/>
           </html:select>
         </preferred>
-      </logic:present>
+      </c:if>
       <%-- all publishing calendars to which user has write access;
            in single calendar model, there will be only one. --%>
       <all>
@@ -168,7 +168,7 @@
     <cost><html:text property="event.cost" size="30" styleId="iCost" styleClass="edit"/></cost>
     <link><html:text property="event.link" size="30" styleId="iLink" styleClass="edit"/></link>
     <location>
-      <logic:present name="bw_preferred_locations_list" scope="session">
+      <c:if test="${not empty sessionScope.bw_preferred_locations_list}">
         <preferred>
           <c:set var="preferredLocations"
                  value="${bw_preferred_locations_list}" />
@@ -178,7 +178,7 @@
                                     value="uid"/>
           </html:select>
         </preferred>
-      </logic:present>
+      </c:if>
       <all>
         <c:set var="locations"
                value="${bw_locations_list}" />
@@ -201,7 +201,7 @@
 
     <logic:equal name="calForm" property="suggestionEnabled" value="true" >
       <suggestTo>
-        <logic:present name="bw_preferred_admin_groups" scope="session">
+        <c:if test="${not empty sessionScope.bw_preferred_admin_groups}">
           <preferred>
             <logic:iterate id="group"
                            name="bw_preferred_admin_groups" scope="session">
@@ -214,8 +214,8 @@
               </group>
             </logic:iterate>
           </preferred>
-        </logic:present>
-        <logic:present name="bw_suite_admin_groups" scope="session">
+        </c:if>
+        <c:if test="${not empty sessionScope.bw_suite_admin_groups}">
           <all>
             <logic:iterate id="group"
                            name="bw_suite_admin_groups" scope="session">
@@ -228,19 +228,19 @@
               </group>
             </logic:iterate>
           </all>
-        </logic:present>
+        </c:if>
       </suggestTo>
     </logic:equal>
 
     <categories>
-      <logic:present name="bw_preferred_categories_list" scope="session">
+      <c:if test="${not empty sessionScope.bw_preferred_categories_list}">
         <preferred>
           <logic:iterate id="category"
                          name="bw_preferred_categories_list" scope="session">
             <%@include file="/docs/category/emitCategory.jsp"%>
           </logic:iterate>
         </preferred>
-      </logic:present>
+      </c:if>
       <all>
         <logic:iterate id="category" name="bw_categories_list"
                        scope="session">
@@ -248,11 +248,11 @@
         </logic:iterate>
       </all>
       <current>
-        <logic:present name="calForm" property="event.categories">
+        <c:if test="${not empty calForm.event.categories}">
           <logic:iterate id="category" name="calForm" property="event.categories">
             <%@include file="/docs/category/emitCategory.jsp"%>
           </logic:iterate>
-        </logic:present>
+        </c:if>
       </current>
     </categories>
 
@@ -267,14 +267,14 @@
       <calsuite>
         <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
         <calendars>
-          <logic:present name="bw_user_collection_list" scope="session">
+          <c:if test="${not empty sessionScope.bw_user_collection_list}">
             <c:set var="calendar" value="${bw_user_collection_list}"
                    scope="session" />
             <c:set var="fullTree" value="true" scope="request"/>
             <c:set var="stopDescentAtAliases" value="false"
                    scope="request"/>
             <%@include file="/docs/calendar/emitCalendar.jsp"%>
-          </logic:present>
+          </c:if>
         </calendars>
       </calsuite>
     </subscriptions>
@@ -285,7 +285,7 @@
     <%@ include file="/docs/event/emitRecur.jsp" %>
 
     <contact>
-      <logic:present name="bw_preferred_contacts_list" scope="session">
+      <c:if test="${not empty sessionScope.bw_preferred_contacts_list}">
         <c:set var="preferredContacts"
                value="${bw_preferred_contacts_list}"/>
         <preferred>
@@ -295,7 +295,7 @@
                                     value="uid"/>
           </html:select>
         </preferred>
-      </logic:present>
+      </c:if>
       <all>
         <c:set var="contacts" value="${bw_contacts_list}"/>
         <html:select property="allContactId">
@@ -310,26 +310,26 @@
       </logic:equal>
     </contact>
 
-    <logic:present name="calForm" property="event.comments">
+    <c:if test="${not empty calForm.event.comments}">
       <comments>
         <logic:iterate id="comment" name="calForm" property="event.comments">
           <bw:emitText name="comment" property="value"/>
         </logic:iterate>
       </comments>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="calForm" property="event.xproperties">
+    <c:if test="${not empty calForm.event.xproperties}">
       <xproperties>
         <logic:iterate id="xprop" name="calForm" property="event.xproperties">
           <logic:equal name="xprop" property="skipJsp" value="false">
             <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <logic:present name="xprop" property="parameters">
+              <c:if test="${not empty xprop.parameters}">
                 <parameters>
                 <logic:iterate id="xpar" name="xprop" property="parameters">
                   <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
                 </logic:iterate>
                 </parameters>
-              </logic:present>
+              </c:if>
               <values>
                 <text><![CDATA[<c:out value="${xprop.value}"
                                       escapeXml="false"/>]]></text>
@@ -338,7 +338,7 @@
           </logic:equal>
         </logic:iterate>
       </xproperties>
-    </logic:present>
+    </c:if>
 
     <!-- these are the values that may be submitted to the update action -->
     <submitButtons>

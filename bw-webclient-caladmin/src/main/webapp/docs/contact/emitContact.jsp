@@ -10,10 +10,10 @@
   </name>
   <bw:emitText name="contact" property="phone" />
   <bw:emitText name="contact" property="status" />
-  <logic:present name="contact" property="email">
+  <c:if test="${not empty contact.email}">
     <bw:emitText name="contact" property="email"/>
-  </logic:present>
-  <logic:present name="contact" property="link">
+  </c:if>
+  <c:if test="${not empty contact.link}">
     <bw:emitText name="contact" property="link" />
-  </logic:present>
+  </c:if>
 </contact>

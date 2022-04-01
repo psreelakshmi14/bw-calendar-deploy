@@ -8,7 +8,7 @@
 <tab>system</tab>
 
 <filters>
-  <logic:present name="calForm" property="filters">
+  <c:if test="${not empty calForm.filters}">
     <logic:iterate name="calForm" property="filters" id="filter">
       <filter>
         <bw:emitText name="filter" property="name"/>
@@ -16,7 +16,7 @@
         <bw:emitText name="filter" property="definition"/>
       </filter>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </filters>
 
 <%@include file="/docs/footer.jsp"%>

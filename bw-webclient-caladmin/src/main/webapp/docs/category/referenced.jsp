@@ -9,38 +9,23 @@
 <tab>system</tab>
 
 <currentCategory>
-  <logic:present name="calForm" property="category">
+  <c:if test="${not empty calForm.category}">
     <c:set var="category" value="${calForm.category}"/>
     <%@include file="/docs/category/emitCategory.jsp"%>
-  </logic:present>
+  </c:if>
 </currentCategory>
 
 <propRefs>
-  <logic:present name="calForm" property="propRefs">
+  <c:if test="${not empty calForm.propRefs}">
     <logic:iterate id="propRef" name="calForm" property="propRefs" >
       <propRef>
-        <logic:present name="propRef" property="collection">
-          <bw:emitText name="propRef" property="collection"
-                       tagName="isCollection" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="collection">
-          <isCollection></isCollection>
-        </logic:notPresent>
-        <logic:present name="propRef" property="path">
-          <bw:emitText name="propRef" property="path" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="path">
-          <path></path>
-        </logic:notPresent>
-        <logic:present name="propRef" property="uid">
-          <bw:emitText name="propRef" property="uid" />
-        </logic:present>
-        <logic:notPresent name="propRef" property="uid">
-          <uid></uid>
-        </logic:notPresent>
+        <bw:emitText name="propRef" property="collection"
+                     tagName="isCollection" />
+        <bw:emitText name="propRef" property="path" />
+        <bw:emitText name="propRef" property="uid" />
       </propRef>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </propRefs>
 
 <%@include file="/docs/footer.jsp"%>

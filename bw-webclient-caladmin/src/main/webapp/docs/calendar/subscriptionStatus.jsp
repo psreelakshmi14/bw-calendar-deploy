@@ -3,11 +3,11 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <subscriptionStatus>
-  <logic:present name="bw_subscription_status" scope="session">
+  <c:if test="${not empty sessionScope.bw_subscription_status}">
     <c:set var="sstatus" value="${bw_subscription_status}"
            scope="request" />
     <bw:emitText name="sstatus" property="requestStatus" />
-    <logic:present name="sstatus" property="subscriptionStatus" >
+    <c:if test="${not empty sstatus.subscriptionStatus}" >
       <c:set var="ss" value="${sstatus.subscriptionStatus}"
              scope="request" />
       <bw:emitText name="ss" property="subscriptionId" />
@@ -18,28 +18,28 @@
       <bw:emitText name="ss" property="errorCt" />
       <bw:emitText name="ss" property="missingTarget" />
       <endA>
-        <logic:present name="ss" property="endAConnector" >
+        <c:if test="${not empty ss.endAConnector}" >
           <c:set var="connector" value="${ss.endAConnector}"
                  scope="request" />
           <bw:emitText name="connector" property="connectorId" />
           <c:set var="properties" value="${connector.properties}"
                  scope="request" />
           <%@ include file="/docs/synchProperties.jsp" %>
-        </logic:present>
+        </c:if>
       </endA>
       <endB>
-        <logic:present name="ss" property="endBConnector" >
+        <c:if test="${not empty ss.endBConnector}" >
           <c:set var="connector" value="${ss.endBConnector}"
                  scope="request" />
           <bw:emitText name="connector" property="connectorId" />
           <c:set var="properties" value="${connector.properties}"
                  scope="request" />
           <%@ include file="/docs/synchProperties.jsp" %>
-        </logic:present>
+        </c:if>
       </endB>
       <properties>
 
       </properties>
-    </logic:present>
-  </logic:present>
+    </c:if>
+  </c:if>
 </subscriptionStatus>
