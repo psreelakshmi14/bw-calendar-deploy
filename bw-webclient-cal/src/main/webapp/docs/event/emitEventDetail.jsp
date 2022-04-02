@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <jsp:include page="/docs/event/emitRecur.jsp"/>
@@ -10,7 +9,7 @@
     <bw:emitText name="event" property="sequence"/><%--
         RFC sequence number for the event --%>
 
-    <logic:present name="event" property="contact">
+    <c:if test="${not empty event.contact}">
       <c:set var="contact" value="${event.contact}"/>
       <contact>
         <bw:emitText name="contact" property="id"/><%--
@@ -24,5 +23,5 @@
         <bw:emitText name="contact" property="link"/><%--
           Value: URI - link to contact web page --%>
       </contact>
-    </logic:present>
+    </c:if>
 

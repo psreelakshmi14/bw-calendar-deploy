@@ -3,7 +3,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <synchInfo>
-  <logic:present name="calForm" property="synchInfo">
+  <c:if test="${not empty calForm.synchInfo}">
     <c:set var="synchInfo" value="${calForm.synchInfo}"
            scope="request" />
     <logic:iterate id="conn" name="synchInfo" property="conns">
@@ -24,5 +24,5 @@
         </props>
       </conn>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </synchInfo>

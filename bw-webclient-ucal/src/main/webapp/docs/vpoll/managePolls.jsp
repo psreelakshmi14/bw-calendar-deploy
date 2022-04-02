@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -14,8 +13,8 @@
 
   <vpoll>
     <bw:emitText name="calForm" property="requestedUid" tagName="uid" />
-    <tab><logic:present name="bw_req_vpoll_tab" scope="session" ><c:out value="${bw_req_vpoll_tab}" /></logic:present></tab>
-    <defaultCalendarPath><logic:present name="bw_default_event_calendar" scope="session" ><c:out value="${bw_default_event_calendar}"/></logic:present></defaultCalendarPath>
+    <tab><c:if test="${not empty sessionScope.bw_req_vpoll_tab}" ><c:out value="${bw_req_vpoll_tab}" /></c:if></tab>
+    <defaultCalendarPath><c:if test="${not empty sessionScope.bw_default_event_calendar}" ><c:out value="${bw_default_event_calendar}"/></c:if></defaultCalendarPath>
   </vpoll>
 
 <%

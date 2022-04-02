@@ -26,16 +26,16 @@ try {
   <bw:emitText name="event" property="recurrenceId" />
 
   <guidcals>
-  <logic:present  name="calForm" property="meetingCal">
+    <c:if test="${not empty calForm.meetingCal}">
     <c:set var="cal" value="${calForm.meetingCal}"/>
     <calendar>
       <bw:emitText name="cal" property="name"/>
       <bw:emitText name="cal" property="path"/>
     </calendar>
-  </logic:present>
+    </c:if>
   </guidcals>
 
-  <logic:notPresent  name="event" property="location">
+  <logic:notPresent name="event" property="location">
     <location>
       <address></address>
       <id></id><%--

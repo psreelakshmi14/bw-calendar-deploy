@@ -33,7 +33,7 @@
 <%
 try {
 %>
-  <logic:present  name="calForm" property="attendees.attendees">
+  <c:if test="${not empty calForm.attendees.attendees}">
     <attendees>
     <logic:iterate id="att" name="calForm" property="attendees.attendees">
 	    <attendee>
@@ -51,11 +51,11 @@ try {
 	    </attendee>
     </logic:iterate>
     </attendees>
-  </logic:present>
-  <logic:notPresent  name="calForm" property="attendees.attendees">
+  </c:if>
+  <c:if test="${empty calForm.attendees.attendees}">
     <attendees>
     </attendees>
-  </logic:notPresent>
+  </c:if>
 
 <%
 } catch (Throwable t) {

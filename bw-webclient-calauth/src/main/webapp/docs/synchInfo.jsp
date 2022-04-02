@@ -6,7 +6,7 @@
 <html:xhtml/>
 
 <synchInfo>
-  <logic:present name="calForm" property="synchInfo">
+  <c:if test="${not empty calForm.synchInfo}">
     <bean:define id="synchInfo" name="calForm"
                  property="synchInfo"
                  toScope="request" />
@@ -28,5 +28,5 @@
         </props>
       </conn>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </synchInfo>

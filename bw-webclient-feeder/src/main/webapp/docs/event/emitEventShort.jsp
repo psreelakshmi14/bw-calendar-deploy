@@ -2,7 +2,7 @@
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
     <%-- Output any event fields with forms specific to short format displays --%>
-    <logic:present  name="event" property="location">
+    <c:if test="${not empty event.location}">
       <c:set var="location" value="${event.location}"/>
       <location>
         <bw:emitText name="location" property="uid"/><%--
@@ -20,10 +20,10 @@
         </logic:notEqual>
         <bw:emitText name="location" property="geouri" />
         <bw:emitText name="location" property="status" />
-        <logic:present name="location" property="subaddress">
+        <c:if test="${not empty location.subaddress}">
           <bw:emitText name="location" property="subaddress.value" tagName="subaddress"/><%--
             Value: string - more address information --%>
-        </logic:present>
+        </c:if>
         <bw:emitText name="location" property="street" />
         <bw:emitText name="location" property="city" />
         <bw:emitText name="location" property="state" />
@@ -33,17 +33,17 @@
         <bw:emitText name="location" property="code" />
         <bw:emitText name="location" property="alternateAddress" />
       </location>
-    </logic:present>
-    <logic:notPresent  name="event" property="location">
+    </c:if>
+    <c:if test="${empty event.location}">
       <location>
         <address></address>
       </location>
-    </logic:notPresent>
+    </c:if>
     <categories>
-      <logic:present name="event" property="categories">
+      <c:if test="${not empty event.categories}">
         <logic:iterate id="category" name="event" property="categories">
           <%@include file="/docs/category/emitCategory.jsp"%>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </categories>
 

@@ -12,13 +12,13 @@ try {
   <%-- Wrapper for a single event (emitEvent.jsp) --%>
   <c:set var="allView" value="true" scope="request"/>
 
-  <logic:present name="calForm" property="curEventFmt">
+  <c:if test="${not empty calForm.curEventFmt}">
     <c:set var="eventFormatter"
            value="${calForm.curEventFmt}"
            scope="request"/>
 
     <%@ include file="/docs/event/emitEvent.jsp" %>
-  </logic:present>
+  </c:if>
 <%
 } catch (Throwable t) {
   t.printStackTrace();

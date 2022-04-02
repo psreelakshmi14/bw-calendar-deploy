@@ -38,7 +38,7 @@
 
   <%-- List of groups  --%>
   <groups>
-    <logic:present name="bw_admin_groups" scope="session" >
+    <c:if test="${not empty sessionScope.bw_admin_groups}" >
       <logic:iterate id="adminGroup" name="bw_admin_groups" scope="session" >
         <group>
           <bw:emitText name="adminGroup"
@@ -54,7 +54,7 @@
           </logic:iterate>
         </group>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </groups>
 </bedework>
 

@@ -16,11 +16,11 @@
   <bw:emitContainer name="calForm" property="event"
                     indent="  " tagName="calendar" />
 
-  <logic:present name="calForm" property="curEventFmt">
+  <c:if test="${not empty calForm.curEventFmt}">
     <c:set var="eventFormatter" value="${calForm.curEventFmt}"/>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
-  </logic:present>
+  </c:if>
 </eventAccess>
 
 

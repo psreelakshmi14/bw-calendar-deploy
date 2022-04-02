@@ -38,12 +38,12 @@
 
   <%-- List of categories  --%>
   <categories>
-    <logic:present name="bw_categories_list" scope="session">
+    <c:if test="${not empty sessionScope.bw_categories_list}">
       <logic:iterate id="category" name="bw_categories_list"
                      scope="session">
         <%@include file="/docs/category/emitCategory.jsp"%>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </categories>
 </bedework>
 

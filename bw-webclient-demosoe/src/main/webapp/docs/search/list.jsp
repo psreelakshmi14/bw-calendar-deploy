@@ -13,11 +13,11 @@ try {
 <page>searchResult</page>
 
 <categories>
-  <logic:present name="bw_categories_list" scope="session">
+  <c:if test="${not empty sessionScope.bw_categories_list}">
     <logic:iterate id="category" name="bw_categories_list" scope="session">
       <%@include file="/docs/category/emitCategory.jsp"%>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </categories>
 
 <searchResults>
@@ -27,7 +27,7 @@ try {
     <resultSize>0</resultSize>
   </logic:notPresent>
 
-  <logic:present name="bw_search_result" scope="request">
+  <c:if test="${not empty requestScope.bw_search_result}">
     <c:set var="sres" value="${bw_search_result}"/>
     <bw:emitText name="sres" property="found" tagName="resultSize" />
     <logic:iterate id="sre" name="bw_search_list" scope="request">
@@ -90,18 +90,18 @@ try {
                   Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
             <!-- always produce the xproperties, if they exist -->
-            <logic:present name="event" property="xproperties">
+            <c:if test="${not empty event.xproperties}">
               <xproperties>
                 <logic:iterate id="xprop" name="event" property="xproperties">
                   <logic:equal name="xprop" property="skipJsp" value="false">
                     <c:out value="<${xprop.name}>" escapeXml="false"/>
-                      <logic:present name="xprop" property="parameters">
+                      <c:if test="${not empty xprop.parameters}">
                         <parameters>
                         <logic:iterate id="xpar" name="xprop" property="parameters">
                           <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
                         </logic:iterate>
                         </parameters>
-                      </logic:present>
+                      </c:if>
                       <values>
                         <c:out value="<text><![CDATA[${xprop.value}]]></text>" escapeXml="false"/>
                       </values>
@@ -109,18 +109,18 @@ try {
                   </logic:equal>
                 </logic:iterate>
               </xproperties>
-            </logic:present>
+            </c:if>
 
-            <logic:present  name="event" property="percentComplete">
+            <c:if test="${not empty event.percentComplete}">
               <bw:emitText name="event" property="percentComplete"/>
-            </logic:present>
+            </c:if>
 
-            <logic:present  name="event" property="geo">
+            <c:if test="${not empty event.geo}">
               <bw:emitText name="event" property="geo.latitude" tagName="latitude"/>
               <bw:emitText name="event" property="geo.longitude" tagName="longitude"/>
-            </logic:present>
+            </c:if>
 
-            <logic:present  name="event" property="location">
+            <c:if test="${not empty event.location}">
               <c:set var="location" value="${event.location}"/>
               <location>
                 <bw:emitText name="location" property="id"/><%--
@@ -131,12 +131,12 @@ try {
                 <bw:emitText name="location" property="link"/><%--
                     Value: URI - link to a web address for the location --%>
               </location>
-            </logic:present>
-            <logic:notPresent  name="event" property="location">
+            </c:if>
+            <c:if test="${empty event.location}">
               <location>
                 <address></address>
               </location>
-            </logic:notPresent>
+            </c:if>
 
           </event>
 

@@ -1,4 +1,3 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%@ include file="/docs/schedule/emitEventProperties.jsp" %>

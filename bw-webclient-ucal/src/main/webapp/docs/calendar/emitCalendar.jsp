@@ -12,11 +12,11 @@
   </logic:equal>
 
   <bw:getChildren id="children" name="calendar" />
-  <logic:present name="children">
+  <c:if test="${not empty children}">
     <logic:iterate name="children" id="cal">
       <c:set var="calendar" value="${cal}" scope="session" />
       <jsp:include page="/docs/calendar/emitCalendar.jsp" />
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </calendar>
 

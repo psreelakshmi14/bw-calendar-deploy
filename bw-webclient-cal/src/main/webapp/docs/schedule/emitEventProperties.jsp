@@ -2,16 +2,16 @@
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
-    <logic:present  name="event" property="originator">
+    <c:if test="${not empty event.originator}">
       <bw:emitText name="event" property="originator"/>
-    </logic:present>
+    </c:if>
     <logic:equal name="event" property="organizerSchedulingObject" value="true" >
       <organizerSchedulingObject />
     </logic:equal>
     <logic:equal name="event" property="attendeeSchedulingObject" value="true" >
       <attendeeSchedulingObject />
     </logic:equal>
-    <logic:present  name="event" property="organizer">
+    <c:if test="${not empty event.organizer}">
       <c:set var="organizer" value="${event.organizer}"/>
       <organizer>
         <bw:emitText name="organizer" property="cn"/><%--
@@ -25,8 +25,8 @@
         <bw:emitText name="organizer" property="organizerUri"/><%--
           Value: string - u --%>
       </organizer>
-    </logic:present>
-    <logic:present name="event" property="attendees">
+    </c:if>
+    <c:if test="${not empty event.attendees}">
       <attendees>
         <logic:iterate id="attendee" name="event" property="attendees">
           <attendee>
@@ -56,19 +56,19 @@
           </attendee>
         </logic:iterate>
       </attendees>
-    </logic:present>
-    <logic:present name="event" property="recipients">
+    </c:if>
+    <c:if test="${not empty event.recipients}">
       <recipients>
         <logic:iterate id="recipient" name="event" property="recipients" >
           <bw:emitText name="recipient" tagName="recipient"/>
         </logic:iterate>
       </recipients>
-    </logic:present>
-    <logic:present name="event" property="comments">
+    </c:if>
+    <c:if test="${not empty event.comments}">
       <comments>
         <logic:iterate id="comment" name="event" property="comments">
           <bw:emitText name="comment" property="value"/>
         </logic:iterate>
       </comments>
-    </logic:present>
+    </c:if>
 

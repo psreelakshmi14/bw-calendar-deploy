@@ -12,13 +12,13 @@ try {
   <%-- Wrapper for a single event (emitEvent.jsp) --%>
 
   <guidcals>
-  <logic:present  name="calForm" property="meetingCal">
+  <c:if test="${not empty calForm.meetingCal}">
     <c:set var="cal" value="${calForm.meetingCal}"/>
     <calendar>
       <bw:emitText name="cal" property="name"/>
       <bw:emitText name="cal" property="path"/>
     </calendar>
-  </logic:present>
+  </c:if>
   </guidcals>
 
   <c:set var="allView" value="true" scope="request"/>

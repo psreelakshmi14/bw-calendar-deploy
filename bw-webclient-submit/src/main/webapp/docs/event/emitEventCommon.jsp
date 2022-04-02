@@ -49,25 +49,24 @@
     <bw:emitText name="event" property="status" /><%-- Status
           Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
-    <logic:present  name="event" property="percentComplete">
+    <c:if test="${not empty event.percentComplete}">
       <bw:emitText name="event" property="percentComplete"/>
-    </logic:present>
+    </c:if>
 
-    <logic:notPresent name="detailView" scope="request"><%-- look for short form --%>
-      <logic:notPresent name="allView" scope="request">
+    <c:if test="${empty requestScope.detailView}"><%-- look for short form --%>
+      <c:if test="${empty requestScope.allView}">
         <jsp:include page="/docs/event/emitEventShort.jsp"/>
-      </logic:notPresent>
-    </logic:notPresent>
+      </c:if>
+    </c:if>
 
-    <logic:present name="detailView" scope="request">
-      <jsp:include page="/docs/event/emitEventDetail.jsp"/>
-    </logic:present>
+    <c:if test="${not empty requestScope.detailView}">
+      <%@ include file="/docs/event/emitEventDetail.jsp"%>
+    </c:if>
 
-    <logic:present name="allView" scope="request">
-      <jsp:include page="/docs/event/emitEventDetail.jsp"/>
-      <jsp:include page="/docs/event/emitEventAll.jsp"/>
-    </logic:present>
-
+    <c:if test="${not empty requestScope.allView}">
+      <%@ include file="/docs/event/emitEventDetail.jsp"%>
+      <%@ include file="/docs/event/emitEventAll.jsp" %>
+    </c:if>
 
     <%-- ****************************************************************
           the following code should not be produced in the public client

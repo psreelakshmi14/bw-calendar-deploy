@@ -2,13 +2,13 @@
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
-    <logic:present  name="schedEvent" property="originator">
+    <c:if test="${not empty schedEvent.originator}">
       <bw:emitText name="schedEvent" property="originator"/>
-    </logic:present>
+    </c:if>
     <logic:equal name="schedEvent" property="organizerSchedulingObject" value="true" >
       <organizerSchedulingObject />
     </logic:equal>
-    <logic:present  name="schedEvent" property="organizer">
+    <c:if test="${not empty schedEvent.organizer}">
       <c:set var="organizer" value="${schedEvent.organizer}"/>
       <organizer>
         <bw:emitText name="organizer" property="cn"/><%--
@@ -22,8 +22,8 @@
         <bw:emitText name="organizer" property="organizerUri"/><%--
           Value: string - u --%>
       </organizer>
-    </logic:present>
-    <logic:present name="schedEvent" property="attendees">
+    </c:if>
+    <c:if test="${not empty schedEvent.attendees}">
       <attendees>
         <logic:iterate id="attendee" name="schedEvent" property="attendees">
           <attendee>
@@ -53,19 +53,19 @@
           </attendee>
         </logic:iterate>
       </attendees>
-    </logic:present>
-    <logic:present name="schedEvent" property="recipients">
+    </c:if>
+    <c:if test="${not empty schedEvent.recipients}">
       <recipients>
         <logic:iterate id="recipient" name="schedEvent" property="recipients" >
           <bw:emitText name="recipient" tagName="recipient"/>
         </logic:iterate>
       </recipients>
-    </logic:present>
-    <logic:present name="schedEvent" property="comments">
+    </c:if>
+    <c:if test="${not empty schedEvent.comments}">
       <comments>
         <logic:iterate id="comment" name="schedEvent" property="comments">
           <bw:emitText name="comment" property="value"/>
         </logic:iterate>
       </comments>
-    </logic:present>
+    </c:if>
 

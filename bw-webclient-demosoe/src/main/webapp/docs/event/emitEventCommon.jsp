@@ -56,7 +56,7 @@
           Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
     <%-- Output any event fields with forms specific to short format displays --%>
-    <logic:present  name="event" property="location">
+    <c:if test="${not empty event.location}">
       <c:set var="location" value="${event.location}"/>
       <location>
         <bw:emitText name="location" property="uid"/><%--
@@ -75,11 +75,11 @@
         </logic:notEqual>
         <bw:emitText name="location" property="geouri" />
         <bw:emitText name="location" property="status" />
-        <logic:present name="location" property="subaddress">
+        <c:if test="${not empty location.subaddress}">
           <bw:emitText name="location" property="subaddress.value"
                        tagName="subaddress"/><%--
             Value: string - more address information --%>
-        </logic:present>
+        </c:if>
         <bw:emitText name="location" property="street" />
         <bw:emitText name="location" property="city" />
         <bw:emitText name="location" property="state" />
@@ -92,8 +92,8 @@
         <bw:emitText name="location" property="creatorHref" tagName="creator" /><%--
           Value: string - location creator id --%>
       </location>
-    </logic:present>
-    <logic:notPresent  name="event" property="location">
+    </c:if>
+    <c:if test="${empty event.location}">
       <location>
         <address></address>
         <uid></uid><%--
@@ -105,29 +105,29 @@
         <creator></creator><%--
           Value: string - location creator id --%>
       </location>
-    </logic:notPresent>
+    </c:if>
 
     <categories>
-      <logic:present name="event" property="categories">
+      <c:if test="${not empty event.categories}">
         <logic:iterate id="category" name="event" property="categories">
           <%@include file="/docs/category/emitCategory.jsp"%>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </categories>
 
     <!-- always produce the xproperties, if they exist -->
-    <logic:present name="event" property="xproperties">
+    <c:if test="${not empty event.xproperties}">
       <xproperties>
         <logic:iterate id="xprop" name="event" property="xproperties">
           <logic:equal name="xprop" property="skipJsp" value="false">
             <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <logic:present name="xprop" property="parameters">
+              <c:if test="${not empty xprop.parameters}">
                 <parameters>
                 <logic:iterate id="xpar" name="xprop" property="parameters">
                   <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
                 </logic:iterate>
                 </parameters>
-              </logic:present>
+              </c:if>
               <values>
                 <c:out value="<text><![CDATA[${xprop.value}]]></text>" escapeXml="false"/>
               </values>
@@ -135,25 +135,25 @@
           </logic:equal>
         </logic:iterate>
       </xproperties>
-    </logic:present>
+    </c:if>
 
-    <logic:present  name="event" property="percentComplete">
+    <c:if test="${not empty event.percentComplete}">
       <bw:emitText name="event" property="percentComplete"/>
-    </logic:present>
+    </c:if>
 
-    <logic:present  name="event" property="geo">
+    <c:if test="${not empty event.geo}">
       <bw:emitText name="event" property="geo.latitude" tagName="latitude"/>
       <bw:emitText name="event" property="geo.longitude" tagName="longitude"/>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="detailView" scope="request">
+    <c:if test="${not empty requestScope.detailView}">
       <%@ include file="/docs/event/emitEventDetail.jsp"%>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="allView" scope="request">
+    <c:if test="${not empty requestScope.allView}">
       <%@ include file="/docs/event/emitEventDetail.jsp"%>
       <%@ include file="/docs/event/emitEventAll.jsp" %>
-    </logic:present>
+    </c:if>
 
     <%-- ****************************************************************
           the following code should not be produced in the public client

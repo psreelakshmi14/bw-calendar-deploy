@@ -189,7 +189,7 @@ try {
 
   <%-- System parameters --%>
   <syspars>
-    <logic:present name="calForm" property="dirInfo" >
+    <c:if test="${not empty calForm.dirInfo}">
       <c:set var="dir" value="${calForm.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
@@ -197,13 +197,13 @@ try {
       <bw:emitText name="dir" property="resourcePrincipalRoot" />
       <bw:emitText name="dir" property="hostPrincipalRoot" />
       <bw:emitText name="dir" property="venuePrincipalRoot" />
-    </logic:present>
+    </c:if>
   </syspars>
 
-  <logic:present name="bw_feature_flags" scope="session" >
+  <c:if test="${not empty sessionScope.bw_feature_flags}">
       <bw:emitText name="bw_feature_flags" scope="session"
                    tagName="featureFlags"/>
-  </logic:present>
+  </c:if>
 <%
 } catch (Throwable t) {
   t.printStackTrace();

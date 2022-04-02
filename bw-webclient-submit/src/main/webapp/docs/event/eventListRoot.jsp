@@ -8,7 +8,7 @@
   <c:set var="sres" value="${bw_search_result}" />
   <c:set var="params" value="${bw_search_params}" />
 
-  <logic:present name="bw_search_list" scope="request">
+  <c:if test="${not empty requestScope.bw_search_list}">
     <logic:iterate id="sre" name="bw_search_list" scope="request">
       <logic:equal name="sre" property="docType" value="event">
           <c:set var="eventFormatter" value="${sre.entity}"
@@ -16,7 +16,7 @@
         <%@include file="/docs/event/emitEvent.jsp"%>
       </logic:equal>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </events>
 
 

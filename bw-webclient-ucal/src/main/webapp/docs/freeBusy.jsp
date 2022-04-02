@@ -4,7 +4,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <freebusy>
-  <logic:present name="calForm" property="formattedFreeBusy" >
+  <c:if test="${not empty calForm.formattedFreeBusy}" >
     <c:set var="freeBusyObj" value="${calForm.formattedFreeBusy}" />
     <bw:emitText name="freeBusyObj" property="account" tagName="who" />
     <bw:emitText name="freeBusyObj" property="start.dtval" tagName="start" />
@@ -23,17 +23,17 @@
         </logic:iterate>
       </day>
     </logic:iterate>
-  </logic:present>
-  <logic:present name="calForm" property="fbResponses" >
+  </c:if>
+  <c:if test="${not empty calForm.fbResponses}" >
     <c:set var="fbresps" value="${calForm.fbResponses}" />
-      <logic:present name="fbresps" property="responses" >
-        <logic:iterate id="resp" name="fbresps" property="responses" >
-          <fbattendee>
-            <bw:emitText name="resp" property="respCode" />
-            <bw:emitText name="resp" property="recipient" />
-          </fbattendee>
-        </logic:iterate>
-      </logic:present>
-  </logic:present>
+    <c:if test="${not empty fbresps.responses}" >
+      <logic:iterate id="resp" name="fbresps" property="responses" >
+        <fbattendee>
+          <bw:emitText name="resp" property="respCode" />
+          <bw:emitText name="resp" property="recipient" />
+        </fbattendee>
+      </logic:iterate>
+    </c:if>
+  </c:if>
 </freebusy>
 

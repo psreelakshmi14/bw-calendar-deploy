@@ -3,7 +3,7 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%-- Output any event fields with forms specific to short format displays --%>
-    <logic:present  name="event" property="location">
+    <c:if test="${not empty event.location}">
       <c:set var="location" value="${event.location}"/>
       <location>
         <bw:emitText name="location" property="uid"/><%--
@@ -12,15 +12,15 @@
           Value: string - physical address of the location --%>
         <bw:emitText name="location" property="link"/><%--
             Value: URI - link to a web address for the location --%>
-        <logic:present name="location" property="subaddress">
+        <c:if test="${not empty location.subaddress}">
           <bw:emitText name="location" property="subaddressField" tagName="subaddress"/><%--
             Value: string - more address information --%>
-        </logic:present>
+        </c:if>
         <bw:emitText name="location" property="creatorHref" tagName="creator" /><%--
           Value: string - location creator id --%>
       </location>
-    </logic:present>
-    <logic:notPresent  name="event" property="location">
+    </c:if>
+    <c:if test="${empty event.location}">
       <location>
         <address></address>
         <id></id><%--
@@ -32,25 +32,25 @@
         <creator></creator><%--
           Value: string - location creator id --%>
       </location>
-    </logic:notPresent>
+    </c:if>
     <categories>
-      <logic:present name="event" property="categories">
+      <c:if test="${not empty event.categories}">
         <logic:iterate id="category" name="event" property="categories">
           <category>
             <bw:emitText name="category" property="id"/><%--
               Value: integer - category id --%>
             <bw:emitText name="category" property="word.value" tagName="word" /><%--
               Value: string - the category value --%>
-            <logic:present name="category" property="description" >
+            <c:if test="${not empty category.description}" >
               <bw:emitText name="category" property="description.value"
                            tagName="description" /><%--
                   Value: string - long description of category --%>
-            </logic:present>
+            </c:if>
             <bw:emitText name="category" property="creatorHref" tagName="creator" /><%--
               Value: string - category creator id --%>
           </category>
         </logic:iterate>
-      </logic:present>
+      </c:if>
     </categories>
     <jsp:include page="/docs/event/emitRecur.jsp"/>
     <bw:emitText name="event" property="description" /><%--
@@ -60,7 +60,7 @@
     <bw:emitText name="event" property="sequence"/><%--
         RFC sequence number for the event --%>
 
-    <logic:present name="event" property="contact">
+    <c:if test="${not empty event.contact}">
       <c:set var="contact" value="${event.contact}"/>
       <contact>
         <bw:emitText name="contact" property="id"/><%--
@@ -74,20 +74,20 @@
         <bw:emitText name="contact" property="link"/><%--
           Value: URI - link to contact web page --%>
       </contact>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="event" property="xproperties">
+    <c:if test="${not empty event.xproperties}">
       <xproperties>
         <logic:iterate id="xprop" name="event" property="xproperties">
           <logic:equal name="xprop" property="skipJsp" value="false">
             <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <logic:present name="xprop" property="parameters">
+              <c:if test="${not empty xprop.parameters}">
                 <parameters>
                 <logic:iterate id="xpar" name="xprop" property="parameters">
                   <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
                 </logic:iterate>
                 </parameters>
-              </logic:present>
+              </c:if>
               <values>
                 <c:out value="<text><![CDATA[${xprop.value}]]></text>" escapeXml="false"/>
               </values>
@@ -95,4 +95,4 @@
           </logic:equal>
         </logic:iterate>
       </xproperties>
-    </logic:present>
+    </c:if>

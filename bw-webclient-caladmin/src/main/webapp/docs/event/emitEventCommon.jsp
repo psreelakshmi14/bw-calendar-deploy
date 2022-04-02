@@ -65,7 +65,6 @@
       <jsp:include page="/docs/event/emitEventAll.jsp"/>
     </c:if>
 
-
     <%-- ****************************************************************
           the following code should not be produced in the public client
          **************************************************************** --%>

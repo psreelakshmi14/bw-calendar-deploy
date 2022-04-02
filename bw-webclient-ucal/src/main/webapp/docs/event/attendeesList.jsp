@@ -12,7 +12,7 @@ try {
 
 <page>attendeesList</page>
 <attendees>
-  <logic:present name="calForm" property="attendees">
+  <c:if test="${not empty calForm.attendees}">
     <logic:iterate id="att" name="calForm" property="attendees.attendees">
 	    <attendee>
 	      <bw:emitText name="att" property="attendeeUri"/>
@@ -21,7 +21,7 @@ try {
         <bw:emitText name="att" property="role"/>
 	    <attendee>
     </logic:iterate>
-  </logic:present>
+  </c:if>
 </attendees>
 
 <%

@@ -54,18 +54,18 @@
           Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
     <!-- always produce the xproperties, if they exist -->
-    <logic:present name="event" property="xproperties">
+    <c:if test="${not empty event.xproperties}">
       <xproperties>
         <logic:iterate id="xprop" name="event" property="xproperties">
           <logic:equal name="xprop" property="skipJsp" value="false">
             <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <logic:present name="xprop" property="parameters">
+              <c:if test="${not empty xprop.parameters}">
                 <parameters>
                 <logic:iterate id="xpar" name="xprop" property="parameters">
                   <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
                 </logic:iterate>
                 </parameters>
-              </logic:present>
+              </c:if>
               <values>
                 <c:out value="<text><![CDATA[${xprop.value}]]></text>" escapeXml="false"/>
               </values>
@@ -73,31 +73,31 @@
           </logic:equal>
         </logic:iterate>
       </xproperties>
-    </logic:present>
+    </c:if>
 
-    <logic:present  name="event" property="percentComplete">
+    <c:if test="${not empty event.percentComplete}">
       <bw:emitText name="event" property="percentComplete"/>
-    </logic:present>
+    </c:if>
 
-    <logic:present  name="event" property="geo">
+    <c:if test="${not empty event.geo}">
       <bw:emitText name="event" property="geo.latitude" tagName="latitude"/>
       <bw:emitText name="event" property="geo.longitude" tagName="longitude"/>
-    </logic:present>
+    </c:if>
 
-    <logic:notPresent name="detailView" scope="request"><%-- look for short form --%>
-      <logic:notPresent name="allView" scope="request">
+    <c:if test="${empty requestScope.detailView}"><%-- look for short form --%>
+      <c:if test="${empty requestScope.allView}">
         <jsp:include page="/docs/event/emitEventShort.jsp"/>
-      </logic:notPresent>
-    </logic:notPresent>
+      </c:if>
+    </c:if>
 
-    <logic:present name="detailView" scope="request">
+    <c:if test="${not empty requestScope.detailView}">
       <%@ include file="/docs/event/emitEventDetail.jsp"%>
-    </logic:present>
+    </c:if>
 
-    <logic:present name="allView" scope="request">
+    <c:if test="${not empty requestScope.allView}">
       <%@ include file="/docs/event/emitEventDetail.jsp"%>
       <%@ include file="/docs/event/emitEventAll.jsp" %>
-    </logic:present>
+    </c:if>
 
     <%-- ****************************************************************
           the following code should not be produced in the public client

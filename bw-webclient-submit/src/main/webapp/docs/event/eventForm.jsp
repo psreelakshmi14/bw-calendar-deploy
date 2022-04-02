@@ -153,7 +153,7 @@ try {
     </location>
 
     <contact>
-      <logic:present name="bw_preferred_contacts_list" scope="session">
+      <c:if test="${not empty sessionScope.bw_preferred_contacts_list}">
         <c:set var="preferredContacts"
                value="${bw_preferred_contacts_list}"/>
         <preferred>
@@ -163,7 +163,7 @@ try {
                                     value="uid"/>
           </html:select>
         </preferred>
-      </logic:present>
+      </c:if>
       <all>
         <c:set var="contacts" value="${bw_contacts_list}"/>
         <html:select property="allContactId">
@@ -196,14 +196,14 @@ try {
         </logic:iterate>
       </all>
       <current>
-        <logic:present name="event" property="categories">
+        <c:if test="${not empty event.categories}">
           <logic:iterate id="category" name="event" property="categories">
             <category>
               <bw:emitText name="category" property="word.value"
                            tagName="keyword"/>
             </category>
           </logic:iterate>
-        </logic:present>
+        </c:if>
       </current>
     </categories>
 
@@ -216,26 +216,26 @@ try {
       <%@include file="/docs/calendar/emitCalendar.jsp"%>
     </calendars>
 
-    <logic:present  name="event" property="percentComplete">
+    <c:if test="${not empty event.percentComplete}">
       <bw:emitText name="event" property="percentComplete"/>
-    </logic:present>
+    </c:if>
 
     <%--<bw:emitText name="event" property="trashable"/>--%>
     <bw:emitText name="event" property="recurringEntity"/>
 
     <%@ include file="/docs/event/emitRecur.jsp" %>
 
-    <logic:present name="event" property="xproperties">
+    <c:if test="${not empty calForm.event.xproperties}">
       <xproperties>
         <logic:iterate id="xprop" name="event" property="xproperties">
           <c:out value="<${xprop.name}>" escapeXml="false"/>
-            <logic:present name="xprop" property="parameters">
+              <c:if test="${not empty xprop.parameters}">
               <parameters>
               <logic:iterate id="xpar" name="xprop" property="parameters">
                   <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
               </logic:iterate>
               </parameters>
-            </logic:present>
+              </c:if>
             <values>
                 <text><![CDATA[<c:out value="${xprop.value}"
                                       escapeXml="false"/>]]></text>
@@ -243,17 +243,17 @@ try {
           <c:out value="</${xprop.name}>" escapeXml="false"/>
         </logic:iterate>
       </xproperties>
-    </logic:present>
+    </c:if>
 
   </genurl:form>
 </formElements>
 
 <editableAccess>
-  <logic:present name="calForm" property="curEventFmt">
+  <c:if test="${not empty calForm.curEventFmt}">
     <c:set var="eventFormatter" value=""${calForm.curEventFmt}"/>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
-  </logic:present>
+  </c:if>
 </editableAccess>
 
 <timezones>

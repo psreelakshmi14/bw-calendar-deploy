@@ -234,19 +234,19 @@ try {
     </appvar>
   </logic:iterate>
 
-  <logic:present name="calForm" property="currentLocale" >
+  <c:if test="${not empty calForm.currentLocale}" >
     <bw:emitText name="calForm" property="currentLocale" />
-  </logic:present>
+  </c:if>
 
-  <logic:present name="bw_cache_prefix" scope="session" >
+  <c:if test="${not empty sessionScope.bw_cache_prefix}" >
     <bw:emitText name="bw_cache_prefix" scope="session"
                  tagName="cachePrefix"/>
-  </logic:present>
+  </c:if>
 
-  <logic:present name="bw_feature_flags" scope="session" >
+  <c:if test="${not empty sessionScope.bw_feature_flags}" >
       <bw:emitText name="bw_feature_flags" scope="session"
                    tagName="featureFlags"/>
-  </logic:present>
+  </c:if>
 
   <selectionState><%--
     What type of information have we selected to display?  Used to
@@ -260,36 +260,36 @@ try {
 
   <%-- List of views for menuing --%>
   <views>
-    <logic:present name="bw_views_list" scope="session">
+    <c:if test="${not empty sessionScope.bw_views_list}">
       <logic:iterate id="view" name="bw_views_list" scope="session">
         <view>
           <bw:emitText name="view" property="name"/>
           <paths>
-            <logic:present name="view" property="collectionPaths">
+            <c:if test="${not empty view.collectionPaths}">
               <logic:iterate name="view" property="collectionPaths" id="path">
                 <bw:emitText name="path"/>
               </logic:iterate>
-            </logic:present>
+            </c:if>
           </paths>
         </view>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </views>
 
   <%-- List of filters for menuing --%>
   <filters>
-    <logic:present name="bw_filters_list" scope="session">
+    <c:if test="${not empty sessionScope.bw_filters_list}">
         <logic:iterate id="view" name="bw_filters_list" scope="session">
         <filter>
           <bw:emitText name="filter" property="name"/>
         </filter>
       </logic:iterate>
-    </logic:present>
+    </c:if>
   </filters>
 
   <%-- System parameters --%>
   <syspars>
-    <logic:present name="calForm" property="dirInfo" >
+    <c:if test="${not empty calForm.dirInfo}" >
       <c:set var="dir" value="${calForm.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
@@ -297,7 +297,7 @@ try {
       <bw:emitText name="dir" property="resourcePrincipalRoot" />
       <bw:emitText name="dir" property="hostPrincipalRoot" />
       <bw:emitText name="dir" property="venuePrincipalRoot" />
-    </logic:present>
+    </c:if>
   </syspars>
 
   <%-- Output the calendar tree --%>

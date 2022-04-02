@@ -2,84 +2,85 @@
 <%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
-<logic:present  name="calForm" property="rruleComponents">
+<c:if test="${not empty calForm.rruleComponents}">
   <logic:iterate  id="rrc" name="calForm" property="rruleComponents">
     <recurrence>
       <bw:emitText name="rrc" property="rule"/>
 
       <bw:emitText name="rrc" property="freq"/>
-      <logic:present  name="rrc" property="until">
+      <c:if test="${not empty rrc.until}">
         <bw:emitText name="rrc" property="until"/>
-      </logic:present>
+      </c:if>
       <bw:emitText name="rrc" property="count"/>
       <bw:emitText name="rrc" property="interval"/>
       <%-- bySecond --%>
       <%-- byMinue --%>
       <%-- byHour --%>
-      <logic:present  name="rrc" property="byDay">
+      <c:if test="${not empty rrc.byDay}">
         <byday>
           <logic:iterate  id="posdays" name="rrc" property="byDay">
-            <pos val="${posdays.pos}">
+            <c:out value='<pos val="${posdays.pos}">'
+                   escapeXml="false"/>
             <logic:iterate  id="day" name="posdays" property="days">
               <bw:emitText name="day" />
             </logic:iterate>
             </pos>
           </logic:iterate>
         </byday>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="byMonthDay">
+      <c:if test="${not empty rrc.byMonthDay}">
         <bymonthday>
           <logic:iterate  id="val" name="rrc" property="byMonthDay">
             <bw:emitText name="val" />
           </logic:iterate>
         </bymonthday>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="byYearDay">
+      <c:if test="${not empty rrc.byYearDay}">
         <byyearday>
           <logic:iterate  id="val" name="rrc" property="byYearDay">
             <bw:emitText name="val" />
           </logic:iterate>
         </byyearday>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="byWeekNo">
+      <c:if test="${not empty rrc.byWeekNo}">
         <byweekno>
           <logic:iterate  id="val" name="rrc" property="byWeekNo">
             <bw:emitText name="val" />
           </logic:iterate>
         </byweekno>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="byMonth">
+      <c:if test="${not empty rrc.byMonth}">
         <bymonth>
           <logic:iterate  id="val" name="rrc" property="byMonth">
             <bw:emitText name="val" />
           </logic:iterate>
         </bymonth>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="bySetPos">
+      <c:if test="${not empty rrc.bySetPos}">
         <bysetpos>
           <logic:iterate  id="val" name="rrc" property="bySetPos">
             <bw:emitText name="val" />
           </logic:iterate>
         </bysetpos>
-      </logic:present>
+      </c:if>
 
-      <logic:present  name="rrc" property="wkst">
+      <c:if test="${not empty rrc.wkst}">
         <bw:emitText name="rrc" property="wkst"/>
-      </logic:present>
+      </c:if>
     </recurrence>
   </logic:iterate>
 
-  <logic:present name="event" property="rdates">
+  <c:if test="${not empty event.rdates}">
     <bw:emitRexdates name="event" property="rdates" indent="    " />
-  </logic:present>
+  </c:if>
 
-  <logic:present name="event" property="exdates">
+  <c:if test="${not empty event.exdates}">
     <bw:emitRexdates name="event" property="exdates" indent="    " />
-  </logic:present>
-</logic:present>
+  </c:if>
+</c:if>
 

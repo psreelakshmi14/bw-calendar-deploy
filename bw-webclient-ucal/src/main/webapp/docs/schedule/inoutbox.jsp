@@ -16,31 +16,31 @@
 
       <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
-      <logic:present  name="event" property="requestStatuses">
+      <c:if test="${not empty event.requestStatuses}">
         <logic:iterate id="requestStatus" name="event" property="requestStatuses">
           <bw:emitText name="requestStatus" />
         </logic:iterate>
-      </logic:present>
+      </c:if>
 
       <bw:emitText name="event" property="summary"
                    tagName="title"/>
       <bw:emitText name="event" property="uid" tagName="guid" />
       <bw:emitText name="event" property="recurrenceId" tagName="recurrenceId" />
 
-      <logic:present name="formattedEvent" property="start">
+      <c:if test="${not empty formattedEvent.start}">
         <start><%-- start date and time --%>
           <c:set var="date" value="${formattedEvent.start}"
                  scope="request" />
           <%@ include file="/docs/event/emitDate.jsp" %>
         </start>
-      </logic:present>
-      <logic:present name="formattedEvent" property="end">
+      </c:if>
+      <c:if test="${not empty formattedEvent.end}">
         <end><%-- end date and time --%>
           <c:set var="date" value="${formattedEvent.end}"
                  scope="request" />
           <%@ include file="/docs/event/emitDate.jsp" %>
         </end>
-      </logic:present>
+      </c:if>
       <%-- last mod date string --%>
       <bw:emitText name="event" property="lastmod" />
       <dtstamp><%-- date stamp and time --%>
@@ -55,21 +55,21 @@
       <bw:emitText name="event" property="link" />
       <bw:emitText name="event" property="cost" />
 
-      <logic:present name="event" property="location">
+      <c:if test="${not empty event.location}">
         <bw:emitText name="formattedEvent" property="event.location.address.value"
                      tagName="location"/>
-      </logic:present>
-      <logic:notPresent name="event" property="location">
+      </c:if>
+      <c:if test="${empty event.location}">
         <location></location>
-      </logic:notPresent>
+      </c:if>
 
-      <logic:present name="event" property="contact">
+      <c:if test="${not empty event.contact}">
         <bw:emitText name="formattedEvent" property="event.contact.cn.value"
                      tagName="contact"/>
-      </logic:present>
-      <logic:notPresent name="event" property="contact">
+      </c:if>
+      <c:if test="${empty event.contact}">
         <contact></contact>
-      </logic:notPresent>
+      </c:if>
 
       <bw:emitText name="formattedEvent" property="event.creatorHref"
                    tagName="creator"/>

@@ -10,7 +10,7 @@ try {
   <c:set var="moduleState" value="${bw_module_state}" />
   <bw:emitText name="calForm" property="calSuiteName" />
 
-  <logic:present name="calForm" property="currentCalSuite" >
+  <c:if test="${not empty calForm.currentCalSuite}" >
     <currentCalSuite>
       <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
       <bw:emitText name="calForm" property="currentCalSuite.group.account" tagName="group" />
@@ -18,7 +18,7 @@ try {
       <bw:emitText name="calForm" property="currentCalSuite.resourcesHome" tagName="resourcesHome" />
       <bw:emitCurrentPrivs name="calForm" property="currentCalSuite.currentAccess" tagName="currentAccess"/>
     </currentCalSuite>
-  </logic:present>
+  </c:if>
 
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
     <c:set var="fmtnow" value="${calForm.today.formatted}" />
@@ -308,14 +308,14 @@ try {
     </appvar>
   </logic:iterate>
 
-<logic:present name="bw_feature_flags" scope="session" >
+<c:if test="${not empty sessionScope.bw_feature_flags}">
   <bw:emitText name="bw_feature_flags" scope="session"
                tagName="featureFlags"/>
-</logic:present>
+</c:if>
 
   <%-- System parameters --%>
   <syspars>
-    <logic:present name="calForm" property="dirInfo" >
+    <c:if test="${not empty calForm.dirInfo}">
       <c:set var="dir" value="${calForm.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
@@ -323,7 +323,7 @@ try {
       <bw:emitText name="dir" property="resourcePrincipalRoot" />
       <bw:emitText name="dir" property="hostPrincipalRoot" />
       <bw:emitText name="dir" property="venuePrincipalRoot" />
-    </logic:present>
+    </c:if>
   </syspars>
 
   <myCalendars>
