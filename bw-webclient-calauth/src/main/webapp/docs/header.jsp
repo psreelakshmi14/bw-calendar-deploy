@@ -104,6 +104,7 @@ try {
                      tagName="memberOf"/>
       </logic:iterate>
   </logic:equal>
+
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
