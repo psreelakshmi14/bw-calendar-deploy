@@ -191,27 +191,7 @@ try {
     <%@ include file="/docs/event/emitRecur.jsp" %>
     <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
-    <c:if test="${not empty event.xproperties}">
-      <xproperties>
-        <logic:iterate id="xprop" name="event" property="xproperties">
-          <logic:equal name="xprop" property="skipJsp" value="false">
-            <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <c:if test="${not empty xprop.parameters}">
-              <parameters>
-                <logic:iterate id="xpar" name="xprop" property="parameters">
-                  <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
-                </logic:iterate>
-              </parameters>
-              </c:if>
-            <values>
-              <text><![CDATA[<c:out value="${xprop.value}"
-                                    escapeXml="false"/>]]></text>
-            </values>
-            <c:out value="</${xprop.name}>" escapeXml="false"/>
-          </logic:equal>
-        </logic:iterate>
-      </xproperties>
-    </c:if>
+    <bw:emitXprops name="event" property="xproperties"/>
 
   </genurl:form>
 </formElements>

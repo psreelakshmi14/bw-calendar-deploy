@@ -318,27 +318,7 @@
       </comments>
     </c:if>
 
-    <c:if test="${not empty calForm.event.xproperties}">
-      <xproperties>
-        <logic:iterate id="xprop" name="calForm" property="event.xproperties">
-          <logic:equal name="xprop" property="skipJsp" value="false">
-            <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <c:if test="${not empty xprop.parameters}">
-                <parameters>
-                <logic:iterate id="xpar" name="xprop" property="parameters">
-                  <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
-                </logic:iterate>
-                </parameters>
-              </c:if>
-              <values>
-                <text><![CDATA[<c:out value="${xprop.value}"
-                                      escapeXml="false"/>]]></text>
-              </values>
-            <c:out value="</${xprop.name}>" escapeXml="false"/>
-          </logic:equal>
-        </logic:iterate>
-      </xproperties>
-    </c:if>
+    <bw:emitXprops name="calForm" property="event.xproperties"/>
 
     <!-- these are the values that may be submitted to the update action -->
     <submitButtons>

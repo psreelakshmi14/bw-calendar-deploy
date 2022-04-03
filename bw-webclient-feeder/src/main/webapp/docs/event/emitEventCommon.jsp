@@ -53,27 +53,7 @@
     <bw:emitText name="event" property="status" /><%-- Status
           Value: string, only one of CONFIRMED, TENTATIVE, or CANCELLED --%>
 
-    <!-- always produce the xproperties, if they exist -->
-    <c:if test="${not empty event.xproperties}">
-      <xproperties>
-        <logic:iterate id="xprop" name="event" property="xproperties">
-          <logic:equal name="xprop" property="skipJsp" value="false">
-            <c:out value="<${xprop.name}>" escapeXml="false"/>
-              <c:if test="${not empty xprop.parameters}">
-                <parameters>
-                <logic:iterate id="xpar" name="xprop" property="parameters">
-                  <c:out value="<${xpar.name}><![CDATA[${xpar.value}]]></${xpar.name}>" escapeXml="false"/>
-                </logic:iterate>
-                </parameters>
-              </c:if>
-              <values>
-                <c:out value="<text><![CDATA[${xprop.value}]]></text>" escapeXml="false"/>
-              </values>
-            <c:out value="</${xprop.name}>" escapeXml="false"/>
-          </logic:equal>
-        </logic:iterate>
-      </xproperties>
-    </c:if>
+    <bw:emitXprops name="event" property="xproperties"/>
 
     <c:if test="${not empty event.percentComplete}">
       <bw:emitText name="event" property="percentComplete"/>
