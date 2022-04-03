@@ -223,7 +223,16 @@ try {
     <%--<bw:emitText name="event" property="trashable"/>--%>
     <bw:emitText name="event" property="recurringEntity"/>
 
-    <%@ include file="/docs/event/emitRecur.jsp" %>
+    <bw:emitRrules name="calForm" property="rruleComponents"
+                   indent="    " />
+
+    <c:if test="${not empty event.rdates}">
+      <bw:emitRexdates name="event" property="rdates" indent="    " />
+    </c:if>
+
+    <c:if test="${not empty event.exdates}">
+      <bw:emitRexdates name="event" property="exdates" indent="    " />
+    </c:if>
 
     <bw:emitXprops name="calForm" property="event.xproperties"/>
 

@@ -1,7 +1,17 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
-    <jsp:include page="/docs/event/emitRecur.jsp"/>
+    <bw:emitRrules name="calForm" property="rruleComponents"
+                   indent="    " />
+
+    <c:if test="${not empty event.rdates}">
+      <bw:emitRexdates name="event" property="rdates" indent="    " />
+    </c:if>
+
+    <c:if test="${not empty event.exdates}">
+      <bw:emitRexdates name="event" property="exdates" indent="    " />
+    </c:if>
+
     <bw:emitText name="event" property="description" /><%--
         Value: string - long description of the event.  Limited to 500 characters. --%>
     <bw:emitText name="event" property="cost" /><%--

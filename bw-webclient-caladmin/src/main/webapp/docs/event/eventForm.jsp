@@ -15,6 +15,8 @@
              tagName="registrationsExternal"/>
 <bw:emitCurrentPrivs name="calForm" property="eventInfo.currentAccess" />
 
+<c:set var="event" value="${calForm.event}" scope="request"  />
+
 <%-- formElements sections take advantage of Struts' form processing features. --%>
 <formElements>
   <bw:emitText name="calForm" property="event.uid"
@@ -282,7 +284,16 @@
     <%--<bw:emitText name="calForm" property="event.trashable" tagName="trashable"/>--%>
     <bw:emitText name="calForm" property="event.recurringEntity" tagName="recurringEntity"/>
 
-    <%@ include file="/docs/event/emitRecur.jsp" %>
+    <bw:emitRrules name="calForm" property="rruleComponents"
+                   indent="    " />
+
+    <c:if test="${not empty event.rdates}">
+      <bw:emitRexdates name="event" property="rdates" indent="    " />
+    </c:if>
+
+    <c:if test="${not empty event.exdates}">
+      <bw:emitRexdates name="event" property="exdates" indent="    " />
+    </c:if>
 
     <contact>
       <c:if test="${not empty sessionScope.bw_preferred_contacts_list}">
