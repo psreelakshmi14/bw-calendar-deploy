@@ -111,26 +111,10 @@ try {
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
   </logic:equal>
-
-  <logic:iterate id="msg" name="calForm" property="msg.msgList">
-    <message>
-      <bw:emitText name="msg" property="msgId"
-                   tagName="id"/>
-      <logic:iterate id="param" name="msg" property="params" >
-        <bw:emitText name="param" />
-      </logic:iterate>
-    </message>
-  </logic:iterate>
-
-  <logic:iterate id="errBean" name="calForm" property="err.msgList">
-    <error>
-      <bw:emitText name="errBean" property="msgId"
-                   tagName="id"/>
-      <logic:iterate id="param" name="errBean" property="params" >
-        <bw:emitText name="param" />
-      </logic:iterate>
-    </error>
-  </logic:iterate>
+  <bw:emitMsgErr name="calForm" property="msg"
+                 tagName="message" indent="  "/>
+  <bw:emitMsgErr name="calForm" property="err"
+                 tagName="error" indent="  "/>
 
   <c:set var="presentationState" value="${bw_presentationstate}" />
   <bw:emitText name="presentationState" property="appRoot" tagName="appRoot" /><%--

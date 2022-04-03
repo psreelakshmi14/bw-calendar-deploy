@@ -105,27 +105,10 @@ try {
       </logic:iterate>
   </logic:equal>
 
-  <%-- messages --%>
-  <logic:iterate id="msg" name="calForm" property="msg.msgList">
-    <message>
-      <bw:emitText name="msg" property="msgId"
-                   tagName="id"/>
-      <logic:iterate id="param" name="msg" property="params" >
-        <bw:emitText name="param" />
-      </logic:iterate>
-    </message>
-  </logic:iterate>
-
-  <%-- errors --%>
-  <logic:iterate id="errBean" name="calForm" property="err.msgList">
-    <error>
-      <bw:emitText name="errBean" property="msgId"
-                   tagName="id"/>
-      <logic:iterate id="param" name="errBean" property="params" >
-        <bw:emitText name="param" />
-      </logic:iterate>
-    </error>
-  </logic:iterate>
+  <bw:emitMsgErr name="calForm" property="msg"
+                 tagName="message" indent="  "/>
+  <bw:emitMsgErr name="calForm" property="err"
+                 tagName="error" indent="  "/>
 
   <c:set var="preferences" value="${bw_preferences}" />
   <bw:emitText name="preferences" property="preferredEndType" />
