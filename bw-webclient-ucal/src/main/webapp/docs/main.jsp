@@ -23,11 +23,11 @@
 <eventscalendar>
   <c:set var="curTimeView" value="${moduleState.curTimeView}"/>
   <c:set var="timeInfo" value="${curTimeView.timePeriodInfo}"/>
-  <logic:iterate id="yearInfo" name="timeInfo" >
+  <c:forEach var="yearInfo" items="${timeInfo}" >
     <year>
       <bw:emitText name="yearInfo" property="year"
                    tagName="value"/>
-      <logic:iterate id="monthInfo" name="yearInfo" property="entries" >
+      <c:forEach var="monthInfo" items="${yearInfo.entries}" >
         <month>
           <bw:emitText name="monthInfo" property="month"
                        tagName="value"/>
@@ -35,15 +35,15 @@
                        tagName="longname"/>
           <bw:emitText name="monthInfo" property="monthName"
                        tagName="shortname"/>
-          <logic:iterate id="weekInfo" name="monthInfo" property="entries" >
+          <c:forEach var="weekInfo" items="${monthInfo.entries}" >
             <week>
               <bw:emitText name="weekInfo" property="weekOfYear"
                            tagName="value"/>
-              <logic:iterate id="dayInfo" name="weekInfo" property="entries" >
+              <c:forEach var="dayInfo" items="${weekInfo.entries}" >
                 <day>
                   <bw:emitText name="dayInfo" property="filler"/>
                   <%/* Fillers currently have no information */%>
-                  <logic:equal name="dayInfo" property="filler" value="false">
+                  <c:if test="${dayInfo.filler == false}">
                     <bw:emitText name="dayInfo" property="dayOfMonth"
                                  tagName="value"/>
                     <bw:emitText name="dayInfo" property="dayName"
@@ -54,25 +54,24 @@
                     <bw:emitText name="dayInfo" property="dateShort"
                                  tagName="shortdate"/>
                     <%-- Do not produce events if we are in the year view
-                    <logic:equal name="calForm"
-                                 property="curTimeView.showData" value="true">
+                    <c:if test="${calForm.curTimeView.showData}">
                                  --%>
-                    <logic:equal name="curTimeView" property="showData" value="true">
-                      <logic:iterate id="eventFmt" name="dayInfo" property="events">
+                    <c:if test="${curTimeView.showData}">
+                      <c:forEach var="eventFmt" items="${dayInfo.events}">
                         <c:set var="eventFormatter" value="${eventFmt}"
                                scope="request" />
                         <jsp:include page="/docs/event/emitEvent.jsp" />
-                      </logic:iterate>
-                    </logic:equal>
-                  </logic:equal>
+                      </c:forEach>
+                    </c:if>
+                  </c:if>
                 </day>
-              </logic:iterate>
+              </c:forEach>
             </week>
-          </logic:iterate>
+          </c:forEach>
         </month>
-      </logic:iterate>
+      </c:forEach>
     </year>
-  </logic:iterate>
+  </c:forEach>
 </eventscalendar>
 
 <%@ include file="/docs/footer.jsp" %>
