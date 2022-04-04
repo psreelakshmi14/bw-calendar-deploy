@@ -235,27 +235,12 @@
     </logic:equal>
 
     <categories>
-      <c:if test="${not empty sessionScope.bw_preferred_categories_list}">
-        <preferred>
-          <logic:iterate id="category"
-                         name="bw_preferred_categories_list" scope="session">
-            <%@include file="/docs/category/emitCategory.jsp"%>
-          </logic:iterate>
-        </preferred>
-      </c:if>
-      <all>
-        <logic:iterate id="category" name="bw_categories_list"
-                       scope="session">
-          <%@include file="/docs/category/emitCategory.jsp"%>
-        </logic:iterate>
-      </all>
-      <current>
-        <c:if test="${not empty calForm.event.categories}">
-          <logic:iterate id="category" name="calForm" property="event.categories">
-            <%@include file="/docs/category/emitCategory.jsp"%>
-          </logic:iterate>
-        </c:if>
-      </current>
+      <bw:emitCategories name="bw_preferred_categories_list" scope="session"
+                         tagName="preferred" indent="  "/>
+      <bw:emitCategories name="bw_categories_list" scope="session"
+                         tagName="all" indent="    "/>
+      <bw:emitCategories name="event"  property="categories"
+                         tagName="current" indent="    "/>
     </categories>
 
     <!-- Subscriptions are calendar aliases (and folders) associated with

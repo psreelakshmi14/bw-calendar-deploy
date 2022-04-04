@@ -161,24 +161,10 @@ try {
     </location>
 
     <categories>
-      <all>
-        <logic:iterate id="category" name="bw_categories_list" scope="session">
-          <category>
-            <bw:emitText name="category" property="word.value" tagName="value" />
-            <bw:emitText name="category" property="uid" tagName="uid" />
-          </category>
-        </logic:iterate>
-      </all>
-      <current>
-        <c:if test="${not empty event.categories}">
-          <logic:iterate id="category" name="event" property="categories">
-            <category>
-              <bw:emitText name="category" property="word.value" tagName="value" />
-              <bw:emitText name="category" property="uid" tagName="uid" />
-            </category>
-          </logic:iterate>
-        </c:if>
-      </current>
+      <bw:emitCategories name="bw_categories_list" scope="session"
+                         tagName="all" indent="  " full="false"/>
+      <bw:emitCategories name="event"  property="categories"
+                         tagName="current" indent="    " full="false"/>
     </categories>
 
     <c:if test="${not empty event.percentComplete}">

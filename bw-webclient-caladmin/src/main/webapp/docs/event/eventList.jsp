@@ -19,11 +19,8 @@
   </calendars>
 
   <%-- Output the categories for UI filtering: --%>
-  <categories>
-    <logic:iterate id="category" name="bw_categories_list" scope="session">
-      <%@include file="/docs/category/emitCategory.jsp"%>
-    </logic:iterate>
-  </categories>
+  <bw:emitCategories name="bw_categories_list" scope="session"
+                     tagName="categories" indent="  "/>
 
 <%@include file="/docs/footer.jsp"%>
 

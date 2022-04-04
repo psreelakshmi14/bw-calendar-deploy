@@ -7,14 +7,8 @@
 <page>categoryList</page>
 <tab>system</tab>
 
-<categories>
-  <c:if test="${not empty sessionScope.bw_editable_categories_list}">
-    <logic:iterate id="category" name="bw_editable_categories_list"
-                   scope="session">
-      <%@include file="/docs/category/emitCategory.jsp"%>
-    </logic:iterate>
-  </c:if>
-</categories>
+  <bw:emitCategories name="bw_editable_categories_list" scope="session"
+                     tagName="categories" indent="  "/>
 
 <%@include file="/docs/footer.jsp"%>
 

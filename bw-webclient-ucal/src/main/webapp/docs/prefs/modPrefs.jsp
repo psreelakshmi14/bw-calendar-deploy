@@ -40,14 +40,8 @@
   <bw:emitText name="userPrefs" property="userMode"/>
   <bw:emitText name="userPrefs" property="defaultTzid"/>
 
-  <defaultCategories>
-    <c:if test="${not empty sessionScope.bw_default_categories_list}">
-      <logic:iterate id="category" name="bw_default_categories_list"
-                     scope="session">
-        <%@include file="/docs/category/emitCategory.jsp"%>
-      </logic:iterate>
-    </c:if>
-  </defaultCategories>
+  <bw:emitCategories name="bw_default_categories_list" scope="session"
+                     tagName="defaultCategories" indent="  "/>
 </prefs>
 
 <formElements>

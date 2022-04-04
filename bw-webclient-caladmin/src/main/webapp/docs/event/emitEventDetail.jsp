@@ -31,13 +31,8 @@
           Value: string - location creator id --%>
       </location>
     </c:if>
-    <categories>
-      <c:if test="${not empty event.categories}">
-        <logic:iterate id="category" name="event" property="categories">
-          <%@include file="/docs/category/emitCategory.jsp"%>
-        </logic:iterate>
-      </c:if>
-    </categories>
+    <bw:emitCategories name="event"  property="categories"
+                       tagName="categories" indent="    "/>
     <bw:emitText name="event" property="description" /><%--
         Value: string - long description of the event.  Limited to 500 characters. --%>
     <bw:emitText name="event" property="cost" /><%--

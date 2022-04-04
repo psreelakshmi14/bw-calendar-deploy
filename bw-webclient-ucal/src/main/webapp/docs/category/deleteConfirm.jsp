@@ -6,12 +6,8 @@
 
 <page>deleteCategoryConfirm</page>
 
-<currentCategory>
-  <c:if test="${not empty calForm.category}">
-    <c:set var="category" value="${calForm.category}"/>
-    <%@include file="/docs/category/emitCategory.jsp"%>
-  </c:if>
-</currentCategory>
+  <bw:emitCategory name="calForm"  property="category"
+                   tagName="currentCategory" indent="  "/>
 
 <%@include file="/docs/footer.jsp"%>
 

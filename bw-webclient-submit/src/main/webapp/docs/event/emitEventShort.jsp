@@ -20,17 +20,5 @@
         <address></address>
       </location>
     </c:if>
-    <categories>
-      <c:if test="${not empty event.categories}">
-        <logic:iterate id="category" name="event" property="categories">
-          <category>
-            <bw:emitText name="category" property="id"/><%--
-              Value: integer - category id --%>
-            <bw:emitText name="category" property="word.value"
-                         tagName="value"/><%--
-              Value: string - the category value --%>
-          </category>
-        </logic:iterate>
-      </c:if>
-    </categories>
-
+    <bw:emitCategories name="event"  property="categories"
+                       tagName="categories" indent="    " full="false"/>

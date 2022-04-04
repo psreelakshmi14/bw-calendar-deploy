@@ -33,25 +33,8 @@
           Value: string - location creator id --%>
       </location>
     </c:if>
-    <categories>
-      <c:if test="${not empty event.categories}">
-        <logic:iterate id="category" name="event" property="categories">
-          <category>
-            <bw:emitText name="category" property="id"/><%--
-              Value: integer - category id --%>
-            <bw:emitText name="category" property="word.value" tagName="word" /><%--
-              Value: string - the category value --%>
-            <c:if test="${not empty category.description}" >
-              <bw:emitText name="category" property="description.value"
-                           tagName="description" /><%--
-                  Value: string - long description of category --%>
-            </c:if>
-            <bw:emitText name="category" property="creatorHref" tagName="creator" /><%--
-              Value: string - category creator id --%>
-          </category>
-        </logic:iterate>
-      </c:if>
-    </categories>
+    <bw:emitCategories name="event"  property="categories"
+                       tagName="categories" indent="    "/>
     <bw:emitRrules name="calForm" property="rruleComponents"
                    indent="    " />
 

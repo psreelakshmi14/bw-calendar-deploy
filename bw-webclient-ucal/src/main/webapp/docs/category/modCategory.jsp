@@ -6,15 +6,10 @@
 
 <page>modCategory</page>
 
-<bw:emitText name="calForm" property="addingCategory"
-             tagName="creating"/>
-
-<currentCategory>
-  <c:if test="${not empty calForm.category}">
-    <c:set var="category" value="${calForm.category}"/>
-    <%@include file="/docs/category/emitCategory.jsp"%>
-  </c:if>
-</currentCategory>
+  <bw:emitText name="calForm" property="addingCategory"
+               tagName="creating"/>
+  <bw:emitCategory name="calForm"  property="category"
+                   tagName="currentCategory" indent="  "/>
 
 <%@include file="/docs/footer.jsp"%>
 

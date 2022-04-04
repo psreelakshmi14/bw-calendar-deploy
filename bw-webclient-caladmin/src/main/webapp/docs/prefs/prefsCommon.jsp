@@ -39,19 +39,10 @@
 </prefs>
 
 <categories>
-  <all>
-    <logic:iterate id="category" name="bw_categories_list" scope="session">
-      <%@include file="/docs/category/emitCategory.jsp"%>
-    </logic:iterate>
-  </all>
-  <current>
-    <c:if test="${not empty sessionScope.bw_default_categories_list}">
-      <logic:iterate id="category" name="bw_default_categories_list"
-                     scope="session">
-        <%@include file="/docs/category/emitCategory.jsp"%>
-      </logic:iterate>
-    </c:if>
-  </current>
+  <bw:emitCategories name="bw_categories_list" scope="session"
+                     tagName="all" indent="  "/>
+  <bw:emitCategories name="bw_default_categories_list" scope="session"
+                     tagName="current" indent="  "/>
 </categories>
 
 

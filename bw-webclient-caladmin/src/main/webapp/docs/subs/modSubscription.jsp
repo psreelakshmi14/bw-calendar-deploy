@@ -31,19 +31,10 @@
 </publicCalendars>
 
 <categories>
-  <all>
-    <logic:iterate id="category" name="bw_categories_list"
-                   scope="session">
-      <%@include file="/docs/category/emitCategory.jsp"%>
-    </logic:iterate>
-  </all>
-  <current>
-    <c:if test="${not empty calForm.calendar.categories}">
-      <logic:iterate id="category" name="calForm" property="calendar.categories">
-        <%@include file="/docs/category/emitCategory.jsp"%>
-      </logic:iterate>
-    </c:if>
-  </current>
+  <bw:emitCategories name="bw_categories_list" scope="session"
+                     tagName="all" indent="  "/>
+  <bw:emitCategories name="calForm" property="calendar.categories"
+                     tagName="current" indent="  "/>
 </categories>
 
 <%@include file="/docs/footer.jsp"%>

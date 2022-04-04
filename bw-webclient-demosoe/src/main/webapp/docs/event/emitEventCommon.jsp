@@ -107,13 +107,8 @@
       </location>
     </c:if>
 
-    <categories>
-      <c:if test="${not empty event.categories}">
-        <logic:iterate id="category" name="event" property="categories">
-          <%@include file="/docs/category/emitCategory.jsp"%>
-        </logic:iterate>
-      </c:if>
-    </categories>
+    <bw:emitCategories name="event"  property="categories"
+                       tagName="categories" indent="    "/>
 
     <bw:emitXprops name="event" property="xproperties"/>
 
