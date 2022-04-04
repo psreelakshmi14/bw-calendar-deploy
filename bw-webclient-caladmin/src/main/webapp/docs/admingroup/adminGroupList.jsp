@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -10,33 +10,32 @@
 <groups>
   <bw:emitText name="calForm" property="showAgMembers"
                tagName="showMembers"/>
-  <logic:iterate id="adminGroup" name="bw_admin_groups" scope="session" >
+  <c:forEach var="adminGroup" items="${sessionScope.bw_admin_groups}" >
     <group>
       <bw:emitText name="adminGroup" property="account"
                    tagName="name"/>
       <bw:emitText name="adminGroup" property="description"
                    tagName="desc"/>
       <members>
-        <logic:equal name="calForm" property="showAgMembers" value="true">
+        <c:if test="${calForm.showAgMembers}">
           <c:if test="${not empty adminGroup.groupMembers}" >
-            <logic:iterate name="adminGroup" property="groupMembers"
-                           id="member" >
+            <c:forEach var="member" items="${adminGroup.groupMembers}" >
               <member>
                 <bw:emitText name="member" property="account" />
                 <bw:emitText name="member" property="kind" />
               </member>
-            </logic:iterate>
+            </c:forEach>
           </c:if>
-        </logic:equal>
+        </c:if>
       </members>
     </group>
-  </logic:iterate>
+  </c:forEach>
 </groups>
 
 <calSuites>
-  <logic:iterate id="calSuite" name="calForm" property="calSuites" >
+  <c:forEach var="calSuite" items="${calForm.calSuites}" >
     <%@include file="/docs/calsuite/emitCalSuite.jsp"%>
-  </logic:iterate>
+  </c:forEach>
 </calSuites>
 
 <%@include file="/docs/footer.jsp"%>

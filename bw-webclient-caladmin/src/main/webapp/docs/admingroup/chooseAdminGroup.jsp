@@ -8,14 +8,14 @@
 <tab>none</tab>
 
 <groups>
-  <logic:iterate id="adminGroup" name="bw_user_admin_groups" scope="session" >
+  <c:forEach var="adminGroup" items="${sessionScope.bw_user_admin_groups}" >
     <group>
       <bw:emitText name="adminGroup" property="account"
                    tagName="name"/>
       <bw:emitText name="adminGroup" property="description"
                    tagName="desc"/>
     </group>
-  </logic:iterate>
+  </c:forEach>
 </groups>
 
 <calSuites>

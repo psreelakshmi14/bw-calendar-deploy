@@ -6,12 +6,12 @@
 <bedework>
   <page>categoryWidget</page>
 
-  <logic:iterate id="appvar" name="calForm" property="appVars">
+  <c:forEach var="appvar" items="${calForm.appVars}">
     <appvar>
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
     </appvar>
-  </logic:iterate>
+  </c:forEach>
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"

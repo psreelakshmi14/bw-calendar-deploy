@@ -134,7 +134,7 @@ try {
         Value: String - a 16 character random string used to allow users to confirm
         additions to their private calendar.  DEPRECATED. --%>
 
-  <logic:iterate id="appvar" name="calForm" property="appVars">
+  <c:forEach var="appvar" items="${calForm.appVars}">
     <appvar><%--
         Application variables can be set arbitrarily by the stylesheet designer.
         Use an "appvar" by adding setappvar=key(value) to the query string of
@@ -146,20 +146,18 @@ try {
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
 
-      <logic:equal name="appvar" property="key" value="summaryMode"><%--
+      <c:if test="${(appvar.key = 'summaryMode') && (appvar.value = 'details')}"><%--
         This is a special use of the appvar feature.  Normally, we don't return
         all details about events except when we display a single event (to keep the
         XML lighter).  To return all event details in an events listing, append a
         query string with setappvar=summaryMode(details).  Turn the detailed view
         off with setappvar=summaryMode(summary).--%>
-        <logic:equal name="appvar" property="value" value="details">
-          <c:set var="detailView" value="true" scope="request"/><%--
-            Send this bean to the request scope so we can test for it on the page
-            that builds the calendar tree (main.jsp) --%>
-        </logic:equal>
-      </logic:equal>
+        <c:set var="detailView" value="true" scope="request"/><%--
+          Send this bean to the request scope so we can test for it on the page
+          that builds the calendar tree (main.jsp) --%>
+      </c:if>
     </appvar>
-  </logic:iterate>
+  </c:forEach>
 
   <selectionState><%--
     What type of information have we selected to display?  Used to

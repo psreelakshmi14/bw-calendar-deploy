@@ -6,12 +6,12 @@
 <bedework>
   <page>groupWidget</page>
 
-  <logic:iterate id="appvar" name="calForm" property="appVars">
+  <c:forEach var="appvar" items="${calForm.appVars}">
     <appvar>
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
     </appvar>
-  </logic:iterate>
+  </c:forEach>
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
@@ -23,21 +23,21 @@
   <%-- List of groups  --%>
   <groups>
     <c:if test="${not empty sessionScope.bw_admin_groups}" >
-      <logic:iterate id="adminGroup" name="bw_admin_groups" scope="session" >
+      <c:forEach var="adminGroup" items="${sessionScope.bw_admin_groups}" >
         <group>
           <bw:emitText name="adminGroup"
                        property="ownerHref" tagName="eventOwner"/>
           <bw:emitText name="adminGroup" property="account" tagName="name"/>
           <bw:emitText name="adminGroup"
                        property="description"/>
-          <logic:iterate id="ancestorGroup" name="adminGroup" property="groups" >
+          <c:forEach var="ancestorGroup" items="${adminGroup.groups}" >
             <memberof>
               <bw:emitText name="ancestorGroup"
                            property="account" tagName="name"/>
             </memberof>
-          </logic:iterate>
+          </c:forEach>
         </group>
-      </logic:iterate>
+      </c:forEach>
     </c:if>
   </groups>
 </bedework>

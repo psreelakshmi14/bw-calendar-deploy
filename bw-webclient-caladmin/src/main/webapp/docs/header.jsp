@@ -348,7 +348,7 @@ try {
     </c:if>
     <groups>
       <c:if test="${not empty sessionScope.bw_user_admin_search_groups}" >
-        <logic:iterate id="adminGroup" name="bw_user_admin_search_groups" scope="session" >
+        <c:forEach var="adminGroup" items="${sessionScope.bw_user_admin_search_groups}" >
           <group>
             <bw:emitText name="adminGroup" property="account"
                          tagName="name"/>
@@ -359,7 +359,7 @@ try {
             <bw:emitText name="adminGroup" property="description"
                          tagName="desc"/>
           </group>
-        </logic:iterate>
+        </c:forEach>
       </c:if>
     </groups>
   </userInfo>
@@ -386,19 +386,12 @@ try {
                    tagName="featureFlags"/>
   </c:if>
 
-  <logic:iterate id="appvar" name="calForm" property="appVars">
-    <appvar><%--
-        Application variables can be set arbitrarily by the stylesheet designer.
-        Use an "appvar" by adding setappvar=key(value) to the query string of
-        a URL.  This feature is useful for setting up state during a user's session.
-        e.g. <a href="{$urlPrefix}/eventView.do?guid=...&setappvar=currentTab(event)">View Event</a>
-        To change the value of an appvar, call the same key with a different value.
-        e.g. <a href="{$urlPrefix}/setup.do?setappvar=currentTab(home)">Return Home</a>
-        If appvars exist, they will be output in the following form:  --%>
+  <c:forEach var="appvar" items="${calForm.appVars}">
+    <appvar>
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
     </appvar>
-  </logic:iterate>
+  </c:forEach>
 
 <%
 } catch (Throwable t) {
