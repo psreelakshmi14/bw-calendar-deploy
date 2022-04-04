@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" language="java" %>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <%
 try {
@@ -45,10 +44,10 @@ try {
     <bw:emitText name="calForm" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
-      <logic:iterate id="group" name="calForm" property="currentGroups" >
+      <c:forEach var="group" items="${calForm.currentGroups}" >
         <bw:emitText name="group" property="principalRef"
                      tagName="memberOf"/>
-      </logic:iterate>
+      </c:forEach>
   </c:if>
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>

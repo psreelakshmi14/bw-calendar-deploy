@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <%-- Output any additional event fields for full format displays --%>
@@ -48,9 +47,9 @@
     </c:if> --%>
     <c:if test="${not empty event.comments}">
       <comments>
-        <logic:iterate id="comment" name="event" property="comments">
-            <bw:emitText name="comment"/>
-        </logic:iterate>
+        <c:forEach var="comment" items="${event.comments}" >
+          <bw:emitText name="comment" property="value"/>
+        </c:forEach>
       </comments>
     </c:if>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"

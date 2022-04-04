@@ -1,17 +1,15 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
   <bw:emitText name="notificationInfo" property="changed" />
-  <logic:iterate id="notification" name="notificationInfo" property="notifications" >
+  <c:forEach var="notification" items="${notificationInfo.notifications}" >
     <notification>
       <bw:emitText name="notification" property="name" />
       <bw:emitText name="notification" property="type" />
       <bw:emitText name="notification" property="xmlFragment"
                    tagName="message" filter="false" />
       <c:if test="${not empty notification.resourcesInfo}" >
-        <logic:iterate id="resourceInfo"
-                       name="notification" property="resourcesInfo" >
+        <c:forEach var="resourceInfo" items="${notification.resourcesInfo}" >
           <resource>
             <bw:emitText name="resourceInfo" property="href" />
             <bw:emitText name="resourceInfo" property="created" />
@@ -28,8 +26,8 @@
               <%-- Whatever else is needed --%>
             </c:if>
           </resource>
-        </logic:iterate>
+        </c:forEach>
       </c:if>
     </notification>
-  </logic:iterate>
+  </c:forEach>
 

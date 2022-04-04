@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <calendar>
@@ -13,7 +12,7 @@
       <%-- a request has been made by the calling page to descend down the tree
            and ignore the open or closed state of calendars  --%>
       <bw:getChildren id="children" name="calendar" form="calForm" />
-      <logic:iterate name="children" id="cal">
+      <c:forEach var="cal" items="${children}">
         <c:set var="calendar" value="${cal}" scope="session" />
           <%--
         <c:if test="${requestScope.stopDescent == 'true'}">
@@ -24,18 +23,18 @@
         <c:if test="${!((requestScope.stopDescentAtAliases == 'true') and (internalAlias == 'true' or externalSub == 'true'))}">
           <jsp:include page="/docs/calendar/emitCalendar.jsp" />
         </c:if>
-      </logic:iterate>
+      </c:forEach>
     </c:when>
     <c:otherwise>
       <%-- the default behavior is to descend down the tree
            based on the open or closed state of calendars  --%>
-      <logic:equal name="calendar" property="open" value="true">
+      <c:if test="${calendar.open}">
         <bw:getChildren id="children" name="calendar" form="calForm" />
-        <logic:iterate name="children" id="cal">
+        <c:forEach var="cal" items="${children}">
           <c:set var="calendar" value="${cal}" scope="session" />
           <jsp:include page="/docs/calendar/emitCalendar.jsp" />
-        </logic:iterate>
-      </logic:equal>
+        </c:forEach>
+      </c:if>
     </c:otherwise>
   </c:choose>
 </calendar>

@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <calendar>
@@ -13,10 +12,10 @@
 
   <bw:getChildren id="children" name="calendar" />
   <c:if test="${not empty children}">
-    <logic:iterate name="children" id="cal">
+    <c:forEach var="cal" items="${children}">
       <c:set var="calendar" value="${cal}" scope="session" />
       <jsp:include page="/docs/calendar/emitCalendar.jsp" />
-    </logic:iterate>
+    </c:forEach>
   </c:if>
 </calendar>
 

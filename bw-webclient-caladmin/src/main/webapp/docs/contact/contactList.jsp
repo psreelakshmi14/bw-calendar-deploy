@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -8,10 +8,9 @@
 
 <contacts>
   <c:if test="${not empty sessionScope.bw_editable_contacts_list}">
-    <logic:iterate id="contact" name="bw_editable_contacts_list"
-                   scope="session">
+    <c:forEach var="contact" items="${sessionScope.bw_editable_contacts_list}">
       <%@include file="/docs/contact/emitContact.jsp"%>
-    </logic:iterate>
+    </c:forEach>e>
   </c:if>
 </contacts>
 

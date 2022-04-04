@@ -10,9 +10,9 @@
 <c:set var="curView" value="${calForm.view}"/>
 <currentView>
   <bw:emitText name="curView" property="name" />
-  <logic:iterate name="curView" property="collectionPaths" id="path">
+  <c:forEach var="path" items="${curView.collectionPaths}">
     <bw:emitText name="path"/>
-  </logic:iterate>
+  </c:forEach>
 </currentView>
 
 <%@include file="/docs/footer.jsp"%>

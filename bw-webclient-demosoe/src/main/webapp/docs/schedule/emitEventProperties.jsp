@@ -1,16 +1,15 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
     <c:if test="${not empty event.originator}">
       <bw:emitText name="event" property="originator"/>
     </c:if>
-    <logic:equal name="event" property="organizerSchedulingObject" value="true" >
+    <c:if test="${event.organizerSchedulingObject}" >
       <organizerSchedulingObject />
-    </logic:equal>
-    <logic:equal name="event" property="attendeeSchedulingObject" value="true" >
+    </c:if>
+    <c:if test="${event.attendeeSchedulingObject}" >
       <attendeeSchedulingObject />
-    </logic:equal>
+    </c:if>
     <c:if test="${not empty event.organizer}">
       <c:set var="organizer" value="${event.organizer}"/>
       <organizer>
@@ -61,16 +60,16 @@
     </c:if>
     <c:if test="${not empty event.recipients}">
       <recipients>
-        <logic:iterate id="recipient" name="event" property="recipients" >
+        <c:forEach var="recipient" items="${event.recipients}" >
           <bw:emitText name="recipient" tagName="recipient"/>
-        </logic:iterate>
+        </c:forEach>
       </recipients>
     </c:if>
     <c:if test="${not empty event.comments}">
       <comments>
-        <logic:iterate id="comment" name="event" property="comments">
+        <c:forEach var="comment" items="${event.comments}" >
           <bw:emitText name="comment" property="value"/>
-        </logic:iterate>
+        </c:forEach>
       </comments>
     </c:if>
 

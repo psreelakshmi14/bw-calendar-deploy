@@ -9,7 +9,7 @@ try {
 %>
 
 <page>attendees</page>
-<c:set var="event" value="${calForm.eventFormatter.event|"/>
+<c:set var="event" value="${calForm.eventFormatter.event}"/>
 <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
 <%@ include file="/docs/freeBusy.jsp" %>

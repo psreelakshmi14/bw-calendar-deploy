@@ -1,18 +1,17 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <synchInfo>
   <c:if test="${not empty calForm.synchInfo}">
     <c:set var="synchInfo" value="${calForm.synchInfo}"
            scope="request" />
-    <logic:iterate id="conn" name="synchInfo" property="conns">
+    <c:forEach var="conn" items="${synchInfo.conns}">
       <conn>
         <bw:emitText name="conn" property="name" />
         <bw:emitText name="conn" property="manager" />
         <bw:emitText name="conn" property="readOnly" />
         <props>
-          <logic:iterate id="prop" name="conn" property="props">
+          <c:forEach var="prop" items="${conn.props}">
             <prop>
               <bw:emitText name="prop" property="name" />
               <bw:emitText name="prop" property="type" />
@@ -20,9 +19,9 @@
               <bw:emitText name="prop" property="description" />
               <bw:emitText name="prop" property="required" />
             </prop>
-          </logic:iterate>
+          </c:forEach>
         </props>
       </conn>
-    </logic:iterate>
+    </c:forEach>
   </c:if>
 </synchInfo>

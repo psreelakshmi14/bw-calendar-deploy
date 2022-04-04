@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -80,13 +79,13 @@ try {
                         property="eventStartDate.minuteVals"/>
         </html:select>
       </minute>
-      <logic:notEqual name="calForm" property="hour24" value="true" >
+      <c:if test="${!calForm.hour24}" >
         <ampm>
           <html:select property="eventStartDate.ampm">
             <html:options property="eventStartDate.ampmLabels"/>
           </html:select>
         </ampm>
-      </logic:notEqual>
+      </c:if>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
@@ -128,11 +127,11 @@ try {
           </html:select>
         </minute>
         <ampm>
-          <logic:notEqual name="calForm" property="hour24" value="true" >
+          <c:if test="${!calForm.hour24}" >
             <html:select property="eventEndDate.ampm">
               <html:options property="eventEndDate.ampmLabels"/>
             </html:select>
-          </logic:notEqual>
+          </c:if>
         </ampm>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>

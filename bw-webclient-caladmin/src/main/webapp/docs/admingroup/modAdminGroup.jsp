@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -16,12 +15,12 @@
 <formElements>
   <genurl:form action="admingroup/update" >
     <name>
-      <logic:equal name="calForm" property="addingAdmingroup" value="true" >
+      <c:if test="${calForm.addingAdmingroup}" >
         <html:text name="calForm" property="updAdminGroup.account" />
-      </logic:equal>
-      <logic:notEqual name="calForm" property="addingAdmingroup" value="true" >
+      </c:if>
+      <c:if test="${!calForm.addingAdmingroup}" >
         <c:out value="${calForm.updAdminGroup.account}" />
-      </logic:notEqual>
+      </c:if>
     </name>
     <desc>
       <html:textarea property="updAdminGroup.description" cols="50"  rows="3"></html:textarea>

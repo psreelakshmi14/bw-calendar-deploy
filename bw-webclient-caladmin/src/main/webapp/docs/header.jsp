@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" language="java" %>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <%
 try {
@@ -66,20 +65,8 @@ try {
                tagName="publicuri"/>
   <bw:emitText name="bwconfig" property="publicAdminUri"
                tagName="adminuri"/>
-
-  <logic:equal name="calForm" property="suggestionEnabled" value="true" >
-      <suggestionEnabled>true</suggestionEnabled>
-  </logic:equal>
-  <logic:notEqual name="calForm" property="suggestionEnabled" value="true" >
-      <suggestionEnabled>false</suggestionEnabled>
-  </logic:notEqual>
-
-  <logic:equal name="calForm" property="workflowEnabled" value="true" >
-      <workflowEnabled>true</workflowEnabled>
-  </logic:equal>
-  <logic:notEqual name="calForm" property="workflowEnabled" value="true" >
-      <workflowEnabled>false</workflowEnabled>
-  </logic:notEqual>
+  <suggestionEnabled><c:out value="${calForm.suggestionEnabled}"/></suggestionEnabled>
+  <workflowEnabled><c:out value="${calForm.workflowEnabled}"/></workflowEnabled>
 
   <%-- Path to collections for public event submissions --%>
   <submissionsRoot>
@@ -318,26 +305,12 @@ try {
     <%-- user type --%>
     <bw:emitText name="calForm" property="curUserContentAdminUser"
                  tagName="contentAdminUser" />
-
     <bw:emitText name="calForm" property="curUserApproverUser"
                  tagName="approverUser" />
-
     <bw:emitText name="calForm" property="curUserSuperUser"
                  tagName="superUser" />
-
-    <logic:equal name="calForm" property="userMaintOK" value="true" >
-      <userMaintOK>true</userMaintOK>
-    </logic:equal>
-    <logic:notEqual name="calForm" property="userMaintOK" value="true" >
-      <userMaintOK>false</userMaintOK>
-    </logic:notEqual>
-
-    <logic:equal name="calForm" property="adminGroupMaintOK" value="true">
-      <adminGroupMaintOk>true</adminGroupMaintOk>
-    </logic:equal>
-    <logic:notEqual name="calForm" property="adminGroupMaintOK" value="true">
-      <adminGroupMaintOk>false</adminGroupMaintOk>
-    </logic:notEqual>
+    <userMaintOK><c:out value="${calForm.userMaintOK}"/></userMaintOK>
+    <adminGroupMaintOk><c:out value="${calForm.adminGroupMaintOK}"/></adminGroupMaintOk>
 
     <%-- user and group --%>
     <bw:emitText name="calForm" property="currentUser"/>

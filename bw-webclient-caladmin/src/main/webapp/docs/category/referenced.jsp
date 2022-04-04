@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -12,14 +11,14 @@
                    tagName="currentCategory" indent="  "/>
 <propRefs>
   <c:if test="${not empty calForm.propRefs}">
-    <logic:iterate id="propRef" name="calForm" property="propRefs" >
+    <c:forEach var="propRef" items="${calForm.propRefs}" >
       <propRef>
         <bw:emitText name="propRef" property="collection"
                      tagName="isCollection" />
         <bw:emitText name="propRef" property="path" />
         <bw:emitText name="propRef" property="uid" />
       </propRef>
-    </logic:iterate>
+    </c:forEach>
   </c:if>
 </propRefs>
 

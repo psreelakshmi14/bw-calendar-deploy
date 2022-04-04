@@ -1,11 +1,10 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <properties>
-  <logic:iterate id="property" name="properties" property="property">
+  <c:forEach var="property" items="${properties.property}">
     <property>
       <bw:emitText name="property" property="name" />
       <bw:emitText name="property" property="value" />
     </property>
-  </logic:iterate>
+  </c:forEach>
 </properties>

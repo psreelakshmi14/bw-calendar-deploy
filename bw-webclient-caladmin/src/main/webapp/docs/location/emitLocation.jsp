@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <location>
@@ -34,10 +33,10 @@
   <bw:emitText name="location" property="alternateAddress" />
   <keys>
     <c:if test="${not empty location.keys}">
-      <logic:iterate id="keyFld" name="location" property="keys">
+      <c:forEach var="keyFld" items="${location.keys}">
         <bw:emitText name="keyFld" property="keyName" />
         <bw:emitText name="keyFld" property="keyVal" />
-      </logic:iterate>
+      </c:forEach>
     </c:if>
   </keys>
 </location>

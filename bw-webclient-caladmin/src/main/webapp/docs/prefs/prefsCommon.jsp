@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <c:set var="userPrefs" value="${calForm.userPreferences}"/>
@@ -32,9 +31,9 @@
   <bw:emitText name="userPrefs" property="categoryMapping"/>
   <bw:emitText name="userPrefs" property="calsuiteApprovers"/>
   <approvers>
-    <logic:iterate id="approver" name="userPrefs" property="calsuiteApproversList">
+    <c:forEach var="approver" items="${userPrefs.calsuiteApproversList}">
       <bw:emitText name="approver"/>
-    </logic:iterate>
+    </c:forEach>
   </approvers>
 </prefs>
 

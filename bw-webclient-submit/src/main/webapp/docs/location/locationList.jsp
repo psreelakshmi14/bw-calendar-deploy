@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -11,7 +11,7 @@ try {
 <page>locationList</page>
 
 <locations>
-  <logic:iterate id="location" name="calForm" property="editableLocations" >
+  <c:forEach var="location" items="${calForm.editableLocations}" >
     <location>
       <bw:emitText name="location" property="address.value" tagName="address" />
       <c:if test="${not empty location.subaddress}">
@@ -20,7 +20,7 @@ try {
       <bw:emitText name="location" property="link" />
       <bw:emitText name="location" property="uid" />
     </location>
-  </logic:iterate>
+  </c:forEach>
 </locations>
 
 <%

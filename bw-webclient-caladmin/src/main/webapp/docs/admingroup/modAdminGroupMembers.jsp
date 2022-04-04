@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -15,13 +15,12 @@
                tagName="name"/>
   <members>
     <c:if test="${not empty calForm.updAdminGroup.groupMembers}" >
-      <logic:iterate name="calForm" property="updAdminGroup.groupMembers"
-                     id="member" >
+      <c:forEach var="member" items="${calForm.updAdminGroup.groupMembers}" >
         <member>
           <bw:emitText name="member" property="account" />
           <bw:emitText name="member" property="kind" />
         </member>
-      </logic:iterate>
+      </c:forEach>
     </c:if>
   </members>
 </adminGroup>

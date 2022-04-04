@@ -1,10 +1,8 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <events>
-  <logic:iterate id="formattedEvent" name="boxInfo" property="events" >
-
+  <c:forEach var="formattedEvent" items="${boxInfo.events}" >
     <c:set var="event" value="${formattedEvent.event}"/>
 
     <event>
@@ -17,9 +15,9 @@
       <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
       <c:if test="${not empty event.requestStatuses}">
-        <logic:iterate id="requestStatus" name="event" property="requestStatuses">
+        <c:forEach var="requestStatus" items="${event.requestStatuses}">
           <bw:emitText name="requestStatus" />
-        </logic:iterate>
+        </c:forEach>
       </c:if>
 
       <bw:emitText name="event" property="summary"
@@ -68,6 +66,6 @@
       <bw:emitText name="formattedEvent" property="event.creatorHref"
                    tagName="creator"/>
     </event>
-  </logic:iterate>
+  </c:forEach>
 </events>
 

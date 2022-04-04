@@ -1,4 +1,3 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -7,7 +6,7 @@
 <tab>system</tab>
 
 <calSuiteResources>
-  <logic:iterate id="csres" name="calForm" property="calSuiteResources" >
+  <c:forEach var="csres" items="${calForm.calSuiteResources}" >
   <calSuiteResource>
     <bw:emitText name="csres" property="name" />
     <bw:emitText name="csres" property="rclass" />
@@ -15,7 +14,7 @@
     <bw:emitText name="csres" property="path" />
     <bw:emitText name="csres" property="contentType" />
   </calSuiteResource>
-  </logic:iterate>
+  </c:forEach>
 </calSuiteResources>
 
 <%@include file="/docs/footer.jsp"%>

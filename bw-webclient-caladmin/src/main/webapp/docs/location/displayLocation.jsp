@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -7,9 +7,9 @@
 <tab>main</tab>
 
 <locations>
-  <logic:iterate id="location" name="calForm" property="editableLocations" >
+  <c:forEach var="location" items="${calForm.editableLocations}" >
     <%@include file="/docs/location/emitLocation.jsp"%>
-  </logic:iterate>
+  </c:forEach>
 </locations>
 
 <%@include file="/docs/footer.jsp"%>

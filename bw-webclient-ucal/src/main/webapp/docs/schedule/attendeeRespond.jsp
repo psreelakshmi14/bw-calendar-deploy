@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -35,7 +34,7 @@ try {
     </c:if>
   </guidcals>
 
-  <logic:notPresent name="event" property="location">
+  <c:if test="${empty event.location}">
     <location>
       <address></address>
       <id></id><%--
@@ -47,7 +46,7 @@ try {
       <creator></creator><%--
         Value: string - location creator id --%>
     </location>
-  </logic:notPresent>
+  </c:if>
 
   <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
@@ -90,13 +89,13 @@ try {
                         property="eventStartDate.minuteVals"/>
         </html:select>
       </minute>
-      <logic:notEqual name="calForm" property="hour24" value="true" >
+      <c:if test="${!calForm.hour24}" >
         <ampm>
           <html:select property="eventStartDate.ampm">
             <html:options property="eventStartDate.ampmLabels"/>
           </html:select>
         </ampm>
-      </logic:notEqual>
+      </c:if>
     </start>
     <end>
       <bw:emitText name="calForm" property="eventEndType" tagName="type"/>
@@ -134,11 +133,11 @@ try {
           </html:select>
         </minute>
         <ampm>
-          <logic:notEqual name="calForm" property="hour24" value="true" >
+          <c:if test="${!calForm.hour24}" >
             <html:select property="eventEndDate.ampm">
               <html:options property="eventEndDate.ampmLabels"/>
             </html:select>
-          </logic:notEqual>
+          </c:if>
         </ampm>
       </dateTime>
       <duration>

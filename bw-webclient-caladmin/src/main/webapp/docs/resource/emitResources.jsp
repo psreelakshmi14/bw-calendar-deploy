@@ -1,9 +1,8 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <resources>
-  <logic:iterate name="calForm" property="calSuiteResources" id="resource">
+  <c:forEach var="resource" items="${calForm.calSuiteResources}">
     <resource>
       <bw:emitText name="resource" property="name" />
       <bw:emitText name="resource" property="contentType"
@@ -13,5 +12,5 @@
       <bw:emitText name="resource" property="type" />
       <bw:emitText name="resource" property="path" />
     </resource>
-  </logic:iterate>
+  </c:forEach>
 </resources>

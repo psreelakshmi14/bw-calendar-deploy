@@ -1,5 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -12,15 +12,14 @@ try {
 <page>locationList</page>
 
 <locations>
-  <logic:iterate id="location" name="bw_editable_locations_list"
-                 scope="session" >
+  <c:forEach var="location" items="${sessionScope.bw_editable_locations_list}" >
     <location>
       <bw:emitText name="location" property="addressField" tagName="address" />
       <bw:emitText name="location" property="street" tagName="subaddress"/>
       <bw:emitText name="location" property="link" />
       <bw:emitText name="location" property="uid" />
     </location>
-  </logic:iterate>
+  </c:forEach>
 </locations>
 
 <%

@@ -1,4 +1,4 @@
-<%@ taglib uri='struts-logic' prefix='logic' %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -9,13 +9,13 @@
 
 <filters>
   <c:if test="${not empty calForm.filters}">
-    <logic:iterate name="calForm" property="filters" id="filter">
+    <c:forEach var="filter" items="${calForm.filters}">
       <filter>
         <bw:emitText name="filter" property="name"/>
         <bw:emitText name="filter" property="description"/>
         <bw:emitText name="filter" property="definition"/>
       </filter>
-    </logic:iterate>
+    </c:forEach>
   </c:if>
 </filters>
 

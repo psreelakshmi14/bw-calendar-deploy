@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -39,11 +38,11 @@ try {
         <html:options labelProperty="eventState.triggerDateTime.minuteLabels"
                       property="eventState.triggerDateTime.minuteVals"/>
       </html:select>
-      <logic:notEqual name="calForm" property="hour24" value="true" >
+      <c:if test="${!calForm.hour24}" >
         <html:select property="eventState.triggerDateTime.ampm">
           <html:options property="eventState.triggerDateTime.ampmLabels"/>
         </html:select>
-      </logic:notEqual>
+      </c:if>
     </alarmtime>
     <alarmTriggerSelectorDate>
       <html:radio name="calForm" property="alarmTriggerByDate"

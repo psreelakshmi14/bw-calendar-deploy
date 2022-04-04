@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -14,7 +13,7 @@ try {
 <formElements>
   <subscriptionId></subscriptionId>
   <bw:emitText name="event" property="uid"
-               tagName=""guid"/">
+               tagName="guid">
   <bw:emitText name="event" property="recurrenceId"/>
 
   <genurl:form action="event/editEvent">
@@ -69,13 +68,13 @@ try {
                         property="eventStartDate.minuteVals"/>
         </html:select>
       </minute>
-      <logic:notEqual name="calForm" property="hour24" value="true" >
+      <c:if test="${!calForm.hour24}" >
         <ampm>
           <html:select property="eventStartDate.ampm">
             <html:options property="eventStartDate.ampmLabels"/>
           </html:select>
         </ampm>
-      </logic:notEqual>
+      </c:if>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
@@ -117,11 +116,11 @@ try {
           </html:select>
         </minute>
         <ampm>
-          <logic:notEqual name="calForm" property="hour24" value="true" >
+          <c:if test="${!calForm.hour24}" >
             <html:select property="eventEndDate.ampm">
               <html:options property="eventEndDate.ampmLabels"/>
             </html:select>
-          </logic:notEqual>
+          </c:if>
         </ampm>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
@@ -172,13 +171,12 @@ try {
                                   value="uid"/>
         </html:select>
       </all>
-      <logic:equal name="bwconfig" property="autoCreateContacts"
-                 value="true">
+      <c:if test="${bwconfig.autoCreateContacts}">
         <name><html:text property="contactName.value" size="30" styleId="iContact" styleClass="edit, highlite"/></name>
         <phone><html:text property="contact.phone" size="30" styleId="iAddPhone" styleClass="edit"/></phone>
         <link><html:text property="contact.link" size="30" styleId="iCLink" styleClass="edit"/></link>
         <email><html:text property="contact.email" size="30" styleId="iEmail" styleClass="edit"/></email>
-      </logic:equal>
+      </c:if>
     </contact>
 
     <%-- As of Bedework 3.5 direct setting of categories is discouraged; admins
@@ -227,19 +225,19 @@ try {
 
 <editableAccess>
   <c:if test="${not empty calForm.curEventFmt}">
-    <c:set var="eventFormatter" value=""${calForm.curEventFmt}"/>
+    <c:set var="eventFormatter" value="${calForm.curEventFmt}"/>
     <bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
                  filter="no"/>
   </c:if>
 </editableAccess>
 
 <timezones>
-  <logic:iterate id="tz" name="calForm" property="timeZoneNames">
+  <c:forEach var="tz" items="${calForm.timeZoneNames}">
     <timezone>
       <bw:emitText name="tz" property="name" filter="true"/>
       <bw:emitText name="tz" property="id" filter="true"/>
     </timezone>
-  </logic:iterate>
+  </c:forEach>
 </timezones>
 
 <%

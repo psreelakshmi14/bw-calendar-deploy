@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -15,12 +14,12 @@
   <view>
     <bw:emitText name="view" property="name" />
     <collections>
-      <logic:iterate name="view" property="collections" id="collection">
+      <c:forEach var="collection" items="${view.collections}">
         <collection>
           <bw:emitText name="collection" property="name" />
           <bw:emitText name="collection" property="path" />
         </collection>
-      </logic:iterate>
+      </c:forEach>
     </collections>
   </view>
 </views>

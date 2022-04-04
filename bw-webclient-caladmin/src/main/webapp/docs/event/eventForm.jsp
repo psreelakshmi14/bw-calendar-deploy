@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-logic' prefix='logic' %>
 <%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
@@ -24,12 +23,12 @@
   <bw:emitText name="calForm" property="event.recurrenceId"
                tagName="recurrenceId"/>
 
-  <logic:equal name="calForm" property="addingEvent" value="false">
+  <c:if test="${!calForm.addingEvent}">
     <bw:emitText name="calForm" property="event.creatorHref"
                  tagName="creator"/>
     <bw:emitText name="calForm" property="event.ownerHref" tagName="owner"/>
     <bw:emitText name="calForm" property="event.name" tagName="name"/>
-  </logic:equal>
+  </c:if>
   <bw:emitText name="calForm" property="eventRegAdminToken"/>
 
   <genurl:form action="event/update" >
@@ -99,13 +98,13 @@
                         property="eventStartDate.minuteVals"/>
         </html:select>
       </minute>
-      <logic:notEqual name="calForm" property="hour24" value="true" >
+      <c:if test="${!calForm.hour24}" >
         <ampm>
           <html:select property="eventStartDate.ampm">
             <html:options property="eventStartDate.ampmLabels"/>
           </html:select>
         </ampm>
-      </logic:notEqual>
+      </c:if>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
@@ -147,11 +146,11 @@
           </html:select>
         </minute>
         <ampm>
-          <logic:notEqual name="calForm" property="hour24" value="true" >
+          <c:if test="${!calForm.hour24}" >
             <html:select property="eventEndDate.ampm">
               <html:options property="eventEndDate.ampmLabels"/>
             </html:select>
-          </logic:notEqual>
+          </c:if>
         </ampm>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
@@ -190,23 +189,22 @@
                                   value="uid"/>
           </html:select>
       </all>
-      <logic:equal name="bwconfig" property="autoCreateLocations"
-                   value="true">
+      <c:if test="${bwconfig.autoCreateLocations}">
         <address>
           <html:text size="30" value="" property="location.address.value" styleId="iLocation" styleClass="edit"/>
         </address>
         <link>
           <html:text property="location.link" size="30" styleId="iLocLink" styleClass="edit"/>
         </link>
-      </logic:equal>
+      </c:if>
     </location>
 
-    <logic:equal name="calForm" property="suggestionEnabled" value="true" >
+    <c:if test="${calForm.suggestionEnabled}" >
       <suggestTo>
         <c:if test="${not empty sessionScope.bw_preferred_admin_groups}">
           <preferred>
-            <logic:iterate id="group"
-                           name="bw_preferred_admin_groups" scope="session">
+            <c:forEach var="group"
+                       items="${sessionScope.bw_preferred_admin_groups}">
               <group>
                 <bw:emitText name="group" property="account"
                              tagName="name"/>
@@ -214,13 +212,13 @@
                              tagName="href"/>
                 <bw:emitText name="group" property="description" />
               </group>
-            </logic:iterate>
+            </c:forEach>
           </preferred>
         </c:if>
         <c:if test="${not empty sessionScope.bw_suite_admin_groups}">
           <all>
-            <logic:iterate id="group"
-                           name="bw_suite_admin_groups" scope="session">
+            <c:forEach var="group"
+                           items="${sessionScope.bw_suite_admin_groups}">
               <group>
                 <bw:emitText name="group" property="account"
                              tagName="name"/>
@@ -228,11 +226,11 @@
                              tagName="href"/>
                 <bw:emitText name="group" property="description" />
               </group>
-            </logic:iterate>
+            </c:forEach>
           </all>
         </c:if>
       </suggestTo>
-    </logic:equal>
+    </c:if>
 
     <categories>
       <c:if test="${not empty sessionScope.bw_preferred_categories_list}">
@@ -302,17 +300,16 @@
                                   value="uid"/>
         </html:select>
       </all>
-      <logic:equal name="bwconfig" property="autoCreateContacts"
-                 value="true">
+      <c:if test="${bwconfig.autoCreateContacts}">
         <%@include file="/docs/contact/modContactCommon.jsp"%>
-      </logic:equal>
+      </c:if>
     </contact>
 
-    <c:if test="${not empty calForm.event.comments}">
+    <c:if test="${not empty event.comments}">
       <comments>
-        <logic:iterate id="comment" name="calForm" property="event.comments">
+        <c:forEach var="comment" items="${event.comments}" >
           <bw:emitText name="comment" property="value"/>
-        </logic:iterate>
+        </c:forEach>
       </comments>
     </c:if>
 
@@ -330,44 +327,44 @@
 </formElements>
 
 <suggestions>
-  <logic:iterate id="suggestion" name="event" property="suggested">
+  <c:forEach var="suggestion" items="${event.suggested}">
     <suggestion>
       <bw:emitText name="suggestion" property="status" />
       <bw:emitText name="suggestion" property="groupHref" />
       <bw:emitText name="suggestion" property="suggestedByHref" />
     </suggestion>
-  </logic:iterate>
+  </c:forEach>
 </suggestions>
 
 <timezones>
-  <logic:iterate id="tz" name="calForm" property="timeZoneNames">
+  <c:forEach var="tz" items="${calForm.timeZoneNames}">
     <timezone>
       <bw:emitText name="tz" property="name" filter="true"/>
       <bw:emitText name="tz" property="id" filter="true"/>
     </timezone>
-  </logic:iterate>
+  </c:forEach>
 </timezones>
 
 <c:set var="calInfo" value="${moduleState.calInfo}" />
 <shortdaynames>
-  <logic:iterate id="shortDayName" name="calInfo" property="shortDayNamesAdjusted">
+  <c:forEach var="shortDayName" items="${calInfo.shortDayNamesAdjusted}">
     <bw:emitText name="shortDayName" tagName="val"/>
-  </logic:iterate>
+  </c:forEach>
 </shortdaynames>
 <recurdayvals>
-  <logic:iterate id="recurDayName" name="calInfo" property="recurDayNamesAdjusted">
+  <c:forEach var="recurDayName" items="${calInfo.recurDayNamesAdjusted}">
     <bw:emitText name="recurDayName" tagName="val"/>
-  </logic:iterate>
+  </c:forEach>
 </recurdayvals>
 <monthlabels>
-  <logic:iterate id="monthLabel" name="calInfo" property="monthLabels">
+  <c:forEach var="monthLabel" items="${calInfo.monthLabels}">
     <bw:emitText name="monthLabel" tagName="val"/>
-  </logic:iterate>
+  </c:forEach>
 </monthlabels>
 <monthvalues>
-  <logic:iterate id="monthVal" name="calInfo" property="monthVals">
+  <c:forEach var="monthVal" items="${calInfo.monthVals}">
     <bw:emitText name="monthVal" tagName="val"/>
-  </logic:iterate>
+  </c:forEach>
   <bw:emitText name="moduleState" property="viewStartDate.month"
                tagName="start"/>
 </monthvalues>
