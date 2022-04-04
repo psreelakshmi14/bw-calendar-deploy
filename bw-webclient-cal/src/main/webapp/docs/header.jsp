@@ -244,29 +244,29 @@ try {
   <%-- List of views for menuing --%>
   <views>
     <c:if test="${not empty sessionScope.bw_views_list}">
-      <logic:iterate id="view" name="bw_views_list" scope="session">
+      <c:forEach var="view" items="${sessionScope.bw_views_list}">
         <view>
           <bw:emitText name="view" property="name"/>
           <paths>
             <c:if test="${not empty view.collectionPaths}">
-              <logic:iterate name="view" property="collectionPaths" id="path">
+              <c:forEach var="path" items="${view.collectionPaths}">
                 <bw:emitText name="path"/>
-              </logic:iterate>
+              </c:forEach>
             </c:if>
           </paths>
         </view>
-      </logic:iterate>
+      </c:forEach>
     </c:if>
   </views>
 
   <%-- List of filters for menuing --%>
   <filters>
     <c:if test="${not empty sessionScope.bw_filters_list}">
-        <logic:iterate id="view" name="bw_filters_list" scope="session">
+        <c:forEach var="view" items="${sessionScope.bw_filters_list}">
         <filter>
           <bw:emitText name="filter" property="name"/>
         </filter>
-      </logic:iterate>
+        </c:forEach>
     </c:if>
   </filters>
 

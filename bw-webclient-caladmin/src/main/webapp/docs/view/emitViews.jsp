@@ -3,14 +3,13 @@
 
 <views>
   <c:if test="${not empty sessionScope.bw_views_list}">
-    <logic:iterate id="view" name="bw_views_list"
-                   scope="session">
+    <c:forEach var="view" items="${sessionScope.bw_views_list}">
       <view>
         <bw:emitText name="view" property="name" />
-        <logic:iterate name="view" property="collectionPaths" id="path">
+        <c:forEach var="path" items="${view.collectionPaths}">
           <bw:emitText name="path"/>
-        </logic:iterate>
+        </c:forEach>
       </view>
-    </logic:iterate>
+    </c:forEach>
   </c:if>
 </views>
