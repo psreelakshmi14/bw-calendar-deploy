@@ -40,16 +40,12 @@ try {
             <bw:emitText name="event" property="scheduleMethod"/>
             <start><%-- start date and time --%>
               <bw:emitText name="event" property="noStart"/>
-              <c:set var="date" value="${eventFmt.start}"
-                     scope="request" />
-              <%@ include file="/docs/event/emitDate.jsp" %>
+              <bw:emitFormattedDates name="eventFmt" property="start" />
             </start>
             <end><%-- end date and time --%>
               <bw:emitText name="event" property="endType"
                            tagName="type"/>
-              <c:set var="date" value="${eventFmt.end}"
-                     scope="request" />
-              <%@ include file="/docs/event/emitDate.jsp" %>
+              <bw:emitFormattedDates name="eventFmt" property="end" />
             </end>
             <bw:emitText name="event" property="creatorHref" tagName="creator"/>
             <bw:emitText name="event" property="ownerHref" tagName="owner"/>

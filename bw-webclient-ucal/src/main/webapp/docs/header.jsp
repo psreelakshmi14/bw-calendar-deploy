@@ -95,7 +95,7 @@ try {
     Values: true, false - Flag if we are in the guest (public) view  --%>
   <bw:emitText name="calForm" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
-  <logic:equal name="calForm" property="guest" value="false">
+  <c:if test="${!calForm.guest}">
     <bw:emitText name="calForm" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
@@ -103,7 +103,7 @@ try {
         <bw:emitText name="group" property="principalRef"
                      tagName="memberOf"/>
       </logic:iterate>
-  </logic:equal>
+  </c:if>
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
@@ -200,7 +200,7 @@ try {
 
     <%-- The following URLs are used only in the personal client --%>
     <%-- ======================================================= --%>
-    <logic:equal name="calForm" property="guest" value="false">
+    <c:if test="${!calForm.guest}">
       <event>
         <initEvent><c:url value="/event/initEvent.do?b=de"/></initEvent>
         <addEvent><c:url value="/event/addEvent.do?b=de"/></addEvent>
@@ -295,7 +295,7 @@ try {
         <setAlarm><c:url value="/alarm/setAlarm.do?b=de"/></setAlarm>
       </alarm>
 
-    </logic:equal>
+    </c:if>
   </urlPrefixes>
 
   <bw:emitText name="calForm" property="confirmationId"

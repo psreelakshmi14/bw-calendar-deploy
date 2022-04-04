@@ -235,8 +235,10 @@
     </logic:equal>
 
     <categories>
-      <bw:emitCategories name="bw_preferred_categories_list" scope="session"
-                         tagName="preferred" indent="  "/>
+      <c:if test="${not empty sessionScope.bw_preferred_categories_list}">
+        <bw:emitCategories name="bw_preferred_categories_list" scope="session"
+                           tagName="preferred" indent="  "/>
+      </c:if>
       <bw:emitCategories name="bw_categories_list" scope="session"
                          tagName="all" indent="    "/>
       <bw:emitCategories name="event"  property="categories"

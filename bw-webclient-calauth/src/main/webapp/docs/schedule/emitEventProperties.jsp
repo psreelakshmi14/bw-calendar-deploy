@@ -5,12 +5,12 @@
     <c:if test="${not empty event.originator}">
       <bw:emitText name="event" property="originator"/>
     </c:if>
-    <logic:equal name="event" property="organizerSchedulingObject" value="true" >
+    <c:if test="${event.organizerSchedulingObject}" >
       <organizerSchedulingObject />
-    </logic:equal>
-    <logic:equal name="event" property="attendeeSchedulingObject" value="true" >
+    </c:if>
+    <c:if test="${event.attendeeSchedulingObject}" >
       <attendeeSchedulingObject />
-    </logic:equal>
+    </c:if>
     <c:if test="${not empty event.organizer}">
       <c:set var="organizer" value="${event.organizer}"/>
       <organizer>

@@ -5,11 +5,11 @@
 <calendar>
   <bw:emitCollection name="calendar" indent="  " full="true" noTag="true" />
 
-  <logic:equal name="calForm" property="guest" value="false">
+  <c:if test="${!calForm.guest}">
     <%-- don't publish privs and acls to the public client --%>
     <bw:emitCurrentPrivs name="calendar" property="currentAccess" />
     <bw:emitAcl name="calendar" property="currentAccess" />
-  </logic:equal>
+  </c:if>
 
   <bw:getChildren id="children" name="calendar" />
   <c:if test="${not empty children}">

@@ -29,24 +29,18 @@
 
       <c:if test="${not empty formattedEvent.start}">
         <start><%-- start date and time --%>
-          <c:set var="date" value="${formattedEvent.start}"
-                 scope="request" />
-          <%@ include file="/docs/event/emitDate.jsp" %>
+          <bw:emitFormattedDates name="formattedEvent" property="start" />
         </start>
       </c:if>
       <c:if test="${not empty formattedEvent.end}">
         <end><%-- end date and time --%>
-          <c:set var="date" value="${formattedEvent.end}"
-                 scope="request" />
-          <%@ include file="/docs/event/emitDate.jsp" %>
+          <bw:emitFormattedDates name="formattedEvent" property="end" />
         </end>
       </c:if>
       <%-- last mod date string --%>
       <bw:emitText name="event" property="lastmod" />
       <dtstamp><%-- date stamp and time --%>
-        <c:set var="date" value="${formattedEvent.dtstamp}"
-               scope="request" />
-        <%@ include file="/docs/event/emitDate.jsp" %>
+        <bw:emitFormattedDates name="formattedEvent" property="dtstamp" />
       </dtstamp>
 
       <bw:emitContainer name="event" indent="      " tagName="calendar" />

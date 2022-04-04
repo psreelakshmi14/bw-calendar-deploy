@@ -10,15 +10,11 @@
     <bw:emitText name="event" property="created"/>
     <start><%-- start date and time --%>
       <bw:emitText name="event" property="noStart"/>
-      <c:set var="date" value="${eventFmt.start}"
-             scope="request" />
-      <%@ include file="/docs/event/emitDate.jsp" %>
+      <bw:emitFormattedDates name="eventFmt" property="start" />
     </start>
     <end><%-- end date and time --%>
       <bw:emitText name="event" property="endType" tagName="type"/>
-      <c:set var="date" value="${eventFmt.end}"
-             scope="request" />
-      <%@ include file="/docs/event/emitDate.jsp" %>
+      <bw:emitFormattedDates name="eventFmt" property="end" />
     </end>
     <bw:emitText name="event" property="creatorHref" tagName="creator"/>
     <bw:emitText name="event" property="ownerHref" tagName="owner"/>
@@ -82,7 +78,7 @@
     <%-- ****************************************************************
           the following code should not be produced in the public client
          **************************************************************** --%>
-    <logic:equal name="calForm" property="guest" value="false">
+    <c:if test="${!calForm.guest}">
       <bw:emitCurrentPrivs name="eventInfo" property="currentAccess" />
-    </logic:equal>
+    </c:if>
   </event>

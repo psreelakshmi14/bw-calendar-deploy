@@ -106,11 +106,11 @@ try {
     Values: true, false - Flag if we are in the guest (public) view  --%>
   <bw:emitText name="calForm" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
-  <logic:equal name="calForm" property="guest" value="false">
+  <c:if test="${!calForm.guest}">
     <bw:emitText name="calForm" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
-  </logic:equal>
+  </c:if>
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
@@ -191,7 +191,7 @@ try {
 
     <%-- The following URLs are used only in the personal client --%>
     <%-- ======================================================= --%>
-    <logic:equal name="calForm" property="guest" value="false">
+    <c:if test="${!calForm.guest}">
       <event>
         <initEvent><c:url value="/event/initEvent.do?b=de"/></initEvent>
         <initPendingEvents><c:url value="/event/initPendingEvents.do?b=de"/></initPendingEvents>
@@ -257,7 +257,7 @@ try {
         <upload><c:url value="/misc/upload.do?b=de"/></upload>
         <initUpload><c:url value="/misc/initUpload.rdo?b=de"/></initUpload>
       </misc>
-    </logic:equal>
+    </c:if>
   </urlPrefixes>
 
   <bw:emitText name="calForm" property="confirmationId"
