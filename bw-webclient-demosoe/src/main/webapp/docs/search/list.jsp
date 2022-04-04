@@ -17,17 +17,17 @@ try {
 <searchResults>
   <bw:emitText name="moduleState" property="query"/>
   <bw:emitText name="moduleState" property="searchLimits"/>
-  <logic:notPresent name="bw_search_result" scope="request">
+  <c:if test="${empty requestScope.bw_search_result}">
     <resultSize>0</resultSize>
-  </logic:notPresent>
+  </c:if>
 
   <c:if test="${not empty requestScope.bw_search_result}">
     <c:set var="sres" value="${bw_search_result}"/>
     <bw:emitText name="sres" property="found" tagName="resultSize" />
-    <logic:iterate id="sre" name="bw_search_list" scope="request">
+    <c:forEach var="sre" items="${requestScope.bw_search_list}">
       <searchResult>
         <bw:emitText name="sre" property="score" />
-        <logic:equal name="sre" property="docType" value="event">
+        <c:if test="${sre.docType == 'event'}">
           <c:set var="eventFmt" value="${sre.entity}" scope="request"  />
           <c:set var="eventInfo" value="${eventFmt.eventInfo}"
                  scope="request"  />
@@ -115,10 +115,10 @@ try {
           </event>
 
 
-        </logic:equal>
+        </c:if>
       </searchResult>
-    </logic:iterate>
-  </logic:present>
+    </c:forEach>
+  </c:if>
 
 </searchResults>
 

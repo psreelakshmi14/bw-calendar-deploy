@@ -20,7 +20,7 @@
     </c:if>
     <%--  hide attendees altogether in admin:
     <c:if test="${not empty event.attendees}">
-      <logic:iterate id="attendee" name="event" property="attendees">
+      <c:forEach var="attendee" items="${event.attendees}">
         <attendee>
           <bw_emitText name="attendee" property="id"/>< %--
               Value: integer - attendee id --% >

@@ -6,8 +6,8 @@
 <currentCalendar>
   <bw:emitCollection name="curcal" indent="  " full="true" noTag="true" />
 
-  <logic:notEqual name="calForm" property="addingCalendar" value="true">
+  <c:if test="${!calForm.addingCalendar}">
     <bw:emitCurrentPrivs name="curcal" property="currentAccess" />
     <bw:emitAcl name="curcal" property="currentAccess" />
-  </logic:notEqual>
+  </c:if>
 </currentCalendar>

@@ -26,13 +26,13 @@
     <bw:emitText name="sres" property="found" tagName="resultSize" />
 
     <c:if test="${not empty requestScope.bw_search_list}">
-      <logic:iterate id="sre" name="bw_search_list" scope="request">
-        <logic:equal name="sre" property="docType" value="event">
+      <c:forEach var="sre" items="${requestScope.bw_search_list}">
+        <c:if test="${sre.docType == 'event'}">
           <c:set var="eventFormatter" value="${sre.entity}"
                  scope="request"  />
           <%@include file="/docs/event/emitEvent.jsp"%>
-        </logic:equal>
-      </logic:iterate>
+        </c:if>
+      </c:forEach>
     </c:if>
   </c:if>
 </events>

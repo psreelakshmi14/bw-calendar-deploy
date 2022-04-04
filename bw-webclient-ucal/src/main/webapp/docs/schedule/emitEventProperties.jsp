@@ -28,7 +28,7 @@
     </c:if>
     <c:if test="${not empty event.attendees}">
       <attendees>
-        <logic:iterate id="attendee" name="event" property="attendees">
+        <c:forEach var="attendee" items="${event.attendees}">
           <attendee>
             <bw:emitText name="attendee" property="id"/><%--
                 Value: integer - attendee id --%>
@@ -54,7 +54,7 @@
             <bw:emitText name="attendee" property="scheduleStatus"/>
             <bw:emitText name="attendee" property="scheduleAgent"/>
           </attendee>
-        </logic:iterate>
+        </c:forEach>
       </attendees>
     </c:if>
     <c:if test="${not empty event.recipients}">
