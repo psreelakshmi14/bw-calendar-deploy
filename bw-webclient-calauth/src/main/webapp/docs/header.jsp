@@ -202,7 +202,7 @@ try {
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
 
-      <c:if test="${(appvar.key = 'summaryMode') && (appvar.value = 'details')}"><%--
+      <c:if test="${(appvar.key == 'summaryMode') && (appvar.value == 'details')}"><%--
           This is a special use of the appvar feature.  Normally, we don't return
           all details about events except when we display a single event (to keep the
           XML lighter).  To return all event details in an events listing, append a
