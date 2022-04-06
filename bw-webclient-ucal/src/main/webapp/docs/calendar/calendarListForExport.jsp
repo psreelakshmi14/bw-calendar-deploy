@@ -1,7 +1,6 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -23,7 +22,7 @@
 </calendars>
 
 <formElements>
-  <genurl:form action="event/editEvent">
+  <html:form action="event/editEvent">
     <start>
       <month>
         <html:select property="eventStartDate.month">

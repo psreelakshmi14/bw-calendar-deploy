@@ -1,5 +1,4 @@
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -12,7 +11,7 @@
 
 <%--  Generate form elements to be exposed --%>
 <formElements>
-  <genurl:form action="event/fetchForDisplay.do">
+  <html:form action="event/fetchForDisplay.do">
     <listAllSwitchFalse>
       <html:radio name="calForm" property="listAllEvents"
                     value="false"

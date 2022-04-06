@@ -1,5 +1,4 @@
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -14,7 +13,7 @@
 <!-- Mod pages contain only formElements for now; we do this to
      take advantage of Struts' form processing features -->
 <formElements>
-  <genurl:form action="contact/update" >
+  <html:form action="contact/update" >
 
     <%@include file="/docs/contact/modContactCommon.jsp"%>
 

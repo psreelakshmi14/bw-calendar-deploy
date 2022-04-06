@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -13,7 +12,7 @@ try {
 <page>emailOptions</page>
 
 <emailoptionsform>
-  <genurl:form action="mail/mailEvent">
+  <html:form action="mail/mailEvent">
     <email><html:text name="calForm" property="lastEmail"/></email>
     <subject><html:text name="calForm" property="lastSubject" /></subject>
   </genurl:form>

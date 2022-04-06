@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -31,7 +30,7 @@
   </c:if>
   <bw:emitText name="calForm" property="eventRegAdminToken"/>
 
-  <genurl:form action="event/update" >
+  <html:form action="event/update" >
     <title><html:text property="summary" size="40" styleId="iTitle" styleClass="edit"/></title>
     <deleted><html:checkbox property="event.deleted" /></deleted>
     <calendar>

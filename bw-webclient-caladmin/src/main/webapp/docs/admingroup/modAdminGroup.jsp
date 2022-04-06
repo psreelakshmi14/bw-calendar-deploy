@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -13,7 +12,7 @@
              tagName="creating"/>
 
 <formElements>
-  <genurl:form action="admingroup/update" >
+  <html:form action="admingroup/update" >
     <name>
       <c:if test="${calForm.addingAdmingroup}" >
         <html:text name="calForm" property="updAdminGroup.account" />

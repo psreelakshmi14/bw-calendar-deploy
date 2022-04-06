@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -24,7 +23,7 @@
 </contact>
 
 <formElements>
-  <genurl:form action="contact/delete.do" >
+  <html:form action="contact/delete.do" >
     <html:submit property="cancelled" value="Cancel"/>
     <html:submit property="deleteContactOK" value="Delete"/>
   </genurl:form>

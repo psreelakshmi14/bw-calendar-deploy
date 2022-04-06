@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -16,7 +15,7 @@ try {
                tagName="guid"/>
   <bw:emitText name="event" property="recurrenceId"/>
 
-  <genurl:form action="event/editEvent">
+  <html:form action="event/editEvent">
     <bw:emitText name="event" property="scheduleMethod"
                  tagName="scheduleMethod" />
     <bw:emitText name="event" property="entityType"

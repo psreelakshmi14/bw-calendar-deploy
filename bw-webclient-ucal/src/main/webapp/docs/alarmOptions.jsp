@@ -1,7 +1,6 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -15,7 +14,7 @@ try {
 <page>alarmOptions</page>
 
 <alarmoptionsform>
-  <genurl:form action="alarm/setAlarm">
+  <html:form action="alarm/setAlarm">
     <alarmdate>
       <html:select property="eventState.triggerDateTime.month">
        <html:options labelProperty="eventState.triggerDateTime.monthLabels"

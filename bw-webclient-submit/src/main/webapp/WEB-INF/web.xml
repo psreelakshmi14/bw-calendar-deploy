@@ -137,11 +137,6 @@
     </taglib>
 
     <taglib>
-      <taglib-uri>struts-genurl</taglib-uri>
-      <taglib-location>/tlds/struts-html.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>bedework</taglib-uri>
       <taglib-location>/tlds/bedework.tld</taglib-location>
     </taglib>

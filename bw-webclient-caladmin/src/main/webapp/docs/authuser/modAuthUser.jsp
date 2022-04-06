@@ -1,6 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 <html:xhtml/>
 
@@ -11,7 +10,7 @@
 <tab>users</tab>
 
 <formElements>
-  <genurl:form action="authuser/update" >
+  <html:form action="authuser/update" >
     <bw:emitText name="calForm" property="editAuthUser.userHref"
                  tagName="userHref"/>
     <publicEvents><html:checkbox property="editAuthUserPublicEvents" /></publicEvents>

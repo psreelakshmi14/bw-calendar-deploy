@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='struts-genurl' prefix='genurl' %>
 <html:xhtml/>
 
 <bedework>
@@ -15,7 +14,7 @@
   <!-- Mod pages contain only formElements for now; we do this to
        take advantage of Struts' form processing features -->
 <formElements>
-  <genurl:form action="location/addKey" >
+  <html:form action="location/addKey" >
     <keyName><html:text size="30" /></keyName>
     <keyValue><html:text size="30" /></keyValue>
 

@@ -9,7 +9,7 @@
 <%--  Generate form elements to be exposed.
       These can be manipulated in the xslt if desired.
 <formElements>
-  <genurl:form action="event/fetchForDisplay.do">
+  <html:form action="event/fetchForDisplay.do">
     <html:text name="calForm" property="eventId" size="6" />
     <html:submit value="go"/>
   </genurl:form>
