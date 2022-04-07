@@ -1,7 +1,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -12,10 +12,10 @@
              tagName="creating"/>
 
 <formElements>
-  <html:form action="admingroup/update" >
+  <bwhtml:form action="admingroup/update" >
     <name>
       <c:if test="${calForm.addingAdmingroup}" >
-        <html:text name="calForm" property="updAdminGroup.account" />
+        <html:text property="updAdminGroup.account" />
       </c:if>
       <c:if test="${!calForm.addingAdmingroup}" >
         <c:out value="${calForm.updAdminGroup.account}" />
@@ -25,10 +25,10 @@
       <html:textarea property="updAdminGroup.description" cols="50"  rows="3"></html:textarea>
     </desc>
     <groupOwner>
-      <html:text name="calForm" property="adminGroupGroupOwner" />
+      <html:text property="adminGroupGroupOwner" />
     </groupOwner>
     <eventsOwner>
-      <html:text name="calForm" property="adminGroupEventOwner" />
+      <html:text property="adminGroupEventOwner" />
     </eventsOwner>
 
     <!-- these are the values that may be submitted to the update action -->
@@ -39,7 +39,7 @@
       <button type="delete">delete</button>
     </submitButtons>
 
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

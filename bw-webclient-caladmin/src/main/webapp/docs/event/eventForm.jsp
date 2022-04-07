@@ -1,7 +1,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bw:emitText name="calForm" property="addingEvent"
              tagName="creating"/>
@@ -30,7 +30,7 @@
   </c:if>
   <bw:emitText name="calForm" property="eventRegAdminToken"/>
 
-  <html:form action="event/update" >
+  <bwhtml:form action="event/update" >
     <title><html:text property="summary" size="40" styleId="iTitle" styleClass="edit"/></title>
     <deleted><html:checkbox property="event.deleted" /></deleted>
     <calendar>
@@ -322,7 +322,7 @@
       <button type="copy">copy</button>
       <button type="delete">delete</button>
     </submitButtons>
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <suggestions>

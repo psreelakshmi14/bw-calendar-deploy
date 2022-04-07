@@ -1,8 +1,8 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@ include file="/docs/header.jsp" %>
@@ -49,7 +49,7 @@ try {
 
   <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
-  <html:form action="schedule/attendeeRespond">
+  <bwhtml:form action="schedule/attendeeRespond">
     <title>
       <html:text name="event" property="summary"/>
     </title>
@@ -161,7 +161,7 @@ try {
       </locationmenu>
       <locationtext><html:text property="locationAddress.value" /></locationtext>
     </location>
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 <c:set var="eventFormatter" value="${calForm.curEventFmt}"
        scope="request"/>

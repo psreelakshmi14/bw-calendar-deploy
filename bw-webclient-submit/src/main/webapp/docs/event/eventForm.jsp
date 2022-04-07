@@ -1,7 +1,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 
 <%
@@ -12,10 +12,10 @@ try {
 <formElements>
   <subscriptionId></subscriptionId>
   <bw:emitText name="event" property="uid"
-               tagName="guid">
+               tagName="guid"/>
   <bw:emitText name="event" property="recurrenceId"/>
 
-  <html:form action="event/editEvent">
+  <bwhtml:form action="event/editEvent">
     <bw:emitText name="event" property="scheduleMethod"
                  tagName="scheduleMethod" />
     <bw:emitText name="event" property="entityType"
@@ -135,7 +135,7 @@ try {
                  tagName="descLength"/>
     <bw:emitText name="event" property="status"/>
     <bw:emitText name="event" property="transparency"/>
-    <cost><html:text name="event" property="cost"/></cost>
+    <cost><input type="text" value="<c:out value='${event.cost}'/>" /></cost>
     <link><html:text name="event" property="link"/></link>
     <c:set var="locations"
            value="${bw_locations_list}" />
@@ -219,7 +219,7 @@ try {
 
     <bw:emitXprops name="calForm" property="event.xproperties"/>
 
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <editableAccess>

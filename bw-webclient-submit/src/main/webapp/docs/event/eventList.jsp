@@ -1,5 +1,5 @@
 <%@ taglib uri='struts-html' prefix='html' %>
-<html:xhtml/>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -11,7 +11,7 @@
 
 <%--  Generate form elements to be exposed --%>
 <formElements>
-  <html:form action="event/fetchForDisplay.do">
+  <bwhtml:form action="event/fetchForDisplay.do">
     <listAllSwitchFalse>
       <html:radio name="calForm" property="listAllEvents"
                     value="false"
@@ -22,7 +22,7 @@
                     value="true"
                     onclick="document.calForm.submit();" />
     </listAllSwitchTrue>
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

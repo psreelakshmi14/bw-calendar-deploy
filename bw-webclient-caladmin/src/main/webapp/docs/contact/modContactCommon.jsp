@@ -1,4 +1,5 @@
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <html:xhtml/>
 
 <name><html:text property="contactName.value" size="30"/></name>

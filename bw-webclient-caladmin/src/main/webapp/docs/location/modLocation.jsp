@@ -1,7 +1,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -15,7 +15,7 @@
 <!-- Mod pages contain only formElements for now; we do this to
      take advantage of Struts' form processing features -->
 <formElements>
-  <html:form action="location/update" >
+  <bwhtml:form action="location/update" >
       <!--
     <address><html:text property="locationAddress.value" size="30" /></address> -->
     <addressField><html:text property="location.addressField" size="30" /></addressField>
@@ -42,7 +42,7 @@
       <button type="delete">delete</button>
     </submitButtons>
 
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

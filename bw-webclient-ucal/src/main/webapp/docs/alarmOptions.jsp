@@ -1,8 +1,8 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
-<html:xhtml/>
 
 <bedework>
 <%@ include file="header.jsp" %>
@@ -14,7 +14,7 @@ try {
 <page>alarmOptions</page>
 
 <alarmoptionsform>
-  <html:form action="alarm/setAlarm">
+  <bwhtml:form action="alarm/setAlarm">
     <alarmdate>
       <html:select property="eventState.triggerDateTime.month">
        <html:options labelProperty="eventState.triggerDateTime.monthLabels"
@@ -77,7 +77,7 @@ try {
     </alarmDurationRelEnd>
     <email><html:text name="calForm" property="eventState.email"/></email>
     <subject><html:text name="calForm" property="eventState.subject" /></subject>
-  </genurl:form>
+  </bwhtml:form>
 </alarmoptionsform>
 
 <%

@@ -1,6 +1,6 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 <%@ taglib uri='struts-html' prefix='html' %>
-<html:xhtml/>
+<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -16,7 +16,7 @@
 </calendars>
 
 <formElements>
-  <html:form action="event/editEvent">
+  <bwhtml:form action="event/editEvent">
     <start>
       <month>
         <html:select property="eventStartDate.month">
@@ -51,7 +51,7 @@
         <html:text property="eventEndDate.year" size="4"/>
       </yearText>
     </end>
-  </genurl:form>
+  </bwhtml:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>
