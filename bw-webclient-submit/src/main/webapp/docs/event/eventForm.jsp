@@ -3,7 +3,6 @@
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
-
 <%
 try {
 %>
@@ -35,12 +34,11 @@ try {
                    tagName="rfc3339DateTime"/>
       <bw:emitText name="calForm" property="eventStartDate.hour"
                    tagName="temphour"/>
-      <month>
-        <html:select property="eventStartDate.month">
-          <html:options labelProperty="eventStartDate.monthLabels"
-                        property="eventStartDate.monthVals"/>
-        </html:select>
-      </month>
+      <bw:select name="calForm"
+                 property="eventStartDate.month"
+                 optionLabels="eventStartDate.monthLabels"
+                 optionValues="eventStartDate.monthVals"
+                 tagName="month"/>
       <day>
         <html:select property="eventStartDate.day">
           <html:options labelProperty="eventStartDate.dayLabels"
@@ -130,7 +128,7 @@ try {
         <weeks><html:text property="eventDuration.weeksStr" size="2" /></weeks>
       </duration>
     </end>
-    <desc><html:textarea property="description"></html:textarea></desc>
+    <desc><textarea><c:out value='${calForm.description}'/></textarea></desc>
     <bw:emitText name="calForm" property="authpars.maxPublicDescriptionLength"
                  tagName="descLength"/>
     <bw:emitText name="event" property="status"/>
