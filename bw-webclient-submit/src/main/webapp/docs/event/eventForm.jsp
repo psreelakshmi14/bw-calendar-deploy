@@ -38,7 +38,8 @@ try {
                  property="eventStartDate.month"
                  optionLabels="eventStartDate.monthLabels"
                  optionValues="eventStartDate.monthVals"
-                 tagName="month"/>
+                 tagName="month"
+                 indent="      "/>
       <day>
         <html:select property="eventStartDate.day">
           <html:options labelProperty="eventStartDate.dayLabels"
@@ -53,24 +54,24 @@ try {
       <yearText>
         <html:text property="eventStartDate.year" size="4"/>
       </yearText>
-      <hour>
-        <html:select property="eventStartDate.hour">
-          <html:options labelProperty="eventStartDate.hourLabels"
-                        property="eventStartDate.hourVals"/>
-        </html:select>
-      </hour>
-      <minute>
-        <html:select property="eventStartDate.minute">
-          <html:options labelProperty="eventStartDate.minuteLabels"
-                        property="eventStartDate.minuteVals"/>
-        </html:select>
-      </minute>
+      <bw:select name="calForm"
+                 property="eventStartDate.hour"
+                 optionLabels="eventStartDate.hourLabels"
+                 optionValues="eventStartDate.hourVals"
+                 tagName="hour"
+                 indent="      "/>
+      <bw:select name="calForm"
+                 property="eventStartDate.minute"
+                 optionLabels="eventStartDate.minuteLabels"
+                 optionValues="eventStartDate.minuteVals"
+                 tagName="minute"
+                 indent="      "/>
       <c:if test="${!calForm.hour24}" >
-        <ampm>
-          <html:select property="eventStartDate.ampm">
-            <html:options property="eventStartDate.ampmLabels"/>
-          </html:select>
-        </ampm>
+        <bw:select name="calForm"
+                   property="eventStartDate.ampm"
+                   optionLabels="eventStartDate.ampmLabels"
+                   tagName="ampm"
+                   indent="      "/>
       </c:if>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
