@@ -176,7 +176,6 @@ try {
     </search>
 
     <misc>
-      <export><c:url value="/misc/export.gdo?b=de"/></export>
       <showPage><c:url value="/misc/showPage.rdo?b=de"/></showPage>
     </misc>
 
@@ -226,7 +225,6 @@ try {
         <fetchDescriptions><c:url value="/calendar/showDescriptionList.rdo?b=de"/></fetchDescriptions>
         <initAdd><c:url value="/calendar/initAdd.do?b=de"/></initAdd>
         <fetchForDisplay><c:url value="/calendar/fetchForDisplay.do?b=de"/></fetchForDisplay>
-        <listForExport><c:url value="/calendar/listForExport.rdo?b=de"/></listForExport>
       </calendar>
 
       <category>

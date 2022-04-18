@@ -16,32 +16,16 @@ try {
 <alarmoptionsform>
   <bwhtml:form action="alarm/setAlarm">
     <alarmdate>
-      <html:select property="eventState.triggerDateTime.month">
-       <html:options labelProperty="eventState.triggerDateTime.monthLabels"
-                      property="eventState.triggerDateTime.monthVals"/>
-      </html:select>
-      <html:select property="eventState.triggerDateTime.day">
-        <html:options labelProperty="eventState.triggerDateTime.dayLabels"
-                      property="eventState.triggerDateTime.dayVals"/>
-      </html:select>
-      <html:select property="eventState.triggerDateTime.year">
-        <html:options property="yearVals"/>
-      </html:select>
+      <bw:selectDate name="calForm"
+                     property="eventState.triggerDateTime"
+                     indent="      "
+                     notag="true"/>
     </alarmdate>
     <alarmtime>
-      <html:select property="eventState.triggerDateTime.hour">
-        <html:options labelProperty="eventState.triggerDateTime.hourLabels"
-                      property="eventState.triggerDateTime.hourVals"/>
-      </html:select>
-      <html:select property="eventState.triggerDateTime.minute">
-        <html:options labelProperty="eventState.triggerDateTime.minuteLabels"
-                      property="eventState.triggerDateTime.minuteVals"/>
-      </html:select>
-      <c:if test="${!calForm.hour24}" >
-        <html:select property="eventState.triggerDateTime.ampm">
-          <html:options property="eventState.triggerDateTime.ampmLabels"/>
-        </html:select>
-      </c:if>
+      <bw:selectTime name="calForm"
+                     property="eventState.triggerDateTime"
+                     indent="      "
+                     notag="true"/>
     </alarmtime>
     <alarmTriggerSelectorDate>
       <html:radio name="calForm" property="alarmTriggerByDate"

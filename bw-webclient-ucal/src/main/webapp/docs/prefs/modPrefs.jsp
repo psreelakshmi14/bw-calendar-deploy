@@ -50,11 +50,10 @@
    <calendars>
      <c:set var="addContentCalendarCollections"
             value="${bw_addcontent_collection_list}" />
-     <html:select name="calForm" property="calendarId">
-       <html:optionsCollection name="addContentCalendarCollections"
-                                     label="path"
-                                     value="path"/>
-     </html:select>
+     <bw:selectCollection name="calForm"
+                          property="calendarId"
+                          cols="addContentCalendarCollections"
+                          indent="    "/>
    </calendars>
  </form>
 </formElements>

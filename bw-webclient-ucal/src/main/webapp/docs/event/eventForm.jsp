@@ -31,12 +31,10 @@ try {
     <calendars>
       <c:set var="addContentCalendarCollections"
              value="${bw_addcontent_collection_list}" />
-      <html:select name="calForm"
-                   property="calendarId">
-        <html:optionsCollection name="addContentCalendarCollections"
-                                label="path"
-                                value="path"/>
-      </html:select>
+      <bw:selectCollection name="calForm"
+                           property="calendarId"
+                           cols="addContentCalendarCollections"
+                           indent="    "/>
     </calendars>
     <allDay><html:checkbox property="eventStartDate.dateOnly"/></allDay>
     <storeUTC><html:checkbox property="eventStartDate.storeUTC"/></storeUTC>
@@ -46,45 +44,12 @@ try {
                    tagName="rfc3339DateTime"/>
       <bw:emitText name="calForm" property="eventStartDate.hour"
                    tagName="temphour"/>
-      <month>
-        <html:select property="eventStartDate.month">
-          <html:options labelProperty="eventStartDate.monthLabels"
-                        property="eventStartDate.monthVals"/>
-        </html:select>
-      </month>
-      <day>
-        <html:select property="eventStartDate.day">
-          <html:options labelProperty="eventStartDate.dayLabels"
-                        property="eventStartDate.dayVals"/>
-        </html:select>
-      </day>
-      <year>
-        <html:select property="eventStartDate.year">
-          <html:options property="yearVals"/>
-        </html:select>
-      </year>
       <yearText>
         <html:text property="eventStartDate.year" size="4"/>
       </yearText>
-      <hour>
-        <html:select property="eventStartDate.hour">
-          <html:options labelProperty="eventStartDate.hourLabels"
-                        property="eventStartDate.hourVals"/>
-        </html:select>
-      </hour>
-      <minute>
-        <html:select property="eventStartDate.minute">
-          <html:options labelProperty="eventStartDate.minuteLabels"
-                        property="eventStartDate.minuteVals"/>
-        </html:select>
-      </minute>
-      <c:if test="${!calForm.hour24}" >
-        <ampm>
-          <html:select property="eventStartDate.ampm">
-            <html:options property="eventStartDate.ampmLabels"/>
-          </html:select>
-        </ampm>
-      </c:if>
+      <bw:selectDateTime name="calForm"
+                         property="eventStartDate"
+                         indent="      "/>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
@@ -93,45 +58,12 @@ try {
       <bw:emitText name="calForm" property="eventEndType"
                    tagName="type"/>
       <dateTime>
-        <month>
-          <html:select property="eventEndDate.month">
-              <html:options labelProperty="eventEndDate.monthLabels"
-                            property="eventEndDate.monthVals"/>
-          </html:select>
-        </month>
-        <day>
-          <html:select property="eventEndDate.day">
-            <html:options labelProperty="eventEndDate.dayLabels"
-                          property="eventEndDate.dayVals"/>
-          </html:select>
-        </day>
-        <year>
-          <html:select property="eventEndDate.year">
-            <html:options property="yearVals"/>
-          </html:select>
-          </year>
         <yearText>
           <html:text property="eventEndDate.year" size="4"/>
         </yearText>
-        <hour>
-          <html:select property="eventEndDate.hour">
-            <html:options labelProperty="eventEndDate.hourLabels"
-                          property="eventEndDate.hourVals"/>
-          </html:select>
-        </hour>
-        <minute>
-          <html:select property="eventEndDate.minute">
-            <html:options labelProperty="eventEndDate.minuteLabels"
-                          property="eventEndDate.minuteVals"/>
-          </html:select>
-        </minute>
-        <ampm>
-          <c:if test="${!calForm.hour24}" >
-            <html:select property="eventEndDate.ampm">
-              <html:options property="eventEndDate.ampmLabels"/>
-            </html:select>
-          </c:if>
-        </ampm>
+        <bw:selectDateTime name="calForm"
+                           property="eventEndDate"
+                           indent="      "/>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
       <duration>

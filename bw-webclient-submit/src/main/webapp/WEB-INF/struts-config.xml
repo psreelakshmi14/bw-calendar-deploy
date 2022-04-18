@@ -436,16 +436,6 @@
                     Export (download) and Import
        =============================================================== -->
 
-    <!-- ........... PUBLIC and PERSONAL clients ...... -->
-
-    <action    path="/misc/export"
-               type="org.bedework.webcommon.misc.ExportAction"
-               name="calForm"
-               scope="session"
-               parameter="actionType=resource;conversation=only"
-               validate="false">
-    </action>
-
     <!-- ........... PERSONAL client only ...... -->
 
     <!-- renderUrl -->
