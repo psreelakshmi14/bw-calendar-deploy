@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -54,7 +53,8 @@ try {
     <bw:textField name="event" property="summary"
                   tagName="title" />
     <bw:emitContainer name="event" indent="    " tagName="calendar" />
-    <allDay><html:checkbox property="eventStartDate.dateOnly"/></allDay>
+    <bw:checkbox property="eventStartDate.dateOnly"
+                 tagName="allDay" />
     <start>
       <bw:textField property="eventStartDate.year" size="4"
                     tagName="yearText" />
@@ -82,7 +82,7 @@ try {
                       tagName="weeks"/>
       </duration>
     </end>
-    <desc><html:textarea name="event" property="description"></html:textarea></desc>
+    <desc><textarea><c:out value='${event.description}'/></textarea></desc>
     <bw:emitText name="event" property="status"/>
     <bw:emitText name="event" property="transparency"/>
     <bw:textField name="event" property="link"

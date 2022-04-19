@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -35,9 +34,12 @@ try {
                            cols="addContentCalendarCollections"
                            indent="    "/>
     </calendars>
-    <allDay><html:checkbox property="eventStartDate.dateOnly"/></allDay>
-    <storeUTC><html:checkbox property="eventStartDate.storeUTC"/></storeUTC>
-    <floating><html:checkbox property="eventStartDate.floating"/></floating>
+    <bw:checkbox property="eventStartDate.dateOnly"
+                 tagName="allDay" />
+    <bw:checkbox property="eventStartDate.storeUTC"
+                 tagName="storeUTC" />
+    <bw:checkbox property="eventStartDate.floating"
+                 tagName="floating" />
     <start>
       <bw:emitText name="calForm" property="eventStartDate.rfc3339DateTime"
                    tagName="rfc3339DateTime"/>
@@ -74,7 +76,7 @@ try {
                       tagName="weeks" />
       </duration>
     </end>
-    <desc><html:textarea property="description"></html:textarea></desc>
+    <desc><textarea><c:out value='${calForm.description}'/></textarea></desc>
     <bw:emitText name="event" property="status"/>
     <bw:emitText name="event" property="transparency"/>
     <bw:textField name="event" property="link"

@@ -200,11 +200,6 @@
      -->
 
     <taglib>
-      <taglib-uri>struts-html</taglib-uri>
-      <taglib-location>/tlds/struts-html.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>bwhtml</taglib-uri>
       <taglib-location>/tlds/bwhtml.tld</taglib-location>
     </taglib>

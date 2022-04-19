@@ -1,4 +1,3 @@
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bw:textField property="contactName.value" size="30"

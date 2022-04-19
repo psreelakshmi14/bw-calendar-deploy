@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -42,8 +41,10 @@
                   tagName="zip" />
     <bw:textField property="location.link" size="30"
                   tagName="link" />
-    <accessible><html:checkbox property="location.accessible" /></accessible>
-    <bw:textField property="location.code" size="30" /></code>
+    <bw:checkbox property="location.accessible"
+                 tagName="accessible" />
+    <bw:textField property="location.code" size="30"
+                  tagName="code" />
     <bw:textField property="location.alternateAddress" size="30"
                   tagName="alternateAddress" />
     <bw:textField property="locationStatus" size="30"

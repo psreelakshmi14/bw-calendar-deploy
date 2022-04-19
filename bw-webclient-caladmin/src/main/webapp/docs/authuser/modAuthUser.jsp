@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -13,9 +12,12 @@
   <bwhtml:form action="authuser/update" >
     <bw:emitText name="calForm" property="editAuthUser.userHref"
                  tagName="userHref"/>
-    <publicEvents><html:checkbox property="editAuthUserPublicEvents" /></publicEvents>
-    <contentAdmin><html:checkbox property="editAuthUserContentAdmin" /></contentAdmin>
-    <approver><html:checkbox property="editAuthUserApprover" /></approver>
+    <bw:checkbox property="editAuthUserPublicEvents"
+                 tagName="publicEvents" />
+    <bw:checkbox property="editAuthUserContentAdmin"
+                 tagName="contentAdmin" />
+    <bw:checkbox property="editAuthUserApprover"
+                 tagName="approver" />
 
     <submitButtons>
       <button type="update">modAuthUser</button>

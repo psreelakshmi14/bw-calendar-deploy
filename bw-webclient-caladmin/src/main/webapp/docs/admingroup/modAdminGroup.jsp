@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -21,9 +20,7 @@
         <c:out value="${calForm.updAdminGroup.account}" />
       </c:if>
     </name>
-    <desc>
-      <html:textarea property="updAdminGroup.description" cols="50"  rows="3"></html:textarea>
-    </desc>
+    <desc><textarea><c:out value='${calForm.updAdminGroup.description}'/></textarea></desc>
     <bw:textField property="adminGroupGroupOwner"
                   tagName="groupOwner" />
     <bw:textField property="adminGroupEventOwner"

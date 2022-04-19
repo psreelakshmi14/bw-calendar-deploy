@@ -1,6 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -17,10 +15,11 @@
 </calSuite>
 
 <formElements>
-  <bwhtml:form action="calSuite/delete.do" >
-    <html:submit property="cancelled" value="Cancel"/>
-    <html:submit property="deleteCalSuiteOK" value="Delete"/>
-  </bwhtml:form>
+  <c:url value="/calSuite/delete.do" var="theUrl"/>
+  <form id="calForm" method="post" action="${theUrl}">
+    <input type="submit" name="cancelled" value="Cancel" />
+    <input type="submit" name="deleteCalSuiteOK" value="Delete" />
+  </form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

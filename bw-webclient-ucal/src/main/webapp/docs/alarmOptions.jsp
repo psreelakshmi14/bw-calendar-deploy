@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -28,12 +27,16 @@ try {
                      notag="true"/>
     </alarmtime>
     <alarmTriggerSelectorDate>
-      <html:radio name="calForm" property="alarmTriggerByDate"
-                   value="true" />
+      <input type="radio" name="alarmTriggerByDate"
+             id="alarmTriggerByDate"
+             value="true"
+        ${calForm.alarmTriggerByDate?'checked':''}>
     </alarmTriggerSelectorDate>
     <alarmTriggerSelectorDuration>
-      <html:radio name="calForm" property="alarmTriggerByDate"
-                      value="false" />
+      <input type="radio" name="alarmTriggerByDate"
+             id="alarmTriggerByDate"
+             value="false"
+        ${!calForm.alarmTriggerByDate?'checked':''}>
     </alarmTriggerSelectorDuration>
     <alarmduration>
       <c:set var="td" value="${calForm.eventState.triggerDuration}" />
@@ -54,20 +57,28 @@ try {
                     tagName="weeks" />
     </alarmduration>
     <alarmDurationBefore>
-      <html:radio name="calForm" property="eventState.triggerDuration.negative"
-                      value="true" />
+      <input type="radio" name="eventState.triggerDuration.negative"
+             id="eventState.triggerDuration.negative"
+             value="true"
+        ${calForm.eventState.triggerDuration.negative?'checked':''}>
     </alarmDurationBefore>
     <alarmDurationAfter>
-      <html:radio name="calForm" property="eventState.triggerDuration.negative"
-                      value="false" />
+      <input type="radio" name="eventState.triggerDuration.negative"
+             id="eventState.triggerDuration.negative"
+             value="false"
+        ${!calForm.eventState.triggerDuration.negative?'checked':''}>
     </alarmDurationAfter>
     <alarmDurationRelStart>
-      <html:radio name="calForm" property="eventState.alarmRelStart"
-                      value="true" />
+      <input type="radio" name="eventState.alarmRelStart"
+             id="eventState.alarmRelStart"
+             value="true"
+        ${calForm.eventState.alarmRelStart?'checked':''}>
     </alarmDurationRelStart>
     <alarmDurationRelEnd>
-      <html:radio name="calForm" property="eventState.alarmRelStart"
-                      value="false" />
+      <input type="radio" name="eventState.alarmRelStart"
+             id="eventState.alarmRelStart"
+             value="false"
+        ${!calForm.eventState.alarmRelStart?'checked':''}>
     </alarmDurationRelEnd>
     <bw:textField name="calForm" property="eventState.email"
                   tagName="email" />

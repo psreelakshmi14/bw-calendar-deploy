@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -34,7 +33,8 @@
     <bw:textField name="calForm" property="summary"
                   size="40" styleId="iTitle" styleClass="edit"
                   tagName="title" />
-    <deleted><html:checkbox property="event.deleted" /></deleted>
+    <bw:checkbox property="event.deleted"
+                 tagName="deleted" />
     <calendar>
       <c:if test="${not empty calForm.preferredCalendars}">
         <%-- all publishing calendars a user has previously used. --%>
@@ -61,9 +61,12 @@
       <bw:emitContainer name="calForm" property="event"
                         indent="        "/>
     </calendar>
-    <allDay><html:checkbox property="eventStartDate.dateOnly"/></allDay>
-    <storeUTC><html:checkbox property="eventStartDate.storeUTC"/></storeUTC>
-    <floating><html:checkbox property="eventStartDate.floating"/></floating>
+    <bw:checkbox property="eventStartDate.dateOnly"
+                 tagName="allDay" />
+    <bw:checkbox property="eventStartDate.storeUTC"
+                 tagName="storeUTC" />
+    <bw:checkbox property="eventStartDate.floating"
+                 tagName="floating" />
     <start>
       <bw:emitText name="calForm" property="eventStartDate.rfc3339DateTime"
                    tagName="rfc3339DateTime"/>
@@ -99,7 +102,7 @@
                       tagName="weeks" />
       </duration>
     </end>
-    <desc><html:textarea property="description" rows="8" cols="55" styleId="iDesc" styleClass="edit"></html:textarea></desc>
+    <desc><textarea><c:out value='${calForm.description}'/></textarea></desc>
     <bw:emitText name="calForm" property="authpars.maxPublicDescriptionLength"
                  tagName="descLength"/>
     <bw:emitText name="calForm" property="event.status"
@@ -130,12 +133,12 @@
                            indent="    "/>
       </all>
       <c:if test="${bwconfig.autoCreateLocations}">
-        <bw:textField size="30" value="" property="location.address.value"
+        <bw:textField size="30" property="location.address.value"
                       styleId="iLocation" styleClass="edit"
                       tagName="address" />
         <bw:textField property="location.link" size="30"
                       styleId="iLocLink" styleClass="edit"
-                      tagName="link" /">
+                      tagName="link" />
       </c:if>
     </location>
 

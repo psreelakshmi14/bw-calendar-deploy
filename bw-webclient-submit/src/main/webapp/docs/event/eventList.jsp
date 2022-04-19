@@ -1,5 +1,3 @@
-<%@ taglib uri='struts-html' prefix='html' %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 
 <bedework>
 <%@include file="/docs/header.jsp"%>
@@ -9,7 +7,8 @@
 
 <%@include file="/docs/event/eventListRoot.jsp"%>
 
-<%--  Generate form elements to be exposed --%>
+<%--  Generate form elements to be exposed
+Unused
 <formElements>
   <bwhtml:form action="event/fetchForDisplay.do">
     <listAllSwitchFalse>
@@ -24,6 +23,7 @@
     </listAllSwitchTrue>
   </bwhtml:form>
 </formElements>
+ --%>
 
 <%@include file="/docs/footer.jsp"%>
 
