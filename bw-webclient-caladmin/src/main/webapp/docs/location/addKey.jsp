@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
+<%@ taglib uri='bedework' prefix='bw' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 
 <bedework>
@@ -15,8 +15,10 @@
        take advantage of Struts' form processing features -->
 <formElements>
   <bwhtml:form action="location/addKey" >
-    <keyName><html:text size="30" /></keyName>
-    <keyValue><html:text size="30" /></keyValue>
+    <bw:textField property="key" size="30"
+                  tagName="keyName" />
+    <bw:textField property="value" size="30"
+                    tagName="keyValue" />
 
     <submitButtons>
       <button type="add">addLocation</button>

@@ -37,11 +37,21 @@ try {
     </alarmTriggerSelectorDuration>
     <alarmduration>
       <c:set var="td" value="${calForm.eventState.triggerDuration}" />
-      <days><html:text size="5" maxlength="5" name="td" property="daysStr"/></days>
-      <hours><html:text size="3" maxlength="3" name="td" property="hoursStr"/></hours>
-      <minutes><html:text size="3" maxlength="3" name="td" property="minutesStr"/></minutes>
-      <seconds><html:text size="3" maxlength="3" name="td" property="secondsStr"/></seconds>
-      <weeks><html:text size="3" maxlength="3" name="td" property="weeksStr"/></weeks>
+      <bw:textField size="5" maxlength="5"
+                    name="td" property="daysStr"
+                    tagName="days" />
+      <bw:textField size="3" maxlength="3"
+                    name="td" property="hoursStr"
+                    tagName="hours" />
+      <bw:textField size="3" maxlength="3"
+                    name="td" property="minutesStr"
+                    tagName="minutes" />
+      <bw:textField size="3" maxlength="3"
+                    name="td" property="secondsStr"
+                    tagName="seconds" />
+      <bw:textField size="3" maxlength="3"
+                    name="td" property="weeksStr"
+                    tagName="weeks" />
     </alarmduration>
     <alarmDurationBefore>
       <html:radio name="calForm" property="eventState.triggerDuration.negative"
@@ -59,8 +69,10 @@ try {
       <html:radio name="calForm" property="eventState.alarmRelStart"
                       value="false" />
     </alarmDurationRelEnd>
-    <email><html:text name="calForm" property="eventState.email"/></email>
-    <subject><html:text name="calForm" property="eventState.subject" /></subject>
+    <bw:textField name="calForm" property="eventState.email"
+                  tagName="email" />
+    <bw:textField name="calForm" property="eventState.subject"
+                  tagName="subject" />
   </bwhtml:form>
 </alarmoptionsform>
 

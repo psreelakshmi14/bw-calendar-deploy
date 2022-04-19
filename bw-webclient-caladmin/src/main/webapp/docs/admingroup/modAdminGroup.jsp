@@ -15,7 +15,7 @@
   <bwhtml:form action="admingroup/update" >
     <name>
       <c:if test="${calForm.addingAdmingroup}" >
-        <html:text property="updAdminGroup.account" />
+        <bw:textField property="updAdminGroup.account" />
       </c:if>
       <c:if test="${!calForm.addingAdmingroup}" >
         <c:out value="${calForm.updAdminGroup.account}" />
@@ -24,12 +24,10 @@
     <desc>
       <html:textarea property="updAdminGroup.description" cols="50"  rows="3"></html:textarea>
     </desc>
-    <groupOwner>
-      <html:text property="adminGroupGroupOwner" />
-    </groupOwner>
-    <eventsOwner>
-      <html:text property="adminGroupEventOwner" />
-    </eventsOwner>
+    <bw:textField property="adminGroupGroupOwner"
+                  tagName="groupOwner" />
+    <bw:textField property="adminGroupEventOwner"
+                  tagName="eventsOwner" />
 
     <!-- these are the values that may be submitted to the update action -->
     <submitButtons>
@@ -38,7 +36,6 @@
       <button type="cancel">cancelled</button>
       <button type="delete">delete</button>
     </submitButtons>
-
   </bwhtml:form>
 </formElements>
 

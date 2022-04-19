@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -28,18 +27,16 @@
                          property="eventStartDate"
                          indent="      "
                          noyear="true" />
-      <yearText>
-        <html:text property="eventStartDate.year" size="4"/>
-      </yearText>
+      <bw:textField property="eventStartDate.year" size="4"
+                    tagName="yearText" />
     </start>
     <end>
       <bw:selectDateTime name="calForm"
                          property="eventEndDate"
                          indent="      "
                          noyear="true" />
-      <yearText>
-        <html:text property="eventEndDate.year" size="4"/>
-      </yearText>
+      <bw:textField property="eventEndDate.year" size="4"
+                    tagName="yearText" />
     </end>
   </bwhtml:form>
 </formElements>

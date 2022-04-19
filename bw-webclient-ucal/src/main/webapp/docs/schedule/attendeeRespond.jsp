@@ -51,14 +51,13 @@ try {
 
   <bwhtml:form action="schedule/attendeeRespond">
     <title>
-      <html:text name="event" property="summary"/>
-    </title>
+    <bw:textField name="event" property="summary"
+                  tagName="title" />
     <bw:emitContainer name="event" indent="    " tagName="calendar" />
     <allDay><html:checkbox property="eventStartDate.dateOnly"/></allDay>
     <start>
-      <yearText>
-        <html:text property="eventStartDate.year" size="4"/>
-      </yearText>
+      <bw:textField property="eventStartDate.year" size="4"
+                    tagName="yearText" />
       <bw:selectDateTime name="calForm"
                          property="eventStartDate"
                          indent="      "/>
@@ -66,41 +65,46 @@ try {
     <end>
       <bw:emitText name="calForm" property="eventEndType" tagName="type"/>
       <dateTime>
-        <yearText>
-          <html:text property="eventEndDate.year" size="4"/>
-        </yearText>
+        <bw:textField property="eventEndDate.year" size="4"
+                      tagName="yearText" />
         <bw:selectDateTime name="calForm"
                            property="eventEndDate"
                            indent="      "/>
       </dateTime>
       <duration>
-        <days><html:text property="eventDuration.daysStr" size="2" /></days>
-        <hours><html:text property="eventDuration.hoursStr" size="2" /></hours>
-        <minutes><html:text property="eventDuration.minutesStr" size="2" /></minutes>
-        <weeks><html:text property="eventDuration.weeksStr" size="2" /></weeks>
+        <bw:textField property="eventDuration.daysStr" size="2"
+                      tagName="days" />
+        <bw:textField property="eventDuration.hoursStr" size="2"
+                      tagName="hours" />
+        <bw:textField property="eventDuration.minutesStr" size="2"
+                      tagName="minutes" />
+        <bw:textField property="eventDuration.weeksStr" size="2"
+                      tagName="weeks"/>
       </duration>
     </end>
     <desc><html:textarea name="event" property="description"></html:textarea></desc>
     <bw:emitText name="event" property="status"/>
     <bw:emitText name="event" property="transparency"/>
-    <link><html:text name="event" property="link"/></link>
+    <bw:textField name="event" property="link"
+                  tagName="link" />
     <c:set var="locations" value="${bw_locations_list}" />
     <location>
       <locationmenu>
-        <html:select property="locationUid">
-          <html:optionsCollection name="locations"
-                                  label="address"
-                                  value="uid"/>
-        </html:select>
+        <bw:selectLocation name="calForm"
+                           property="locationUid"
+                           locs="locations"
+                           indent="    "/>
       </locationmenu>
-      <locationtext><html:text property="locationAddress.value" /></locationtext>
+      <bw:textField property="locationAddress.value"
+                    tagName="locationtext"/>
     </location>
   </bwhtml:form>
 </formElements>
 <c:set var="eventFormatter" value="${calForm.curEventFmt}"
        scope="request"/>
-<bw:emitText name="eventFormatter" property="xmlAccess" tagName="access"
-                 filter="no"/>
+<bw:emitText name="eventFormatter" property="xmlAccess"
+             tagName="access"
+             filter="no"/>
 
 <%
 } catch (Throwable t) {

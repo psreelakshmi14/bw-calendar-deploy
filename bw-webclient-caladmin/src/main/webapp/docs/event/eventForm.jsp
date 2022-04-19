@@ -31,7 +31,9 @@
   <bw:emitText name="calForm" property="eventRegAdminToken"/>
 
   <bwhtml:form action="event/update" >
-    <title><html:text property="summary" size="40" styleId="iTitle" styleClass="edit"/></title>
+    <bw:textField name="calForm" property="summary"
+                  size="40" styleId="iTitle" styleClass="edit"
+                  tagName="title" />
     <deleted><html:checkbox property="event.deleted" /></deleted>
     <calendar>
       <c:if test="${not empty calForm.preferredCalendars}">
@@ -65,13 +67,13 @@
     <start>
       <bw:emitText name="calForm" property="eventStartDate.rfc3339DateTime"
                    tagName="rfc3339DateTime"/>
-      <yearText>
-        <html:text property="eventStartDate.year" size="4"/>
-      </yearText>
+      <bw:textField property="eventStartDate.year" size="4"
+                    tagName="yearText" />
       <bw:selectDateTime name="calForm"
                          property="eventStartDate"
                          indent="      "/>
-      <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
+      <bw:emitText name="calForm" property="eventStartDate.tzid"
+                   tagName="tzid"/>
     </start>
     <end>
       <bw:emitText name="calForm" property="eventEndDate.rfc3339DateTime"
@@ -79,19 +81,22 @@
       <bw:emitText name="calForm" property="eventEndType"
                    tagName="type"/>
       <dateTime>
-        <yearText>
-          <html:text property="eventEndDate.year" size="4"/>
-        </yearText>
+        <bw:textField property="eventEndDate.year" size="4"
+                      tagName="yearText" />
         <bw:selectDateTime name="calForm"
                            property="eventEndDate"
                            indent="      "/>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
       <duration>
-        <days><html:text property="eventDuration.daysStr" size="2" /></days>
-        <hours><html:text property="eventDuration.hoursStr" size="2" /></hours>
-        <minutes><html:text property="eventDuration.minutesStr" size="2" /></minutes>
-        <weeks><html:text property="eventDuration.weeksStr" size="2" /></weeks>
+        <bw:textField property="eventDuration.daysStr" size="2"
+                      tagName="days" />
+        <bw:textField property="eventDuration.hoursStr" size="2"
+                      tagName="hours" />
+        <bw:textField property="eventDuration.minutesStr" size="2"
+                      tagName="minutes" />
+        <bw:textField property="eventDuration.weeksStr" size="2"
+                      tagName="weeks" />
       </duration>
     </end>
     <desc><html:textarea property="description" rows="8" cols="55" styleId="iDesc" styleClass="edit"></html:textarea></desc>
@@ -99,36 +104,38 @@
                  tagName="descLength"/>
     <bw:emitText name="calForm" property="event.status"
                  tagName="status"/>
-    <cost><html:text property="event.cost" size="30" styleId="iCost" styleClass="edit"/></cost>
-    <link><html:text property="event.link" size="30" styleId="iLink" styleClass="edit"/></link>
+    <bw:textField property="event.cost" size="30"
+                  styleId="iCost" styleClass="edit"
+                  tagName="cost" />
+    <bw:textField name="event" property="link"
+                  styleId="iLink" styleClass="edit"
+                  tagName="link" />
     <location>
       <c:if test="${not empty sessionScope.bw_preferred_locations_list}">
         <preferred>
           <c:set var="preferredLocations"
                  value="${bw_preferred_locations_list}" />
-          <html:select property="prefLocationId">
-            <html:optionsCollection name="preferredLocations"
-                                    label="address.value"
-                                    value="uid"/>
-          </html:select>
+          <bw:selectLocation name="calForm"
+                             property="prefLocationId"
+                             locs="preferredLocations"
+                             indent="    "/>
         </preferred>
       </c:if>
       <all>
         <c:set var="locations"
                value="${bw_locations_list}" />
-        <html:select property="allLocationId">
-          <html:optionsCollection name="locations"
-                                  label="address.value"
-                                  value="uid"/>
-          </html:select>
+        <bw:selectLocation name="calForm"
+                           property="allLocationId"
+                           locs="locations"
+                           indent="    "/>
       </all>
       <c:if test="${bwconfig.autoCreateLocations}">
-        <address>
-          <html:text size="30" value="" property="location.address.value" styleId="iLocation" styleClass="edit"/>
-        </address>
-        <link>
-          <html:text property="location.link" size="30" styleId="iLocLink" styleClass="edit"/>
-        </link>
+        <bw:textField size="30" value="" property="location.address.value"
+                      styleId="iLocation" styleClass="edit"
+                      tagName="address" />
+        <bw:textField property="location.link" size="30"
+                      styleId="iLocLink" styleClass="edit"
+                      tagName="link" /">
       </c:if>
     </location>
 
@@ -218,20 +225,18 @@
         <c:set var="preferredContacts"
                value="${bw_preferred_contacts_list}"/>
         <preferred>
-          <html:select property="prefContactId">
-            <html:optionsCollection name="preferredContacts"
-                                    label="cn.value"
-                                    value="uid"/>
-          </html:select>
+          <bw:selectContact name="calForm"
+                            property="prefContactId"
+                            contacts="preferredContacts"
+                            indent="    "/>
         </preferred>
       </c:if>
       <all>
         <c:set var="contacts" value="${bw_contacts_list}"/>
-        <html:select property="allContactId">
-          <html:optionsCollection name="contacts"
-                                  label="cn.value"
-                                  value="uid"/>
-        </html:select>
+        <bw:selectContact name="calForm"
+                          property="allContactId"
+                          contacts="contacts"
+                          indent="    "/>
       </all>
       <c:if test="${bwconfig.autoCreateContacts}">
         <%@include file="/docs/contact/modContactCommon.jsp"%>

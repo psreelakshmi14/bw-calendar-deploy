@@ -10,7 +10,7 @@
       These can be manipulated in the xslt if desired.
 <formElements>
   <bwhtml:form action="event/fetchForDisplay.do">
-    <html:text name="calForm" property="eventId" size="6" />
+    <bw:textField name="calForm" property="eventId" size="6" />
     <html:submit value="go"/>
   </bwhtml:form>
 </formElements>

@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='struts-html' prefix='html' %>
 <%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
@@ -26,7 +25,8 @@
 
 <formElements>
   <bwhtml:form action="admingroup/updateMembers" >
-    <member><html:text property="updGroupMember" size="15" /></member>
+    <bw:textField property="updGroupMember" size="15"
+                  tagName="member">
 
     <!-- these are the values that may be submitted to the update action -->
     <submitButtons>
