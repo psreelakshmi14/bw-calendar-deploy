@@ -105,7 +105,7 @@
 
   <filter-mapping>
     <filter-name>struts2</filter-name>
-    <url-pattern>*.gdo</url-pattern>
+    <url-pattern>*.rdo</url-pattern>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
