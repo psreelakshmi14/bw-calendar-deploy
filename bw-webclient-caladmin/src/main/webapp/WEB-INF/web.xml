@@ -18,6 +18,11 @@
     <param-value>/main/showMain.rdo</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>formClass</param-name>
+    <param-value>org.bedework.client.web.admin.BwAdminActionForm</param-value>
+  </context-param>
+
   <!-- Do not alter or move  the following comment -->
   <!-- add context params here -->
 
@@ -38,7 +43,12 @@
     <filter-name>SvcI Filter</filter-name>
     <filter-class>org.bedework.webcommon.BwSvciFilter</filter-class>
   </filter>
-  
+
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+
   <!-- XSLT should getResource the response before the FOPFilter -->
 
   <filter-mapping>
@@ -73,6 +83,30 @@
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
 
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.gdo</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.rdo</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
   <listener>
     <listener-class>org.bedework.util.servlet.SessionListener</listener-class>
   </listener>
@@ -84,65 +118,8 @@
   <!-- Do not alter or move  the following comment -->
   <!-- add listeners here -->
 
-  <servlet>
-    <servlet-name>action</servlet-name>
-    <servlet-class>
-      org.apache.struts.action.ActionServlet
-    </servlet-class>
-
-    <load-on-startup>1</load-on-startup>
-
-    <!--
-    <security-role-ref>
-      <description>A user with full administrative privileges</description>
-      <role-name>admin</role-name>
-      <role-link>bedework.admin</role-link>
-    </security-role-ref>
-
-    <security-role-ref>
-      <description>A user with some administrative privileges</description>
-      <role-name>contentadmin</role-name>
-      <role-link>bedework.contentadmin</role-link>
-    </security-role-ref>
-
-    <security-role-ref>
-      <description>Somebody who can add alerts</description>
-      <role-name>alerts</role-name>
-      <role-link>bedework.alerts</role-link>
-    </security-role-ref>
-
-    <security-role-ref>
-      <description>Somebody who owns events</description>
-      <role-name>owner</role-name>
-      <role-link>bedework.owner</role-link>
-    </security-role-ref>
-
-    <security-role-ref>
-      <description>A user</description>
-      <role-name>user</role-name>
-      <role-link>bedework.user</role-link>
-    </security-role-ref>
-    -->
-  </servlet>
-
   <!-- Do not alter or move  the following comment -->
   <!-- add servlet definitions here -->
-
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.gdo</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.rdo</url-pattern>
-  </servlet-mapping>
-
-  <!-- This probably has to be last for struts -->
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
 
   <!-- Do not alter or move  the following comment -->
   <!-- add servlet mappings here -->
