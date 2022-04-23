@@ -13,6 +13,7 @@
 <bw:emitCurrentPrivs name="calForm" property="eventInfo.currentAccess" />
 
 <c:set var="event" value="${calForm.event}" scope="request"  />
+<c:set var="eventDuration" value="${calForm.eventDuration}" scope="request"  />
 
 <%-- formElements sections take advantage of Struts' form processing features. --%>
 <formElements>
