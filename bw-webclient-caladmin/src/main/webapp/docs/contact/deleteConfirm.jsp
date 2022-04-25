@@ -9,7 +9,14 @@
 
 <c:set var="contact" value="${calForm.contact}" />
 <contact>
-  <bw:emitText name="contact" property="cn.value"
+  <c:set var="cn" value="${contact.cn}" />
+  <c:if test="${empty cn}">
+    <c:set var="cnval" value="Broken contact" />
+  </c:if>
+  <c:if test="${not empty cn}">
+    <c:set var="cnval" value="${cn.value}" />
+  </c:if>
+  <bw:emitText name="cnval"
                tagName="name"/>
   <bw:emitText name="contact" property="phone" />
   <c:if test="${not empty contact.email}">

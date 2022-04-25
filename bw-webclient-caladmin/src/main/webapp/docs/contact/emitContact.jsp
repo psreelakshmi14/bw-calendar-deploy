@@ -5,8 +5,15 @@
     <c:url value="/contact/fetchForUpdate.do" var="theUrl">
       <c:param name="uid" value="${contact.uid}"/>
     </c:url>
+    <c:set var="cn" value="${contact.cn}" />
+    <c:if test="${empty cn}">
+      <c:set var="cnval" value="Broken contact" />
+    </c:if>
+    <c:if test="${not empty cn}">
+      <c:set var="cnval" value="${cn.value}" />
+    </c:if>
     <a href='<c:out value="${theUrl}"/>'><c:out
-              value="${contact.cn.value}" /></a>
+              value="${cnval}" /></a>
   </name>
   <bw:emitText name="contact" property="phone" />
   <bw:emitText name="contact" property="status" />
