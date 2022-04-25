@@ -925,7 +925,7 @@
     <!-- ........... PERSONAL client only ...... -->
 
     <action    path="/location/showUpdateList"
-               type="org.bedework.webcommon.RenderAction"
+               type="org.bedework.client.web.rw.location.FetchEditableAction"
                name="calForm"
                scope="session"
                parameter="actionType=render"
@@ -960,13 +960,8 @@
       <forward name="continue" path="/location/showModForm.rdo" redirect="true" />
     </action>
 
-    <action    path="/location/initUpdate"
-               type="org.bedework.webcommon.NoopAction"
-               name="calForm"
-               scope="session"
-               parameter="actionType=action"
-               validate="false">
-      <forward name="success" path="/location/showUpdateList.rdo" redirect="true" />
+    <action    name="location/initUpdate">
+      <result type="redirect">/location/showUpdateList.rdo</result>
     </action>
 
     <action    path="/location/fetchForUpdate"

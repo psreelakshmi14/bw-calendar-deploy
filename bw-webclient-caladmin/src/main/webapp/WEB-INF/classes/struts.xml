@@ -1350,7 +1350,7 @@
 
 
     <action    name="location/showUpdateList"
-               class="org.bedework.webcommon.RenderAction">
+               class="org.bedework.client.web.rw.location.FetchEditableAction">
       <param name="actionType">render</param>
 
       <result name="success">/docs/location/locationList.jsp</result>
@@ -1371,11 +1371,8 @@
       <result name="continue" type="redirect">/location/showModForm.rdo</result>
     </action>
 
-    <action    name="location/initUpdate"
-               class="org.bedework.client.web.rw.location.InitUpdateAction">
-      <param name="actionType">action</param>
-
-      <result name="success" type="redirect">/location/showUpdateList.rdo</result>
+    <action    name="location/initUpdate">
+      <result type="redirect">/location/showUpdateList.rdo</result>
     </action>
 
     <action    name="location/delete"
