@@ -26,7 +26,7 @@
 <formElements>
   <bwhtml:form action="admingroup/updateMembers" >
     <bw:textField property="updGroupMember" size="15"
-                  tagName="member">
+                  tagName="member"/>
 
     <!-- these are the values that may be submitted to the update action -->
     <submitButtons>
