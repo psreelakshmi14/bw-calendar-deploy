@@ -153,6 +153,7 @@
                class="org.bedework.webcommon.search.SearchParamsAction">
       <param name="actionType">action</param>
       <param name="conversation">start</param>
+
       <result name="success" type="redirect">/main/showPendingTab.rdo</result>
       <result name="listEvents" type="redirect">/main/showPendingTab.rdo</result>
     </action>
