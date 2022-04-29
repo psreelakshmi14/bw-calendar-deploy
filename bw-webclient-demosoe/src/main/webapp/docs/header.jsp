@@ -103,6 +103,7 @@ try {
                      tagName="memberOf"/>
       </c:forEach>
   </c:if>
+
   <bw:emitMsgErr name="calForm" property="msg"
                  tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
@@ -188,41 +189,41 @@ try {
         Value: String - a 16 character random string used to allow users to confirm
         additions to their private calendar.  DEPRECATED. --%>
 
-<c:forEach var="appvar" items="${calForm.appVars}">
-    <appvar><%--
-        Application variables can be set arbitrarily by the stylesheet designer.
-        Use an "appvar" by adding setappvar=key(value) to the query string of
-        a URL.  This feature is useful for setting up state during a user's session.
-        e.g. <a href="{$urlPrefix}/eventView.do?guid=...&setappvar=currentTab(event)">View Event</a>
-        To change the value of an appvar, call the same key with a different value.
-        e.g. <a href="{$urlPrefix}/setup.do?setappvar=currentTab(home)">Return Home</a>
-        If appvars exist, they will be output in the following form:  --%>
-    <bw:emitText name="appvar" property="key" />
-    <bw:emitText name="appvar" property="value" />
+  <c:forEach var="appvar" items="${calForm.appVars}">
+      <appvar><%--
+          Application variables can be set arbitrarily by the stylesheet designer.
+          Use an "appvar" by adding setappvar=key(value) to the query string of
+          a URL.  This feature is useful for setting up state during a user's session.
+          e.g. <a href="{$urlPrefix}/eventView.do?guid=...&setappvar=currentTab(event)">View Event</a>
+          To change the value of an appvar, call the same key with a different value.
+          e.g. <a href="{$urlPrefix}/setup.do?setappvar=currentTab(home)">Return Home</a>
+          If appvars exist, they will be output in the following form:  --%>
+      <bw:emitText name="appvar" property="key" />
+      <bw:emitText name="appvar" property="value" />
 
-    <c:if test="${(appvar.key == 'summaryMode') && (appvar.value == 'details')}"><%--
-        This is a special use of the appvar feature.  Normally, we don't return
-        all details about events except when we display a single event (to keep the
-        XML lighter).  To return all event details in an events listing, append a
-        query string with setappvar=summaryMode(details).  Turn the detailed view
-        off with setappvar=summaryMode(summary).--%>
-      <c:set var="detailView" value="true" scope="request"/><%--
-          Send this bean to the request scope so we can test for it on the page
-          that builds the calendar tree (main.jsp) --%>
-    </c:if>
-  </appvar>
-</c:forEach>
+      <c:if test="${(appvar.key == 'summaryMode') && (appvar.value == 'details')}"><%--
+          This is a special use of the appvar feature.  Normally, we don't return
+          all details about events except when we display a single event (to keep the
+          XML lighter).  To return all event details in an events listing, append a
+          query string with setappvar=summaryMode(details).  Turn the detailed view
+          off with setappvar=summaryMode(summary).--%>
+        <c:set var="detailView" value="true" scope="request"/><%--
+            Send this bean to the request scope so we can test for it on the page
+            that builds the calendar tree (main.jsp) --%>
+      </c:if>
+    </appvar>
+  </c:forEach>
 
   <c:if test="${not empty calForm.currentLocale}" >
     <bw:emitText name="calForm" property="currentLocale" />
   </c:if>
 
-  <c:if test="${not empty sessionScope.bw_cache_prefix}">
+  <c:if test="${not empty sessionScope.bw_cache_prefix}" >
     <bw:emitText name="bw_cache_prefix" scope="session"
                  tagName="cachePrefix"/>
   </c:if>
 
-  <c:if test="${not empty sessionScope.bw_feature_flags}">
+  <c:if test="${not empty sessionScope.bw_feature_flags}" >
       <bw:emitText name="bw_feature_flags" scope="session"
                    tagName="featureFlags"/>
   </c:if>
@@ -255,20 +256,20 @@ try {
     </c:if>
   </views>
 
-<%-- List of filters for menuing --%>
+  <%-- List of filters for menuing --%>
   <filters>
     <c:if test="${not empty sessionScope.bw_filters_list}">
-      <c:forEach var="view" items="${sessionScope.bw_filters_list}">
+        <c:forEach var="view" items="${sessionScope.bw_filters_list}">
         <filter>
           <bw:emitText name="filter" property="name"/>
         </filter>
-      </c:forEach>
+        </c:forEach>
     </c:if>
   </filters>
 
   <%-- System parameters --%>
   <syspars>
-    <c:if test="${not empty calForm.dirInfo}">
+    <c:if test="${not empty calForm.dirInfo}" >
       <c:set var="dir" value="${calForm.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />

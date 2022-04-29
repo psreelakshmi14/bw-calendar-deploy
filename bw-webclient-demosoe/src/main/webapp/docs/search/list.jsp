@@ -8,6 +8,7 @@
 <%
 try {
 %>
+
   <page>searchResult</page>
 
   <bw:emitCategories name="bw_categories_list" scope="session"
@@ -16,7 +17,7 @@ try {
 <searchResults>
   <bw:emitText name="moduleState" property="query"/>
   <bw:emitText name="moduleState" property="searchLimits"/>
-  <c:if test="${empty requestScope.bw_search_result}">
+  <c:if test="${empty sessionScope.bw_search_result}">
     <resultSize>0</resultSize>
   </c:if>
 

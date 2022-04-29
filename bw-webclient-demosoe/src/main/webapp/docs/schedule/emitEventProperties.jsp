@@ -29,8 +29,7 @@
       <attendees>
         <c:forEach var="attendee" items="${event.attendees}">
           <attendee>
-            <bw:emitText name="attendee" property="id"
-                         tagName="id" /><%--
+            <bw:emitText name="attendee" property="id" /><%--
                 Value: integer - attendee id --%>
             <bw:emitText name="attendee" property="cn"/><%--
               Value: string - cn of the attendee --%>
@@ -47,8 +46,7 @@
                 Value: string - language code --%>
             <bw:emitText name="attendee" property="sentBy"/><%--
               Value: string - usually mailto url --%>
-            <bw:emitText name="attendee" property="rsvp"
-                         tagName="rsvp" />
+            <bw:emitText name="attendee" property="rsvp" />
             <bw:emitText name="attendee" property="role"/>
             <bw:emitText name="attendee" property="partstat"/>
             <bw:emitText name="attendee" property="attendeeUri"/>

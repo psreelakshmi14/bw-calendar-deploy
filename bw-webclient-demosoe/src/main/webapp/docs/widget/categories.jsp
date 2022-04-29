@@ -11,11 +11,10 @@
       <bw:emitText name="appvar" property="value" />
     </appvar>
   </c:forEach>
-
   <bw:emitMsgErr name="calForm" property="msg"
-                 tagName="message" indent="    "/>
+                 tagName="message" indent="  "/>
   <bw:emitMsgErr name="calForm" property="err"
-                 tagName="error" indent="    "/>
+                 tagName="error" indent="  "/>
 
   <c:set var="presentationState" value="${bw_presentationstate}" />
   <bw:emitText name="presentationState" property="appRoot" tagName="appRoot" />
