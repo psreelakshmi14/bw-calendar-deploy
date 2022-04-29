@@ -472,7 +472,7 @@
       <param name="actionType">action</param>
       <param name="conversation">start</param>
 
-      <result name="listEvents" type="redirect">/main/showResult.rdo</result>
+      <result name="listEvents" type="redirect">/search/showResult.rdo</result>
       <result name="success" type="redirect">/search/showResult.rdo</result>
     </action>
 
