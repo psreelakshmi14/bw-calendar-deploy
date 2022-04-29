@@ -336,8 +336,8 @@
 
     <action    name="misc/export"
                class="org.bedework.webcommon.misc.ExportAction">
-      <param name="conversation">only</param>
       <param name="actionType">resource</param>
+      <param name="conversation">only</param>
     </action>
 
     <!-- ===============================================================
