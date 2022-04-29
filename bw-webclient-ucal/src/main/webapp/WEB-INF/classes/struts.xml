@@ -1,0 +1,1577 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<!-- ============================================================
+   This is a the Struts 2 configuration for the Bedework
+   user calendar client.
+   ============================================================== -->
+
+<!--
+  The action-mappings below are divided into "normal" actions (suffixed
+  with ".do") and render actions (suffixed with ".rdo"). All normal actions
+  (which are typically used to change the application's state) redirect
+  to a render action that returns a jsp page for display. Render actions
+  do not change state.
+
+  The action-mappings are grouped together by function.
+  The division between normal and render actions is required, among other
+  things, to allow Bedework to run in a portal.
+  By convention, most render actions are named "show[Name]".
+
+  Note that nearly all global forwards map to a render action that produce
+  a jsp page for display.
+
+  All action URLs used in any client are produced in header.jsp to take
+  advantage of appropriate encoding or extensions required by the container
+  and/or portal.  These "urlPrefixes" are then pulled into the xslt
+  for use in constructing links into the application.  Look at the top of
+  header.jsp and the default.xsl files within any client for examples.  Use
+  the url-prefix variables in the xslt rather than calling these paths directly.
+
+  Struts allows the specification of an action parameter.  We use this to
+  pass a semicolon separated string of key/value pairs to the action classes.
+
+  Each action is marked with its action type, and optionally a refresh time
+  and/or refresh action, for example
+
+  parameter="actionType=render;refinterval=900;conversation=end"
+
+  Valid parameter keywords and values:
+  refinterval    integer refresh seconds
+  refaction      action result for refresh
+  actionType     action, render or resource
+  conversation   start    - start of a multi-request conversation
+                 continue - part-way through a multi-request conversation
+                 end - end of a multi-request conversation
+                 only - if a conversation is already started on entry, end it
+                   with no processing of changes.
+                   Start a new conversation which we will end on exit.
+                 processAndOnly - if a conversation is already started on entry,
+                   process changes and end it.
+                   start a new conversation which we will end on exit.
+  auth           yes/no does this action require authentication
+
+  In the absence of a conversation parameter we assume that a conversation
+  starts with actionType=action and ends with actionType=render.
+
+  Conversations are related to the persistance framework and allow us to keep
+  a persistance engine session running until the sequence of actions is
+  completed.
+
+  What we don't see here are the urls generated to bridge the gaps in the
+  conversations. For example, we fetch an event and display it to the user.
+
+  The conversation does not end at this point - when the user submits the
+  updates we continue and if some invalid input is discovered we may
+  re-present the form. The conversation would end after a successful update.
+
+  -->
+
+<struts>
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.multipart.maxSize" value="1000000" />
+  <constant name="struts.enable.SlashesInActionNames" value="true"/>
+  <constant name="struts.action.extension" value="do,gdo,rdo" />
+
+  <package name="bedework" extends="struts-default">
+    <!-- global redirects used by many actions -->
+    <global-results>
+      <!-- render forwards -->
+      <result name="initialise">/main/initialise.rdo</result>
+      <result name="showEditEvent">/event/showEditEvent.rdo</result>
+      <result name="eventMore">/event/showEventMore.rdo</result>
+
+      <!-- result for a new session from some bookmarked link; used by
+           org.bedework.webcommon.RenderAction when a refresh is needed -->
+      <result name="gotomain">/main/showMain.rdo</result>
+
+      <!-- set up state and get going. -->
+      <result name="initial">/setup.do</result>
+
+      <!-- global redirects used by many actions -->
+      <result name="error" type="redirect">/main/showMain.rdo</result>
+
+      <result name="noAction" type="redirect">/main/showMain.rdo</result>
+
+      <result name="cancelled" type="redirect">/main/showMain.rdo</result>
+
+      <result name="noAccess" type="redirect">/main/showMain.rdo</result>
+
+      <result name="notFound" type="redirect">/main/showMain.rdo</result>
+
+      <result name="loggedOut">/docs/login/logout.html</result>
+    </global-results>
+
+    <!-- ========== Action Mapping Definitions ============================== -->
+
+    <!-- ===============================================================
+                        Fundamental Actions
+     =============================================================== -->
+
+    <!-- ........... PUBLIC and PERSONAL clients ...... -->
+
+    <action    name="main/initialise"
+               class="org.bedework.webcommon.RenderMainAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="success">/docs/main.jsp</result>
+    </action>
+
+
+    <action    name="main/processShowMain"
+               class="org.bedework.webcommon.RenderMainAction">
+      <param name="actionType">render</param>
+      <param name="conversation">processAndOnly</param>
+
+      <result name="success">/docs/main.jsp</result>
+    </action>
+
+    <action    name="main/showMain"
+               class="org.bedework.webcommon.RenderMainAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="success">/docs/main.jsp</result>
+    </action>
+
+    <action    name="main/showMainEnd"
+               class="org.bedework.webcommon.RenderMainAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+
+      <result name="success">/docs/main.jsp</result>
+    </action>
+
+    <action    name="setup"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="listEvents" type="redirect">/main/showEventList.rdo</result>
+    </action>
+
+    <action    name="main/reload"
+               class="org.bedework.webcommon.misc.ReloadAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+             Switch to a subscription, calendar or view
+         ............................................................... -->
+
+    <action    name="main/setSelection"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="listEvents" type="redirect">/main/showMain.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="noViewDef" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <action    name="main/setSelectionList"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="listEvents" type="redirect">/main/showEventList.rdo</result>
+      <result name="success" type="redirect">/main/showEventList.rdo</result>
+      <result name="noViewDef" type="redirect">/main/showEventList.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+             Actions for ongoing
+         ............................................................... -->
+
+    <action    name="main/setOngoingList"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+      <param name="mdl">ongoing</param>
+
+      <result name="listEvents" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="success" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="noViewDef" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="error" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="noAction" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="cancelled" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="noAccess" type="redirect">/main/showOngoingList.rdo</result>
+      <result name="notFound" type="redirect">/main/showOngoingList.rdo</result>
+    </action>
+
+    <action    name="main/showOngoingList"
+               class="org.bedework.webcommon.search.RenderSearchResultAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+      <param name="mdl">ongoing</param>
+      <param name="refaction">/main/showOngoingList.rdo</param>
+
+      <result name="success">/docs/event/eventList.jsp</result>
+      <result name="error">/docs/asyncError.jsp</result>
+      <result name="noAction">/docs/asyncError.jsp</result>
+      <result name="cancelled">/docs/asyncError.jsp</result>
+      <result name="noAccess">/docs/asyncError.jsp</result>
+      <result name="notFound">/docs/asyncError.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+         Actions for mainEventList
+     ............................................................... -->
+
+    <action    name="main/setMainEventList"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+      <param name="mdl">mainEventList</param>
+
+      <result name="listEvents" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="success" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noViewDef" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="error" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noAction" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="cancelled" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noAccess" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="notFound" type="redirect">/main/showMainEventList.rdo</result>
+    </action>
+
+    <action    name="main/nextMainEventList"
+               class="org.bedework.webcommon.search.SearchNextAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+      <param name="mdl">mainEventList</param>
+
+      <result name="success" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noViewDef" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="error" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noAction" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="cancelled" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="noAccess" type="redirect">/main/showMainEventList.rdo</result>
+      <result name="notFound" type="redirect">/main/showMainEventList.rdo</result>
+    </action>
+
+    <action    name="main/showMainEventList"
+               class="org.bedework.webcommon.search.RenderSearchResultAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+      <param name="mdl">mainEventList</param>
+      <param name="refaction">/main/showMainEventList.rdo</param>
+
+      <result name="success">/docs/event/eventList.jsp</result>
+      <result name="error">/docs/asyncError.jsp</result>
+      <result name="noAction">/docs/asyncError.jsp</result>
+      <result name="cancelled">/docs/asyncError.jsp</result>
+      <result name="noAccess">/docs/asyncError.jsp</result>
+      <result name="notFound">/docs/asyncError.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+             Display an event
+         ............................................................... -->
+
+    <action    name="main/setViewPeriod"
+               class="org.bedework.webcommon.misc.GoToAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/main/showMainEnd.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+           Display a list of events
+       ............................................................... -->
+
+    <action    name="main/listEvents"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="listEvents" type="redirect">/main/showEventList.rdo</result>
+      <result name="success" type="redirect">/main/showEventList.rdo</result>
+    </action>
+
+    <action    name="main/showEventList"
+               class="org.bedework.webcommon.search.RenderSearchResultAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+      <param name="refaction">/main/showMainEventList.rdo</param>
+
+      <result name="success">/docs/event/eventList.jsp</result>
+    </action>
+
+    <!-- ===============================================================
+                          Events
+         =============================================================== -->
+
+    <!-- ...............................................................
+             Display an event
+         ............................................................... -->
+
+    <action    name="event/eventView"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/event/showEventMore.rdo</result>
+    </action>
+
+    <action    name="event/showEventMore"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+
+      <result name="success">/docs/event/eventMore.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+             Edit an event
+             delete result only if we have a "delete" request parameter
+         ............................................................... -->
+
+    <action    name="event/editEvent"
+               class="org.bedework.client.web.rw.event.FetchEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="continue" type="redirect">/event/showEditEvent.rdo</result>
+      <result name="copy" type="redirect">/event/showEditEvent.rdo</result>
+    </action>
+
+    <action    name="event/showEditEvent"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+      <param name="refinterval">900</param>
+
+      <result name="success">/docs/event/editEvent.jsp</result>
+    </action>
+
+    <action    name="event/updateEvent"
+               class="org.bedework.client.web.rw.event.UpdateEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="validationError" type="redirect">/main/showMain.rdo</result>
+      <result name="retry" type="redirect">/event/showEditEvent.rdo</result>
+      <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
+      <result name="continue" type="redirect">/event/showEditEvent.rdo</result>
+      <result name="delete" type="redirect">/event/showDeleteConfirm.rdo</result>
+      <result name="copy" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="editEventAttendees" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="makeEventIntoMeeting" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="eventDatesInited" type="redirect">/event/showEditEvent.rdo</result>
+    </action>
+    <!-- No longer?
+           <result name="updateEventAccess" type="redirect">/event/showEditEvent.rdo</result> 
+     -->
+
+    <!-- ...............................................................
+             Modify an event
+         ............................................................... -->
+
+    <action    name="event/gotoEditEvent"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/event/showEditEvent.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+             Add an event
+         ............................................................... -->
+
+    <action    name="event/initEvent"
+               class="org.bedework.client.web.rw.event.InitAddEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="validationError" type="redirect">/event/showAddEvent.rdo</result>
+    </action>
+
+    <action    name="event/showAddEvent"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+      <param name="refinterval">900</param>
+
+      <result name="success">/docs/event/addEvent.jsp</result>
+    </action>
+
+    <action    name="event/addEvent"
+               class="org.bedework.client.web.rw.event.UpdateEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="noAction" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="error" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="validationError" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="retry" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="duplicate" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="continue" type="redirect">/event/showEditEvent.rdo</result>
+      <result name="delete" type="redirect">/event/showDeleteConfirm.rdo</result>
+      <result name="copy" type="redirect">/event/showModForm.rdo</result>
+      <result name="editEventAttendees" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="updateEventAccess" type="redirect">/event/showAddEvent.rdo</result>
+      <result name="makeEventIntoMeeting" type="redirect">/event/showAttendeesForEvent.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+             Deleting an event (link on edit event page)
+         ............................................................... -->
+
+    <action    name="event/delEvent"
+               class="org.bedework.client.web.rw.event.DeleteEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+             Deleting an event (where from?)
+         ............................................................... -->
+
+    <action    name="event/showDeleteConfirm"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/event/deleteConfirm.jsp</result>
+    </action>
+
+    <!-- ........... PUBLIC and PERSONAL clients ...... -->
+
+    <action    name="event/deleteConfirm"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/event/showDeleteConfirm.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Adding Event References
+         ............................................................... -->
+
+    <action    name="event/addEventRef"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/event/showAddEventRef.rdo</result>
+    </action>
+
+    <action    name="event/showAddEventRef"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/event/addEventRef.jsp</result>
+    </action>
+
+    <action    name="event/addEventRefComplete"
+               class="org.bedework.client.web.rw.event.AddEventRefAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="eventNotFound" type="redirect">/main/showMain.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="duplicate" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Adding Event Subscriptions to a event list collection
+         ............................................................... -->
+
+    <action    name="event/addEventSub"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/event/showAddEventSub.rdo</result>
+    </action>
+
+    <action    name="event/showAddEventSub"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/event/addEventSub.jsp</result>
+    </action>
+
+    <action    name="event/addEventSubComplete"
+               class="org.bedework.client.web.rw.event.AddEventSubAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="eventNotFound" type="redirect">/main/showMain.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="duplicate" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                      Scheduling meetings
+         =============================================================== -->
+
+    <action    name="event/initMeeting"
+               class="org.bedework.client.web.rw.event.InitAddEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/event/showAttendeesForEvent.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Editing event attendees - from update, new meeting or make event into meeting
+         ............................................................... -->
+
+    <!-- Update the attendee list and recalculate freebusy -->
+    <action    name="event/attendeesForEvent"
+               class="org.bedework.webcommon.event.AttendeeAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="badRequest" type="redirect">/main/showMain.rdo</result>
+      <result name="error" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="noAction" type="redirect">/event/showAttendeesForEvent.rdo</result>
+      <result name="listAttendees" type="redirect">/event/listAttendees.rdo</result>
+    </action>
+
+    <action    name="event/listAttendees"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+      <param name="refinterval">900</param>
+
+      <result name="success">/docs/event/attendeesList.jsp</result>
+    </action>
+
+    <action    name="event/showAttendeesForEvent"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+      <param name="refinterval">900</param>
+
+      <result name="success">/docs/schedule/attendees.jsp</result>
+    </action>
+
+    <!-- Exit with a link to update the current event from the freebusy -->
+
+    <!-- Get the freebusy for a list of attendees -->
+    <action    name="event/requestFreeBusy"
+               class="org.bedework.client.web.rw.schedule.RequestFreeBusy">
+      <param name="actionType">resource</param>
+      <param name="conversation">continue</param>
+    </action>
+
+    <!-- ...............................................................
+         Show the inbox
+         ............................................................... -->
+
+    <action    name="schedule/showInbox"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="success">/docs/schedule/inbox.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+         Delete from the inbox
+         ............................................................... -->
+
+    <action    name="event/delInboxEvent"
+               class="org.bedework.client.web.rw.event.DeleteEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+
+      <result name="success" type="redirect">/schedule/showInbox.rdo</result>
+    </action>
+
+    <action    name="schedule/clearReply"
+               class="org.bedework.client.web.rw.event.DeleteEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Fetch and display a reply in the inbox - first two unused?
+         ............................................................... -->
+
+    <action    name="schedule/initAttendeeReply"
+               class="org.bedework.client.web.rw.schedule.ProcessInboxEvent">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="noAction" type="redirect">/schedule/showInbox.rdo</result>
+      <result name="noMeeting" type="redirect">/schedule/showMeeting.rdo</result>
+      <result name="continue" type="redirect">/schedule/showMeeting.rdo</result>
+    </action>
+
+    <action    name="schedule/showMeeting"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/event/eventMore.jsp</result>
+    </action>
+
+    <!-- XXX Conversation may not work if we result to edit -->
+    <action    name="schedule/processAttendeeReply"
+               class="org.bedework.client.web.rw.schedule.AttendeeReply">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/schedule/showInbox.rdo</result>
+      <result name="duplicate" type="redirect">/schedule/showInbox.rdo</result>
+      <result name="declined" type="redirect">/schedule/showInbox.rdo</result>
+      <result name="edit" type="redirect">/event/showEditEvent.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Attendee responding to an event
+         ............................................................... -->
+
+    <action    name="schedule/initAttendeeRespond"
+               class="org.bedework.client.web.rw.schedule.ProcessInboxEvent">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="noAction" type="redirect">/schedule/showInbox.rdo</result>
+      <result name="noMeeting" type="redirect">/schedule/showMeeting.rdo</result>
+      <result name="continue" type="redirect">/schedule/showMeeting.rdo</result>
+    </action>
+
+    <action    name="schedule/showAttendeeRespond"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+      <param name="refinterval">900</param>
+
+      <result name="success">/docs/schedule/attendeeRespond.jsp</result>
+    </action>
+
+    <action    name="schedule/initAttendeeUpdate"
+               class="org.bedework.client.web.rw.schedule.ProcessInboxEvent">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="continue" type="redirect">/schedule/showAttendeeRespond.rdo</result>
+      <result name="success" type="redirect">/schedule/showAttendeeRespond.rdo</result>
+    </action>
+
+    <action    name="schedule/changeStatus"
+               class="org.bedework.client.web.rw.schedule.AttendeeRespond">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="continue" type="redirect">/schedule/showAttendeeRespond.rdo</result>
+      <result name="success" type="redirect">/schedule/showAttendeeRespond.rdo</result>
+    </action>
+
+    <!-- Conversation may not work if we get a validation error -->
+    <action    name="schedule/attendeeRespond"
+               class="org.bedework.client.web.rw.schedule.AttendeeRespond">
+      <param name="actionType">action</param>
+      <param name="conversation">end</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="validationError" type="redirect">/schedule/showAttendeeRespond.rdo</result>
+      <result name="duplicate" type="redirect">/schedule/showInbox.rdo</result>
+    </action>
+
+    <!-- ...............................................................
+         Attendee asking for a refresh - option when editing event.
+         ............................................................... -->
+
+    <action    name="schedule/refresh"
+               class="org.bedework.client.web.rw.schedule.AttendeeRespond">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="success" type="redirect">/event/showEventMore.rdo</result>
+      <result name="validationError" type="redirect">/event/showEventMore.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                      Export (download) and Import
+         =============================================================== -->
+
+    <!-- ........... PUBLIC and PERSONAL clients ...... -->
+
+    <action    name="misc/export"
+               class="org.bedework.webcommon.misc.ExportAction">
+      <param name="actionType">resource</param>
+      <param name="conversation">only</param>
+    </action>
+
+    <!-- ........... PERSONAL client only ...... -->
+
+    <action    name="misc/initUpload"
+               class="org.bedework.client.web.rw.misc.InitUploadAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="success">/docs/upload.jsp</result>
+    </action>
+
+    <!--  Action called by the upload form -->
+    <action    name="misc/upload"
+               class="org.bedework.client.web.rw.misc.UploadAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="baddata" type="redirect">/main/showMain.rdo</result>
+      <result name="retry" type="redirect">/misc/initUpload.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                      Asynchronous calls and generic pages
+         =============================================================== -->
+
+    <!-- an action for setting values into the form asynchronously -->
+    <action    name="misc/async"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+      <param name="mdl">async</param>
+
+      <result name="success">/docs/async.jsp</result>
+      <result name="error">/docs/asyncError.jsp</result>
+      <result name="noAction">/docs/asyncError.jsp</result>
+      <result name="cancelled">/docs/asyncError.jsp</result>
+      <result name="noAccess">/docs/asyncError.jsp</result>
+      <result name="notFound">/docs/asyncError.jsp</result>
+    </action>
+
+    <action    name="misc/showPage"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="success">/docs/showPage.jsp</result>
+    </action>
+
+    <!-- ===============================================================
+                         Category Actions
+         =============================================================== -->
+
+    <!-- ...............................................................
+             Display categories page
+         ............................................................... -->
+
+    <action    name="categories/json"
+               class="org.bedework.webcommon.category.FetchCategoriesAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="catlist">true</param>
+    </action>
+
+    <action    name="category/initUpdate"
+               class="org.bedework.webcommon.category.FetchCategoriesAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/category/showUpdateList.rdo</result>
+    </action>
+
+    <action    name="category/showUpdateList"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+
+      <result name="success">/docs/category/categoryList.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+             Add a category
+         ............................................................... -->
+
+    <action    name="category/initAdd"
+               class="org.bedework.client.web.rw.category.InitAddCategoryAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="continue" type="redirect">/category/showModForm.rdo</result>
+    </action>
+
+    <action    name="category/showModForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/category/modCategory.jsp</result>
+    </action>
+
+    <action    name="category/update"
+               class="org.bedework.client.web.rw.category.UpdateCategoryAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="cancelled" type="redirect">/category/showUpdateList.rdo</result>
+      <result name="continue" type="redirect">/category/showUpdateList.rdo</result>
+      <result name="retry" type="redirect">/category/showModForm.rdo</result>
+      <result name="delete" type="redirect">/category/showDeleteConfirm.rdo</result>
+    </action>
+
+    <action    name="category/showDeleteConfirm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/category/deleteConfirm.jsp</result>
+    </action>
+
+    <action    name="category/delete"
+               class="org.bedework.client.web.rw.category.DeleteCategoryAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="inUse" type="redirect">/category/showReferenced.rdo</result>
+      <result name="cancelled" type="redirect">/category/showUpdateList.rdo</result>
+      <result name="notFound" type="redirect">/category/showUpdateList.rdo</result>
+      <result name="continue" type="redirect">/category/showUpdateList.rdo</result>
+    </action>
+
+    <action    name="category/showReferenced"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+
+      <result name="success">/docs/category/referenced.jsp</result>
+    </action>
+
+    <!-- ...............................................................
+             Modify a category
+         ............................................................... -->
+
+    <action    name="category/fetchForUpdate"
+               class="org.bedework.client.web.rw.category.FetchCategoryAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/category/showModForm.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                          Locations
+         =============================================================== -->
+
+    <!-- ........... PERSONAL client only ...... -->
+
+    <action    name="location/showUpdateList"
+               class="org.bedework.client.web.rw.location.FetchEditableAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/location/locationList.jsp</result>
+    </action>
+
+    <action    name="location/showModForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/location/modLocation.jsp</result>
+    </action>
+
+    <action    name="location/showDeleteConfirm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/location/deleteConfirm.jsp</result>
+    </action>
+
+    <action    name="location/initAdd"
+               class="org.bedework.client.web.rw.location.InitAddLocationAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/location/showModForm.rdo</result>
+    </action>
+
+    <action    name="location/initUpdate">
+      <result type="redirect">/location/showUpdateList.rdo</result>
+    </action>
+
+    <action    name="location/fetchForUpdate"
+               class="org.bedework.client.web.rw.location.FetchLocationAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/location/showModForm.rdo</result>
+    </action>
+
+    <action    name="location/update"
+               class="org.bedework.client.web.rw.location.UpdateLocationAction">
+      <param name="actionType">action</param>
+
+      <result name="cancelled" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="success" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="retry" type="redirect">/location/showModForm.rdo</result>
+      <result name="delete" type="redirect">/location/showDeleteConfirm.rdo</result>
+    </action>
+
+    <action    name="location/delete"
+               class="org.bedework.client.web.rw.location.DeleteLocationAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="noAccess" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="referenced" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="notFound" type="redirect">/location/showUpdateList.rdo</result>
+      <result name="cancelled" type="redirect">/location/showUpdateList.rdo</result>
+    </action>
+
+    <!-- Must be a gdo action - returns json -->
+    <action    name="location/all"
+               class="org.bedework.webcommon.location.FetchLocationsAction">
+      <param name="actionType">resource</param>
+      <param name="conversation">only</param>
+      <param name="mdl">locations</param>
+    </action>
+
+    <!-- ===============================================================
+                          Free / Busy
+          =============================================================== -->
+
+    <!-- ........... PERSONAL client only ...... -->
+
+    <action    name="freeBusy/showFreeBusy"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/freeBusy.jsp</result>
+    </action>
+
+    <action    name="fbsvc"
+               class="org.bedework.client.web.rw.schedule.FreeBusyPublishAction">
+      <param name="actionType">resource</param>
+    </action>
+
+    <action    name="freeBusy/getFreeBusy"
+               class="org.bedework.client.web.rw.misc.FreeBusyAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/freeBusy/showFreeBusy.rdo</result>
+      <result name="noAccess" type="redirect">/freeBusy/showFreeBusy.rdo</result>
+      <result name="notFound" type="redirect">/freeBusy/showFreeBusy.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                         Calendar Actions
+         =============================================================== -->
+
+    <!-- ........... PUBLIC and PERSONAL clients ...... -->
+
+    <action    name="publish/calendar"
+               class="org.bedework.webcommon.misc.WebCalendarAction">
+      <param name="actionType">resource</param>
+    </action>
+
+    <action    name="calendar/showPublicCals"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/calendarList.jsp</result>
+    </action>
+
+    <action    name="calendar/fetchPublicCalendars"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/calendar/showPublicCals.rdo</result>
+    </action>
+
+    <action    name="calendar/showCals"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/emitCalendars.jsp</result>
+    </action>
+
+    <action    name="calendar/fetchCalendars"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/calendar/showCals.rdo</result>
+    </action>
+
+    <action    name="calendar/showCalendarForExport"
+               class="org.bedework.webcommon.calendars.RenderCalendarAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/displayCalendarForExport.jsp</result>
+    </action>
+
+    <action    name="calendar/fetchForExport"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+
+      <result name="success">/calendar/showCalendarForExport.rdo</result>
+    </action>
+
+    <!-- ........... PERSONAL client only  .............. -->
+
+    <action    name="calendar/showCalendar"
+               class="org.bedework.webcommon.calendars.RenderCalendarAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/displayCalendar.jsp</result>
+    </action>
+
+    <action    name="calendar/fetchForDisplay"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/calendar/showCalendar.rdo</result>
+    </action>
+
+    <!-- === Adding and Modifying Calendars === -->
+
+    <action    name="calendar/showModForm"
+               class="org.bedework.webcommon.calendars.RenderCalendarAction">
+      <param name="actionType">render</param>
+
+      <result name="notFound" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="success">/docs/calendar/modCalendar.jsp</result>
+    </action>
+
+    <action    name="calendar/initAdd"
+               class="org.bedework.client.web.rw.calendars.InitAddCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/calendar/showAddForm.rdo</result>
+    </action>
+
+    <action    name="calendar/showAddForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/modCalendar.jsp</result>
+    </action>
+
+    <action    name="calendar/showUpdateList"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/calendarList.jsp</result>
+    </action>
+
+    <action    name="calendar/fetchForUpdate"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/calendar/showModForm.rdo</result>
+    </action>
+
+    <action    name="calendar/update"
+               class="org.bedework.client.web.rw.calendars.UpdateCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="cancelled" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="retry" type="redirect">/calendar/showModForm.rdo</result>
+      <result name="notAdded" type="redirect">/calendar/showAddForm.rdo</result>
+      <result name="delete" type="redirect">/calendar/showDeleteConfirm.rdo</result>
+    </action>
+
+    <action    name="calendar/setPropsInGrid"
+               class="org.bedework.client.web.rw.calendars.PatchCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <action    name="calendar/setPropsInList"
+               class="org.bedework.client.web.rw.calendars.PatchCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/main/showEventList.rdo</result>
+    </action>
+
+    <!-- === deleting calendars === -->
+
+    <action    name="calendar/showDeleteConfirm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="cancelled" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="success">/docs/calendar/deleteConfirm.jsp</result>
+    </action>
+
+    <action    name="calendar/showReferenced"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/referenced.jsp</result>
+    </action>
+
+    <action    name="calendar/delete"
+               class="org.bedework.client.web.rw.calendars.DeleteCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="inUse" type="redirect">/calendar/showReferenced.rdo</result>
+      <result name="notFound" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="cancelled" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="continue" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="reffed" type="redirect">/calendar/showUpdateList.rdo</result>
+    </action>
+
+    <action    name="calendar/listForExport"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/calendarListForExport.jsp</result>
+    </action>
+
+    <!-- === display a page of descriptions for public calendars (not currently used) === -->
+
+    <action    name="calendar/showDescriptionList"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/calendarDescriptions.jsp</result>
+    </action>
+
+    <!-- ===============================================================
+                       Sharing
+         =============================================================== -->
+
+    <action    name="sharing/sharecol"
+               class="org.bedework.client.web.rw.sharing.ShareCollectionAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/calendar/showModForm.rdo</result>
+    </action>
+
+    <action    name="sharing/reply"
+               class="org.bedework.client.web.rw.sharing.ShareReplyAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/main/showMain.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <action    name="sharing/publish"
+               class="org.bedework.client.web.rw.sharing.PublishCollectionAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/calendar/showModForm.rdo</result>
+    </action>
+
+    <action    name="sharing/subscribe"
+               class="org.bedework.client.web.rw.sharing.SubscribeAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/calendar/showUpdateList.rdo</result>
+      <result name="success" type="redirect">/calendar/showUpdateList.rdo</result>
+    </action>
+
+    <action    name="sharing/initAddSubscription"
+               class="org.bedework.client.web.rw.calendars.InitAddCalendarAction">
+      <param name="actionType">action</param>
+
+      <result name="continue" type="redirect">/sharing/showAddSubForm.rdo</result>
+    </action>
+
+    <action    name="sharing/showAddSubForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/calendar/addSubscription.jsp</result>
+    </action>
+
+    <!-- ===============================================================
+                       Notifications
+         =============================================================== -->
+
+    <!-- The following two actions do the same thing, and differ only by their
+         conversation= parameter. The first action is used when no
+         transaction is running; the second is used in the middle of a transaction
+         (e.g. a form is being filled). -->
+    <action    name="notify/remove"
+               class="org.bedework.client.web.rw.notifications.RemoveAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="mdl">remove</param>
+
+      <result name="notFound" type="redirect">/widget/ajaxTerminator.rdo</result>
+      <result name="success" type="redirect">/widget/ajaxTerminator.rdo</result>
+    </action>
+
+    <action    name="notify/removeTrans"
+               class="org.bedework.client.web.rw.notifications.RemoveAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+
+      <result name="notFound" type="redirect">/widget/ajaxTerminator.rdo</result>
+      <result name="success" type="redirect">/widget/ajaxTerminator.rdo</result>
+    </action>
+
+    <action    name="notify/get"
+               class="org.bedework.client.web.rw.notifications.GetNotificationsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="mdl">notify</param>
+
+      <result name="success" type="redirect">/notify/show.rdo</result>
+    </action>
+
+    <action    name="notify/show"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/notifications/notifications.jsp</result>
+    </action>
+
+    <action    name="notify/removeAll"
+               class="org.bedework.client.web.rw.notifications.RemoveAllAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+    </action>
+
+    <action    name="notify/subscribe"
+               class="org.bedework.client.web.rw.notifications.SubscribeAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="mdl">notify</param>
+    </action>
+
+    <!-- ===============================================================
+                                VPOLL
+         =============================================================== -->
+
+    <action    name="vpoll/initManageVpoll"
+               class="org.bedework.client.web.rw.schedule.ProcessInboxEvent">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="continue" type="redirect">/vpoll/managePolls.rdo</result>
+      <result name="success" type="redirect">/vpoll/managePolls.rdo</result>
+    </action>
+
+    <action    name="vpoll/managePolls"
+               class="org.bedework.client.web.rw.schedule.VpollAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+      <param name="refinterval">1500</param>
+
+      <result name="success">/docs/vpoll/managePolls.jsp</result>
+    </action>
+
+    <!-- ===============================================================
+                       Subscriptions
+                       Not any more - supported through add collection code
+         ===============================================================
+
+    <action    name="subs/showSubsMenu"
+               class="org.bedework.webcommon.RenderAction">
+               <param name="actionType">render</param>
+      
+      <result name="success">/docs/subs/subsMenu.jsp</result> 
+    </action>
+
+    <action    name="subs/showSubs"
+               class="org.bedework.webcommon.subs.RenderSubscriptionsAction">
+               <param name="actionType">render</param>
+      
+      <result name="success">/docs/subs/subscriptions.jsp</result> 
+    </action>
+
+    <action    name="subs/fetch"
+               class="org.bedework.webcommon.subs.GetSubscriptionsAction">
+               <param name="actionType">action</param>
+      
+      <result name="success">/subs/showSubs.rdo</result> 
+    </action>
+
+    <action    name="subs/showModForm"
+               class="org.bedework.webcommon.RenderAction">
+               <param name="actionType">render</param>
+      
+      <result name="success">/docs/subs/modSubscription.jsp</result> 
+    </action>
+
+    <action    name="subs/fetchForUpdate"
+               class="org.bedework.webcommon.subs.FetchSubscriptionAction">
+               <param name="actionType">action</param>
+      
+      <result name="continue">/subs/showModForm.rdo</result> 
+    </action>
+
+    <action    name="subs/initAdd"
+               class="org.bedework.webcommon.subs.InitSubscribeAction">
+               <param name="actionType">action</param>
+      
+      <result name="noAccess" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="cancelled" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="added" type="redirect">/subs/showModForm.rdo</result> 
+      <result name="success" type="redirect">/subs/showModForm.rdo</result> 
+    </action>
+
+    <action    name="subs/subscribe"
+               class="org.bedework.webcommon.subs.EndSubscribeAction">
+               <param name="actionType">action</param>
+      
+      <result name="cancelled" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="retry" type="redirect">/subs/showModForm.rdo</result> 
+      <result name="reffed" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="noAccess" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="added" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="updated" type="redirect">/subs/showSubs.rdo</result> 
+      <result name="success" type="redirect">/subs/showSubs.rdo</result> 
+    </action>
+
+    <action    name="subs/unsubscribe"
+               class="org.bedework.webcommon.subs.UnsubscribeAction">
+               <param name="actionType">action</param>
+      
+      <result name="success" type="redirect">/subs/showSubs.rdo</result> 
+    </action>
+
+    <action    name="subs/inaccessible"
+               class="org.bedework.webcommon.RenderAction">
+               <param name="actionType">render</param>
+      
+      <result name="success">/docs/subs/subInaccessible.jsp</result> 
+    </action>
+    -->
+
+    <!-- ===============================================================
+                        Views
+         =============================================================== -->
+
+    <action    name="view/addView"
+               class="org.bedework.client.web.rw.views.AddViewAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <action    name="view/removeView"
+               class="org.bedework.client.web.rw.views.DeleteViewAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                     User Preferences (also see email and alarms)
+         =============================================================== -->
+
+    <!-- ........... PERSONAL client only ...... -->
+
+    <action    name="prefs/showModForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/prefs/modPrefs.jsp</result>
+    </action>
+
+    <action    name="prefs/fetchForUpdate"
+               class="org.bedework.client.web.rw.pref.FetchPrefsAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/prefs/showModForm.rdo</result>
+    </action>
+
+    <action    name="prefs/update"
+               class="org.bedework.client.web.rw.pref.UpdatePrefsAction">
+      <param name="actionType">action</param>
+
+      <result name="cancelled" type="redirect">/main/showMain.rdo</result>
+      <result name="retry" type="redirect">/prefs/showModForm.rdo"  redirect="true</result>
+      <result name="notFound" type="redirect">/prefs/showModForm.rdo"  redirect="true</result>
+      <result name="success" type="redirect">/prefs/showModForm.rdo</result>
+    </action>
+
+    <action    name="prefs/showSchedulingModForm"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/prefs/modSchedulingPrefs.jsp</result>
+    </action>
+
+    <!-- the following needs to call a different action to display the
+         inbox access information  -->
+    <action    name="prefs/fetchSchedulingForUpdate"
+               class="org.bedework.client.web.rw.pref.FetchPrefsAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/prefs/showSchedulingModForm.rdo</result>
+    </action>
+
+    <action    name="prefs/updateSchedulingPrefs"
+               class="org.bedework.client.web.rw.pref.UpdatePrefsAction">
+      <param name="actionType">action</param>
+
+      <result name="cancelled" type="redirect">/main/showMain.rdo</result>
+      <result name="retry" type="redirect">/prefs/showSchedulingModForm.rdo"  redirect="true</result>
+      <result name="notFound" type="redirect">/prefs/showSchedulingModForm.rdo"  redirect="true</result>
+      <result name="success" type="redirect">/prefs/showSchedulingModForm.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                     Mailing Events
+         =============================================================== -->
+
+    <action    name="mail/showEmailOptions"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/emailOptions.jsp</result>
+    </action>
+
+    <action    name="mail/initMailEvent"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/email/showEmailOptions.rdo</result>
+    </action>
+
+    <action    name="mail/mailEvent"
+               class="org.bedework.webcommon.event.MailEventAction">
+      <param name="actionType">action</param>
+
+      <result name="noEvent" type="redirect">/main/showMain.rdo</result>
+      <result name="retry" type="redirect">/email/showEmailOptions.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                     Event Alarms
+         =============================================================== -->
+
+    <action    name="alarm/showAlarmOptions"
+               class="org.bedework.webcommon.event.RenderEventAction">
+      <param name="actionType">render</param>
+
+      <result name="success">/docs/alarmOptions.jsp</result>
+    </action>
+
+    <action    name="alarm/initEventAlarm"
+               class="org.bedework.webcommon.event.EventKeyAction">
+      <param name="actionType">action</param>
+
+      <result name="success" type="redirect">/alarm/showAlarmOptions.rdo</result>
+    </action>
+
+    <action    name="alarm/setAlarm"
+               class="org.bedework.webcommon.event.SetAlarmAction">
+      <param name="actionType">action</param>
+
+      <result name="retry" type="redirect">/alarm/showAlarmOptions.rdo</result>
+      <result name="success" type="redirect">/main/showMain.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                     Searching
+         =============================================================== -->
+
+    <action    name="search/search"
+               class="org.bedework.webcommon.search.SearchParamsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="listEvents" type="redirect">/main/showResult.rdo</result>
+      <result name="success" type="redirect">/search/showResult.rdo</result>
+    </action>
+
+
+    <action    name="search/showResult"
+               class="org.bedework.webcommon.search.RenderSearchResultAction">
+      <param name="actionType">render</param>
+      <param name="conversation">end</param>
+
+      <result name="success">/docs/search/list.jsp</result>
+    </action>
+
+    <action    name="search/next"
+               class="org.bedework.webcommon.search.SearchNextAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="success" type="redirect">/search/showResult.rdo</result>
+    </action>
+
+    <!-- ===============================================================
+                          Monitor
+         =============================================================== -->
+
+    <action    name="monitor"
+               class="org.bedework.webcommon.monitor.MonitorAction">
+      <param name="actionType">resource</param>
+    </action>
+
+    <!-- ===============================================================
+           Widgets - simple pages that return XML snippets for use with
+           ajax enabled forms (such as the cachedfeeder)
+         =============================================================== -->
+
+    <action    name="widget/showCategories"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="mdl">showcats</param>
+
+      <result name="success">/docs/widget/categories.jsp</result>
+    </action>
+
+    <action    name="widget/categories"
+               class="org.bedework.webcommon.NoopAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="mdl">showcats</param>
+
+      <result name="success" type="redirect">/widget/showCategories.rdo</result>
+      <result name="listEvents" type="redirect">/widget/showCategories.rdo</result>
+    </action>
+
+    <action    name="widget/showGroups"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="mdl">showgroups</param>
+
+      <result name="success">/docs/widget/groups.jsp</result>
+    </action>
+
+    <action    name="widget/groups"
+               class="org.bedework.webcommon.admingroup.FetchAGsAction">
+      <param name="actionType">action</param>
+      <param name="conversation">only</param>
+      <param name="mdl">showgroups</param>
+
+      <result name="success" type="redirect">/widget/showGroups.rdo</result>
+      <result name="listEvents" type="redirect">/widget/showGroups.rdo</result>
+    </action>
+
+    <!-- Update the attendee list and recalculate freebusy -->
+    <action    name="widget/attendees"
+               class="org.bedework.webcommon.event.AttendeeAction">
+      <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+      <param name="mdl">showatts</param>
+
+      <result name="success" type="redirect">/widget/showAttendees.rdo</result>
+      <result name="listAttendees" type="redirect">/widget/showAttendees.rdo</result>
+    </action>
+
+    <action    name="widget/showAttendees"
+               class="org.bedework.webcommon.RenderAction">
+      <param name="actionType">render</param>
+      <param name="mdl">showatts</param>
+
+      <result name="success">/docs/widget/attendees.jsp</result>
+    </action>
+  </package>
+
+</struts>
