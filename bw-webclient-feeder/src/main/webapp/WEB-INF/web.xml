@@ -22,6 +22,11 @@
     <param-value>/main/showMain.rdo</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>formClass</param-name>
+    <param-value>org.bedework.webcommon.BwActionFormBase</param-value>
+  </context-param>
+
   <!-- Do not alter or move  the following comment -->
   <!-- add context params here -->
 
@@ -41,6 +46,15 @@
   <filter>
     <filter-name>SvcI Filter</filter-name>
     <filter-class>org.bedework.webcommon.BwSvciFilter</filter-class>
+    <init-param>
+      <param-name>headDisallowed</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
   </filter>
   
   <!-- XSLT should getResource the response before the FOPFilter -->
@@ -93,9 +107,41 @@
     <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
 
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.do</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.gdo</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.rdo</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
   <!-- Mapping for freebusy service -->
   <filter-mapping>
     <filter-name>SvcI Filter</filter-name>
+    <url-pattern>/fbsvc</url-pattern>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>struts2</filter-name>
     <url-pattern>/fbsvc</url-pattern>
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>FORWARD</dispatcher>
@@ -113,39 +159,8 @@
   <!-- Do not alter or move  the following comment -->
   <!-- add listeners here -->
 
-  <servlet>
-    <servlet-name>action</servlet-name>
-    <servlet-class>
-      org.apache.struts.action.ActionServlet
-    </servlet-class>
-
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-
   <!-- Do not alter or move  the following comment -->
   <!-- add servlet definitions here -->
-
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.gdo</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.rdo</url-pattern>
-  </servlet-mapping>
-
-  <!-- This probably has to be last for struts -->
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
-
-  <!-- Mapping for freebusy service -->
-  <servlet-mapping>
-    <servlet-name>action</servlet-name>
-    <url-pattern>/fbsvc</url-pattern>
-  </servlet-mapping>
 
   <!-- Do not alter or move  the following comment -->
   <!-- add servlet mappings here -->

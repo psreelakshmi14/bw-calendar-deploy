@@ -174,8 +174,8 @@
                scope="session"
                parameter="actionType=action;conversation=start"
                validate="false">
-      <forward name="success" path="/main/showMain.rdo" redirect="true" />
       <forward name="listEvents" path="/main/showMain.rdo" redirect="true" />
+      <forward name="success" path="/main/showMain.rdo" redirect="true" />
       <forward name="noViewDef" path="/main/showMain.rdo" redirect="true" />
     </action>
 
@@ -185,8 +185,8 @@
                scope="session"
                parameter="actionType=action;conversation=start"
                validate="false">
-      <forward name="success" path="/main/showEventList.rdo" redirect="true" />
       <forward name="listEvents" path="/main/showEventList.rdo" redirect="true" />
+      <forward name="success" path="/main/showEventList.rdo" redirect="true" />
       <forward name="noViewDef" path="/main/showEventList.rdo" redirect="true" />
     </action>
 
@@ -200,8 +200,8 @@
                scope="session"
                parameter="actionType=action;conversation=start;mdl=ongoing"
                validate="false">
-      <forward name="success" path="/main/showOngoingList.rdo" redirect="true" />
       <forward name="listEvents" path="/main/showOngoingList.rdo" redirect="true" />
+      <forward name="success" path="/main/showOngoingList.rdo" redirect="true" />
       <forward name="noViewDef" path="/main/showOngoingList.rdo" redirect="true" />
       <forward name="error" path="/main/showOngoingList.rdo" redirect="true" />
       <forward name="noAction" path="/main/showOngoingList.rdo" redirect="true" />
@@ -234,8 +234,8 @@
                scope="session"
                parameter="actionType=action;conversation=start;mdl=mainEventList"
                validate="false">
-      <forward name="success" path="/main/showMainEventList.rdo" redirect="true" />
       <forward name="listEvents" path="/main/showMainEventList.rdo" redirect="true" />
+      <forward name="success" path="/main/showMainEventList.rdo" redirect="true" />
       <forward name="noViewDef" path="/main/showMainEventList.rdo" redirect="true" />
       <forward name="error" path="/main/showMainEventList.rdo" redirect="true" />
       <forward name="noAction" path="/main/showMainEventList.rdo" redirect="true" />
@@ -300,27 +300,6 @@
       <forward name="listEvents" path="/docs/event/eventList.jsp"/>
       <forward name="noAction" path="/docs/event/eventList.jsp"/>
     </action>
-    <!--
-    <action    path="/main/listEvents"
-               type="org.bedework.webcommon.search.SearchParamsAction"
-               name="calForm"
-               scope="session"
-               parameter="actionType=action;conversation=start"
-               validate="false">
-      <forward name="success" path="/main/showEventList.rdo" redirect="true" />
-      <forward name="listEvents" path="/main/showEventList.rdo" redirect="true" />
-    </action>
-
-    <action    path="/main/showEventList"
-               type="org.bedework.webcommon.search.RenderSearchResultAction"
-               name="calForm"
-               scope="session"
-               parameter="actionType=render;conversation=end;refaction=/main/showEventList.rdo"
-               validate="false">
-      <forward name="success" path="/docs/event/eventList.jsp"/>
-      <forward name="error" path="/docs/event/eventList.jsp"/>
-    </action>
-    -->
 
     <!-- ...............................................................
            Display a list of events - no forwarding
@@ -363,7 +342,6 @@
       <forward name="success" path="/docs/event/eventMore.jsp" />
     </action>
 
-
   <!-- ===============================================================
                     Export (download) and Import
        =============================================================== -->
@@ -377,7 +355,6 @@
                parameter="actionType=resource;conversation=only"
                validate="false">
     </action>
-
 
     <!-- ===============================================================
                       Asynchronous calls and generic pages
@@ -405,6 +382,22 @@
                parameter="actionType=render;conversation=only"
                validate="false">
       <forward name="success" path="/docs/showPage.jsp" />
+    </action>
+
+    <!-- ===============================================================
+                         Category Actions
+         =============================================================== -->
+
+  <!-- ...............................................................
+           Display categories page
+       ............................................................... -->
+
+    <action    path="/categories/json"
+               type="org.bedework.webcommon.category.FetchCategoriesAction"
+               name="calForm"
+               scope="session"
+               parameter="catlist=true;catnofile=true;actionType=action;conversation=only;mdl=jcategories"
+               validate="false">
     </action>
 
     <!-- ===============================================================
@@ -449,8 +442,8 @@
                scope="session"
                parameter="actionType=action;conversation=start"
                validate="false">
-      <forward name="success" path="/search/showResult.rdo" redirect="true" />
       <forward name="listEvents" path="/search/showResult.rdo" redirect="true" />
+      <forward name="success" path="/search/showResult.rdo" redirect="true" />
     </action>
 
 
@@ -532,14 +525,6 @@
                name="calForm"
                scope="session"
                parameter="actionType=action;conversation=only;mdl=jadgrps"
-               validate="false">
-    </action>
-
-    <action    path="/categories/json"
-               type="org.bedework.webcommon.category.FetchCategoriesAction"
-               name="calForm"
-               scope="session"
-               parameter="catlist=true;catnofile=true;actionType=action;conversation=only;mdl=jcategories"
                validate="false">
     </action>
 
