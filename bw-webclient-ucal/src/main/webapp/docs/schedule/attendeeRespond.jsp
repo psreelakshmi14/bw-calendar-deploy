@@ -13,7 +13,7 @@ try {
 <page>attendeeRespond</page>
 
 <formElements>
-  <c:set var="event" value="${}calForm.event}"/>
+  <c:set var="event" value="${calForm.event}"/>
 
   <bw:emitText name="event" property="scheduleState" />
   <bw:emitText name="event" property="scheduleMethod" />
@@ -49,7 +49,6 @@ try {
   <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
   <bwhtml:form action="schedule/attendeeRespond">
-    <title>
     <bw:textField name="event" property="summary"
                   tagName="title" />
     <bw:emitContainer name="event" indent="    " tagName="calendar" />
