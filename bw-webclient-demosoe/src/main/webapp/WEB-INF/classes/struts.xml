@@ -100,7 +100,7 @@
 
       <result name="notFound" type="redirect">/main/showMain.rdo</result>
 
-      <result name="loggedOut">/docs/login/logout.html</result>
+      <result name="loggedOut">/login/logout.html</result>
     </global-results>
 
     <!-- =========================================================

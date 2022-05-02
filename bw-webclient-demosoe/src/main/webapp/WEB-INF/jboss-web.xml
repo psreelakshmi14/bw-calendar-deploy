@@ -3,7 +3,7 @@
 <jboss-web>
   <!-- Virtual host -->
 
-  <context-root>/cal</context-root>
+  <context-root>/demosoe</context-root>
 
   <resource-ref>
     <res-ref-name>jms/BedeworkConnectionFactory</res-ref-name>
