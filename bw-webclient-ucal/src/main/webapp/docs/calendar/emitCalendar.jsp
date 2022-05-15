@@ -6,8 +6,10 @@
 
   <c:if test="${!calForm.guest}">
     <%-- don't publish privs and acls to the public client --%>
-    <bw:emitCurrentPrivs name="calendar" property="currentAccess" />
-    <bw:emitAcl name="calendar" property="currentAccess" />
+    <bw:emitCurrentPrivs name="calendar" property="currentAccess"
+                         scope="session"/>
+    <bw:emitAcl name="calendar" property="currentAccess"
+                scope="session"/>
   </c:if>
 
   <bw:getChildren id="children" name="calendar" />
