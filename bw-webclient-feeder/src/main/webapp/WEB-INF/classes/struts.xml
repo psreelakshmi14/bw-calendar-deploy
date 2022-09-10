@@ -143,7 +143,7 @@
     </action>
 
     <action    name="setup"
-               class="org.bedework.webcommon.search.NoopRenderAction">
+               class="org.bedework.webcommon.NoopRenderAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
 
@@ -301,7 +301,7 @@
            Display a list of events - no forwarding
        ............................................................... -->
 
-    <action    name="/main/eventsFeed"
+    <action    name="main/eventsFeed"
                class="org.bedework.webcommon.search.SearchParamsAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
@@ -397,7 +397,7 @@
 
     <!-- ........... PUBLIC and PERSONAL clients ...... -->
 
-    <action    name="/publish/calendar"
+    <action    name="publish/calendar"
                class="org.bedework.webcommon.misc.WebCalendarAction">
       <param name="actionType">resource</param>
     </action>
@@ -487,35 +487,35 @@
          =============================================================== -->
 
     <!-- Must be a gdo action - returns json -->
-    <action    name="/locations/json"
+    <action    name="locations/json"
                class="org.bedework.webcommon.location.FetchLocationsAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
       <param name="mdl">jlocations</param>
     </action>
 
-    <action    name="/admingroups/json"
+    <action    name="admingroups/json"
                class="org.bedework.webcommon.admingroup.FetchAdminGroupsAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
       <param name="mdl">jadgrps</param>
     </action>
 
-    <action    name="/calsuites/json"
+    <action    name="calsuites/json"
                class="org.bedework.webcommon.calsuite.FetchCalSuitesAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
       <param name="mdl">jcalsuites</param>
     </action>
 
-    <action    name="/public-collections/json"
+    <action    name="public-collections/json"
                class="org.bedework.webcommon.calendars.FetchCollectionsAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
       <param name="mdl">jcollections</param>
     </action>
 
-    <action    name="/user-collections/json"
+    <action    name="user-collections/json"
                class="org.bedework.webcommon.calendars.FetchCollectionsAction">
       <param name="actionType">action</param>
       <param name="conversation">only</param>
