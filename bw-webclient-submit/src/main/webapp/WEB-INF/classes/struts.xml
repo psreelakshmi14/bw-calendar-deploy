@@ -71,7 +71,7 @@
   -->
 
 <struts>
-  <constant name="struts.devMode" value="true" />
+  <constant name="struts.devMode" value="${env.org_bedework_struts_devMode:false}" />
   <constant name="struts.multipart.maxSize" value="1000000" />
   <constant name="struts.enable.SlashesInActionNames" value="true"/>
   <constant name="struts.action.extension" value="do,gdo,rdo" />
