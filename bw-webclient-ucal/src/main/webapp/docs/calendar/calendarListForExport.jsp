@@ -23,18 +23,18 @@
 <formElements>
   <bwhtml:form action="event/editEvent">
     <start>
-      <bw:selectDateTime name="calForm"
-                         property="eventStartDate"
-                         indent="      "
-                         noyear="true" />
+      <bw:selectDate name="calForm"
+                     property="eventStartDate"
+                     indent="      "
+                     noyear="true" />
       <bw:textField property="eventStartDate.year" size="4"
                     tagName="yearText" />
     </start>
     <end>
-      <bw:selectDateTime name="calForm"
-                         property="eventEndDate"
-                         indent="      "
-                         noyear="true" />
+      <bw:selectDate name="calForm"
+                     property="eventEndDate"
+                     indent="      "
+                     noyear="true" />
       <bw:textField property="eventEndDate.year" size="4"
                     tagName="yearText" />
     </end>
