@@ -6,7 +6,7 @@
   <bw:emitText name="calSuite" property="defaultContext" />
   <bw:emitText name="calSuite" property="group.account" tagName="group" />
   <bw:emitText name="calSuite" property="rootCollectionPath" tagName="calPath" />
-  <bw:emitText name="calSuite" property="submissionsRootPath" />
+  <bw:emitText name="calSuite" property="description" />
   <bw:emitCurrentPrivs name="calSuite" property="currentAccess"/>
   <bw:emitAcl name="calSuite" property="currentAccess" />
 </calSuite>
