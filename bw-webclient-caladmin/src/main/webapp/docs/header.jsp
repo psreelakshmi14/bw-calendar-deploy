@@ -72,7 +72,7 @@ try {
   <submissionsRoot>
     <bw:emitText name="calForm" property="encodedSubmissionRoot"
                  tagName="encoded"/>
-    <bw:emitText name="bwconfig" property="submissionRoot"
+    <bw:emitText name="calForm" property="submissionRoot"
                  tagName="unencoded"/>
   </submissionsRoot>
 
