@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>locationReferenced</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
   <c:set var="location" value="${calform.location}"/>
 <location>

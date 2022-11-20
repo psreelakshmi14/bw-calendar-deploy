@@ -115,6 +115,20 @@
       <result name="success">/docs/main.jsp</result>
     </action>
 
+    <action    name="main/showCurrentTab"
+               class="org.bedework.client.web.admin.ShowCurrentTabAction">
+      <param name="actionType">render</param>
+      <param name="conversation">only</param>
+
+      <result name="main">/docs/main.jsp</result>
+      <result name="approvalQueue">/docs/event/eventList.jsp</result>
+      <result name="pending">/docs/tabPendingEvents.jsp</result>
+      <result name="suggestionQueue">/docs/tabSuggestionQueueEvents.jsp</result>
+      <result name="users">/docs/tabUsers.jsp</result>
+      <result name="calsuite">/docs/tabCalsuite.jsp</result>
+      <result name="system">/docs/tabSystem.jsp</result>
+    </action>
+
     <action    name="admin/showNoAccess"
                class="org.bedework.webcommon.RenderAction">
       <param name="actionType">render</param>
@@ -141,18 +155,18 @@
     </action>
 
     <action    name="setup"
-               class="org.bedework.webcommon.NoopAction">
+               class="org.bedework.client.web.admin.MainAction">
       <param name="actionType">render</param>
 
       <result name="success" type="redirect">/main/showMain.rdo</result>
-      <result name="listEvents" type="redirect">/main/showEventList.rdo</result>
       <result name="loggedOut" type="redirect">/main/showMain.rdo</result>
     </action>
 
     <action    name="main/initPendingTab"
-               class="org.bedework.webcommon.search.SearchParamsAction">
+               class="org.bedework.client.web.admin.event.InitEventTabAction">
       <param name="actionType">action</param>
       <param name="conversation">start</param>
+      <param name="currentTab">pending</param>
 
       <result name="success" type="redirect">/main/showPendingTab.rdo</result>
       <result name="listEvents" type="redirect">/main/showPendingTab.rdo</result>
@@ -173,34 +187,21 @@
     </action>
 
     <action    name="main/initApprovalQueueTab"
-               class="org.bedework.webcommon.search.SearchParamsAction">
+               class="org.bedework.client.web.admin.event.InitEventTabAction">
       <param name="actionType">action</param>
       <param name="conversation">start</param>
-      
-      <result name="success" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="listEvents" type="redirect">/main/showApprovalQueueTab.rdo</result>
-    </action>
+      <param name="currentTab">approvalQueue</param>
 
-    <action    name="main/showApprovalQueueTab"
-               class="org.bedework.webcommon.search.RenderSearchResultAction">
-      <param name="actionType">render</param>
-      <param name="conversation">end</param>
-      
-      <result name="success">/docs/tabApprovalQueueEvents.jsp</result>
-    </action>
-
-    <action    name="main/nextApprovalQueueTab"
-               class="org.bedework.webcommon.search.SearchNextAction">
-      <param name="actionType">action</param>
-
-      <result name="success" type="redirect">/main/showApprovalQueueTab.rdo</result>
+      <result name="success" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="listEvents" type="redirect">/event/showUpdateList.rdo</result>
     </action>
 
     <action    name="main/initSuggestionQueueTab"
-               class="org.bedework.webcommon.search.SearchParamsAction">
+               class="org.bedework.client.web.admin.event.InitEventTabAction">
       <param name="actionType">action</param>
       <param name="conversation">start</param>
-      
+      <param name="currentTab">suggestionQueue</param>
+
       <result name="success" type="redirect">/main/showSuggestionQueueTab.rdo</result>
       <result name="listEvents" type="redirect">/main/showSuggestionQueueTab.rdo</result>
     </action>
@@ -221,26 +222,29 @@
     </action>
 
     <action    name="main/showCalsuiteTab"
-               class="org.bedework.webcommon.RenderAction">
+               class="org.bedework.client.web.admin.ShowTabAction">
       <param name="actionType">render</param>
       <param name="conversation">only</param>
-      
+      <param name="currentTab">calsuite</param>
+
       <result name="success">/docs/tabCalsuite.jsp</result>
     </action>
 
     <action    name="main/showUsersTab"
-               class="org.bedework.webcommon.RenderAction">
+               class="org.bedework.client.web.admin.ShowTabAction">
       <param name="actionType">render</param>
       <param name="conversation">only</param>
-      
+      <param name="currentTab">users</param>
+
       <result name="success">/docs/tabUsers.jsp</result>
     </action>
 
     <action    name="main/showSystemTab"
-               class="org.bedework.webcommon.RenderAction">
+               class="org.bedework.client.web.admin.ShowTabAction">
       <param name="actionType">render</param>
       <param name="conversation">end</param>
-      
+      <param name="currentTab">system</param>
+
       <result name="success">/docs/tabSystem.jsp</result>
     </action>
 
@@ -299,9 +303,9 @@
       <param name="actionType">action</param>
       <param name="conversation">start</param>
       
-      <result name="noAction" type="redirect">/main/showMain.rdo</result>
-      <result name="notFound" type="redirect">/main/showMain.rdo</result>
-      <result name="error" type="redirect">/main/showMain.rdo</result>
+      <result name="noAction" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="notFound" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="error" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="continue" type="redirect">/event/showModForm.rdo</result>
       <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
@@ -322,10 +326,10 @@
       
       <result name="validationError" type="redirect">/event/showModForm.rdo</result>
       <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
-      <result name="success" type="redirect">/main/showMain.rdo</result>
+      <result name="success" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="retry" type="redirect">/event/showModForm.rdo</result>
       <result name="delete" type="redirect">/event/showDeleteConfirm.rdo</result>
-      <result name="cancelled" type="redirect">/main/showMain.rdo</result>
+      <result name="cancelled" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
@@ -404,15 +408,6 @@
                        Pending Event Actions
          =============================================================== -->
 
-    <action    name="event/showModFormPending"
-               class="org.bedework.webcommon.RenderAction">
-      <param name="actionType">render</param>
-      <param name="conversation">continue</param>
-      <param name="refinterval">900</param>
-
-      <result name="success">/docs/event/modEventPending.jsp</result>
-    </action>
-
     <action    name="event/fetchForUpdatePending"
                class="org.bedework.client.web.admin.event.AdminFetchEventAction">
       <param name="actionType">action</param>
@@ -421,7 +416,7 @@
       <result name="noAction" type="redirect">/main/showPendingTab.rdo</result>
       <result name="notFound" type="redirect">/main/showPendingTab.rdo</result>
       <result name="error" type="redirect">/main/showPendingTab.rdo</result>
-      <result name="continue" type="redirect">/event/showModFormPending.rdo</result>
+      <result name="continue" type="redirect">/event/showModForm.rdo</result>
       <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
@@ -433,7 +428,7 @@
       <result name="validationError" type="redirect">/main/showPendingTab.rdo</result>
       <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
       <result name="success" type="redirect">/main/showPendingTab.rdo</result>
-      <result name="retry" type="redirect">/event/showModFormPending.rdo</result>
+      <result name="retry" type="redirect">/event/showModForm.rdo</result>
       <result name="delete" type="redirect">/event/showDeleteConfirmPending.rdo</result>
       <result name="cancelled" type="redirect">/main/showPendingTab.rdo</result>
       <result name="copy" type="redirect">/event/showModForm.rdo</result>
@@ -461,24 +456,15 @@
                        Approval Queue Event Actions
          =============================================================== -->
 
-    <action    name="event/showModFormApprovalQueue"
-               class="org.bedework.webcommon.RenderAction">
-      <param name="actionType">render</param>
-      <param name="conversation">continue</param>
-      <param name="refinterval">900</param>
-
-      <result name="success">/docs/event/modEventApprovalQueue.jsp</result>
-    </action>
-
     <action    name="event/fetchForUpdateApprovalQueue"
                class="org.bedework.client.web.admin.event.AdminFetchEventAction">
       <param name="actionType">action</param>
       <param name="conversation">start</param>
-      <result name="noAction" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="notFound" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="error" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="continue" type="redirect">/event/showModFormApprovalQueue.rdo</result>
-      <result name="copy" type="redirect">/event/showModFormApprovalQueue.rdo</result>
+      <result name="noAction" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="notFound" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="error" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="continue" type="redirect">/event/showModForm.rdo</result>
+      <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
     <action    name="event/updateApprovalQueue"
@@ -486,22 +472,13 @@
                <param name="actionType">action</param>
       <param name="conversation">continue</param>
 
-      <result name="validationError" type="redirect">/main/showApprovalQueueTab.rdo</result>
+      <result name="validationError" type="redirect">/event/showUpdateList.rdo</result>
       <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
-      <result name="success" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="retry" type="redirect">/event/showModFormApprovalQueue.rdo</result>
+      <result name="success" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="retry" type="redirect">/event/showModForm.rdo</result>
       <result name="delete" type="redirect">/event/showDeleteConfirmApprovalQueue.rdo</result>
-      <result name="cancelled" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="copy" type="redirect">/event/showModFormApprovalQueue.rdo</result>
-    </action>
-
-    <action    name="event/showModFormSuggestionQueue"
-               class="org.bedework.webcommon.RenderAction">
-      <param name="actionType">render</param>
-      <param name="conversation">continue</param>
-      <param name="refinterval">900</param>
-
-      <result name="success">/docs/event/modEventSuggestionQueue.jsp</result>
+      <result name="cancelled" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
     <action    name="event/fetchForUpdateSuggestionQueue"
@@ -511,8 +488,8 @@
       <result name="noAction" type="redirect">/main/showSuggestionQueueTab.rdo</result>
       <result name="notFound" type="redirect">/main/showSuggestionQueueTab.rdo</result>
       <result name="error" type="redirect">/main/showSuggestionQueueTab.rdo</result>
-      <result name="continue" type="redirect">/event/showModFormSuggestionQueue.rdo</result>
-      <result name="copy" type="redirect">/event/showModFormSuggestionQueue.rdo</result>
+      <result name="continue" type="redirect">/event/showModForm.rdo</result>
+      <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
     <action    name="event/updateSuggestionQueue"
@@ -523,10 +500,10 @@
       <result name="validationError" type="redirect">/main/showSuggestionQueueTab.rdo</result>
       <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
       <result name="success" type="redirect">/main/showSuggestionQueueTab.rdo</result>
-      <result name="retry" type="redirect">/event/showModFormSuggestionQueue.rdo</result>
+      <result name="retry" type="redirect">/event/showModForm.rdo</result>
       <result name="delete" type="redirect">/event/showDeleteConfirmSuggestionQueue.rdo</result>
       <result name="cancelled" type="redirect">/main/showSuggestionQueueTab.rdo</result>
-      <result name="copy" type="redirect">/event/showModFormSuggestionQueue.rdo</result>
+      <result name="copy" type="redirect">/event/showModForm.rdo</result>
     </action>
 
     <action    name="event/showDeleteConfirmApprovalQueue"
@@ -542,10 +519,10 @@
                <param name="actionType">action</param>
       <param name="conversation">continue</param>
 
-      <result name="cancelled" type="redirect">/main/showApprovalQueueTab.rdo</result>
+      <result name="cancelled" type="redirect">/event/showUpdateList.rdo</result>
       <result name="noAction" type="redirect">/event/showDeleteConfirmApprovalQueue.rdo</result>
-      <result name="continue" type="redirect">/main/showApprovalQueueTab.rdo</result>
-      <result name="success" type="redirect">/main/showApprovalQueueTab.rdo</result>
+      <result name="continue" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="success" type="redirect">/event/showUpdateList.rdo</result>
     </action>
 
     <!-- ===============================================================

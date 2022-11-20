@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>adminGroupList</page>
-<tab>users</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <groups>
   <bw:emitText name="calForm" property="showAgMembers"

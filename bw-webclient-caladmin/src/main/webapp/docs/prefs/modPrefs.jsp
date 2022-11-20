@@ -3,7 +3,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modPrefs</page>
-<tab>users</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%@include file="/docs/prefs/prefsCommon.jsp"%>
 

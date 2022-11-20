@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>categoryReferenced</page>
-<tab>system</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
   <bw:emitCategory name="calForm"  property="category"
                    tagName="currentCategory" indent="  "/>

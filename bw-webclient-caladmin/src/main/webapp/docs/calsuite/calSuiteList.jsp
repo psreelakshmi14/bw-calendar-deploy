@@ -4,7 +4,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>calSuiteList</page>
-<tab>system</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <calSuites>
   <c:forEach var="calSuite" items="${calForm.calSuites}" >

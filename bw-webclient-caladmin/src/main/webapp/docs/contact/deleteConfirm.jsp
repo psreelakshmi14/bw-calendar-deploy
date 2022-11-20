@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteContactConfirm</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="contact" value="${calForm.contact}" />
 <contact>

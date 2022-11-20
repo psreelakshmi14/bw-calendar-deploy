@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modResource</page>
-<tab>calsuite</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <bw:emitText name="calForm" property="addingResource"
              tagName="creating"/>

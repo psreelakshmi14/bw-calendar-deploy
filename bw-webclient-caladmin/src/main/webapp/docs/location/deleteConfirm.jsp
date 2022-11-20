@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteLocationConfirm</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <location>
   <bw:emitText name="calForm" property="location.address.value"

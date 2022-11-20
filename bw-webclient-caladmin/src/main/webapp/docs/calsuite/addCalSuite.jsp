@@ -3,7 +3,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>addCalSuite</page>
-<tab>system</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%@include file="/docs/footer.jsp"%>
 

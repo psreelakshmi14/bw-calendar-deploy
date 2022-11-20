@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>contactReferenced</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="contact" value="${calform.contact}"/>
 <contact>

@@ -5,7 +5,7 @@
 try {
 %>
 <page>tabPendingEvents</page>
-<tab>pending</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%@include file="/docs/event/eventListRoot.jsp"%>
 <%

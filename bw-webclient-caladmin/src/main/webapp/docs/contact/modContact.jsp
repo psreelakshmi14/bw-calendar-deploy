@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modContact</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 <bw:emitText name="calForm" property="addingContact"
              tagName="creating"/>
 

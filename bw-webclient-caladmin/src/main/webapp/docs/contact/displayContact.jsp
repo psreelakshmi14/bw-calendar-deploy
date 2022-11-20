@@ -4,7 +4,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>displayContact</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <contacts>
   <c:forEach var="contact" items="${calForm.editableContacts}" >

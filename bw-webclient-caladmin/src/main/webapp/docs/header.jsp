@@ -94,7 +94,6 @@ try {
     <initPendingTab><c:url value="/main/initPendingTab.do?b=de"/></initPendingTab>
     <nextPendingTab><c:url value="/main/nextPendingTab.do?b=de"/></nextPendingTab>
     <initApprovalQueueTab><c:url value="/main/initApprovalQueueTab.do?b=de"/></initApprovalQueueTab>
-    <nextApprovalQueueTab><c:url value="/main/nextApprovalQueueTab.do?b=de"/></nextApprovalQueueTab>
     <initSuggestionQueueTab><c:url value="/main/initSuggestionQueueTab.do?b=de"/></initSuggestionQueueTab>
     <nextSuggestionQueueTab><c:url value="/main/nextSuggestionQueueTab.do?b=de"/></nextSuggestionQueueTab>
     <showCalsuiteTab><c:url value="/main/showCalsuiteTab.rdo?b=de"/></showCalsuiteTab>

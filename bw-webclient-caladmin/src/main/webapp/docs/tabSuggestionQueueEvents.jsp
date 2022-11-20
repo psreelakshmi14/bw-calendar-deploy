@@ -5,7 +5,7 @@
 try {
 %>
 <page>tabSuggestionQueueEvents</page>
-<tab>suggestionQueue</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%@include file="/docs/event/eventListRoot.jsp"%>
 <%

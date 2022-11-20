@@ -4,7 +4,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteEventConfirmPending</page>
-<tab>pending</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="allView" value="true" scope="request"/>
 <c:set var="eventFormatter" value="${calForm.curEventFmt}"

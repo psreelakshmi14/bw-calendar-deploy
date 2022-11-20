@@ -4,7 +4,7 @@
 <%@ include file="/docs/header.jsp" %>
 
 <page>selectCalForEvent</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <% /* Used when selecting a calendar while adding or editing an event.
 

@@ -10,7 +10,7 @@ try {
 %>
 
 <page>searchResult</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <searchResults>
   <bw:emitText name="moduleState" property="query"/>

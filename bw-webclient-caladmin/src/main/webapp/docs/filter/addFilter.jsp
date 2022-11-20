@@ -5,7 +5,7 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>addFilter</page>
-<tab>system</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <filters>
   <c:if test="${not empty calForm.filters}">

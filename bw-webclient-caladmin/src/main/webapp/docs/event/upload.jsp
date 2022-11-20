@@ -7,7 +7,7 @@ try {
 %>
 
 <page>upload</page>
-<tab>system</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%
 } catch (Throwable t) {

@@ -1,10 +1,11 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
 
 <bedework>
 <%@include file="header.jsp"%>
 
 <page>main</page>
-<tab>main</tab>
+<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%--  Generate form elements to be exposed.
       These can be manipulated in the xslt if desired.
