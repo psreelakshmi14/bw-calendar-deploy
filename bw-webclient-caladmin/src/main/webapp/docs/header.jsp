@@ -92,10 +92,8 @@ try {
          append the query string, we can always begin with an ampersand. --%>
     <setup><c:url value="/setup.do?b=de"/></setup>
     <initPendingTab><c:url value="/main/initPendingTab.do?b=de"/></initPendingTab>
-    <nextPendingTab><c:url value="/main/nextPendingTab.do?b=de"/></nextPendingTab>
     <initApprovalQueueTab><c:url value="/main/initApprovalQueueTab.do?b=de"/></initApprovalQueueTab>
     <initSuggestionQueueTab><c:url value="/main/initSuggestionQueueTab.do?b=de"/></initSuggestionQueueTab>
-    <nextSuggestionQueueTab><c:url value="/main/nextSuggestionQueueTab.do?b=de"/></nextSuggestionQueueTab>
     <showCalsuiteTab><c:url value="/main/showCalsuiteTab.rdo?b=de"/></showCalsuiteTab>
     <showUsersTab><c:url value="/main/showUsersTab.rdo?b=de"/></showUsersTab>
     <showSystemTab><c:url value="/main/showSystemTab.rdo?b=de"/></showSystemTab>
@@ -116,17 +114,10 @@ try {
       <initAddEvent><c:url value="/event/initAddEvent.do?b=de"/></initAddEvent>
       <initUpdateEvent><c:url value="/event/initUpdateEvent.do?b=de"/></initUpdateEvent>
       <delete><c:url value="/event/delete.do?b=de"/></delete>
-      <deletePending><c:url value="/event/deletePending.do?b=de"/></deletePending>
-      <deleteApprovalQueue><c:url value="/event/deleteApprovalQueue.do?b=de"/></deleteApprovalQueue>
       <fetchForDisplay><c:url value="/event/fetchForDisplay.do?b=de"/></fetchForDisplay>
       <fetchForUpdate><c:url value="/event/fetchForUpdate.do?b=de"/></fetchForUpdate>
       <fetchUpdateList><c:url value="/event/fetchUpdateList.do?b=de"/></fetchUpdateList>
-      <fetchForUpdatePending><c:url value="/event/fetchForUpdatePending.do?b=de"/></fetchForUpdatePending>
-      <fetchForUpdateApprovalQueue><c:url value="/event/fetchForUpdateApprovalQueue.do?b=de"/></fetchForUpdateApprovalQueue>
-      <fetchForUpdateSuggestionQueue><c:url value="/event/fetchForUpdateSuggestionQueue.do?b=de"/></fetchForUpdateSuggestionQueue>
       <update><c:url value="/event/update.do?b=de"/></update>
-      <updatePending><c:url value="/event/updatePending.do?b=de"/></updatePending>
-      <updateApprovalQueue><c:url value="/event/updateApprovalQueue.do?b=de"/></updateApprovalQueue>
       <selectCalForEvent><c:url value="/event/selectCalForEvent.do?b=de"/></selectCalForEvent>
       <initUpload><c:url value="/event/initUpload.rdo?b=de"/></initUpload>
       <upload><c:url value="/event/upload.do?b=de"/></upload>
