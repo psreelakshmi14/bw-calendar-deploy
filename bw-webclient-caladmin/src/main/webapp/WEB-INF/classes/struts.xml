@@ -317,9 +317,47 @@
       <result name="success" type="redirect">/event/showModForm.rdo</result>
     </action>
 
-    <!-- ...............................................................
+    <!-- .........................................................
+             Approve/publish an event (link on event list page)
+         ......................................................... -->
+
+    <action    name="event/fetchForApprovePublish"
+               class="org.bedework.client.web.admin.event.AdminFetchEventAction">
+      <param name="actionType">action</param>
+      <param name="conversation">start</param>
+
+      <result name="noAction" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="notFound" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="error" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="continue" type="redirect">/event/showApprovePublish.rdo</result>
+      <result name="copy" type="redirect">/event/showApprovePublish.rdo</result>
+    </action>
+
+    <action    name="event/showApprovePublish"
+               class="org.bedework.client.web.admin.AdminRenderAction">
+      <param name="actionType">render</param>
+      <param name="conversation">continue</param>
+
+      <result name="success">/docs/event/approvePublish.jsp</result>
+    </action>
+
+    <!-- .........................................................
+             Approve/publish an event (from showApprovePublish)
+         ......................................................... -->
+
+    <action    name="event/approvePublish"
+               class="org.bedework.client.web.admin.event.ApprovePublishAction">
+               <param name="actionType">action</param>
+      <param name="conversation">continue</param>
+      <result name="cancelled" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="noAction" type="redirect">/event/showApprovePublish.rdo</result>
+      <result name="continue" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="success" type="redirect">/event/showUpdateList.rdo</result>
+    </action>
+
+    <!-- .........................................................
              Deleting an event (from confirm)
-         ............................................................... -->
+         ......................................................... -->
 
     <action    name="event/delete"
                class="org.bedework.client.web.rw.event.DeleteEventAction">

@@ -106,6 +106,8 @@ try {
     </search>
 
     <event>
+      <fetchForApprovePublish><c:url value="/event/fetchForApprovePublish.do?b=de"/></fetchForApprovePublish>
+      <approvePublish><c:url value="/event/approvePublish.do?b=de"/></approvePublish>
       <showEvent><c:url value="/event/showEvent.rdo?b=de"/></showEvent>
       <showModForm><c:url value="/event/showModForm.rdo?b=de"/></showModForm>
       <showUpdateList><c:url value="/event/showUpdateList.rdo?b=de"/></showUpdateList>
