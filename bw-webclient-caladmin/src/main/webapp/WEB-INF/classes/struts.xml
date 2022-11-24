@@ -349,10 +349,10 @@
                class="org.bedework.client.web.admin.event.ApprovePublishAction">
                <param name="actionType">action</param>
       <param name="conversation">continue</param>
-      <result name="cancelled" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="cancelled" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="noAction" type="redirect">/event/showApprovePublish.rdo</result>
-      <result name="continue" type="redirect">/event/showUpdateList.rdo</result>
-      <result name="success" type="redirect">/event/showUpdateList.rdo</result>
+      <result name="continue" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="success" type="redirect">/main/showCurrentTab.rdo</result>
     </action>
 
     <!-- .........................................................
