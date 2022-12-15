@@ -17,7 +17,7 @@
     </c:if>
     <c:if test="${empty requestScope.bw_search_params}" >
       <curOffset>0</curOffset>
-      <pageSize>0</pageSize>
+      <pageSize>1</pageSize>
       <toDate.dtval>19530315</toDate.dtval>
     </c:if>
 
