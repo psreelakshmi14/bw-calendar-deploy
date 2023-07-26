@@ -329,6 +329,7 @@
       <result name="noAction" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="notFound" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="error" type="redirect">/main/showCurrentTab.rdo</result>
+      <result name="validationError" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="continue" type="redirect">/event/showApprovePublish.rdo</result>
       <result name="copy" type="redirect">/event/showApprovePublish.rdo</result>
     </action>
@@ -339,6 +340,7 @@
       <param name="conversation">continue</param>
 
       <result name="success">/docs/event/approvePublish.jsp</result>
+      <result name="validationError" type="redirect">/main/showCurrentTab.rdo</result>
     </action>
 
     <!-- .........................................................
@@ -351,6 +353,7 @@
       <param name="conversation">continue</param>
       <result name="cancelled" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="noAction" type="redirect">/event/showApprovePublish.rdo</result>
+      <result name="validationError" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="continue" type="redirect">/main/showCurrentTab.rdo</result>
       <result name="success" type="redirect">/main/showCurrentTab.rdo</result>
     </action>
