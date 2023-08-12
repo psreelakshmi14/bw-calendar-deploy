@@ -2,7 +2,7 @@
 <jboss-deployment-structure>
   <deployment>
     <dependencies>
-      <module name="deployment.bw-xml-ear-${bw-xml.version}.ear" />
+      <module name="deployment.bw-xml-war-${bw-xml.version}.war" />
     </dependencies>
   </deployment>
 </jboss-deployment-structure>
