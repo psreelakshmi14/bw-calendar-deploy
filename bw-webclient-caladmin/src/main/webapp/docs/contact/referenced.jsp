@@ -7,7 +7,7 @@
 <page>contactReferenced</page>
 <tab><c:out value="${calForm.currentTab}"/></tab>
 
-<c:set var="contact" value="${calform.contact}"/>
+<c:set var="contact" value="${calForm.contact}"/>
 <contact>
   <bw:emitText name="contact" property="cn.value"
                tagName="name"/>

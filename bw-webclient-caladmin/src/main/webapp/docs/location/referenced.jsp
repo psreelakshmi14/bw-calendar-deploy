@@ -7,7 +7,7 @@
 <page>locationReferenced</page>
 <tab><c:out value="${calForm.currentTab}"/></tab>
 
-  <c:set var="location" value="${calform.location}"/>
+  <c:set var="location" value="${calForm.location}"/>
 <location>
   <bw:emitText name="location" property="address.value"
                tagName="address">

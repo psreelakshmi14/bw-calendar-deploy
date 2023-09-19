@@ -32,7 +32,7 @@
 <categories>
   <bw:emitCategories name="bw_categories_list" scope="session"
                      tagName="all" indent="  "/>
-  <bw:emitCategories name="calform"  property="calendar.categories"
+  <bw:emitCategories name="calForm"  property="calendar.categories"
                      tagName="current" indent="    "/>
 </categories>
 
