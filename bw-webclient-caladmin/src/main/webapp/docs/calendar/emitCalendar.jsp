@@ -2,17 +2,17 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <calendar>
-  <bw:emitCollection name="calendar" indent="  " full="true" noTag="true" />
+  <bw:emitCollection name="calendar" indent="  " full="true" noTag="true" scope="session" />
 
-  <bw:emitCurrentPrivs name="calendar" property="currentAccess" />
-  <bw:emitAcl name="calendar" property="currentAccess" />
+  <bw:emitCurrentPrivs name="calendar" scope="session" property="currentAccess" />
+  <bw:emitAcl name="calendar" scope="session" property="currentAccess" />
 
   <c:choose>
     <c:when test="${requestScope.fullTree == 'true'}">
       <%-- a request has been made by the calling page to descend down the tree
            and ignore the open or closed state of calendars  --%>
-      <bw:getChildren id="children" name="calendar" form="calForm" />
-      <c:forEach var="cal" items="${children}">
+      <bw:getChildren id="children" name="calendar" scope="session" form="calForm" />
+      <c:forEach var="cal" items="${sessionScope.children}">
         <c:set var="calendar" value="${cal}" scope="session" />
           <%--
         <c:if test="${requestScope.stopDescent == 'true'}">
@@ -29,8 +29,8 @@
       <%-- the default behavior is to descend down the tree
            based on the open or closed state of calendars  --%>
       <c:if test="${calendar.open}">
-        <bw:getChildren id="children" name="calendar" form="calForm" />
-        <c:forEach var="cal" items="${children}">
+        <bw:getChildren id="children" name="calendar" scope="session" form="calForm" />
+        <c:forEach var="cal" items="${sessionScope.children}">
           <c:set var="calendar" value="${cal}" scope="session" />
           <jsp:include page="/docs/calendar/emitCalendar.jsp" />
         </c:forEach>
