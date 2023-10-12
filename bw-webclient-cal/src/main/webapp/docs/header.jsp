@@ -251,6 +251,16 @@ try {
               </c:forEach>
             </c:if>
           </paths>
+          <collections>
+            <c:if test="${not empty view.collections}">
+              <c:forEach var="col" items="${view.collections}">
+                <collection>
+                  <bw:emitText name="col" property="path" />
+                  <bw:emitText name="col" property="summary" />
+                </collection>
+              </c:forEach>
+            </c:if>
+          </collections>
         </view>
       </c:forEach>
     </c:if>
