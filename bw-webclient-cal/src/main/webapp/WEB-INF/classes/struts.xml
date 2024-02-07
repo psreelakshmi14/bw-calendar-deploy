@@ -96,6 +96,8 @@
 
       <result name="cancelled" type="redirect">/main/showMain.rdo</result>
 
+      <result name="badRequest" type="redirect">/main/showMain.rdo</result>
+
       <result name="noAccess" type="redirect">/main/showMain.rdo</result>
 
       <result name="notFound" type="redirect">/main/showMain.rdo</result>
