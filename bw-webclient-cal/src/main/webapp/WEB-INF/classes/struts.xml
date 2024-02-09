@@ -453,7 +453,7 @@
                class="org.bedework.webcommon.NoopAction">
       <param name="actionType">action</param>
 
-      <result name="success">/calendar/showCalendarForExport.rdo</result>
+      <result name="success" type="redirect">/calendar/showCalendarForExport.rdo</result>
     </action>
 
     <!-- === display a page of descriptions for public calendars (not currently used) === -->
