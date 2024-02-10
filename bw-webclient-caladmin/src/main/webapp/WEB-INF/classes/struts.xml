@@ -725,8 +725,8 @@
       <param name="conversation">only</param>
       <param name="mdl">remove</param>
 
-      <result name="notFound" type="redirect">/widget/ajaxTerminator.rdo</result>
-      <result name="success" type="redirect">/widget/ajaxTerminator.rdo</result>
+      <result name="notFound">/docs/widget/ajaxTerminator.jsp</result>
+      <result name="success">/docs/widget/ajaxTerminator.jsp</result>
     </action>
 
     <action    name="notify/removeTrans"
@@ -735,8 +735,8 @@
       <param name="conversation">only</param>
       <param name="mdl">remove</param>
 
-      <result name="notFound" type="redirect">/widget/ajaxTerminator.rdo</result>
-      <result name="success" type="redirect">/widget/ajaxTerminator.rdo</result>
+      <result name="notFound" type="redirect">/docs/widget/ajaxTerminator.jsp</result>
+      <result name="success" type="redirect">/docs/widget/ajaxTerminator.jsp</result>
     </action>
 
     <action    name="notify/get"
