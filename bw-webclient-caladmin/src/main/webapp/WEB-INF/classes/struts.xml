@@ -304,6 +304,7 @@
       <result name="duplicate" type="redirect">/event/showEditEvent.rdo</result>
       <result name="success" type="redirect">/main/showMain.rdo</result>
       <result name="retry" type="redirect">/event/showModForm.rdo</result>
+      <result name="input" type="redirect">/event/showModForm.rdo</result>
       <result name="delete" type="redirect">/event/showDeleteConfirm.rdo</result>
       <result name="cancelled" type="redirect">/main/showMain.rdo</result>
       <result name="copy" type="redirect">/event/showModForm.rdo</result>
