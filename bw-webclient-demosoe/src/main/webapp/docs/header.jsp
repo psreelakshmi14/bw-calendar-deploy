@@ -189,7 +189,7 @@ try {
         Value: String - a 16 character random string used to allow users to confirm
         additions to their private calendar.  DEPRECATED. --%>
 
-  <c:forEach var="appvar" items="${calForm.appVars}">
+  <c:forEach var="appvar" items="${sessionScope['org.bedework.client.appvars']}">
       <appvar><%--
           Application variables can be set arbitrarily by the stylesheet designer.
           Use an "appvar" by adding setappvar=key(value) to the query string of

@@ -5,7 +5,7 @@
 <bedework>
   <page>categoryWidget</page>
 
-  <c:forEach var="appvar" items="${calForm.appVars}">
+  <c:forEach var="appvar" items="${sessionScope['org.bedework.client.appvars']}">
     <appvar>
       <bw:emitText name="appvar" property="key" />
       <bw:emitText name="appvar" property="value" />
