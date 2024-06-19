@@ -3,9 +3,9 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
-  <bw:emitMsgErr name="calForm" property="msg"
+  <bw:emitMsgErr name="org.bedework.client.messageobj" scope="session"
                  tagName="message" indent="  "/>
-  <bw:emitMsgErr name="calForm" property="err"
+  <bw:emitMsgErr name="org.bedework.client.errorobj" scope="session"
                  tagName="error" indent="  "/>
 
   <c:set var="presentationState" value="${bw_presentationstate}" />

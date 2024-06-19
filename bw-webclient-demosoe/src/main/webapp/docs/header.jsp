@@ -104,9 +104,9 @@ try {
       </c:forEach>
   </c:if>
 
-  <bw:emitMsgErr name="calForm" property="msg"
+  <bw:emitMsgErr name="org.bedework.client.messageobj" scope="session"
                  tagName="message" indent="  "/>
-  <bw:emitMsgErr name="calForm" property="err"
+  <bw:emitMsgErr name="org.bedework.client.errorobj" scope="session"
                  tagName="error" indent="  "/>
 
   <c:set var="preferences" value="${bw_preferences}" />
