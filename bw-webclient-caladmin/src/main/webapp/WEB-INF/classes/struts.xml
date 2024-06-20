@@ -267,6 +267,7 @@
       
       <result name="notFound" type="redirect">/main/showMain.rdo</result>
       <result name="continue" type="redirect">/event/showEvent.rdo</result>
+      <result name="noAction">/docs/event/eventList.jsp</result>
     </action>
 
     <!-- ...............................................................
