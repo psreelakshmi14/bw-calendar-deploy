@@ -123,7 +123,7 @@ try {
         as pubevents.app.root and personal.app.root. Note that references to
         html web resources such as images are set in the xsl stylesheets. --%>
   <bw:emitText name="presentationState" property="browserResourceRoot"/>
-  <bw:emitText name="calForm" property="urlPrefix"
+  <bw:emitText name="org.bedework.client.urlprefix" scope="request"
                tagName="urlprefix"/><%--
         Value: URI - this is prefix of the calendar application.
         e.g. http://localhost:8080/cal
