@@ -327,9 +327,9 @@ try {
     </appvar>
   </c:forEach>
 
-  <c:if test="${not empty calForm.currentLocale}" >
-    <bw:emitText name="calForm" property="currentLocale"
-                 tagName="currentLocale"/>
+<c:if test="${not empty sessionScope.web_globals.currentLocale}" >
+  <bw:emitText name="web_globals" property="currentLocale"
+               scope="session" tagName="currentLocale"/>
   </c:if>
 
   <c:if test="${not empty sessionScope.bw_cache_prefix}">
