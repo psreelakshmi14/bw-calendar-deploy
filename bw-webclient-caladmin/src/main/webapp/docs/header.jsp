@@ -305,7 +305,8 @@ try {
     <adminGroupMaintOk><c:out value="${calForm.adminGroupMaintOK}"/></adminGroupMaintOk>
 
     <%-- user and group --%>
-    <bw:emitText name="calForm" property="currentUser"/>
+    <c:set var="globals" value="${sessionScope.web_globals}" />
+    <bw:emitText name="globals" property="currentUser"/>
     <bw:emitText name="calForm" property="adminUserId" tagName="user"/>
     <c:if test="${not empty calForm.adminGroupName}" >
       <bw:emitText name="calForm" property="adminGroupName" tagName="group"/>

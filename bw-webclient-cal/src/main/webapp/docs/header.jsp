@@ -92,10 +92,12 @@ try {
   <bw:emitText name="calForm" property="publicView"
                tagName="publicview"/><%--
     Values: true, false - Flag if we are in the guest (public) view  --%>
+  <c:set var="globals" value="${sessionScope.web_globals}" />
+
   <bw:emitText name="calForm" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
   <c:if test="${!calForm.guest}">
-    <bw:emitText name="calForm" property="currentUser"
+    <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
       <c:forEach var="group" items="${calForm.currentGroups}" >
@@ -214,9 +216,8 @@ try {
     </appvar>
   </c:forEach>
 
-<c:if test="${not empty sessionScope.web_globals.currentLocale}" >
-  <bw:emitText name="web_globals" property="currentLocale"
-               scope="session" />
+<c:if test="${not empty globals.currentLocale}" >
+  <bw:emitText name="globals" property="currentLocale" />
   </c:if>
 
   <c:if test="${not empty sessionScope.bw_cache_prefix}" >

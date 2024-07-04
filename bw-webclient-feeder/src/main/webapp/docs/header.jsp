@@ -40,8 +40,9 @@ try {
     Values: true, false - Flag if we are in the guest (public) view  --%>
   <bw:emitText name="calForm" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
+  <c:set var="globals" value="${sessionScope.web_globals}" />
   <c:if test="${!calForm.guest}">
-    <bw:emitText name="calForm" property="currentUser"
+    <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
       <c:forEach var="group" items="${calForm.currentGroups}" >
