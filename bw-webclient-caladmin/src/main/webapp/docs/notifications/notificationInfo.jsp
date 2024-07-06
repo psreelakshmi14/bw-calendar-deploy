@@ -1,5 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
   <bw:emitText name="notificationInfo" property="changed" />
   <c:forEach var="notification" items="${notificationInfo.notifications}" >

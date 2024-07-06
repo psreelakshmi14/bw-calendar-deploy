@@ -1,5 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <%-- Output a single event. This page handles fields common to all views --%>
   <event>

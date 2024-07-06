@@ -18,6 +18,13 @@
     <org.bedework.war.dependency>org.bedework.calendar.rw-war</org.bedework.war.dependency>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.bedework.bwwebcl</groupId>
+      <artifactId>bw-calendar-client-taglib</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>

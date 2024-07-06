@@ -1,15 +1,16 @@
 <%@ page contentType="text/xml;charset=UTF-8" language="java" %>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 <%
 try {
 %>
 
   <c:set var="bwconfig" value="${calForm.config}" scope="session" />
   <c:set var="moduleState" value="${bw_module_state}" />
+  <c:set var="globals" value="${sessionScope.web_globals}" />
 
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
-    <bw:emitText name="calForm" property="defaultTzid" />
+    <bw:emitText name="globals" property="defaultTzid" />
     <c:set var="fmtnow" value="${calForm.today.formatted}" />
     <bw:emitText name="fmtnow" property="date"/><%--
       Value: YYYYMMDD --%>
@@ -299,15 +300,13 @@ try {
                  tagName="contentAdminUser" />
     <bw:emitText name="calForm" property="curUserApproverUser"
                  tagName="approverUser" />
-    <bw:emitText name="calForm" property="curUserSuperUser"
-                 tagName="superUser" />
+    <bw:emitText name="globals" property="superUser" />
     <userMaintOK><c:out value="${calForm.userMaintOK}"/></userMaintOK>
     <adminGroupMaintOk><c:out value="${calForm.adminGroupMaintOK}"/></adminGroupMaintOk>
 
     <%-- user and group --%>
-    <c:set var="globals" value="${sessionScope.web_globals}" />
     <bw:emitText name="globals" property="currentUser"/>
-    <bw:emitText name="calForm" property="adminUserId" tagName="user"/>
+    <bw:emitText name="globals" property="adminUserId" tagName="user"/>
     <c:if test="${not empty calForm.adminGroupName}" >
       <bw:emitText name="calForm" property="adminGroupName" tagName="group"/>
       <bw:emitText name="calForm" property="oneGroup"/>

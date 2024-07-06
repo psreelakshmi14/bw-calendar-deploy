@@ -1,5 +1,5 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <c:set var="curcal" value="${calForm.calendar}"/>
 <currentCalendar>

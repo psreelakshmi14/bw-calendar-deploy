@@ -1,4 +1,4 @@
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <properties>
   <c:forEach var="property" items="${properties.property}">

@@ -32,6 +32,11 @@
     <param-value>org.bedework.webcommon.BwModules</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>globalsClass</param-name>
+    <param-value>org.bedework.webcommon.BwWebGlobals</param-value>
+  </context-param>
+
   <!-- Do not alter or move  the following comment -->
   <!-- add context params here -->
 

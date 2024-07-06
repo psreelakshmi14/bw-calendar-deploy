@@ -1,4 +1,4 @@
-<%@ taglib uri='bedework' prefix='bw' %>
+<%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <bw:textField property="contactName.value" size="30"
               tagName="name"/>

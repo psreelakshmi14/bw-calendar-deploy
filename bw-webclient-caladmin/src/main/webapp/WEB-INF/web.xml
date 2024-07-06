@@ -28,6 +28,11 @@
     <param-value>org.bedework.client.web.admin.BwAdminModules</param-value>
   </context-param>
 
+  <context-param>
+    <param-name>globalsClass</param-name>
+    <param-value>org.bedework.client.web.admin.BwAdminWebGlobals</param-value>
+  </context-param>
+
   <!-- Do not alter or move  the following comment -->
   <!-- add context params here -->
 
@@ -146,12 +151,12 @@
      -->
 
     <taglib>
-      <taglib-uri>bwhtml</taglib-uri>
+      <taglib-uri>https://bedework.org/tags-html</taglib-uri>
       <taglib-location>/tlds/bwhtml.tld</taglib-location>
     </taglib>
 
     <taglib>
-      <taglib-uri>bedework</taglib-uri>
+      <taglib-uri>https://bedework.org/jsp/taglib/bedework</taglib-uri>
       <taglib-location>/tlds/bedework.tld</taglib-location>
     </taglib>
   </jsp-config>

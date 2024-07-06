@@ -7,6 +7,7 @@ try {
 
   <c:set var="bwconfig" value="${calForm.config}" scope="session" />
   <c:set var="moduleState" value="${bw_module_state}" />
+  <c:set var="globals" value="${sessionScope.web_globals}" />
   <bw:emitText name="calForm" property="calSuiteName" />
 
   <c:if test="${not empty calForm.currentCalSuite}" >
@@ -36,7 +37,7 @@ try {
                  tagName="twodigithour24"/>
     <bw:emitText name="calForm" property="today.utcDate"
                  tagName="utc"/>
-    <bw:emitText name="calForm" property="defaultTzid" />
+    <bw:emitText name="globals" property="defaultTzid" />
   </now>
 
   <c:set var="ctView" value="${moduleState.curTimeView}"/>
@@ -105,7 +106,6 @@ try {
     Values: true, false - Flag if we are in the guest (public) view  --%>
   <bw:emitText name="calForm" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
-<c:set var="globals" value="${sessionScope.web_globals}" />
   <c:if test="${!calForm.guest}">
     <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
