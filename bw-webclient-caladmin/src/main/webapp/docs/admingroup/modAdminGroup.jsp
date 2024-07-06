@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='https://bedework.org/tags-html' prefix='bwhtml' %>
 <%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <bedework>
@@ -11,7 +10,7 @@
              tagName="creating"/>
 
 <formElements>
-  <bwhtml:form action="admingroup/update" >
+  <bw:form action="admingroup/update" >
     <name>
       <c:if test="${calForm.addingAdmingroup}" >
         <bw:textField property="updAdminGroup.account" />
@@ -33,7 +32,7 @@
       <button type="cancel">cancelled</button>
       <button type="delete">delete</button>
     </submitButtons>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

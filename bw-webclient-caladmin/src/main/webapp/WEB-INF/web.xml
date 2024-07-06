@@ -151,11 +151,6 @@
      -->
 
     <taglib>
-      <taglib-uri>https://bedework.org/tags-html</taglib-uri>
-      <taglib-location>/tlds/bwhtml.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>https://bedework.org/jsp/taglib/bedework</taglib-uri>
       <taglib-location>/tlds/bedework.tld</taglib-location>
     </taglib>

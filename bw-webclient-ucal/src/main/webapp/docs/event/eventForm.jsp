@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 
@@ -14,7 +13,7 @@ try {
                tagName="guid"/>
   <bw:emitText name="event" property="recurrenceId"/>
 
-  <bwhtml:form action="event/editEvent">
+  <bw:form action="event/editEvent">
     <bw:emitText name="event" property="scheduleMethod"
                  tagName="scheduleMethod" />
     <bw:emitText name="event" property="entityType"
@@ -123,7 +122,7 @@ try {
 
     <bw:emitXprops name="event" property="xproperties"/>
 
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <editableAccess>

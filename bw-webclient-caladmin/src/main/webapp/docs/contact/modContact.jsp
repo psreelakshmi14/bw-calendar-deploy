@@ -1,4 +1,3 @@
-<%@ taglib uri='https://bedework.org/tags-html' prefix='bwhtml' %>
 <%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <bedework>
@@ -12,7 +11,7 @@
 <!-- Mod pages contain only formElements for now; we do this to
      take advantage of Struts' form processing features -->
 <formElements>
-  <bwhtml:form action="contact/update" >
+  <bw:form action="contact/update" >
 
     <%@include file="/docs/contact/modContactCommon.jsp"%>
 
@@ -24,7 +23,7 @@
       <button type="delete">delete</button>
     </submitButtons>
 
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -48,7 +47,7 @@ try {
 
   <%@ include file="/docs/schedule/emitEventProperties.jsp" %>
 
-  <bwhtml:form action="schedule/attendeeRespond">
+  <bw:form action="schedule/attendeeRespond">
     <bw:textField name="event" property="summary"
                   tagName="title" />
     <bw:emitContainer name="event" indent="    " tagName="calendar" />
@@ -97,7 +96,7 @@ try {
       <bw:textField property="locationAddress.value"
                     tagName="locationtext"/>
     </location>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 <c:set var="eventFormatter" value="${calForm.curEventFmt}"
        scope="request"/>

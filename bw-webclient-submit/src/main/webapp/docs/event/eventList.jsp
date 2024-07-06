@@ -10,7 +10,7 @@
 <%--  Generate form elements to be exposed
 Unused
 <formElements>
-  <bwhtml:form action="event/fetchForDisplay.do">
+  <bw:form action="event/fetchForDisplay.do">
     <listAllSwitchFalse>
       <html:radio name="calForm" property="listAllEvents"
                     value="false"
@@ -21,7 +21,7 @@ Unused
                     value="true"
                     onclick="document.calForm.submit();" />
     </listAllSwitchTrue>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
  --%>
 

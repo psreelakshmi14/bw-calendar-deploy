@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -21,7 +20,7 @@
 </calendars>
 
 <formElements>
-  <bwhtml:form action="event/editEvent">
+  <bw:form action="event/editEvent">
     <start>
       <bw:selectDate name="calForm"
                      property="eventStartDate"
@@ -38,7 +37,7 @@
       <bw:textField property="eventEndDate.year" size="4"
                     tagName="yearText" />
     </end>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

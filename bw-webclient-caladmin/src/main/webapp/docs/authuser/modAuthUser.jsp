@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='https://bedework.org/tags-html' prefix='bwhtml' %>
 <%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <bedework>
@@ -9,7 +8,7 @@
 <tab><c:out value="${calForm.currentTab}"/></tab>
 
 <formElements>
-  <bwhtml:form action="authuser/update" >
+  <bw:form action="authuser/update" >
     <bw:emitText name="calForm" property="editAuthUser.userHref"
                  tagName="userHref"/>
     <bw:checkbox property="editAuthUserPublicEvents"
@@ -23,7 +22,7 @@
       <button type="update">modAuthUser</button>
     </submitButtons>
 
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <%@include file="/docs/footer.jsp"%>

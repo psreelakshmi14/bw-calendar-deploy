@@ -1,5 +1,4 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='https://bedework.org/tags-html' prefix='bwhtml' %>
 <%@ taglib uri='https://bedework.org/jsp/taglib/bedework' prefix='bw' %>
 
 <bw:emitText name="calForm" property="addingEvent"
@@ -30,7 +29,7 @@
   </c:if>
   <bw:emitText name="calForm" property="eventRegAdminToken"/>
 
-  <bwhtml:form action="event/update" >
+  <bw:form action="event/update" >
     <bw:textField name="calForm" property="summary"
                   size="40" styleId="iTitle" styleClass="edit"
                   tagName="title" />
@@ -265,7 +264,7 @@
       <button type="copy">copy</button>
       <button type="delete">delete</button>
     </submitButtons>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 
 <suggestions>
@@ -279,7 +278,7 @@
 </suggestions>
 
 <timezones>
-  <c:forEach var="tz" items="${calForm.timeZoneNames}">
+  <c:forEach var="tz" items="${globals.timeZoneNames}">
     <timezone>
       <bw:emitText name="tz" property="name" filter="true"/>
       <bw:emitText name="tz" property="id" filter="true"/>

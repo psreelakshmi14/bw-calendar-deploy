@@ -1,6 +1,5 @@
 <%@ page contentType="text/xml;charset=UTF-8" buffer="none" language="java" %><?xml version="1.0" encoding="UTF-8"?>
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix="c" %>
-<%@ taglib uri='bwhtml' prefix='bwhtml' %>
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <bedework>
@@ -13,7 +12,7 @@ try {
 <page>alarmOptions</page>
 
 <alarmoptionsform>
-  <bwhtml:form action="alarm/setAlarm">
+  <bw:form action="alarm/setAlarm">
     <alarmdate>
       <bw:selectDate name="calForm"
                      property="eventState.triggerDateTime"
@@ -84,7 +83,7 @@ try {
                   tagName="email" />
     <bw:textField name="calForm" property="eventState.subject"
                   tagName="subject" />
-  </bwhtml:form>
+  </bw:form>
 </alarmoptionsform>
 
 <%

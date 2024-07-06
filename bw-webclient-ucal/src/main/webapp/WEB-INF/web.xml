@@ -213,11 +213,6 @@
      -->
 
     <taglib>
-      <taglib-uri>bwhtml</taglib-uri>
-      <taglib-location>/tlds/bwhtml.tld</taglib-location>
-    </taglib>
-
-    <taglib>
       <taglib-uri>bedework</taglib-uri>
       <taglib-location>/tlds/bedework.tld</taglib-location>
     </taglib>

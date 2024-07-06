@@ -10,10 +10,10 @@
 <%--  Generate form elements to be exposed.
       These can be manipulated in the xslt if desired.
 <formElements>
-  <bwhtml:form action="event/fetchForDisplay.do">
+  <bw:form action="event/fetchForDisplay.do">
     <bw:textField name="calForm" property="eventId" size="6" />
     <html:submit value="go"/>
-  </bwhtml:form>
+  </bw:form>
 </formElements>
 --%>
 
