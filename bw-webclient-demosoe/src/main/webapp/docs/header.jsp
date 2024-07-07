@@ -10,7 +10,7 @@ try {
   <c:set var="globals" value="${sessionScope.web_globals}" />
 
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
-    <c:set var="fmtnow" value="${calForm.today.formatted}" />
+    <c:set var="fmtnow" value="${globals.today.formatted}" />
     <bw:emitText name="fmtnow" property="date"/><%--
       Value: YYYYMMDD --%>
     <bw:emitText name="fmtnow" property="longDateString"
@@ -24,7 +24,7 @@ try {
       Value (example): 10:15 PM --%>
     <bw:emitText name="fmtnow" property="twoDigitHour24"
                  tagName="twodigithour24"/>
-    <bw:emitText name="calForm" property="today.utcDate"
+    <bw:emitText name="globals" property="today.utcDate"
                  tagName="utc"/>
     <bw:emitText name="globals" property="defaultTzid" />
   </now>

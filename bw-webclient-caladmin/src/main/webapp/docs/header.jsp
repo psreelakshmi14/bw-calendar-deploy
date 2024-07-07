@@ -11,7 +11,7 @@ try {
 
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
     <bw:emitText name="globals" property="defaultTzid" />
-    <c:set var="fmtnow" value="${calForm.today.formatted}" />
+    <c:set var="fmtnow" value="${globals.today.formatted}" />
     <bw:emitText name="fmtnow" property="date"/><%--
       Value: YYYYMMDD --%>
   </now>
