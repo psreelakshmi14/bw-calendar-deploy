@@ -7,8 +7,7 @@
     Values: true, false - Flag if we are using 24 hour time --%>
 <bw:emitText name="calForm" property="authpars.maxInstances" />
 <bw:emitText name="calForm" property="authpars.maxYears" />
-<bw:emitText name="calForm" property="config.registrationsExternal"
-             tagName="registrationsExternal"/>
+<bw:emitText name="bwconfig" property="registrationsExternal"/>
 <bw:emitCurrentPrivs name="calForm" property="eventInfo.currentAccess" />
 
 <c:set var="event" value="${calForm.event}" scope="request"  />

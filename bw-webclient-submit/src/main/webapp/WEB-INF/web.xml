@@ -30,7 +30,7 @@
 
   <context-param>
     <param-name>globalsClass</param-name>
-    <param-value>org.bedework.webcommon.BwWebGlobals</param-value>
+    <param-value>org.bedework.webcommon.BwRWWebGlobals</param-value>
   </context-param>
 
   <!-- Do not alter or move  the following comment -->

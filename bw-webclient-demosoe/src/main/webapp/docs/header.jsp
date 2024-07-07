@@ -5,7 +5,7 @@
 try {
 %>
 
-  <c:set var="bwconfig" value="${calForm.config}" scope="session" />
+  <c:set var="bwconfig" value="${sessionScope.bw_client_config}" />
   <c:set var="moduleState" value="${bw_module_state}" />
   <c:set var="globals" value="${sessionScope.web_globals}" />
 

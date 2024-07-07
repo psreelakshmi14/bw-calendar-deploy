@@ -5,7 +5,7 @@
 try {
 %>
 
-  <c:set var="bwconfig" value="${calForm.config}" scope="session" />
+  <c:set var="bwconfig" value="${sessionScope.bw_client_config}" />
   <c:set var="moduleState" value="${bw_module_state}" />
   <c:set var="globals" value="${sessionScope.web_globals}" />
   <bw:emitText name="calForm" property="calSuiteName" />
@@ -141,9 +141,9 @@ try {
 
   <!-- Path to calendar for public event submissions -->
   <submissionsRoot>
-    <bw:emitText name="calForm" property="encodedSubmissionRoot"
+    <bw:emitText name="globals" property="encodedSubmissionRoot"
                  tagName="encoded"/>
-    <bw:emitText name="calForm" property="submissionRoot"
+    <bw:emitText name="globals" property="submissionRoot"
                  tagName="unencoded"/>
   </submissionsRoot>
 

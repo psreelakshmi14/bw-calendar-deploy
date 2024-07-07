@@ -5,7 +5,7 @@
 try {
 %>
 
-  <c:set var="bwconfig" value="${calForm.config}" scope="session" />
+  <c:set var="bwconfig" value="${sessionScope.bw_client_config}" />
   <c:set var="moduleState" value="${bw_module_state}" />
   <c:set var="globals" value="${sessionScope.web_globals}" />
 
@@ -66,22 +66,22 @@ try {
                tagName="publicuri"/>
   <bw:emitText name="bwconfig" property="publicAdminUri"
                tagName="adminuri"/>
-  <suggestionEnabled><c:out value="${calForm.suggestionEnabled}"/></suggestionEnabled>
-  <workflowEnabled><c:out value="${calForm.workflowEnabled}"/></workflowEnabled>
+  <suggestionEnabled><c:out value="${globals.suggestionEnabled}"/></suggestionEnabled>
+  <workflowEnabled><c:out value="${globals.workflowEnabled}"/></workflowEnabled>
 
   <%-- Path to collections for public event submissions --%>
   <submissionsRoot>
-    <bw:emitText name="calForm" property="encodedSubmissionRoot"
+    <bw:emitText name="globals" property="encodedSubmissionRoot"
                  tagName="encoded"/>
-    <bw:emitText name="calForm" property="submissionRoot"
+    <bw:emitText name="globals" property="submissionRoot"
                  tagName="unencoded"/>
   </submissionsRoot>
 
   <%-- Path to collections for public event workflow --%>
   <workflowRoot>
-    <bw:emitText name="calForm" property="encodedWorkflowRoot"
+    <bw:emitText name="globals" property="encodedWorkflowRoot"
                  tagName="encoded"/>
-    <bw:emitText name="calForm" property="workflowRoot"
+    <bw:emitText name="globals" property="workflowRoot"
                  tagName="unencoded"/>
   </workflowRoot>
 
