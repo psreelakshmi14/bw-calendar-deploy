@@ -308,9 +308,9 @@ try {
     <%-- user and group --%>
     <bw:emitText name="globals" property="currentUser"/>
     <bw:emitText name="globals" property="adminUserId" tagName="user"/>
-    <c:if test="${not empty calForm.adminGroupName}" >
-      <bw:emitText name="calForm" property="adminGroupName" tagName="group"/>
-      <bw:emitText name="calForm" property="oneGroup"/>
+    <c:if test="${not empty globals.adminGroupName}" >
+      <bw:emitText name="globals" property="adminGroupName" tagName="group"/>
+      <bw:emitText name="globals" property="oneGroup"/>
     </c:if>
     <groups>
       <c:if test="${not empty sessionScope.bw_user_admin_search_groups}" >
