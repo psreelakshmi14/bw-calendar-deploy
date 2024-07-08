@@ -5,13 +5,14 @@
              tagName="creating"/>
 <bw:emitText name="calForm" property="hour24" /><%--
     Values: true, false - Flag if we are using 24 hour time --%>
-<bw:emitText name="calForm" property="authpars.maxInstances" />
-<bw:emitText name="calForm" property="authpars.maxYears" />
+<bw:emitText name="bwauthpars" property="maxInstances" />
+<bw:emitText name="bwauthpars" property="maxYears" />
 <bw:emitText name="bwconfig" property="registrationsExternal"/>
 <bw:emitCurrentPrivs name="calForm" property="eventInfo.currentAccess" />
 
 <c:set var="event" value="${calForm.event}" scope="request"  />
 <c:set var="eventDuration" value="${calForm.eventDuration}" scope="request"  />
+<c:set var="calInfo" value="${moduleState.calInfo}" />
 
 <%-- formElements sections take advantage of Struts' form processing features. --%>
 <formElements>
@@ -73,7 +74,8 @@
                     tagName="yearText" />
       <bw:selectDateTime name="calForm"
                          property="eventStartDate"
-                         indent="      "/>
+                         indent="      "
+                         yearVals="${calInfo.yearVals}"/>
       <bw:emitText name="calForm" property="eventStartDate.tzid"
                    tagName="tzid"/>
     </start>
@@ -87,7 +89,8 @@
                       tagName="yearText" />
         <bw:selectDateTime name="calForm"
                            property="eventEndDate"
-                           indent="      "/>
+                           indent="      "
+                           yearVals="${calInfo.yearVals}"/>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
       <duration>
@@ -102,7 +105,7 @@
       </duration>
     </end>
     <desc><textarea><c:out value='${calForm.description}'/></textarea></desc>
-    <bw:emitText name="calForm" property="authpars.maxPublicDescriptionLength"
+    <bw:emitText name="bwauthpars" property="maxPublicDescriptionLength"
                  tagName="descLength"/>
     <bw:emitText name="calForm" property="event.status"
                  tagName="status"/>
@@ -141,7 +144,7 @@
       </c:if>
     </location>
 
-    <c:if test="${calForm.suggestionEnabled}" >
+    <c:if test="${globals.suggestionEnabled}" >
       <suggestTo>
         <c:if test="${not empty sessionScope.bw_preferred_admin_groups}">
           <preferred>
@@ -285,7 +288,6 @@
   </c:forEach>
 </timezones>
 
-<c:set var="calInfo" value="${moduleState.calInfo}" />
 <shortdaynames>
   <c:forEach var="shortDayName" items="${calInfo.shortDayNamesAdjusted}">
     <bw:emitText name="shortDayName" tagName="val"/>

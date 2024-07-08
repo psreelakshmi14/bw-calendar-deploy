@@ -7,6 +7,7 @@ try {
 %>
 
 <c:set var="event" value="${calForm.event}"/>
+<c:set var="calInfo" value="${moduleState.calInfo}" />
 <formElements>
   <subscriptionId></subscriptionId>
   <bw:emitText name="event" property="uid"
@@ -48,7 +49,8 @@ try {
                     tagName="yearText" />
       <bw:selectDateTime name="calForm"
                          property="eventStartDate"
-                         indent="      "/>
+                         indent="      "
+                         yearVals="${calInfo.yearVals}"/>
       <bw:emitText name="calForm" property="eventStartDate.tzid" tagName="tzid"/>
     </start>
     <end>
@@ -61,7 +63,8 @@ try {
                       tagName="yearText" />
         <bw:selectDateTime name="calForm"
                            property="eventEndDate"
-                           indent="      "/>
+                           indent="      "
+                           yearVals="${calInfo.yearVals}"/>
         <bw:emitText name="calForm" property="eventEndDate.tzid" tagName="tzid"/>
       </dateTime>
       <duration>

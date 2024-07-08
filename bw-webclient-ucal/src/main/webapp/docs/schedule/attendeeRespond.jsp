@@ -10,6 +10,7 @@ try {
 %>
 
 <page>attendeeRespond</page>
+  <c:set var="calInfo" value="${moduleState.calInfo}" />
 
 <formElements>
   <c:set var="event" value="${calForm.event}"/>
@@ -58,7 +59,8 @@ try {
                     tagName="yearText" />
       <bw:selectDateTime name="calForm"
                          property="eventStartDate"
-                         indent="      "/>
+                         indent="      "
+                         yearVals="${calInfo.yearVals}"/>
     </start>
     <end>
       <bw:emitText name="calForm" property="eventEndType" tagName="type"/>
@@ -67,7 +69,8 @@ try {
                       tagName="yearText" />
         <bw:selectDateTime name="calForm"
                            property="eventEndDate"
-                           indent="      "/>
+                           indent="      "
+                           yearVals="${calInfo.yearVals}"/>
       </dateTime>
       <duration>
         <bw:textField property="eventDuration.daysStr" size="2"

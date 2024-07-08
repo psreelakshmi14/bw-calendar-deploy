@@ -10,6 +10,7 @@ try {
 %>
 
 <page>alarmOptions</page>
+  <c:set var="calInfo" value="${moduleState.calInfo}" />
 
 <alarmoptionsform>
   <bw:form action="alarm/setAlarm">
@@ -17,7 +18,8 @@ try {
       <bw:selectDate name="calForm"
                      property="eventState.triggerDateTime"
                      indent="      "
-                     notag="true"/>
+                     notag="true"
+                     yearVals="${calInfo.yearVals}"/>
     </alarmdate>
     <alarmtime>
       <bw:selectTime name="calForm"

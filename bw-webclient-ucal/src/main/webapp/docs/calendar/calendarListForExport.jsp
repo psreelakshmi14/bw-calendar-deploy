@@ -9,6 +9,7 @@
 
 <%-- list the public calendars; we can get subscriptions and myCalendars
      from the header xml --%>
+<c:set var="calInfo" value="${moduleState.calInfo}" />
 
 <calendars>
   <c:if test="${not empty sessionScope.bw_public_collection_list}">
@@ -25,7 +26,8 @@
       <bw:selectDate name="calForm"
                      property="eventStartDate"
                      indent="      "
-                     noyear="true" />
+                     noyear="true"
+                     yearVals="${calInfo.yearVals}" />
       <bw:textField property="eventStartDate.year" size="4"
                     tagName="yearText" />
     </start>
@@ -33,7 +35,8 @@
       <bw:selectDate name="calForm"
                      property="eventEndDate"
                      indent="      "
-                     noyear="true" />
+                     noyear="true"
+                     yearVals="${calInfo.yearVals}" />
       <bw:textField property="eventEndDate.year" size="4"
                     tagName="yearText" />
     </end>

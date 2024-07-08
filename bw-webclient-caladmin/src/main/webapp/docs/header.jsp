@@ -8,6 +8,8 @@ try {
   <c:set var="bwconfig" value="${sessionScope.bw_client_config}" />
   <c:set var="moduleState" value="${bw_module_state}" />
   <c:set var="globals" value="${sessionScope.web_globals}" />
+  <c:set var="bwsess" value="${sessionScope.org_bedework_sessstate}" />
+  <c:set var="bwauthpars" value="${bwsess.authpars}" />
 
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
     <bw:emitText name="globals" property="defaultTzid" />
@@ -34,7 +36,6 @@ try {
   </currentdate>
 
   <%-- get the default number of days for event lists --%>
-  <c:set var="bwauthpars" value="${calForm.authpars}" scope="session" />
   <bw:emitText name="bwauthpars" property="defaultWebCalPeriod"
                tagName="defaultdays"/>
   <bw:emitText name="bwauthpars" property="maxWebCalPeriod"
