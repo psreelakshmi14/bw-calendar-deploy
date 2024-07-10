@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modAdminGroupMembers</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <adminGroup>
   <bw:emitText name="calForm" property="updAdminGroup.account"

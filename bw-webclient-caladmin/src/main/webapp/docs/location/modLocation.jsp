@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modLocation</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <bw:emitText name="calForm" property="addingLocation"
              tagName="creating"/>

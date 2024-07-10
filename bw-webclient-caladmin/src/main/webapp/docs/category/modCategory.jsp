@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modCategory</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
   <bw:emitText name="calForm" property="addingCategory"
                tagName="creating"/>

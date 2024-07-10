@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>eventList</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%
   try {

@@ -5,7 +5,6 @@
 <%@include file="header.jsp"%>
 
 <page>main</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%--  Generate form elements to be exposed.
       These can be manipulated in the xslt if desired.

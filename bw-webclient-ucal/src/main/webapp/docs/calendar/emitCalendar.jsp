@@ -4,7 +4,7 @@
 <calendar>
   <bw:emitCollection name="calendar" indent="  " full="true" noTag="true" />
 
-  <c:if test="${!calForm.guest}">
+  <c:if test="${!globals.guest}">
     <%-- don't publish privs and acls to the public client --%>
     <bw:emitCurrentPrivs name="calendar" property="currentAccess"
                          scope="session"/>

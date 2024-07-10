@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modAdminGroup</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 <bw:emitText name="calForm" property="addingAdmingroup"
              tagName="creating"/>
 

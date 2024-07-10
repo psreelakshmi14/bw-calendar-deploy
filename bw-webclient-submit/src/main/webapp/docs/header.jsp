@@ -103,12 +103,9 @@ try {
   <bw:emitText name="calForm" property="hour24" /><%--
     Values: true, false - Flag if we are using 24 hour time --%>
 
-  <bw:emitText name="calForm" property="publicView"
-               tagName="publicview"/><%--
-    Values: true, false - Flag if we are in the guest (public) view  --%>
-  <bw:emitText name="calForm" property="guest" /><%--
+  <bw:emitText name="globals" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
-  <c:if test="${!calForm.guest}">
+  <c:if test="${!globals.guest}">
     <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
@@ -192,7 +189,7 @@ try {
 
     <%-- The following URLs are used only in the personal client --%>
     <%-- ======================================================= --%>
-    <c:if test="${!calForm.guest}">
+    <c:if test="${!globals.guest}">
       <event>
         <initEvent><c:url value="/event/initEvent.do?b=de"/></initEvent>
         <initPendingEvents><c:url value="/event/initPendingEvents.do?b=de"/></initPendingEvents>
@@ -297,8 +294,8 @@ try {
 
   <%-- System parameters --%>
   <syspars>
-    <c:if test="${not empty calForm.dirInfo}">
-      <c:set var="dir" value="${calForm.dirInfo}" />
+    <c:if test="${not empty globals.dirInfo}">
+      <c:set var="dir" value="${globals.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
       <bw:emitText name="dir" property="ticketPrincipalRoot" />

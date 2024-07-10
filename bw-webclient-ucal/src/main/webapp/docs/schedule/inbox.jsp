@@ -7,7 +7,7 @@
 <page>inbox</page>
 
 <%--  Display inbox --%>
-<c:set var="boxInfo" value="${calForm.inBoxInfo}" />
+<c:set var="boxInfo" value="${globals.inBoxInfo}" />
 <inbox>
   <%@include file="/docs/schedule/inoutbox.jsp"%>
 </inbox>

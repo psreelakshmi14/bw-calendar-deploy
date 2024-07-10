@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>displayEvent</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="allView" value="true" scope="request"/>
 <c:set var="eventFormatter" value="${calForm.curEventFmt}"

@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteCategoryConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
   <bw:emitCategory name="calForm"  property="category"
                    tagName="currentCategory" indent="  "/>

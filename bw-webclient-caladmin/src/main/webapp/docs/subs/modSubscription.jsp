@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modSubscription</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <bw:emitText name="calForm" property="addingCalendar"
              tagName="creating"/>

@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modCalSuite</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="calSuite" value="${calForm.calSuite}"/>
 <%@include file="/docs/calsuite/emitCalSuite.jsp"%>

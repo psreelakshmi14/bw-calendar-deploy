@@ -36,27 +36,6 @@
     <bw:checkbox property="event.deleted"
                  tagName="deleted" />
     <calendar>
-      <c:if test="${not empty calForm.preferredCalendars}">
-        <%-- all publishing calendars a user has previously used. --%>
-        <preferred>
-          <c:set var="preferredCollections"
-                 value="${calForm.preferredCalendars}" />
-          <bw:selectCollection name="calForm"
-                               property="prefCalendarId"
-                               cols="preferredCollections"
-                               indent="    "/>
-        </preferred>
-      </c:if>
-      <%-- all publishing calendars to which user has write access;
-           in single calendar model, there will be only one. --%>
-      <all>
-        <c:set var="addContentCalendarCollections"
-               value="${bw_addcontent_collection_list}" />
-        <bw:selectCollection name="calForm"
-                             property="calendarId"
-                             cols="addContentCalendarCollections"
-                             indent="    "/>
-      </all>
       <%-- Output the event's calendar information --%>
       <bw:emitContainer name="calForm" property="event"
                         indent="        "/>

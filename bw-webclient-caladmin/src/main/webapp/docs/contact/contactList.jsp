@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>contactList</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <contacts>
   <c:if test="${not empty sessionScope.bw_editable_contacts_list}">

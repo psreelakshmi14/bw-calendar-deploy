@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>displayLocation</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <locations>
   <c:forEach var="location" items="${calForm.editableLocations}" >

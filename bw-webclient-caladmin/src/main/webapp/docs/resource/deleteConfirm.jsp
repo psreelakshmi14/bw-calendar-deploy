@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteResourceConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="curResource" value="${calForm.calSuiteResource}"/>
 <currentResource>

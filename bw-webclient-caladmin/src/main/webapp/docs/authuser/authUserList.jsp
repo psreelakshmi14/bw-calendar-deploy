@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>authUserList</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <authUsers>
   <c:forEach var="authUser" items="${sessionScope.bw_auth_users}" >

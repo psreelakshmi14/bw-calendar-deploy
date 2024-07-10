@@ -90,12 +90,9 @@ try {
   <bw:emitText name="calForm" property="hour24" /><%--
     Values: true, false - Flag if we are using 24 hour time --%>
 
-  <bw:emitText name="calForm" property="publicView"
-               tagName="publicview"/><%--
-    Values: true, false - Flag if we are in the guest (public) view  --%>
-  <bw:emitText name="calForm" property="guest" /><%--
+  <bw:emitText name="globals" property="guest" /><%--
     Value: true, false - Flag if we are a guest --%>
-  <c:if test="${!calForm.guest}">
+  <c:if test="${!globals.guest}">
     <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
@@ -200,7 +197,7 @@ try {
 
     <%-- The following URLs are used only in the personal client --%>
     <%-- ======================================================= --%>
-    <c:if test="${!calForm.guest}">
+    <c:if test="${!globals.guest}">
       <event>
         <initEvent><c:url value="/event/initEvent.do?b=de"/></initEvent>
         <addEvent><c:url value="/event/addEvent.do?b=de"/></addEvent>
@@ -344,15 +341,15 @@ try {
   </c:if>
 
   <schedulingMessages>
-    <c:if test="${not empty calForm.inBoxInfo}" >
-      <c:set var="boxInfo" value="${calForm.inBoxInfo}" />
+    <c:if test="${not empty globals.inBoxInfo}" >
+      <c:set var="boxInfo" value="${globals.inBoxInfo}" />
       <%@include file="/docs/schedule/inoutbox.jsp"%>
     </c:if>
   </schedulingMessages>
 
   <notifications>
-    <c:if test="${not empty calForm.notificationInfo}" >
-      <c:set var="notificationInfo" value="${calForm.notificationInfo}" />
+    <c:if test="${not empty globals.notificationInfo}" >
+      <c:set var="notificationInfo" value="${globals.notificationInfo}" />
       <%@include file="/docs/notifications/notificationInfo.jsp"%>
     </c:if>
   </notifications>
@@ -398,8 +395,8 @@ try {
 
   <%-- System parameters --%>
   <syspars>
-    <c:if test="${not empty calForm.dirInfo}">
-      <c:set var="dir" value="${calForm.dirInfo}" />
+    <c:if test="${not empty globals.dirInfo}">
+      <c:set var="dir" value="${globals.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
       <bw:emitText name="dir" property="ticketPrincipalRoot" />
@@ -409,8 +406,8 @@ try {
     </c:if>
   </syspars>
 
-  <c:if test="${not empty calForm.imageUploadDirectory}" >
-    <bw:emitText name="calForm" property="imageUploadDirectory" />
+  <c:if test="${not empty globals.imageUploadDirectory}" >
+    <bw:emitText name="globals" property="imageUploadDirectory" />
   </c:if>
 
   <%-- Output the calendar tree --%>

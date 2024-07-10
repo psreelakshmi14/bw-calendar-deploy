@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteEventConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <bw:emitText name="calForm" property="markDeleted"/>
 <c:set var="allView" value="true" scope="request"/>

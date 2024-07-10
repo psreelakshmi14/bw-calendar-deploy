@@ -5,7 +5,6 @@
     try {
   %>
 <page>modEvent</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <%@include file="/docs/event/eventForm.jsp"%>
   <%

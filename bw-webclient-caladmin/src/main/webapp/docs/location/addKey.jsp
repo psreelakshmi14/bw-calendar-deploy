@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>addLocationKey</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
   <c:set var="location" value="${calForm.location}" />
   <%@include file="/docs/location/emitLocation.jsp"%>

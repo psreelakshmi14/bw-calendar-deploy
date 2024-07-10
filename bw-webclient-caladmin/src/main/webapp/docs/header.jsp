@@ -11,6 +11,8 @@ try {
   <c:set var="bwsess" value="${sessionScope.org_bedework_sessstate}" />
   <c:set var="bwauthpars" value="${bwsess.authpars}" />
 
+  <tab><c:out value="${globals.currentTab}"/></tab>
+
   <now><%-- The actual date right "now" - this may not be the same as currentdate --%>
     <bw:emitText name="globals" property="defaultTzid" />
     <c:set var="fmtnow" value="${globals.today.formatted}" />
@@ -278,32 +280,36 @@ try {
   <bw:emitText name="calForm" property="calSuiteName" />
 
   <c:if test="${not empty calForm.currentCalSuite}" >
+    <c:set var="currentCalSuite"
+           value="${calForm.currentCalSuite}" />
     <currentCalSuite>
-      <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
-      <bw:emitText name="calForm" property="currentCalSuite.group.account" tagName="group" />
-      <bw:emitText name="calForm" property="currentCalSuite.group.principalRef" tagName="groupHref" />
-      <bw:emitText name="calForm" property="currentCalSuite.resourcesHome" tagName="resourcesHome" />
-      <bw:emitCurrentPrivs name="calForm" property="currentCalSuite.currentAccess" tagName="currentAccess"/>
+      <bw:emitText name="currentCalSuite" property="name" />
+      <bw:emitText name="currentCalSuite" property="group.account"
+                   tagName="group" />
+      <bw:emitText name="currentCalSuite" property="group.principalRef"
+                   tagName="groupHref" />
+      <bw:emitText name="currentCalSuite" property="resourcesHome" />
+      <bw:emitCurrentPrivs name="currentCalSuite" property="currentAccess"/>
     </currentCalSuite>
   </c:if>
 
   <notifications>
-    <c:if test="${not empty calForm.notificationInfo}" >
+    <c:if test="${not empty globals.notificationInfo}" >
         <c:set var="notificationInfo"
-               value="${calForm.notificationInfo}" />
+               value="${globals.notificationInfo}" />
         <%@include file="/docs/notifications/notificationInfo.jsp"%>
     </c:if>
   </notifications>
 
   <userInfo>
     <%-- user type --%>
-    <bw:emitText name="calForm" property="curUserContentAdminUser"
+    <bw:emitText name="globals" property="curUserContentAdminUser"
                  tagName="contentAdminUser" />
-    <bw:emitText name="calForm" property="curUserApproverUser"
+    <bw:emitText name="globals" property="curUserApproverUser"
                  tagName="approverUser" />
     <bw:emitText name="globals" property="superUser" />
-    <userMaintOK><c:out value="${calForm.userMaintOK}"/></userMaintOK>
-    <adminGroupMaintOk><c:out value="${calForm.adminGroupMaintOK}"/></adminGroupMaintOk>
+    <userMaintOK><c:out value="${globals.userMaintOK}"/></userMaintOK>
+    <adminGroupMaintOk><c:out value="${globals.adminGroupMaintOK}"/></adminGroupMaintOk>
 
     <%-- user and group --%>
     <bw:emitText name="globals" property="currentUser"/>
@@ -332,8 +338,8 @@ try {
 
   <%-- System parameters and directory info--%>
   <syspars>
-    <c:if test="${not empty calForm.dirInfo}" >
-      <c:set var="dir" value="${calForm.dirInfo}" />
+    <c:if test="${not empty globals.dirInfo}" >
+      <c:set var="dir" value="${globals.dirInfo}" />
       <bw:emitText name="dir" property="userPrincipalRoot" />
       <bw:emitText name="dir" property="groupPrincipalRoot" />
       <bw:emitText name="dir" property="ticketPrincipalRoot" />
@@ -343,8 +349,8 @@ try {
     </c:if>
   </syspars>
 
-  <c:if test="${not empty calForm.imageUploadDirectory}" >
-    <bw:emitText name="calForm" property="imageUploadDirectory" />
+  <c:if test="${not empty globals.imageUploadDirectory}" >
+    <bw:emitText name="globals" property="imageUploadDirectory" />
   </c:if>
 
   <c:if test="${not empty sessionScope.bw_feature_flags}" >

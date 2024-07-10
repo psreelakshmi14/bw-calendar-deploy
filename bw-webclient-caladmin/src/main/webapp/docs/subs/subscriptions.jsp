@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>subscriptions</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <!-- subscriptions are a subset of calendars; there is no difference to the underlying code. -->
 <calendars>

@@ -3,7 +3,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>calSuiteRes</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <calSuiteResources>
   <c:forEach var="csres" items="${calForm.calSuiteResources}" >

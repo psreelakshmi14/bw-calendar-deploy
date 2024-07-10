@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>calSuiteRes</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="csres" value="${calForm.calSuiteResource}" />
 

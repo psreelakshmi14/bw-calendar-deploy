@@ -66,7 +66,7 @@
     <%-- ****************************************************************
           the following code should not be produced in the public client
          **************************************************************** --%>
-    <c:if test="${!calForm.guest}">
+    <c:if test="${!globals.guest}">
       <bw:emitCurrentPrivs name="eventInfo" property="currentAccess" />
     </c:if>
   </event>

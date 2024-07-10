@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteCalSuiteConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="calSuite" value="${calForm.calSuite}"/>
 <calSuite>

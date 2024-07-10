@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>locationList</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <locations>
   <c:if test="${not empty sessionScope.bw_editable_locations_list}">

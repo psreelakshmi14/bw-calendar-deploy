@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>modAuthUser</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <formElements>
   <bw:form action="authuser/update" >

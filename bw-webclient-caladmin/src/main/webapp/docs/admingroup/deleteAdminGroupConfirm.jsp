@@ -4,7 +4,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteAdminGroupConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <groups>
   <jsp:include page="displayAdminGroupCommon.jsp" />

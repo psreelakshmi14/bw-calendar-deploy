@@ -5,7 +5,6 @@
 <%@include file="/docs/header.jsp"%>
 
 <page>deleteViewConfirm</page>
-<tab><c:out value="${calForm.currentTab}"/></tab>
 
 <c:set var="curView" value="${calForm.view}"/>
 <currentView>
