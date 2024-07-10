@@ -277,11 +277,11 @@ try {
     </filter>
   </urlPrefixes>
 
-  <bw:emitText name="calForm" property="calSuiteName" />
+  <bw:emitText name="globals" property="calSuiteName" />
 
-  <c:if test="${not empty calForm.currentCalSuite}" >
+  <c:if test="${not empty globals.currentCalSuite}" >
     <c:set var="currentCalSuite"
-           value="${calForm.currentCalSuite}" />
+           value="${globals.currentCalSuite}" />
     <currentCalSuite>
       <bw:emitText name="currentCalSuite" property="name" />
       <bw:emitText name="currentCalSuite" property="group.account"

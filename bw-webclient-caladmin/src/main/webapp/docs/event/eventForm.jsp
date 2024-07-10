@@ -176,7 +176,7 @@
       <!-- need to iterate over all calsuites to which a user has access.
            For now, we'll return just the current one to get things going. -->
       <calsuite>
-        <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
+        <bw:emitText name="globals" property="currentCalSuite.name" tagName="name" />
         <calendars>
           <c:if test="${not empty sessionScope.bw_user_collection_list}">
             <c:set var="calendar" value="${bw_user_collection_list}"

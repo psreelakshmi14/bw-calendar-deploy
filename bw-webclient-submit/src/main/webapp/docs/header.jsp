@@ -12,13 +12,14 @@ try {
   <c:set var="bwauthpars" value="${bwsess.authpars}" />
   <bw:emitText name="calForm" property="calSuiteName" />
 
-  <c:if test="${not empty calForm.currentCalSuite}" >
+  <c:if test="${not empty globals.currentCalSuite}" >
     <currentCalSuite>
-      <bw:emitText name="calForm" property="currentCalSuite.name" tagName="name" />
-      <bw:emitText name="calForm" property="currentCalSuite.group.account" tagName="group" />
-      <bw:emitText name="calForm" property="currentCalSuite.group.principalRef" tagName="groupHref" />
-      <bw:emitText name="calForm" property="currentCalSuite.resourcesHome" tagName="resourcesHome" />
-      <bw:emitCurrentPrivs name="calForm" property="currentCalSuite.currentAccess" tagName="currentAccess"/>
+      <c:set var="currentCalSuite" value="globals.currentCalSuite" />
+      <bw:emitText name="currentCalSuite" property="name" />
+      <bw:emitText name="currentCalSuite" property="group.account" tagName="group" />
+      <bw:emitText name="currentCalSuite" property="group.principalRef" tagName="groupHref" />
+      <bw:emitText name="currentCalSuite" property="resourcesHome" />
+      <bw:emitCurrentPrivs name="currentCalSuite" property="currentAccess" />
     </currentCalSuite>
   </c:if>
 
