@@ -3,7 +3,7 @@
 
 <bw:emitText name="calForm" property="addingEvent"
              tagName="creating"/>
-<bw:emitText name="calForm" property="hour24" /><%--
+<bw:emitText name="globals" property="hour24" /><%--
     Values: true, false - Flag if we are using 24 hour time --%>
 <bw:emitText name="bwauthpars" property="maxInstances" />
 <bw:emitText name="bwauthpars" property="maxYears" />

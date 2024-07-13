@@ -2,8 +2,8 @@
 <%@ taglib uri='bedework' prefix='bw' %>
 
 <synchInfo>
-  <c:if test="${not empty calForm.synchInfo}">
-    <c:set var="synchInfo" value="${calForm.synchInfo}"
+  <c:if test="${not empty globals.synchInfo}">
+    <c:set var="synchInfo" value="${globals.synchInfo}"
            scope="request" />
     <c:forEach var="conn" items="${synchInfo.conns}">
       <conn>

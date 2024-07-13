@@ -12,9 +12,9 @@ try {
 
 <emailoptionsform>
   <bw:form action="mail/mailEvent">
-    <bw:textField name="calForm" property="lastEmail"
+    <bw:textField name="globals" property="lastEmail"
                   tagName="email" />
-    <bw:textField name="calForm" property="lastSubject"
+    <bw:textField name="globals" property="subject"
                   tagName="subject" />
   </bw:form>
 </emailoptionsform>

@@ -33,7 +33,7 @@ try {
   <bw:emitText name="ctView" property="periodName"
                tagName="periodname"/><%--
     Values: Day, Week, Month, Year - The current time period name.   --%>
-  <bw:emitText name="calForm" property="hour24" /><%--
+  <bw:emitText name="globals" property="hour24" /><%--
     Values: true, false - Flag if we are using 24 hour time --%>
 
   <bw:emitText name="globals" property="guest" /><%--
@@ -42,7 +42,7 @@ try {
     <bw:emitText name="globals" property="currentUser"
                  tagName="userid"/><%--
       Value: string - Userid of non-guest user --%>
-      <c:forEach var="group" items="${calForm.currentGroups}" >
+      <c:forEach var="group" items="${globals.currentGroups}" >
         <bw:emitText name="group" property="principalRef"
                      tagName="memberOf"/>
       </c:forEach>
@@ -125,11 +125,6 @@ try {
       <stats><c:url value="/stats/stats.do?b=de"/></stats>
     </stats>
   </urlPrefixes>
-
-  <bw:emitText name="calForm" property="confirmationId"
-               tagName="confirmationid"/><%--
-        Value: String - a 16 character random string used to allow users to confirm
-        additions to their private calendar.  DEPRECATED. --%>
 
   <c:forEach var="appvar" items="${sessionScope['org.bedework.client.appvars']}">
     <appvar><%--
