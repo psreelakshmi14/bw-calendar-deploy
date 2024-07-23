@@ -14,7 +14,8 @@ try {
 
   <c:if test="${not empty globals.currentCalSuite}" >
     <currentCalSuite>
-      <c:set var="currentCalSuite" value="globals.currentCalSuite" />
+      <c:set var="currentCalSuite"
+             value="${globals.currentCalSuite}" />
       <bw:emitText name="currentCalSuite" property="name" />
       <bw:emitText name="currentCalSuite" property="group.account" tagName="group" />
       <bw:emitText name="currentCalSuite" property="group.principalRef" tagName="groupHref" />
