@@ -11,7 +11,7 @@
 %>
 <%@include file="/docs/event/eventListRoot.jsp"%>
 
-<c:if test="${calForm.currentTab == 'main'}">
+<c:if test="${globals.currentTab == 'main'}">
   <%-- Output the writable calendars --%>
   <calendars>
     <c:forEach var="calendar" items="${sessionScope.bw_addcontent_collection_list}" >
