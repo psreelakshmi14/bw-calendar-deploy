@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.bedework</groupId>
     <artifactId>bedework-parent</artifactId>
-    <version>77</version>
+    <version>87</version>
   </parent>
 
   <groupId>org.bedework.deploy</groupId>
@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
 
   <name>Bedework: deploy calendar web components</name>
-  <description>Create ear and war files for bedework</description>
+  <description>Create war files for bedework calendar</description>
   <url>https://github.com/Bedework/bw-calendar-deploy</url>
 
   <modules>
