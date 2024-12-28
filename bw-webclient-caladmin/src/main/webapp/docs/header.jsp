@@ -128,6 +128,10 @@ try {
       <initUpload><c:url value="/event/initUpload.rdo?b=de"/></initUpload>
       <upload><c:url value="/event/upload.do?b=de"/></upload>
     </event>
+    <eventreg>
+      <html><c:url value="/eventreg"/></html>
+      <webService><c:url value="/eventregws"/></webService>
+    </eventreg>
     <suggest>
       <setStatus><c:url value="/suggest/setStatus.gdo?b=de"/></setStatus>
       <setStatusForUpdate><c:url value="/suggest/setStatusForUpdate.gdo?b=de"/></setStatusForUpdate>
