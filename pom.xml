@@ -34,26 +34,21 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Define version for ical4j -->
+      <!-- Directly define ical4j dependency without using properties -->
       <dependency>
         <groupId>org.mnode.ical4j</groupId>
         <artifactId>ical4j</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.0</version> <!-- Replace with the version you need -->
       </dependency>
 
-      <!-- Other dependencies can be added here as necessary -->
+      <!-- You can define other dependencies in the same way -->
     </dependencies>
   </dependencyManagement>
-
-  <properties>
-    <!-- Define any properties that should be used across modules -->
-    <ical4j.version>3.0.0</ical4j.version>
-  </properties>
 
   <build>
     <pluginManagement>
       <plugins>
-        <!-- Ensure Maven Compiler Plugin is set to Java 8 or higher, since 1.6 might cause issues -->
+        <!-- Ensure Maven Compiler Plugin is set to Java 8 or higher -->
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
@@ -80,5 +75,4 @@
       </plugins>
     </pluginManagement>
   </build>
-
 </project>
