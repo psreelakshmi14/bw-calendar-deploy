@@ -16,6 +16,13 @@
   <description>Create war files for Bedework calendar</description>
   <url>https://github.com/Bedework/bw-calendar-deploy</url>
 
+  <properties>
+    <!-- Define the ical4j properties correctly -->
+    <ical4j.groupId>org.mnode.ical4j</ical4j.groupId>
+    <ical4j.artifactId>ical4j</ical4j.artifactId>
+    <ical4j.version>3.0.0</ical4j.version> <!-- Use the correct version here -->
+  </properties>
+
   <modules>
     <module>bw-calendar-notifyws</module>
     <module>bw-calendar-pubcaldav</module>
@@ -34,14 +41,11 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Directly define ical4j dependency without using properties -->
       <dependency>
-        <groupId>org.mnode.ical4j</groupId>
-        <artifactId>ical4j</artifactId>
-        <version>3.0.0</version> <!-- Replace with the version you need -->
+        <groupId>${ical4j.groupId}</groupId>
+        <artifactId>${ical4j.artifactId}</artifactId>
+        <version>${ical4j.version}</version>
       </dependency>
-
-      <!-- You can define other dependencies in the same way -->
     </dependencies>
   </dependencyManagement>
 
