@@ -13,15 +13,8 @@
   <packaging>pom</packaging>
 
   <name>Bedework: deploy calendar web components</name>
-  <description>Create war files for Bedework calendar</description>
+  <description>Create war files for bedework calendar</description>
   <url>https://github.com/Bedework/bw-calendar-deploy</url>
-
-  <properties>
-    <!-- Define the ical4j properties correctly -->
-    <ical4j.groupId>org.mnode.ical4j</ical4j.groupId>
-    <ical4j.artifactId>ical4j</ical4j.artifactId>
-    <ical4j.version>3.0.0</ical4j.version> <!-- Use the correct version here -->
-  </properties>
 
   <modules>
     <module>bw-calendar-notifyws</module>
@@ -38,45 +31,4 @@
     <module>bw-webclient-calauth</module>
     <module>bw-webclient-demosoe</module>
   </modules>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>${ical4j.groupId}</groupId>
-        <artifactId>${ical4j.artifactId}</artifactId>
-        <version>${ical4j.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <!-- Ensure Maven Compiler Plugin is set to Java 8 or higher -->
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-          </configuration>
-        </plugin>
-
-        <!-- Flatten Maven Plugin -->
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.2.7</version>
-          <executions>
-            <execution>
-              <phase>validate</phase>
-              <goals>
-                <goal>flatten</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
